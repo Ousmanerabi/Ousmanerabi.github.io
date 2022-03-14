@@ -32,5 +32,5 @@ Skills:
 - Experience working internationally
 <br/><br/>
 
-<a href="/resume_ManuelaRunge.docx" download>Download Resume</a>
+<a href="/Ousmane_DIALLO_CV_FSMformat_December.docx" download>Download Resume</a>
 
