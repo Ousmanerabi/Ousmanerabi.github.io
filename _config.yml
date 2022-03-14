@@ -11,7 +11,7 @@ title                    : "Home"
 title_separator          : "-"
 name                     : &name "Ousmane DIALLO"
 description              : &description "personal description"
-url                      : https://Ousmanerabi.github.io/
+url                      : "https://Ousmanerabi.github.io/"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : "academicpages/academicpages.github.io"
 teaser                   :  # filename of teaser fallback teaser image placed in /images/, .e.g. "500x300.png"
