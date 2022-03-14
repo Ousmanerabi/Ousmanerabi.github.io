@@ -1,22 +1,22 @@
 # main links links
 main:
   - title: "Publications"
-    url: /publications/
+    url: https://Ousmanerabi.github.io/publications/
 
   - title: "Talks"
-    url: /talks/    
+    url: https://Ousmanerabi.github.io/talks/    
 
-  - title: "Teaching"
-    url: /teaching/    
+  #- title: "Teaching"
+  #  url: /teaching/    
     
   - title: "Portfolio"
-    url: /portfolio/
+    url: https://Ousmanerabi.github.io/portfolio/
         
-  - title: "Blog Posts"
-    url: /year-archive/
+  #- title: "Blog Posts"
+  #  url: /year-archive/
     
   - title: "CV"
-    url: /cv/
+    url: CV_ousmaneDIALLO.pdf
     
-  - title: "Guide"
-    url: /markdown/
+ # - title: "Guide"
+ #   url: /markdown/
