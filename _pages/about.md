@@ -1,3 +1,13 @@
+---
+permalink: /
+title:
+excerpt: "About me"
+author_profile: true
+redirect_from: 
+  - /about/
+  - /about.html
+---
+
 My name is Ousmane DIALLO, I am an MD and infectious disease epidemiologist and passionate about data analysis in health-related research.
 Many diseases and advserse health outcomes are preventable and, or treatable - that is what drives me in my work. 
 I am widely interested in using quantitative tools, from data analysis to find influencing factors for a health/disease outcome, 
