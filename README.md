@@ -1,4 +1,4 @@
-This is the repository for the GitHub page website at ousmanerabi.github.io/.
+This is the repository for the GitHub page website at https://ousmanerabi.github.io/.
 
 This repository was forked from https://github.com/academicpages/academicpages.github.io and then edited for the personal website.
 
