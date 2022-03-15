@@ -8,6 +8,4 @@ date: 2017-04-22
 location: "Vienne, Autriche"
 ---
 
-[Do](http://exampleurl.com)
-
-This is a description of your tutorial, note the different field in type. This is a markdown files that can be all markdown-ified like any other post. Yay markdown!
+<br/><img src='/images/eccmid_2017.png'>
