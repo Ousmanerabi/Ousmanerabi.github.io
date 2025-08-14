@@ -14,7 +14,8 @@ Rigorous biostatistician and epidemiologist with 6+ years of experience in healt
 <br/>
 
 Core competencies:
-- Expertise in infectious disease epidemiology and public health
+- SAS & R Programming <img width="468" height="13" alt="image" src="https://github.com/user-attachments/assets/53aec843-589c-4f3b-bbfc-70a6d0ea079c" />
+
 - Extensive experience in data management and data analysis
 - Proficient in R, QGIS, SQL, HPC, Power BI, Tableau 
 - Experience working internationally
