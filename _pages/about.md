@@ -14,10 +14,18 @@ Rigorous biostatistician and epidemiologist with 6+ years of experience in healt
 <br/>
 
 Core competencies:
-- SAS & R Programming <img width="468" height="13" alt="image" src="https://github.com/user-attachments/assets/53aec843-589c-4f3b-bbfc-70a6d0ea079c" />
-
-- Extensive experience in data management and data analysis
-- Proficient in R, QGIS, SQL, HPC, Power BI, Tableau 
+- SAS & R Programming
+- Clinical Trials Programming
+- Clinical Data Interchange Standards Consortium (CDISC)
+- Health Data Analytics
+- Statistical Analysis Plans
+- Statistical Modeling
+- Data Cleaning & Transformation
+- Cross-Functional Collaboration
+- Communication
+- Regulatory Compliance
+- Data Visualization
+- Quality Control (QC)
 - Experience working internationally
 <br/><br/>
 
