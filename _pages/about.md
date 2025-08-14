@@ -8,10 +8,8 @@ redirect_from:
   - /about.html
 ---
 
-My name is Ousmane DIALLO, I am an MD and infectious disease epidemiologist and passionate about data analysis in health-related research.
-Many diseases and advserse health outcomes are preventable and, or treatable - that is what drives me in my work. 
-I am widely interested in using quantitative tools, from data analysis to find influencing factors for a health/disease outcome, 
-to simulation modeling to project likely impact of interventions in a population. 
+Rigorous biostatistician and epidemiologist with 6+ years of experience in health data analytics and large-scale data management. Seeking to apply SAS programming skills and hands-on training in CDISC standards (SDTM and ADaM) to advance clinical research studies and regulatory submissions. Works collaboratively in a team environment to acquire, curate, clean, analyze, and transform complex surveillance and survey datasets, delivering submission-ready insights and supporting high-quality publications. <img width="468" height="94" alt="image" src="https://github.com/user-attachments/assets/d9558c5e-56d4-43aa-9cdc-2c1cc1b9a8cd" />
+ 
 <br/>
 
 I have worked for several years on the epidemiological surveillance of antibiotic resistance and on epidemiological surveillance systems for bacterial, viral and parasitic infections. I have worked in Africa, Europe and the USA.<br/>
