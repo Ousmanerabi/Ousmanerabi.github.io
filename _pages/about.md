@@ -8,7 +8,9 @@ redirect_from:
   - /about.html
 ---
 
-Rigorous biostatistician and epidemiologist with 6+ years of experience in health data analytics and large-scale data management. Seeking to apply SAS programming skills and hands-on training in CDISC standards (SDTM and ADaM) to advance clinical research studies and regulatory submissions. Works collaboratively in a team environment to acquire, curate, clean, analyze, and transform complex surveillance and survey datasets, delivering submission-ready insights and supporting high-quality publications. <img width="468" height="94" alt="image" src="https://github.com/user-attachments/assets/d9558c5e-56d4-43aa-9cdc-2c1cc1b9a8cd" />
+Rigorous biostatistician and epidemiologist with 6+ years of experience in health data analytics and large-scale data management. Seeking to apply SAS programming skills and hands-on training in CDISC standards (SDTM and ADaM) to advance clinical research studies and regulatory submissions. Works collaboratively in a team environment to acquire, curate, clean, analyze, and transform complex surveillance and survey datasets, delivering submission-ready insights and supporting high-quality publications. 
+
+<img width="468" height="94" alt="image" src="https://github.com/user-attachments/assets/d9558c5e-56d4-43aa-9cdc-2c1cc1b9a8cd" />
  
 <br/>
 
