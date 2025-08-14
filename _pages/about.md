@@ -22,7 +22,7 @@ I received an M.D. from the [University of Gamal Abdel Nasser, Conakry, Guinea](
 --- 
 <br/>
 
-Skills:
+Core competencies:
 - Expertise in infectious disease epidemiology and public health
 - Extensive experience in data management and data analysis
 - Proficient in R, QGIS, SQL, HPC, Power BI, Tableau 
