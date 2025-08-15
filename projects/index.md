@@ -20,7 +20,7 @@ Below is a curated selection of projects I led or contributed to between 2020 an
 
 ## Projects
 - [Predicting the Impact of Subnational Tailoring of Interventions in Guinea](subnational-tailoring-guinea.md) — *2020–2021*
-- [Risk Factors – ITN Guinea DHS 2018](https://github.com/ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018) — *2021–2022*
+- [Risk Factors – ITN Guinea DHS 2018][![View on GitHub](https://img.shields.io/badge/View%20on%20GitHub-181717?logo=github&logoColor=white)](https://github.com/ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018) — *2021–2022*
 
 - [Risk Factors for Clinical Malaria in Children Under Five (Burkina Faso)](risk-factors-ufive-burkina.md) — *2022–2023*
 - [Resources Spent on Bed Nets to Prevent Malaria in Urban Settings](itn-spending-urban-settings.md) — *2022–2023*
