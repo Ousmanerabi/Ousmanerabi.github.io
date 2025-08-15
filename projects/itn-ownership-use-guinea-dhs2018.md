@@ -1,29 +1,69 @@
+# Factors Associated with the Use of Insecticide-Treated Nets in Guinea  
+*Analysis of the 2018 Demographic and Health Survey*
+
 ---
-title: "Identifying Factors Associated with ITN Ownership and Use (Guinea DHS 2018)"
-summary: "Analyzed DHS data to determine key drivers of bed net ownership and use in Guinea."
-layout: page
-tags: ["Analytics", "R", "Survey methods"]
+
+## Overview
+This repository contains the R code and analysis pipeline for the article:  
+**"Factors associated with the use of insecticide-treated nets in Guinea: an analysis of the 2018 Demographic and Health Survey"**.  
+The objective was to identify household and individual-level determinants of ITN ownership and use, in order to inform national malaria prevention strategies.
+
 ---
-**Period:** 2021–2022  
-**Role:** Principal Investigator & Lead Data Analyst
 
-### Context & Objective  
-Analyzed DHS data to determine key drivers of bed net ownership and use in Guinea.
+## Data
+- **Source:** Guinea DHS 2018 (Demographic and Health Survey)  
+- **Access:** Available from the [DHS Program](https://dhsprogram.com/data/available-datasets.cfm) upon request  
+- **Key variables:** Household wealth quintiles, education, residence type, household composition, ITN ownership, ITN use
 
-### Methods & Tools  
-- Complex survey analysis in R
-- Logistic regression
-- Data visualization
+---
 
-### Key Deliverables  
-- Peer-reviewed manuscript / policy brief
-- Reproducible code
+## Methods
+- Complex survey analysis accounting for weights, clusters, and strata
+- Logistic regression for ITN ownership and ITN use among those with access
+- Bivariate, univariate, and multivariate models
+- Analysis performed in **R**
 
-### Impact  
-Provided evidence to inform vector control strategies and messaging.
+---
+
+## Repository Structure
+
+### Indicators/
+Scripts for calculating household and individual-level ITN indicators.
+
+- **Household_and_individual_level_indicators.R**  
+  Recode variables at the household level and calculate ITN indicators for both household and individual levels.
+
+- **Recoding_of_variables_in_the_PR_file.R**  
+  Perform additional recoding for variables in the PR dataset.
+
+---
+
+### Risk_factors_Analysis/
+Scripts for performing bivariate, univariate, and multivariate analyses.
+
+- **Househod_ITN_ownership_risk_factors.R**  
+  Identify factors associated with ITN ownership at the household level.
+
+- **ITN_use_among_with_access_risk_factors.R**  
+  Identify factors associated with ITN use among individuals with access.
+  
+---
+
+## How to Use
+1. Run `Household_and_individual_level_indicators.R` in the `Indicators/` directory to recode the selected variables at the household level and calculate the indicators.
+2. Execute `Recoding of variables in the PR file.R` script.
+3. Run `Househod_ITN_ownership_risk_factors.R` in the `Risk_factors_Analysis/` folder to estimate risk factors for ITN ownership.
+4. Run `ITN_use_among_with_access_risk_factors.R` in the `Risk_factors_Analysis/` folder to estimate risk factors for ITN use among those with access.
+
+---
+
+## Impact
+- Provided evidence to the National Malaria Control Program for targeted ITN distribution and behavior change communication strategies
+- Supports academic research and programmatic decision-making on malaria prevention in Guinea
 
 ---
 **Links:**  
-- Code: _to be added_  
-- Report/Publication: _to be added_  
-- Contact: [Email](mailto:ousmanerabi12@gmail.com)
+- Code: **[View Code on GitHub](https://github.com/ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018)**
+- Report/Publication: [Download PDF](https://link.springer.com/content/pdf/10.1186/s12936-023-04463-z.pdf) 
+- Contact: For any issues about the code, please contact:  
+**Ousmane Diallo** — [ousmanerabi12@gmail.com](mailto:ousmanerabi12@gmail.com)
