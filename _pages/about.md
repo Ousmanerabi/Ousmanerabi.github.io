@@ -29,5 +29,5 @@ Core competencies:
 - Experience working internationally
 <br/><br/>
 
-<a href="/Ousmane_DIALLO_CV_FSMformat_December.docx" download>Download Resume</a>
+<a href="/Ousmane Diallo - Resume_updated.pdf" download>Download Resume</a>
 
