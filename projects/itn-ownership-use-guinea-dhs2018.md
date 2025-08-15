@@ -4,6 +4,9 @@ layout: page
 permalink: /projects/itn-ownership-use-guinea-dhs2018/
 ---
 
+# {{ page.title }}
+
+
 > **Period:** 2021–2022 · **Role:** Lead Data Analyst · **Country:** Guinea
 
 ## Overview
