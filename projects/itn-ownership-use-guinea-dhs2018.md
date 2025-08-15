@@ -10,10 +10,11 @@ permalink: /projects/itn-ownership-use-guinea-dhs2018/
 > **Period:** 2021–2022 · **Role:** Lead Data Analyst · **Country:** Guinea
 
 ## Overview
-Analysis of the 2018 Guinea Demographic and Health Survey (DHS) to identify determinants of **ownership** and **use** of insecticide-treated nets (ITNs) at both household and individual levels. The goal was to inform the National Malaria Control Program’s distribution and communication strategies.
+Analysis of the 2018 Guinea Demographic and Health Survey (DHS) to identify determinants of **ownership** and **use** of insecticide-treated nets (ITNs) at both household and individual levels. Understanding the factors influencing household ITN ownership and usage among those with access will enable the Guinea National Malaria Control Programme to design targeted interventions aimed at increasing bed net coverage and utilization.
 
 ## Key Highlights
-- Main variables: wealth quintiles, education level, urban/rural setting, household composition.
+- Main variables: wealth quintiles, education level, urban/rural setting, Age of household head, Age of individual, Sex of household head, Sex of individual, Household size, Number of rooms, Marital status, 
+Children under five, Pregnant status, Region.
 - Two main outcomes: **ITN ownership** and **ITN use the previous night** (among those with access).
 - Accounted for complex survey design: weights, strata, and clusters.
 
