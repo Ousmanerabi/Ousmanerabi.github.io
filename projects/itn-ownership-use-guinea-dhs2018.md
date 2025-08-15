@@ -4,7 +4,7 @@ layout: page
 permalink: /projects/itn-ownership-use-guinea-dhs2018/
 ---
 
-> **Period:** 2021–2022 · **Role:** Principal Investigator & Lead Data Analyst · **Location:** Guinea
+> **Period:** 2021–2022 · **Role:** Lead Data Analyst · **Location:** Guinea
 
 ## Overview
 Analysis of the 2018 Guinea Demographic and Health Survey (DHS) to identify determinants of **ownership** and **use** of insecticide-treated nets (ITNs) at both household and individual levels. The goal was to inform the National Malaria Control Program’s distribution and communication strategies.
@@ -26,5 +26,7 @@ Survey-weighted logistic regression models were implemented using R (`survey`, `
 - Informed recommendations for tailoring behavior change communication messages.
 
 ## Links
-- **Code on GitHub:** https://github.com/ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018  
-- **Publication / Report:** (add DOI or PDF link if available)
+- **Code on GitHub:** https://github.com/ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018 
+<a href="https://github.com/ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018" class="btn btn-primary" target="_blank">View Code on GitHub</a>
+ 
+- **Publication (PDF):** [Download Article](https://link.springer.com/content/pdf/10.1186/s12936-023-04463-z.pdf)  
