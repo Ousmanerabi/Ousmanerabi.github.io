@@ -1,0 +1,1 @@
+Place your timeline image here as 'timeline_projects.png'. You can export the PNG you shared and copy it to this folder.
