@@ -31,8 +31,8 @@ Survey-weighted logistic regression models were implemented in R (`survey`, `srv
 
 ## Visual Highlights
 
-![Regional variation in Guinea of A household ITN ownership; B proportion of the population with access to an ITN; C ITN usage; and D ITN usage among those with access]({{ "/assets/projects/itn/Fichier_8.png" | relative_url }})
-*Proportion of households owning at least one ITN, Guinea DHS 2018.*
+![ITN Usage]({{ "/assets/projects/itn/Fichier_8.png" | relative_url }})
+*Regional variation in Guinea of A household ITN ownership; B proportion of the population with access to an ITN; C ITN usage; and D ITN usage among those with access.*
 
 ![ITN Usage Map]({{ "/assets/projects/itn/two_dimensionel.png" | relative_url }})
 *Two-dimensional histogram showing the number of people who could use nets owned by the household if all nets were in use, stratified by household size, in the 2018 Guinea DHS.*
