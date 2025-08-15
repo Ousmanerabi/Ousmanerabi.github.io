@@ -1,6 +1,4 @@
-# Factors Associated with the Use of Insecticide-Treated Nets in Guinea  
-*Analysis of the 2018 Demographic and Health Survey*
-
+# Factors associated with the ownership and use of insecticide-treated nets in Guinea: an analysis of the 2018 Demographic and Health Survey
 ---
 
 ## Overview
