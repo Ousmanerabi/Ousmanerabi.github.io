@@ -29,6 +29,14 @@ Survey-weighted logistic regression models were implemented in R (`survey`, `srv
 - Evidence to better target **priority groups** in ITN distribution campaigns.
 - Recommendations to tailor behavior change communication messages.
 
+## Visual Highlights
+
+![Regional variation in Guinea of A household ITN ownership; B proportion of the population with access to an ITN; C ITN usage; and D ITN usage among those with access](../assets/projects/Figure 8.png)
+*Proportion of households owning at least one ITN, Guinea DHS 2018.*
+
+![ITN Usage Map](../assets/projects/two_dimensionel.png)
+*Two-dimensional histogram showing the number people who could use nets owned by the household if all nets were in use, stratified by household size, in the 2018 Guinea DHS.*
+
 ## Links
 [![Download Article (PDF)](https://img.shields.io/badge/PDF-Download-red?logo=adobeacrobatreader)](https://link.springer.com/content/pdf/10.1186/s12936-023-04463-z.pdf)
 [![View Code on GitHub](https://img.shields.io/badge/View%20Code%20on%20GitHub-181717?logo=github&logoColor=white)](https://github.com/ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018)
