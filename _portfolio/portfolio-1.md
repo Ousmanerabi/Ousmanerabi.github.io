@@ -1,5 +1,5 @@
 ---
-title: "Portfolio item number 1"
+title: "Factors associated with the ownership and use of insecticide-treated nets in Guinea: an analysis of the 2018 Demographic and Health Survey"
 excerpt: "Short description of portfolio item number 1<br/><img src='/images/500x300.png'>"
 collection: portfolio
 ---
