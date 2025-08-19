@@ -22,7 +22,6 @@ Below is a curated selection of projects I led or contributed to between 2020 an
 - [Predicting the Impact of Subnational Tailoring of Interventions in Guinea](subnational-tailoring-guinea.md) — *2020–2021*
 - [Risk Factors – ITN Guinea DHS 2018](itn-ownership-use-guinea-dhs2018.md) — *2021–2022*
 - [Risk Factors for Clinical Malaria in Children Under Five (Burkina Faso)](risk-factors-ufive-burkina.md) — *2022–2023*
-- [Resources Spent on Bed Nets to Prevent Malaria in Urban Settings](itn-spending-urban-settings.md) — *2022–2023*
 - [Data Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)](snt-stratification-targeting.md) — *2023*
 - [Retrospective Analysis of Malaria Trend in Burkina Faso](retrospective-trend-burkina.md) — *2023–2024*
 - [Microstratification in Conakry](microstratification-conakry.md) — *2023–2024*
