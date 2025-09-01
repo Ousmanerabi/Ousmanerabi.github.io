@@ -1,5 +1,5 @@
 ---
-title: "Risk Factors of ITN Ownership – Guinea DHS 2018"
+title: "Risk Factors of ITN Ownership and Use – Guinea DHS 2018"
 description: "Household & individual-level determinants of ITN ownership using DHS 2018 Guinea data."
 date: "2025-08-30"
 categories: [R, Epidemiology, Malaria, DHS]
@@ -104,3 +104,5 @@ R (survey methods, modeling, mapping), reproducible reporting.
 ### Disclaimer
 
 This page demonstrates methods on public DHS data; no confidential data are included.
+
+[![](https://img.shields.io/badge/PDF-Download-red?logo=adobeacrobatreader)](https://link.springer.com/content/pdf/10.1186/s12936-023-04463-z.pdf)

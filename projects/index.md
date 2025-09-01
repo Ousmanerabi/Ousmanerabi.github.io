@@ -10,7 +10,7 @@ summary: "Selected projects in epidemiology, analytics, modeling, and training."
 Below is a curated selection of projects I led or contributed to between 2020 and 2024. Each page summarizes the context, methods, deliverables, and the public health impact. Where possible, I share code and artifacts to support reproducibility.
 </p>
 
-![Timeline for key projects](images/timeline_projects.png)
+![Timeline for key projects](assets/projects/itn/timeline.png)
 
 ## Thematic Areas
 - **Modeling**: Scenario modeling to guide policy.
