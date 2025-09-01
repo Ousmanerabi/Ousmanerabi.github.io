@@ -1,0 +1,106 @@
+---
+title: "Risk Factors of ITN Ownership – Guinea DHS 2018"
+description: "Household & individual-level determinants of ITN ownership using DHS 2018 Guinea data."
+date: "2025-08-30"
+categories: [R, Epidemiology, Malaria, DHS]
+format:
+  html:
+    toc: true
+    code-fold: true
+    code-tools: true
+---
+
+### Overview
+
+Analysis of the 2018 Guinea Demographic and Health Survey (DHS) to identify determinants of **ownership** and **use** of insecticide-treated nets (ITNs) at both household and individual levels. Understanding the factors influencing household ITN ownership and usage among those with access will enable the Guinea National Malaria Control Programme to design targeted interventions aimed at increasing bed net coverage and utilization.
+
+### **Key Highlights**
+
+-   Main variables: wealth quintiles, education level, urban/rural setting, age of household head, age of individual, sex of household head, sex of individual, household size, number of rooms, marital status, children under five, pregnant status, and region.
+
+-   Two main outcomes: **ITN ownership** and **ITN use the previous night** (among those with access).
+
+-   Accounted for complex survey design: weights, strata, and clusters.
+
+### **Methods & Tools**
+
+Survey-weighted logistic regression models were implemented in R (`survey`, `srvyr`, `dplyr`, `ggplot2`, `tmap`) to estimate adjusted odds ratios and visualize disparities.
+
+### **Impact**
+
+-   Evidence to better target **priority groups** in ITN distribution campaigns.
+
+-   Recommendations to tailor behavior change communication messages.
+
+### Visual Highlights
+
+![Regional variation in Guinea of A household ITN ownership; B proportion of the population with access to an ITN; C ITN usage; and D ITN usage among those with access.](images/Fichier_8.png)
+
+![Two-dimensional histogram showing the number of people who could use nets owned by the household if all nets were in use, stratified by household size, in the 2018 Guinea DHS.](images/two_dimensionel.png)
+
+### Code example
+
+```{r}
+#| label: Bivariate and Univariate analysis of different risk factors for ITN ownership at the country level
+#| fig-cap: "Temperature and ozone level."
+#| warning: false
+#| eval: false
+
+## Install and charge the survey design library
+
+library(survey)
+
+## Bivariate analysis
+
+explanatory_vars <- c("wealth", "sex", "urb", "Num_childre", "region", "rooms", "hh_size", "Edu", "head_age", "Marital")
+
+for(i in 1:length(explanatory_vars)){
+  col = explanatory_vars[i]
+  tbl <- svytable(~HH_at_least_one + col, design_sample_hh)
+  t = summary(tbl, statistic="Chisq")
+  t = plyr::ldply(t)
+}
+
+
+## Univariate analysis of different risk factors for ITN ownership at the country level 
+
+models <- explanatory_vars %>%      
+  str_c("HH_at_least_one ~ ", .) %>%      
+  
+  # iterate through each univariate formula
+  map(                               
+    .f = ~svyglm(                      
+      formula = as.formula(.x),      
+      family = "binomial",           
+      design = design_sample_hh)) %>%       
+  
+
+  map(
+    .f = ~tidy(
+      .x, 
+      exponentiate = TRUE,           
+      conf.int = TRUE)) %>%         
+  
+ 
+  bind_rows() %>% 
+  
+  mutate(across(where(is.numeric), round, digits = 2))
+
+models
+
+
+```
+
+## Repository & Reproducibility
+
+-   Full code & structure: [GitHub](https://github.com/Ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018 "Risk_factors_ITN_Guinea_DHS_2018")
+
+-   Data: public DHS; no confidential content.
+
+### Skills Demonstrated
+
+R (survey methods, modeling, mapping), reproducible reporting.
+
+### Disclaimer
+
+This page demonstrates methods on public DHS data; no confidential data are included.
