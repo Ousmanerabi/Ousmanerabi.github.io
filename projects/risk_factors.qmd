@@ -42,7 +42,7 @@ Survey-weighted logistic regression models were implemented in R (`survey`, `srv
 
 ```{r}
 #| label: Bivariate and Univariate analysis of different risk factors for ITN ownership at the country level
-#| fig-cap: "Temperature and ozone level."
+#| fig-cap: "Regional distribution"
 #| warning: false
 #| eval: false
 
@@ -56,7 +56,7 @@ explanatory_vars <- c("wealth", "sex", "urb", "Num_childre", "region", "rooms", 
 
 for(i in 1:length(explanatory_vars)){
   col = explanatory_vars[i]
-  tbl <- svytable(~HH_at_least_one + col, design_sample_hh)
+  tbl <- survey::svytable(~HH_at_least_one + col, design_sample_hh)
   t = summary(tbl, statistic="Chisq")
   t = plyr::ldply(t)
 }
@@ -65,28 +65,27 @@ for(i in 1:length(explanatory_vars)){
 ## Univariate analysis of different risk factors for ITN ownership at the country level 
 
 models <- explanatory_vars %>%      
-  str_c("HH_at_least_one ~ ", .) %>%      
+  stringr::str_c("HH_at_least_one ~ ", .) %>%      
   
   # iterate through each univariate formula
-  map(                               
-    .f = ~svyglm(                      
+  purrr::map(                               
+    .f = ~survey::svyglm(                      
       formula = as.formula(.x),      
       family = "binomial",           
       design = design_sample_hh)) %>%       
   
 
-  map(
-    .f = ~tidy(
+  purrr::map(
+    .f = ~broom::tidy(
       .x, 
       exponentiate = TRUE,           
       conf.int = TRUE)) %>%         
   
  
-  bind_rows() %>% 
+  dplyr::bind_rows() %>% 
   
-  mutate(across(where(is.numeric), round, digits = 2))
+  dplyr::mutate(across(where(is.numeric), round, digits = 2))
 
-models
 
 
 ```
