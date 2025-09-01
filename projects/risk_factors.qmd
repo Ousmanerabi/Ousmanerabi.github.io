@@ -91,7 +91,7 @@ models
 
 ```
 
-## Repository & Reproducibility
+### Repository & Reproducibility
 
 -   Full code & structure: [GitHub](https://github.com/Ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018 "Risk_factors_ITN_Guinea_DHS_2018")
 
@@ -101,8 +101,10 @@ models
 
 R (survey methods, modeling, mapping), reproducible reporting.
 
+### Paper link
+
+[![](https://img.shields.io/badge/PDF-Download-red?logo=adobeacrobatreader)](https://link.springer.com/content/pdf/10.1186/s12936-023-04463-z.pdf)
+
 ### Disclaimer
 
 This page demonstrates methods on public DHS data; no confidential data are included.
-
-[![](https://img.shields.io/badge/PDF-Download-red?logo=adobeacrobatreader)](https://link.springer.com/content/pdf/10.1186/s12936-023-04463-z.pdf)
