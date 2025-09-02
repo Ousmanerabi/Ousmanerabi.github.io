@@ -1,0 +1,201 @@
+---
+title: "Times series analysis"
+description: "Quantify the trend in malaria incidence at health district level and identify the factors associated with malaria incidence in Burkina Faso from 2016-2023 using routine cases data"
+date: "2025-08-30"
+categories: [R, Epidemiology, Malaria, DHS, climate, Time series]
+format:
+  html:
+    toc: true
+    code-fold: true
+    #code-tools: true
+---
+
+### Overview
+
+The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2022 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso.
+
+## Methods
+
+### Data sources
+
+Monthly routine case data from public and formal private health facilities were extracted from the Burkina Faso health management information system (HMIS) for the period January 2016 to December 2023.
+
+| Variable | Definition | Sources | Temporal resolution | Period |
+|-------------|-----------------------------------|----------|-----------|--------------|
+| **Suspected cases** | Suspected cases are those presenting clinical symptoms of malaria (fever). | HMIS | Monthly | 2016–2023, excluding 2019 |
+| **Tested cases** | Cases who received a diagnostic test (rapid diagnostic test (RDT) or microscopy). | HMIS | Monthly |  |
+| **Confirmed cases** | Malaria cases confirmed positive by microscopy or RDT. | HMIS | Monthly |  |
+| **Presumed cases** | Cases treated for malaria without a positive test result. | HMIS | Monthly |  |
+| **Population** | Number of people per health district per year. | HMIS | Annual | 2016–2023 |
+| **Treatment-seeking behaviors** | Proportion of children under five with fever who were: i) taken to seek care in the public sector, ii) in the private sector, iii) not taken to care. | DHS, MIS | Every 3 years | 2014, 2017–18, 2021 |
+
+#### Incidences adjustments
+
+Crude malaria incidence was calculated by dividing the number of reported confirmed cases for each health district and month by the district population and multiplying by 1000. Then, crude incidence was adjusted for each factor in accordance with the WHO framework (REF).
+
+#### Quantify trends
+
+#### Seasonal trend decomposition based on local regression smoothening (STL) using stlplus.
+
+STL additive method was used to decompose each time series Yt into seasonal (St), trend (Tt), and remainder (Rt) components.
+
+Sen’s slope \[Ref\] was used to quantify the direction and intensity of the trends in the time series of each incidence estimate for each district. Statistical significance of the trend was assessed by a two-sided Mann-Kendall test \[REF\]. A significance level of 0.05 was used to determine statistical significance.
+
+### Factors associated with malaria incidences
+
+The response variable was annual malaria-adjusted cases for testing, reporting, and treatment-seeking rates (adjustment 3). Data for covariates from 2016 to 2023 were extracted from various sources.
+
+Generalized additive models add flexibility in modeling functional relationships between the response variable and the covariates using smooth curves without specifying their exact form (REF).
+
+```{r}
+
+#| label: blur-all-retrospective-images
+#| echo: false
+#| warning: false
+library(magick)
+
+in_dir  <- "~/Documents/GitHub/Ousmanerabi.github.io/assets/projects/retrospective"
+out_dir <- "~/Documents/GitHub/Ousmanerabi.github.io/assets/projects/retrospective_blur"
+dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
+
+imgs <- list.files(in_dir, pattern = "\\.(png|jpg|jpeg)$", full.names = TRUE)
+for (p in imgs) {
+  img <- image_read(p)
+  img_blur <- image_blur(img, radius = 6, sigma = 3)
+  image_write(img_blur, file.path(out_dir, basename(p)))
+}
+
+```
+
+![](images/Fichier2-01.png)
+
+### Key Deliverables
+
+-   Burden of malaria in Burkina Faso from 2016 to 2023 using four incidence rates was estimated
+
+-   The trend in malaria incidence in Burkina Faso from 2016 to 2023 for the four incidences rates was assessed and this allows us to better understand how each adjustment affects the reported malaria burden over time.
+
+-   The factors associated with malaria incidence was assessed.
+
+### Visual Highlights
+
+![Temporal and spatial analysis for the four incidences](images/Fichier2.png)
+
+Ω
+
+![Spatial relative percent change between 2016 and 2023](images/Fichier6-01.png)
+
+![Sen's slope coefficient for malaria incidence](images/Fichier5-02.png)
+
+### Code example
+
+##### Normalize function
+
+```{r normalize}
+#| label: Assessed the trend analysis
+#| warning: false
+#| eval: false
+
+## Function for normalize the four incidences rates (comparaison purpose)
+getNormalized <- function(vec) {
+  if (!is.numeric(vec) || all(is.na(vec))) {
+    warning("Input vector is non-numeric or all NA; returning original vector")
+    return(vec)
+  }
+  vec_mean <- mean(vec, na.rm = TRUE)
+  vec_sd <- sd(vec, na.rm = TRUE)
+  if (is.na(vec_sd) || vec_sd == 0) {
+    warning("Standard deviation is 0 or NA; returning original vector")
+    return(vec)
+  }
+  (vec - vec_mean) / vec_sd
+}
+
+## Monthly data
+
+monthly_DS_incidence <- monthly_DS_incide %>%
+  dplyr::mutate(
+    mal_cases_norm = getNormalized(`Incidence brute`),
+    incidence_adj_presumed_cases_norm = getNormalized(Adj1),
+    incidence_adj_presumed_cases_RR_norm = getNormalized(Adj2),
+    incidence_adj_presumed_cases_RR_TSR_norm = getNormalized(Adj3)
+  )
+
+
+```
+
+##### STL decomposition
+
+```{r}
+#| label: STL decomposition
+#| warning: false
+#| eval: false
+
+## STL decomposition
+
+STL_result_DF_norm_list <- list()
+indicators <- list(
+  list(col = "mal_cases_norm", type = "Crude Incidence"),
+  list(col = "incidence_adj_presumed_cases_norm", type = "Adjusted Presumed Cases"),
+  list(col = "incidence_adj_presumed_cases_RR_norm", type = "Adjusted Presumed Cases RR"),
+  list(col = "incidence_adj_presumed_cases_RR_TSR_norm", type = "Adjusted Presumed Cases RR TSR")
+)
+
+## Monthly data
+monthly_DS_incidence = monthly_DS_incidence 
+
+## loop
+for (DS in base::sort(base::unique(monthly_DS_incidence$districts))) {
+  cases_dist <- monthly_DS_incidence %>%
+    dplyr::filter(districts == DS) %>%
+    dplyr::arrange(Date)
+  
+  if (nrow(cases_dist) == 0) {
+    warning(paste("No data for district:", DS, "- skipping"))
+    next
+  }
+  
+  for (ind in indicators) {
+    if (!ind$col %in% names(cases_dist)) {
+      warning(paste("Column", ind$col, "not found in district", DS, "- skipping"))
+      next
+    }
+    
+    ind_values <- cases_dist[[ind$col]]
+    valid_idx <- !is.na(ind_values)
+    valid_ind_norm <- ind_values[valid_idx]
+    valid_dates <- cases_dist$Date[valid_idx]
+    
+    if (length(valid_ind_norm) < 2) {
+      warning(paste("Fewer than 2 valid observations for", ind$col, "in district", DS, "- skipping"))
+      next
+    }
+    
+    start_year <- base::as.numeric(format(valid_dates[1], "%Y"))
+    start_month <- base::as.numeric(format(valid_dates[1], "%m"))
+    ind_ts <- stats::ts(valid_ind_norm, start = c(start_year, start_month), deltat = 1/12)
+    ind_stl <- stlplus::stlplus(ind_ts, s.window = "periodic")
+    
+    ind_stl_ts <- base::as.data.frame(ind_stl$data[, 1:4])
+    ind_stl_ts$type <- ind$type
+    ind_stl_ts$dates <- valid_dates
+    ind_stl_ts$MK_p <- trend::smk.test(ind_ts)$p.value
+    ind_stl_ts$sens_slope <- trend::sea.sens.slope(ind_ts)
+    ind_stl_ts$District <- DS
+    
+    STL_result_DF_norm_list[[base::paste(DS, ind$col, sep = "_")]] <- ind_stl_ts
+  }
+}
+
+STL_result_DF_norm <- data.table::rbindlist(STL_result_DF_norm_list, fill = TRUE)
+STL_result_DF_slopes <- base::unique(STL_result_DF_norm[, c("type", "MK_p", "sens_slope", "District")])
+
+
+
+```
+
+### Repository & Reproducibility
+
+-   Full code & structure: [GitHub](https://github.com/Ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018 "Risk_factors_ITN_Guinea_DHS_2018")
+
+-   Data: public DHS; no confidential content.
