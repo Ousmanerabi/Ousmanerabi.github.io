@@ -196,6 +196,6 @@ STL_result_DF_slopes <- base::unique(STL_result_DF_norm[, c("type", "MK_p", "sen
 
 ### Repository & Reproducibility
 
--   Full code & structure: [GitHub](https://github.com/Ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018 "Risk_factors_ITN_Guinea_DHS_2018")
+-   Full code & structure: [Full code](https://github.com/Ousmanerabi/Retrospective_analysis)
 
--   Data: public DHS; no confidential content.
+-   Data:
