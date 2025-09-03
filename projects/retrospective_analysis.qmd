@@ -77,7 +77,7 @@ Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ### 1. Reporting rate
 
-![**Monthly reporting rates per health district**](images/weighted.png){fig-align="center" width="422"}
+![Fig. Monthly reporting rates per health district](images/weighted.png){fig-align="center" width="422"}
 
 ::: callout-note
 **Key Insight:** Data quality varied considerably from district to district. Some districts reported less than 50% during certain periods, which significantly skewed the crude incidence estimates.
@@ -85,22 +85,38 @@ Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ------------------------------------------------------------------------
 
-### 2. Malaria Incidence Trends
+### 2. Incidence estimates
+
+![Fig. Incidence estimates following WHO framework. A-D: Temporal trend for the four incidences (crude incidence, incidence adjusted by testing rate, incidence adjusted by testing rate and reporting rate, incidence adjusted by testing rate, reporting rate and care-seeking rate; E-D: Spatial analysis for the four incidences from 2023.](images/Fichier2-02.png){fig-align="center" width="573"}
+
+::: callout-note
+**Key Insight:** Crude incidence and Adjustment 1 were nearly identical across districts, reflecting strong case management policies that ensure treatment follows testing. However, Adjustments 2 and 3 revealed hidden burden: poor reporting completeness in 2023 inflated incidence in several northern and eastern districts, while accounting for care-seeking (Adjustment 3) added \~450 cases per 1,000 in Gorom-Gorom, Gaoua, Kaya, Boussouma, and Fada. This underscores the importance of integrating care-seeking behavior into malaria burden estimates.
+:::
+
+------------------------------------------------------------------------
+
+### 3. Malaria Incidence Trends
 
 #### Sen's slope coefficient (Mann kendall test)
 
-![**Fig. Sen's slope coefficient for malaria incidence**](images/Fichier5-02.png)
+![Fig. Sen’s slope coefficient for the trend of malaria incidence adjusted for testing rate, weighted reporting rate and care-seeking rate; Gray color: not significant.](images/Fichier5-02.png){fig-align="center" width="533"}
 
 ::: callout-note
-**Key Insight:** Crude incidence suggested rising malaria burden, but after adjusting for testing, reporting, and treatment-seeking, trends stabilized post-2019.\
-This highlights the risk of overestimating burden if raw HMIS data are used without correction.
+**Key Insight:** Trend analysis (Mann-Kendall) of Adjustment 3 showed heterogeneity across districts: Gorom-Gorom, Sapone, and Kampti had significant upward trends, while 39 of 70 districts experienced significant declines, reflecting improved malaria control or reduced transmission in much of Burkina Faso
 :::
 
 ------------------------------------------------------------------------
 
 ## Code example
 
-#### Normalize function : This function allows you to standardize the different indicators so that they can be compared with each other.
+### Normalize Function
+
+This function standardizes the four malaria incidence indicators so they can be compared on the same scale across districts.
+
+::: callout-tip
+**Reproducibility Note:**\
+All analyses are fully reproducible in R. This snippet shows how indicators were normalized prior to trend analysis.
+:::
 
 ```{r normalize}
 #| label: Assessed the trend analysis
@@ -135,7 +151,14 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 ```
 
-#### STL decomposition: This function allows you to decompose the time series, test significance, and estimate the slope coefficient.
+#### STL Decomposition
+
+This function decomposes the normalized time series into seasonal, trend, and remainder components, and applies Mann-Kendall and Sen’s slope tests to assess statistical significance.
+
+::: callout-tip
+**Key Insight:**\
+STL decomposition helped disentangle seasonal variation from long-term malaria trends, allowing robust detection of increasing or decreasing trajectories at the district level.
+:::
 
 ```{r}
 #| label: STL decomposition

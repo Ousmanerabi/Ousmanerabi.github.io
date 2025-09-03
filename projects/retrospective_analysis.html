@@ -94,9 +94,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#visual-highlights" id="toc-visual-highlights" class="nav-link" data-scroll-target="#visual-highlights">Visual Highlights</a>
   <ul class="collapse">
   <li><a href="#reporting-rate" id="toc-reporting-rate" class="nav-link" data-scroll-target="#reporting-rate">1. Reporting rate</a></li>
-  <li><a href="#malaria-incidence-trends" id="toc-malaria-incidence-trends" class="nav-link" data-scroll-target="#malaria-incidence-trends">2. Malaria Incidence Trends</a></li>
+  <li><a href="#incidence-estimates" id="toc-incidence-estimates" class="nav-link" data-scroll-target="#incidence-estimates">2. Incidence estimates</a></li>
+  <li><a href="#malaria-incidence-trends" id="toc-malaria-incidence-trends" class="nav-link" data-scroll-target="#malaria-incidence-trends">3. Malaria Incidence Trends</a></li>
   </ul></li>
-  <li><a href="#code-example" id="toc-code-example" class="nav-link" data-scroll-target="#code-example">Code example</a></li>
+  <li><a href="#code-example" id="toc-code-example" class="nav-link" data-scroll-target="#code-example">Code example</a>
+  <ul class="collapse">
+  <li><a href="#normalize-function" id="toc-normalize-function" class="nav-link" data-scroll-target="#normalize-function">Normalize Function</a></li>
+  <li><a href="#stl-decomposition-1" id="toc-stl-decomposition-1" class="nav-link" data-scroll-target="#stl-decomposition-1">STL Decomposition</a></li>
+  </ul></li>
   <li><a href="#repository-reproducibility" id="toc-repository-reproducibility" class="nav-link" data-scroll-target="#repository-reproducibility">Repository &amp; Reproducibility</a></li>
   <li><a href="#public-health-relevance" id="toc-public-health-relevance" class="nav-link" data-scroll-target="#public-health-relevance">Public Health Relevance</a></li>
   </ul>
@@ -276,7 +281,7 @@ Model: <strong>Generalized Additive Models (GAMs)</strong> for nonlinear effects
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/weighted.png" class="img-fluid figure-img" width="422"></p>
-<figcaption><strong>Monthly reporting rates per health district</strong></figcaption>
+<figcaption>Fig. Monthly reporting rates per health district</figcaption>
 </figure>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -294,14 +299,12 @@ Note
 </div>
 <hr>
 </section>
-<section id="malaria-incidence-trends" class="level3">
-<h3 class="anchored" data-anchor-id="malaria-incidence-trends">2. Malaria Incidence Trends</h3>
-<section id="sens-slope-coefficient-mann-kendall-test" class="level4">
-<h4 class="anchored" data-anchor-id="sens-slope-coefficient-mann-kendall-test">Sen’s slope coefficient (Mann kendall test)</h4>
+<section id="incidence-estimates" class="level3">
+<h3 class="anchored" data-anchor-id="incidence-estimates">2. Incidence estimates</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/Fichier5-02.png" class="img-fluid figure-img"></p>
-<figcaption><strong>Fig. Sen’s slope coefficient for malaria incidence</strong></figcaption>
+<p><img src="images/Fichier2-02.png" class="img-fluid figure-img" width="573"></p>
+<figcaption>Fig. Incidence estimates following WHO framework. A-D: Temporal trend for the four incidences (crude incidence, incidence adjusted by testing rate, incidence adjusted by testing rate and reporting rate, incidence adjusted by testing rate, reporting rate and care-seeking rate; E-D: Spatial analysis for the four incidences from 2023.</figcaption>
 </figure>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -314,8 +317,32 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Key Insight:</strong> Crude incidence suggested rising malaria burden, but after adjusting for testing, reporting, and treatment-seeking, trends stabilized post-2019.<br>
-This highlights the risk of overestimating burden if raw HMIS data are used without correction.</p>
+<p><strong>Key Insight:</strong> Crude incidence and Adjustment 1 were nearly identical across districts, reflecting strong case management policies that ensure treatment follows testing. However, Adjustments 2 and 3 revealed hidden burden: poor reporting completeness in 2023 inflated incidence in several northern and eastern districts, while accounting for care-seeking (Adjustment 3) added ~450 cases per 1,000 in Gorom-Gorom, Gaoua, Kaya, Boussouma, and Fada. This underscores the importance of integrating care-seeking behavior into malaria burden estimates.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="malaria-incidence-trends" class="level3">
+<h3 class="anchored" data-anchor-id="malaria-incidence-trends">3. Malaria Incidence Trends</h3>
+<section id="sens-slope-coefficient-mann-kendall-test" class="level4">
+<h4 class="anchored" data-anchor-id="sens-slope-coefficient-mann-kendall-test">Sen’s slope coefficient (Mann kendall test)</h4>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Fichier5-02.png" class="img-fluid figure-img" width="533"></p>
+<figcaption>Fig. Sen’s slope coefficient for the trend of malaria incidence adjusted for testing rate, weighted reporting rate and care-seeking rate; Gray color: not significant.</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Key Insight:</strong> Trend analysis (Mann-Kendall) of Adjustment 3 showed heterogeneity across districts: Gorom-Gorom, Sapone, and Kampti had significant upward trends, while 39 of 70 districts experienced significant declines, reflecting improved malaria control or reduced transmission in much of Burkina Faso</p>
 </div>
 </div>
 <hr>
@@ -324,8 +351,23 @@ This highlights the risk of overestimating burden if raw HMIS data are used with
 </section>
 <section id="code-example" class="level2">
 <h2 class="anchored" data-anchor-id="code-example">Code example</h2>
-<section id="normalize-function-this-function-allows-you-to-standardize-the-different-indicators-so-that-they-can-be-compared-with-each-other." class="level4">
-<h4 class="anchored" data-anchor-id="normalize-function-this-function-allows-you-to-standardize-the-different-indicators-so-that-they-can-be-compared-with-each-other.">Normalize function : This function allows you to standardize the different indicators so that they can be compared with each other.</h4>
+<section id="normalize-function" class="level3">
+<h3 class="anchored" data-anchor-id="normalize-function">Normalize Function</h3>
+<p>This function standardizes the four malaria incidence indicators so they can be compared on the same scale across districts.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Reproducibility Note:</strong><br>
+All analyses are fully reproducible in R. This snippet shows how indicators were normalized prior to trend analysis.</p>
+</div>
+</div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -355,9 +397,27 @@ This highlights the risk of overestimating burden if raw HMIS data are used with
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+<section id="stl-decomposition" class="level4">
+<h4 class="anchored" data-anchor-id="stl-decomposition">STL decomposition:</h4>
 </section>
-<section id="stl-decomposition-this-function-allows-you-to-decompose-the-time-series-test-significance-and-estimate-the-slope-coefficient." class="level4">
-<h4 class="anchored" data-anchor-id="stl-decomposition-this-function-allows-you-to-decompose-the-time-series-test-significance-and-estimate-the-slope-coefficient.">STL decomposition: This function allows you to decompose the time series, test significance, and estimate the slope coefficient.</h4>
+</section>
+<section id="stl-decomposition-1" class="level3">
+<h3 class="anchored" data-anchor-id="stl-decomposition-1">STL Decomposition</h3>
+<p>This function decomposes the normalized time series into seasonal, trend, and remainder components, and applies Mann-Kendall and Sen’s slope tests to assess statistical significance.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Key Insight:</strong><br>
+STL decomposition helped disentangle seasonal variation from long-term malaria trends, allowing robust detection of increasing or decreasing trajectories at the district level.</p>
+</div>
+</div>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
