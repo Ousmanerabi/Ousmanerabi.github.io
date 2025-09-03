@@ -1,5 +1,5 @@
 ---
-title: "Times series analysis"
+title: "Time Series Analysis of Malaria Trends — Burkina Faso (2016–2023)"
 description: "Quantify the trend in malaria incidence at health district level and identify the factors associated with malaria incidence in Burkina Faso from 2016-2023 using routine cases data"
 date: "2025-08-30"
 categories: [R, Epidemiology, Malaria, DHS, climate, Time series]
@@ -10,88 +10,68 @@ format:
     #code-tools: true
 ---
 
+> **Period:** 2016–2023 · **Role:** Lead Data Analyst · **Location:** Burkina Faso
+
+::: callout-note
+[View code on GitHub](https://github.com/...) · [Project index](/projects/)
+:::
+
 ## Overview
 
-The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2022 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.
+The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2023 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.
 
 ## Methods
 
 ### Data sources
 
-Monthly routine case data from public and formal private health facilities were extracted from the Burkina Faso health management information system (HMIS) for the period January 2016 to December 2023.
-
-| Variable | Definition | Sources | Temporal resolution | Period |
-|-------------|-----------------------------------|----------|-----------|--------------|
-| **Suspected cases** | Suspected cases are those presenting clinical symptoms of malaria (fever). | HMIS | Monthly | 2016–2023, excluding 2019 |
-| **Tested cases** | Cases who received a diagnostic test (rapid diagnostic test (RDT) or microscopy). | HMIS | Monthly |  |
-| **Confirmed cases** | Malaria cases confirmed positive by microscopy or RDT. | HMIS | Monthly |  |
-| **Presumed cases** | Cases treated for malaria without a positive test result. | HMIS | Monthly |  |
-| **Population** | Number of people per health district per year. | HMIS | Annual | 2016–2023 |
-| **Treatment-seeking behaviors** | Proportion of children under five with fever who were: i) taken to seek care in the public sector, ii) in the private sector, iii) not taken to care. | DHS, MIS | Every 3 years | 2014, 2017–18, 2021 |
+| Variable | Definition | Source | Temporal | Period |
+|---------------|---------------|---------------|---------------|---------------|
+| Suspected cases | Clinical malaria suspicion (fever) | HMIS | Monthly | 2016–2023 (excl. 2019) |
+| Tested cases | Received RDT or microscopy | HMIS | Monthly | 2016–2023 |
+| Confirmed cases | Positive RDT or microscopy | HMIS | Monthly | 2016–2023 |
+| Presumed cases | Treated without positive test | HMIS | Monthly | 2016–2023 |
+| Population | District population | HMIS | Annual | 2016–2023 |
+| Treatment-seeking (U5) | Public/private/no care | DHS/MIS | Every 3 years | 2014, 2017–18, 2021 |
 
 ### Data management
 
-For this project, I used the standard data analysis framework to **assess data quality** and **correct potential biases** before performing the main analyses.\
-This included steps such as data cleaning, consistency checks, facility matching, treatment of missing values, and detection and imputation of outliers.
+We applied a standard data quality workflow before analysis:
 
-#### Data Management Steps
+-   Standardized district and facility names across years.
 
--   Standardized health district and facility names (to ensure consistency across years).
--   Removed or corrected duplicate and inconsistent records.
--   Classified facility reporting activity (active vs inactive).
--   Detected and imputed outliers using statistical rules (3σ, MAD, IQR).
+-   Removed duplicates/inconsistencies; harmonized facility identifiers.
 
-### Incidences adjustments
+-   Classified facility reporting activity (active vs. inactive).
+
+-   Detected and imputed outliers using **3σ**, **MAD**, and **IQR** rules.
+
+-   Managed missingness; validated reporting rates.
+
+### Incidence adjustments
 
 Crude malaria incidence was calculated by dividing the number of reported confirmed cases for each health district and month by the district population and multiplying by 1000. Then, crude incidence was adjusted for each factor in accordance with the WHO framework (REF).
 
-### Quantify trends
+### Trend quantification
 
-#### Seasonal trend decomposition based on local regression smoothening (STL) using stlplus.
+-   **STL decomposition** (LOESS) to separate seasonal, trend, residual components.
+-   **Sen’s slope** for monotonic trend magnitude.
+-   **Mann–Kendall** test for trend significance (α = 0.05).
 
-STL additive method was used to decompose each time series Yt into seasonal (St), trend (Tt), and remainder (Rt) components.
+### Factors associated with incidence
 
-Sen’s slope \[Ref\] was used to quantify the direction and intensity of the trends in the time series of each incidence estimate for each district. Statistical significance of the trend was assessed by a two-sided Mann-Kendall test \[REF\]. A significance level of 0.05 was used to determine statistical significance.
-
-### Factors associated with malaria incidences
-
-The response variable was annual malaria-adjusted cases for testing, reporting, and treatment-seeking rates (adjustment 3). Data for covariates from 2016 to 2023 were extracted from various sources.
-
-Generalized additive models add flexibility in modeling functional relationships between the response variable and the covariates using smooth curves without specifying their exact form (REF).
-
-```{r}
-
-#| label: blur-all-retrospective-images
-#| echo: false
-#| warning: false
-library(magick)
-
-in_dir  <- "~/Documents/GitHub/Ousmanerabi.github.io/assets/projects/retrospective"
-out_dir <- "~/Documents/GitHub/Ousmanerabi.github.io/assets/projects/retrospective_blur"
-dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
-
-imgs <- list.files(in_dir, pattern = "\\.(png|jpg|jpeg)$", full.names = TRUE)
-for (p in imgs) {
-  img <- image_read(p)
-  img_blur <- image_blur(img, radius = 6, sigma = 3)
-  image_write(img_blur, file.path(out_dir, basename(p)))
-}
-
-```
+Outcome: annual incidence adjusted for testing, reporting, treatment-seeking (Adjustment 3).\
+Covariates (2016–2023): climate, ITN access/use, SMC coverage, stockouts (RDT/ACT/IPTp).\
+Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ## Key Deliverables
 
--   Burden of malaria in Burkina Faso from 2016 to 2023 using four incidence rates was estimated
-
--   The trend in malaria incidence in Burkina Faso from 2016 to 2023 for the four incidences rates was assessed and this allows us to better understand how each adjustment affects the reported malaria burden over time.
-
--   The factors associated with malaria incidence was assessed.
+-   Malaria burden estimated under four incidence definitions (2016–2023).
+-   Trend analysis (seasonal + long-term) by district for each incidence definition.
+-   Significant covariates associated with adjusted incidence.
 
 ## Visual Highlights
 
 ![Temporal and spatial analysis for the four incidences](images/Fichier2.png)
-
-Ω
 
 ![Spatial relative percent change between 2016 and 2023](images/Fichier6-01.png)
 

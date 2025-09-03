@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2025-08-30">
 <meta name="description" content="Quantify the trend in malaria incidence at health district level and identify the factors associated with malaria incidence in Burkina Faso from 2016-2023 using routine cases data">
 
-<title>Times series analysis</title>
+<title>Time Series Analysis of Malaria Trends — Burkina Faso (2016–2023)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -86,9 +86,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data sources</a></li>
   <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management">Data management</a></li>
-  <li><a href="#incidences-adjustments" id="toc-incidences-adjustments" class="nav-link" data-scroll-target="#incidences-adjustments">Incidences adjustments</a></li>
-  <li><a href="#quantify-trends" id="toc-quantify-trends" class="nav-link" data-scroll-target="#quantify-trends">Quantify trends</a></li>
-  <li><a href="#factors-associated-with-malaria-incidences" id="toc-factors-associated-with-malaria-incidences" class="nav-link" data-scroll-target="#factors-associated-with-malaria-incidences">Factors associated with malaria incidences</a></li>
+  <li><a href="#incidence-adjustments" id="toc-incidence-adjustments" class="nav-link" data-scroll-target="#incidence-adjustments">Incidence adjustments</a></li>
+  <li><a href="#trend-quantification" id="toc-trend-quantification" class="nav-link" data-scroll-target="#trend-quantification">Trend quantification</a></li>
+  <li><a href="#factors-associated-with-incidence" id="toc-factors-associated-with-incidence" class="nav-link" data-scroll-target="#factors-associated-with-incidence">Factors associated with incidence</a></li>
   </ul></li>
   <li><a href="#key-deliverables" id="toc-key-deliverables" class="nav-link" data-scroll-target="#key-deliverables">Key Deliverables</a></li>
   <li><a href="#visual-highlights" id="toc-visual-highlights" class="nav-link" data-scroll-target="#visual-highlights">Visual Highlights</a></li>
@@ -101,7 +101,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Times series analysis</h1>
+<h1 class="title">Time Series Analysis of Malaria Trends — Burkina Faso (2016–2023)</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
     <div class="quarto-category">Epidemiology</div>
@@ -137,72 +137,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<blockquote class="blockquote">
+<p><strong>Period:</strong> 2016–2023 · <strong>Role:</strong> Lead Data Analyst · <strong>Location:</strong> Burkina Faso</p>
+</blockquote>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://github.com/...">View code on GitHub</a> · <a href="./projects/">Project index</a></p>
+</div>
+</div>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2022 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.</p>
+<p>The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2023 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.</p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
 <section id="data-sources" class="level3">
 <h3 class="anchored" data-anchor-id="data-sources">Data sources</h3>
-<p>Monthly routine case data from public and formal private health facilities were extracted from the Burkina Faso health management information system (HMIS) for the period January 2016 to December 2023.</p>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 15%">
-<col style="width: 42%">
-<col style="width: 12%">
-<col style="width: 13%">
-<col style="width: 16%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
 </colgroup>
 <thead>
 <tr class="header">
 <th>Variable</th>
 <th>Definition</th>
-<th>Sources</th>
-<th>Temporal resolution</th>
+<th>Source</th>
+<th>Temporal</th>
 <th>Period</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>Suspected cases</strong></td>
-<td>Suspected cases are those presenting clinical symptoms of malaria (fever).</td>
+<td>Suspected cases</td>
+<td>Clinical malaria suspicion (fever)</td>
 <td>HMIS</td>
 <td>Monthly</td>
-<td>2016–2023, excluding 2019</td>
+<td>2016–2023 (excl. 2019)</td>
 </tr>
 <tr class="even">
-<td><strong>Tested cases</strong></td>
-<td>Cases who received a diagnostic test (rapid diagnostic test (RDT) or microscopy).</td>
+<td>Tested cases</td>
+<td>Received RDT or microscopy</td>
 <td>HMIS</td>
 <td>Monthly</td>
-<td></td>
+<td>2016–2023</td>
 </tr>
 <tr class="odd">
-<td><strong>Confirmed cases</strong></td>
-<td>Malaria cases confirmed positive by microscopy or RDT.</td>
+<td>Confirmed cases</td>
+<td>Positive RDT or microscopy</td>
 <td>HMIS</td>
 <td>Monthly</td>
-<td></td>
+<td>2016–2023</td>
 </tr>
 <tr class="even">
-<td><strong>Presumed cases</strong></td>
-<td>Cases treated for malaria without a positive test result.</td>
+<td>Presumed cases</td>
+<td>Treated without positive test</td>
 <td>HMIS</td>
 <td>Monthly</td>
-<td></td>
+<td>2016–2023</td>
 </tr>
 <tr class="odd">
-<td><strong>Population</strong></td>
-<td>Number of people per health district per year.</td>
+<td>Population</td>
+<td>District population</td>
 <td>HMIS</td>
 <td>Annual</td>
 <td>2016–2023</td>
 </tr>
 <tr class="even">
-<td><strong>Treatment-seeking behaviors</strong></td>
-<td>Proportion of children under five with fever who were: i) taken to seek care in the public sector, ii) in the private sector, iii) not taken to care.</td>
-<td>DHS, MIS</td>
+<td>Treatment-seeking (U5)</td>
+<td>Public/private/no care</td>
+<td>DHS/MIS</td>
 <td>Every 3 years</td>
 <td>2014, 2017–18, 2021</td>
 </tr>
@@ -211,69 +226,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-management" class="level3">
 <h3 class="anchored" data-anchor-id="data-management">Data management</h3>
-<p>For this project, I used the standard data analysis framework to <strong>assess data quality</strong> and <strong>correct potential biases</strong> before performing the main analyses.<br>
-This included steps such as data cleaning, consistency checks, facility matching, treatment of missing values, and detection and imputation of outliers.</p>
-<section id="data-management-steps" class="level4">
-<h4 class="anchored" data-anchor-id="data-management-steps">Data Management Steps</h4>
+<p>We applied a standard data quality workflow before analysis:</p>
 <ul>
-<li>Standardized health district and facility names (to ensure consistency across years).</li>
-<li>Removed or corrected duplicate and inconsistent records.</li>
-<li>Classified facility reporting activity (active vs inactive).</li>
-<li>Detected and imputed outliers using statistical rules (3σ, MAD, IQR).</li>
+<li><p>Standardized district and facility names across years.</p></li>
+<li><p>Removed duplicates/inconsistencies; harmonized facility identifiers.</p></li>
+<li><p>Classified facility reporting activity (active vs.&nbsp;inactive).</p></li>
+<li><p>Detected and imputed outliers using <strong>3σ</strong>, <strong>MAD</strong>, and <strong>IQR</strong> rules.</p></li>
+<li><p>Managed missingness; validated reporting rates.</p></li>
 </ul>
 </section>
-</section>
-<section id="incidences-adjustments" class="level3">
-<h3 class="anchored" data-anchor-id="incidences-adjustments">Incidences adjustments</h3>
+<section id="incidence-adjustments" class="level3">
+<h3 class="anchored" data-anchor-id="incidence-adjustments">Incidence adjustments</h3>
 <p>Crude malaria incidence was calculated by dividing the number of reported confirmed cases for each health district and month by the district population and multiplying by 1000. Then, crude incidence was adjusted for each factor in accordance with the WHO framework (REF).</p>
 </section>
-<section id="quantify-trends" class="level3">
-<h3 class="anchored" data-anchor-id="quantify-trends">Quantify trends</h3>
-<section id="seasonal-trend-decomposition-based-on-local-regression-smoothening-stl-using-stlplus." class="level4">
-<h4 class="anchored" data-anchor-id="seasonal-trend-decomposition-based-on-local-regression-smoothening-stl-using-stlplus.">Seasonal trend decomposition based on local regression smoothening (STL) using stlplus.</h4>
-<p>STL additive method was used to decompose each time series Yt into seasonal (St), trend (Tt), and remainder (Rt) components.</p>
-<p>Sen’s slope [Ref] was used to quantify the direction and intensity of the trends in the time series of each incidence estimate for each district. Statistical significance of the trend was assessed by a two-sided Mann-Kendall test [REF]. A significance level of 0.05 was used to determine statistical significance.</p>
+<section id="trend-quantification" class="level3">
+<h3 class="anchored" data-anchor-id="trend-quantification">Trend quantification</h3>
+<ul>
+<li><strong>STL decomposition</strong> (LOESS) to separate seasonal, trend, residual components.</li>
+<li><strong>Sen’s slope</strong> for monotonic trend magnitude.</li>
+<li><strong>Mann–Kendall</strong> test for trend significance (α = 0.05).</li>
+</ul>
 </section>
-</section>
-<section id="factors-associated-with-malaria-incidences" class="level3">
-<h3 class="anchored" data-anchor-id="factors-associated-with-malaria-incidences">Factors associated with malaria incidences</h3>
-<p>The response variable was annual malaria-adjusted cases for testing, reporting, and treatment-seeking rates (adjustment 3). Data for covariates from 2016 to 2023 were extracted from various sources.</p>
-<p>Generalized additive models add flexibility in modeling functional relationships between the response variable and the covariates using smooth curves without specifying their exact form (REF).</p>
-<div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: blur-all-retrospective-images</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stderr">
-<pre><code>Linking to ImageMagick 6.9.12.93
-Enabled features: cairo, fontconfig, freetype, heic, lcms, pango, raw, rsvg, webp
-Disabled features: fftw, ghostscript, x11</code></pre>
-</div>
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>in_dir  <span class="ot">&lt;-</span> <span class="st">"~/Documents/GitHub/Ousmanerabi.github.io/assets/projects/retrospective"</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>out_dir <span class="ot">&lt;-</span> <span class="st">"~/Documents/GitHub/Ousmanerabi.github.io/assets/projects/retrospective_blur"</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(out_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>, <span class="at">recursive =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>imgs <span class="ot">&lt;-</span> <span class="fu">list.files</span>(in_dir, <span class="at">pattern =</span> <span class="st">"</span><span class="sc">\\</span><span class="st">.(png|jpg|jpeg)$"</span>, <span class="at">full.names =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (p <span class="cf">in</span> imgs) {</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  img <span class="ot">&lt;-</span> <span class="fu">image_read</span>(p)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  img_blur <span class="ot">&lt;-</span> <span class="fu">image_blur</span>(img, <span class="at">radius =</span> <span class="dv">6</span>, <span class="at">sigma =</span> <span class="dv">3</span>)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">image_write</span>(img_blur, <span class="fu">file.path</span>(out_dir, <span class="fu">basename</span>(p)))</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
+<section id="factors-associated-with-incidence" class="level3">
+<h3 class="anchored" data-anchor-id="factors-associated-with-incidence">Factors associated with incidence</h3>
+<p>Outcome: annual incidence adjusted for testing, reporting, treatment-seeking (Adjustment 3).<br>
+Covariates (2016–2023): climate, ITN access/use, SMC coverage, stockouts (RDT/ACT/IPTp).<br>
+Model: <strong>Generalized Additive Models (GAMs)</strong> for nonlinear effects.</p>
 </section>
 </section>
 <section id="key-deliverables" class="level2">
 <h2 class="anchored" data-anchor-id="key-deliverables">Key Deliverables</h2>
 <ul>
-<li><p>Burden of malaria in Burkina Faso from 2016 to 2023 using four incidence rates was estimated</p></li>
-<li><p>The trend in malaria incidence in Burkina Faso from 2016 to 2023 for the four incidences rates was assessed and this allows us to better understand how each adjustment affects the reported malaria burden over time.</p></li>
-<li><p>The factors associated with malaria incidence was assessed.</p></li>
+<li>Malaria burden estimated under four incidence definitions (2016–2023).</li>
+<li>Trend analysis (seasonal + long-term) by district for each incidence definition.</li>
+<li>Significant covariates associated with adjusted incidence.</li>
 </ul>
 </section>
 <section id="visual-highlights" class="level2">
@@ -284,7 +270,6 @@ Disabled features: fftw, ghostscript, x11</code></pre>
 <figcaption>Temporal and spatial analysis for the four incidences</figcaption>
 </figure>
 </div>
-<p>Ω</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Fichier6-01.png" class="img-fluid figure-img"></p>
@@ -305,30 +290,30 @@ Disabled features: fftw, ghostscript, x11</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Function for normalize the four incidences rates (comparaison purpose)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>getNormalized <span class="ot">&lt;-</span> <span class="cf">function</span>(vec) {</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(vec) <span class="sc">||</span> <span class="fu">all</span>(<span class="fu">is.na</span>(vec))) {</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">"Input vector is non-numeric or all NA; returning original vector"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(vec)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  vec_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  vec_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(vec_sd) <span class="sc">||</span> vec_sd <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">"Standard deviation is 0 or NA; returning original vector"</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(vec)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  (vec <span class="sc">-</span> vec_mean) <span class="sc">/</span> vec_sd</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Monthly data</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>monthly_DS_incidence <span class="ot">&lt;-</span> monthly_DS_incide <span class="sc">%&gt;%</span></span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">mal_cases_norm =</span> <span class="fu">getNormalized</span>(<span class="st">`</span><span class="at">Incidence brute</span><span class="st">`</span>),</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidence_adj_presumed_cases_norm =</span> <span class="fu">getNormalized</span>(Adj1),</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidence_adj_presumed_cases_RR_norm =</span> <span class="fu">getNormalized</span>(Adj2),</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidence_adj_presumed_cases_RR_TSR_norm =</span> <span class="fu">getNormalized</span>(Adj3)</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Function for normalize the four incidences rates (comparaison purpose)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>getNormalized <span class="ot">&lt;-</span> <span class="cf">function</span>(vec) {</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(vec) <span class="sc">||</span> <span class="fu">all</span>(<span class="fu">is.na</span>(vec))) {</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">"Input vector is non-numeric or all NA; returning original vector"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(vec)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  vec_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  vec_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(vec_sd) <span class="sc">||</span> vec_sd <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">"Standard deviation is 0 or NA; returning original vector"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(vec)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  (vec <span class="sc">-</span> vec_mean) <span class="sc">/</span> vec_sd</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Monthly data</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>monthly_DS_incidence <span class="ot">&lt;-</span> monthly_DS_incide <span class="sc">%&gt;%</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">mal_cases_norm =</span> <span class="fu">getNormalized</span>(<span class="st">`</span><span class="at">Incidence brute</span><span class="st">`</span>),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidence_adj_presumed_cases_norm =</span> <span class="fu">getNormalized</span>(Adj1),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidence_adj_presumed_cases_RR_norm =</span> <span class="fu">getNormalized</span>(Adj2),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">incidence_adj_presumed_cases_RR_TSR_norm =</span> <span class="fu">getNormalized</span>(Adj3)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
@@ -337,64 +322,64 @@ Disabled features: fftw, ghostscript, x11</code></pre>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## STL decomposition</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>STL_result_DF_norm_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>indicators <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"mal_cases_norm"</span>, <span class="at">type =</span> <span class="st">"Crude Incidence"</span>),</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"incidence_adj_presumed_cases_norm"</span>, <span class="at">type =</span> <span class="st">"Adjusted Presumed Cases"</span>),</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"incidence_adj_presumed_cases_RR_norm"</span>, <span class="at">type =</span> <span class="st">"Adjusted Presumed Cases RR"</span>),</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"incidence_adj_presumed_cases_RR_TSR_norm"</span>, <span class="at">type =</span> <span class="st">"Adjusted Presumed Cases RR TSR"</span>)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Monthly data</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>monthly_DS_incidence <span class="ot">=</span> monthly_DS_incidence </span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="do">## loop</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (DS <span class="cf">in</span> base<span class="sc">::</span><span class="fu">sort</span>(base<span class="sc">::</span><span class="fu">unique</span>(monthly_DS_incidence<span class="sc">$</span>districts))) {</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>  cases_dist <span class="ot">&lt;-</span> monthly_DS_incidence <span class="sc">%&gt;%</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(districts <span class="sc">==</span> DS) <span class="sc">%&gt;%</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(Date)</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(cases_dist) <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"No data for district:"</span>, DS, <span class="st">"- skipping"</span>))</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">next</span></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (ind <span class="cf">in</span> indicators) {</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>ind<span class="sc">$</span>col <span class="sc">%in%</span> <span class="fu">names</span>(cases_dist)) {</span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Column"</span>, ind<span class="sc">$</span>col, <span class="st">"not found in district"</span>, DS, <span class="st">"- skipping"</span>))</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>      <span class="cf">next</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>    ind_values <span class="ot">&lt;-</span> cases_dist[[ind<span class="sc">$</span>col]]</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>    valid_idx <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(ind_values)</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>    valid_ind_norm <span class="ot">&lt;-</span> ind_values[valid_idx]</span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    valid_dates <span class="ot">&lt;-</span> cases_dist<span class="sc">$</span>Date[valid_idx]</span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(valid_ind_norm) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Fewer than 2 valid observations for"</span>, ind<span class="sc">$</span>col, <span class="st">"in district"</span>, DS, <span class="st">"- skipping"</span>))</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a>      <span class="cf">next</span></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a>    start_year <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(<span class="fu">format</span>(valid_dates[<span class="dv">1</span>], <span class="st">"%Y"</span>))</span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    start_month <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(<span class="fu">format</span>(valid_dates[<span class="dv">1</span>], <span class="st">"%m"</span>))</span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a>    ind_ts <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">ts</span>(valid_ind_norm, <span class="at">start =</span> <span class="fu">c</span>(start_year, start_month), <span class="at">deltat =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>)</span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>    ind_stl <span class="ot">&lt;-</span> stlplus<span class="sc">::</span><span class="fu">stlplus</span>(ind_ts, <span class="at">s.window =</span> <span class="st">"periodic"</span>)</span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.data.frame</span>(ind_stl<span class="sc">$</span>data[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>type <span class="ot">&lt;-</span> ind<span class="sc">$</span>type</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>dates <span class="ot">&lt;-</span> valid_dates</span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>MK_p <span class="ot">&lt;-</span> trend<span class="sc">::</span><span class="fu">smk.test</span>(ind_ts)<span class="sc">$</span>p.value</span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>sens_slope <span class="ot">&lt;-</span> trend<span class="sc">::</span><span class="fu">sea.sens.slope</span>(ind_ts)</span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>District <span class="ot">&lt;-</span> DS</span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>    STL_result_DF_norm_list[[base<span class="sc">::</span><span class="fu">paste</span>(DS, ind<span class="sc">$</span>col, <span class="at">sep =</span> <span class="st">"_"</span>)]] <span class="ot">&lt;-</span> ind_stl_ts</span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a>STL_result_DF_norm <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">rbindlist</span>(STL_result_DF_norm_list, <span class="at">fill =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a>STL_result_DF_slopes <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">unique</span>(STL_result_DF_norm[, <span class="fu">c</span>(<span class="st">"type"</span>, <span class="st">"MK_p"</span>, <span class="st">"sens_slope"</span>, <span class="st">"District"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="do">## STL decomposition</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>STL_result_DF_norm_list <span class="ot">&lt;-</span> <span class="fu">list</span>()</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>indicators <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"mal_cases_norm"</span>, <span class="at">type =</span> <span class="st">"Crude Incidence"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"incidence_adj_presumed_cases_norm"</span>, <span class="at">type =</span> <span class="st">"Adjusted Presumed Cases"</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"incidence_adj_presumed_cases_RR_norm"</span>, <span class="at">type =</span> <span class="st">"Adjusted Presumed Cases RR"</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="at">col =</span> <span class="st">"incidence_adj_presumed_cases_RR_TSR_norm"</span>, <span class="at">type =</span> <span class="st">"Adjusted Presumed Cases RR TSR"</span>)</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Monthly data</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>monthly_DS_incidence <span class="ot">=</span> monthly_DS_incidence </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="do">## loop</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (DS <span class="cf">in</span> base<span class="sc">::</span><span class="fu">sort</span>(base<span class="sc">::</span><span class="fu">unique</span>(monthly_DS_incidence<span class="sc">$</span>districts))) {</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  cases_dist <span class="ot">&lt;-</span> monthly_DS_incidence <span class="sc">%&gt;%</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">filter</span>(districts <span class="sc">==</span> DS) <span class="sc">%&gt;%</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    dplyr<span class="sc">::</span><span class="fu">arrange</span>(Date)</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">nrow</span>(cases_dist) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"No data for district:"</span>, DS, <span class="st">"- skipping"</span>))</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">next</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> (ind <span class="cf">in</span> indicators) {</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="sc">!</span>ind<span class="sc">$</span>col <span class="sc">%in%</span> <span class="fu">names</span>(cases_dist)) {</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>      <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Column"</span>, ind<span class="sc">$</span>col, <span class="st">"not found in district"</span>, DS, <span class="st">"- skipping"</span>))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>      <span class="cf">next</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    ind_values <span class="ot">&lt;-</span> cases_dist[[ind<span class="sc">$</span>col]]</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    valid_idx <span class="ot">&lt;-</span> <span class="sc">!</span><span class="fu">is.na</span>(ind_values)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    valid_ind_norm <span class="ot">&lt;-</span> ind_values[valid_idx]</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    valid_dates <span class="ot">&lt;-</span> cases_dist<span class="sc">$</span>Date[valid_idx]</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">length</span>(valid_ind_norm) <span class="sc">&lt;</span> <span class="dv">2</span>) {</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      <span class="fu">warning</span>(<span class="fu">paste</span>(<span class="st">"Fewer than 2 valid observations for"</span>, ind<span class="sc">$</span>col, <span class="st">"in district"</span>, DS, <span class="st">"- skipping"</span>))</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>      <span class="cf">next</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    start_year <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(<span class="fu">format</span>(valid_dates[<span class="dv">1</span>], <span class="st">"%Y"</span>))</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    start_month <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.numeric</span>(<span class="fu">format</span>(valid_dates[<span class="dv">1</span>], <span class="st">"%m"</span>))</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    ind_ts <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">ts</span>(valid_ind_norm, <span class="at">start =</span> <span class="fu">c</span>(start_year, start_month), <span class="at">deltat =</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">12</span>)</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    ind_stl <span class="ot">&lt;-</span> stlplus<span class="sc">::</span><span class="fu">stlplus</span>(ind_ts, <span class="at">s.window =</span> <span class="st">"periodic"</span>)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">as.data.frame</span>(ind_stl<span class="sc">$</span>data[, <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>])</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>type <span class="ot">&lt;-</span> ind<span class="sc">$</span>type</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>dates <span class="ot">&lt;-</span> valid_dates</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>MK_p <span class="ot">&lt;-</span> trend<span class="sc">::</span><span class="fu">smk.test</span>(ind_ts)<span class="sc">$</span>p.value</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>sens_slope <span class="ot">&lt;-</span> trend<span class="sc">::</span><span class="fu">sea.sens.slope</span>(ind_ts)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    ind_stl_ts<span class="sc">$</span>District <span class="ot">&lt;-</span> DS</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>    STL_result_DF_norm_list[[base<span class="sc">::</span><span class="fu">paste</span>(DS, ind<span class="sc">$</span>col, <span class="at">sep =</span> <span class="st">"_"</span>)]] <span class="ot">&lt;-</span> ind_stl_ts</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>STL_result_DF_norm <span class="ot">&lt;-</span> data.table<span class="sc">::</span><span class="fu">rbindlist</span>(STL_result_DF_norm_list, <span class="at">fill =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>STL_result_DF_slopes <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">unique</span>(STL_result_DF_norm[, <span class="fu">c</span>(<span class="st">"type"</span>, <span class="st">"MK_p"</span>, <span class="st">"sens_slope"</span>, <span class="st">"District"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 </section>
