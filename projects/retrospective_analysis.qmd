@@ -22,7 +22,7 @@ permalink: /projects/retrospective_analysis/
 
 The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2023 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.
 
-**Role:** Sole author — responsible for data cleaning, quality assessment, analysis, modeling, mapping, and reporting.
+**Role:** Sole author responsible for data cleaning, quality assessment, analysis, modeling, mapping, and reporting.
 
 ## Methods
 
@@ -75,35 +75,32 @@ Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ## Visual Highlights
 
-### Incidence estimates
+### 1. Reporting rate
 
-![Temporal and spatial analysis for the four incidences](images/Fichier2.png)
-
-::: callout-note
-**Key Insight:** Data quality varied substantially by district. Some districts had \>30% inactive facilities, strongly biasing crude incidence estimates.
-:::
-
-### Trend
-
-#### A. Rate variation
-
-![Spatial relative percent change between 2016 and 2023](images/Fichier6-01.png)
+![Monthly reporting rates per health district](images/weighted.png){fig-align="center" width="422"}
 
 ::: callout-note
-**Key Insight:** Data quality varied substantially by district. Some districts had \>30% inactive facilities, strongly biasing crude incidence estimates.
+**Key Insight:** Data quality varied considerably from district to district. Some districts reported less than 50% during certain periods, which significantly skewed the crude incidence estimates.
 :::
 
-#### B. Sen's slope coefficient (Mann kendall test)
+------------------------------------------------------------------------
+
+### 2. Malaria Incidence Trends
+
+#### Sen's slope coefficient (Mann kendall test)
 
 ![Sen's slope coefficient for malaria incidence](images/Fichier5-02.png)
 
 ::: callout-note
-**Key Insight:** Data quality varied substantially by district. Some districts had \>30% inactive facilities, strongly biasing crude incidence estimates.
+**Key Insight:** Crude incidence suggested rising malaria burden, but after adjusting for testing, reporting, and treatment-seeking, trends stabilized post-2019.\
+This highlights the risk of overestimating burden if raw HMIS data are used without correction.
 :::
+
+------------------------------------------------------------------------
 
 ## Code example
 
-##### Normalize function : cette fonction permet de normaliser les diferents indicateurs afin de pouvoir leur comparer entre eux.
+#### Normalize function : This function allows you to standardize the different indicators so that they can be compared with each other.
 
 ```{r normalize}
 #| label: Assessed the trend analysis
@@ -138,7 +135,7 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 ```
 
-##### STL decomposition
+#### STL decomposition: This function allows you to decompose the time series, test significance, and estimate the slope coefficient.
 
 ```{r}
 #| label: STL decomposition
