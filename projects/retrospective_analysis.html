@@ -93,8 +93,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#key-deliverables" id="toc-key-deliverables" class="nav-link" data-scroll-target="#key-deliverables">Key Deliverables</a></li>
   <li><a href="#visual-highlights" id="toc-visual-highlights" class="nav-link" data-scroll-target="#visual-highlights">Visual Highlights</a>
   <ul class="collapse">
-  <li><a href="#incidence-estimates" id="toc-incidence-estimates" class="nav-link" data-scroll-target="#incidence-estimates">Incidence estimates</a></li>
-  <li><a href="#trend" id="toc-trend" class="nav-link" data-scroll-target="#trend">Trend</a></li>
+  <li><a href="#reporting-rate" id="toc-reporting-rate" class="nav-link" data-scroll-target="#reporting-rate">1. Reporting rate</a></li>
+  <li><a href="#malaria-incidence-trends" id="toc-malaria-incidence-trends" class="nav-link" data-scroll-target="#malaria-incidence-trends">2. Malaria Incidence Trends</a></li>
   </ul></li>
   <li><a href="#code-example" id="toc-code-example" class="nav-link" data-scroll-target="#code-example">Code example</a></li>
   <li><a href="#repository-reproducibility" id="toc-repository-reproducibility" class="nav-link" data-scroll-target="#repository-reproducibility">Repository &amp; Reproducibility</a></li>
@@ -162,7 +162,7 @@ Note
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2023 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.</p>
-<p><strong>Role:</strong> Sole author — responsible for data cleaning, quality assessment, analysis, modeling, mapping, and reporting.</p>
+<p><strong>Role:</strong> Sole author responsible for data cleaning, quality assessment, analysis, modeling, mapping, and reporting.</p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
@@ -271,12 +271,12 @@ Model: <strong>Generalized Additive Models (GAMs)</strong> for nonlinear effects
 </section>
 <section id="visual-highlights" class="level2">
 <h2 class="anchored" data-anchor-id="visual-highlights">Visual Highlights</h2>
-<section id="incidence-estimates" class="level3">
-<h3 class="anchored" data-anchor-id="incidence-estimates">Incidence estimates</h3>
+<section id="reporting-rate" class="level3">
+<h3 class="anchored" data-anchor-id="reporting-rate">1. Reporting rate</h3>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/Fichier2.png" class="img-fluid figure-img"></p>
-<figcaption>Temporal and spatial analysis for the four incidences</figcaption>
+<p><img src="images/weighted.png" class="img-fluid figure-img" width="422"></p>
+<figcaption><strong>Monthly reporting rates per health district</strong></figcaption>
 </figure>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -289,40 +289,19 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Key Insight:</strong> Data quality varied substantially by district. Some districts had &gt;30% inactive facilities, strongly biasing crude incidence estimates.</p>
+<p><strong>Key Insight:</strong> Data quality varied considerably from district to district. Some districts reported less than 50% during certain periods, which significantly skewed the crude incidence estimates.</p>
 </div>
 </div>
+<hr>
 </section>
-<section id="trend" class="level3">
-<h3 class="anchored" data-anchor-id="trend">Trend</h3>
-<section id="a.-rate-variation" class="level4">
-<h4 class="anchored" data-anchor-id="a.-rate-variation">A. Rate variation</h4>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/Fichier6-01.png" class="img-fluid figure-img"></p>
-<figcaption>Spatial relative percent change between 2016 and 2023</figcaption>
-</figure>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Key Insight:</strong> Data quality varied substantially by district. Some districts had &gt;30% inactive facilities, strongly biasing crude incidence estimates.</p>
-</div>
-</div>
-</section>
-<section id="b.-sens-slope-coefficient-mann-kendall-test" class="level4">
-<h4 class="anchored" data-anchor-id="b.-sens-slope-coefficient-mann-kendall-test">B. Sen’s slope coefficient (Mann kendall test)</h4>
+<section id="malaria-incidence-trends" class="level3">
+<h3 class="anchored" data-anchor-id="malaria-incidence-trends">2. Malaria Incidence Trends</h3>
+<section id="sens-slope-coefficient-mann-kendall-test" class="level4">
+<h4 class="anchored" data-anchor-id="sens-slope-coefficient-mann-kendall-test">Sen’s slope coefficient (Mann kendall test)</h4>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Fichier5-02.png" class="img-fluid figure-img"></p>
-<figcaption>Sen’s slope coefficient for malaria incidence</figcaption>
+<figcaption><strong>Fig. Sen’s slope coefficient for malaria incidence</strong></figcaption>
 </figure>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -335,16 +314,18 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Key Insight:</strong> Data quality varied substantially by district. Some districts had &gt;30% inactive facilities, strongly biasing crude incidence estimates.</p>
+<p><strong>Key Insight:</strong> Crude incidence suggested rising malaria burden, but after adjusting for testing, reporting, and treatment-seeking, trends stabilized post-2019.<br>
+This highlights the risk of overestimating burden if raw HMIS data are used without correction.</p>
 </div>
 </div>
+<hr>
 </section>
 </section>
 </section>
 <section id="code-example" class="level2">
 <h2 class="anchored" data-anchor-id="code-example">Code example</h2>
-<section id="normalize-function-cette-fonction-permet-de-normaliser-les-diferents-indicateurs-afin-de-pouvoir-leur-comparer-entre-eux." class="level5">
-<h5 class="anchored" data-anchor-id="normalize-function-cette-fonction-permet-de-normaliser-les-diferents-indicateurs-afin-de-pouvoir-leur-comparer-entre-eux.">Normalize function : cette fonction permet de normaliser les diferents indicateurs afin de pouvoir leur comparer entre eux.</h5>
+<section id="normalize-function-this-function-allows-you-to-standardize-the-different-indicators-so-that-they-can-be-compared-with-each-other." class="level4">
+<h4 class="anchored" data-anchor-id="normalize-function-this-function-allows-you-to-standardize-the-different-indicators-so-that-they-can-be-compared-with-each-other.">Normalize function : This function allows you to standardize the different indicators so that they can be compared with each other.</h4>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -375,8 +356,8 @@ Note
 </details>
 </div>
 </section>
-<section id="stl-decomposition" class="level5">
-<h5 class="anchored" data-anchor-id="stl-decomposition">STL decomposition</h5>
+<section id="stl-decomposition-this-function-allows-you-to-decompose-the-time-series-test-significance-and-estimate-the-slope-coefficient." class="level4">
+<h4 class="anchored" data-anchor-id="stl-decomposition-this-function-allows-you-to-decompose-the-time-series-test-significance-and-estimate-the-slope-coefficient.">STL decomposition: This function allows you to decompose the time series, test significance, and estimate the slope coefficient.</h4>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
