@@ -47,7 +47,7 @@ I applied a standard data quality workflow before analysis:
 
 -   Classified facility reporting activity (active vs. inactive).
 
--   Detected and imputed outliers using **mean ± 3 SD**, **Median absolute deviation (MAD)**, and **Iinterquartile range** rules.
+-   Detected and imputed outliers using **mean ± 3 SD**, **Median absolute deviation (MAD)**, and **Interquartile range (IQR)** rules.
 
 -   Managed missingness; validated reporting rates.
 
