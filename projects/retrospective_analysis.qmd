@@ -81,7 +81,7 @@ Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ## Code example
 
-##### Normalize function
+##### Normalize function : cette fonction permet de normaliser les diferents indicateurs afin de pouvoir leur comparer entre eux.
 
 ```{r normalize}
 #| label: Assessed the trend analysis
@@ -103,7 +103,7 @@ getNormalized <- function(vec) {
   (vec - vec_mean) / vec_sd
 }
 
-## Monthly data
+## Create new variables to use in the trend analysis
 
 monthly_DS_incidence <- monthly_DS_incide %>%
   dplyr::mutate(
