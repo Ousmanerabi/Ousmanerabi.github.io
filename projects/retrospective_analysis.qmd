@@ -10,9 +10,9 @@ format:
     #code-tools: true
 ---
 
-### Overview
+## Overview
 
-The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2022 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso.
+The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2022 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.
 
 ## Methods
 
@@ -29,11 +29,23 @@ Monthly routine case data from public and formal private health facilities were 
 | **Population** | Number of people per health district per year. | HMIS | Annual | 2016–2023 |
 | **Treatment-seeking behaviors** | Proportion of children under five with fever who were: i) taken to seek care in the public sector, ii) in the private sector, iii) not taken to care. | DHS, MIS | Every 3 years | 2014, 2017–18, 2021 |
 
-#### Incidences adjustments
+### Data management
+
+For this project, I used the standard data analysis framework to **assess data quality** and **correct potential biases** before performing the main analyses.\
+This included steps such as data cleaning, consistency checks, facility matching, treatment of missing values, and detection and imputation of outliers.
+
+#### Data Management Steps
+
+-   Standardized health district and facility names (to ensure consistency across years).
+-   Removed or corrected duplicate and inconsistent records.
+-   Classified facility reporting activity (active vs inactive).
+-   Detected and imputed outliers using statistical rules (3σ, MAD, IQR).
+
+### Incidences adjustments
 
 Crude malaria incidence was calculated by dividing the number of reported confirmed cases for each health district and month by the district population and multiplying by 1000. Then, crude incidence was adjusted for each factor in accordance with the WHO framework (REF).
 
-#### Quantify trends
+### Quantify trends
 
 #### Seasonal trend decomposition based on local regression smoothening (STL) using stlplus.
 
@@ -67,9 +79,7 @@ for (p in imgs) {
 
 ```
 
-![](images/Fichier2-01.png)
-
-### Key Deliverables
+## Key Deliverables
 
 -   Burden of malaria in Burkina Faso from 2016 to 2023 using four incidence rates was estimated
 
@@ -77,7 +87,7 @@ for (p in imgs) {
 
 -   The factors associated with malaria incidence was assessed.
 
-### Visual Highlights
+## Visual Highlights
 
 ![Temporal and spatial analysis for the four incidences](images/Fichier2.png)
 
@@ -87,7 +97,7 @@ for (p in imgs) {
 
 ![Sen's slope coefficient for malaria incidence](images/Fichier5-02.png)
 
-### Code example
+## Code example
 
 ##### Normalize function
 
@@ -194,8 +204,13 @@ STL_result_DF_slopes <- base::unique(STL_result_DF_norm[, c("type", "MK_p", "sen
 
 ```
 
-### Repository & Reproducibility
+## Repository & Reproducibility
 
--   Full code & structure: [Full code](https://github.com/Ousmanerabi/Retrospective_analysis)
+-   **Repository:** [Full code](https://github.com/Ousmanerabi/Retrospective_analysis)
 
--   Data:
+-   **Data:**
+
+    -   **Public datasets:** DHS, MIS, and climate datasets (e.g., CHIRPS rainfall) are fully open-access.
+    -   **Restricted datasets:** Routine HMIS surveillance data and intervention coverage data (ITN, SMC, RDT, ACT, IPTp stockouts) are not publicly available and were accessed under agreement with the Burkina Faso National Malaria Control Programme (PNLP).
+
+    For reproducibility, all **data management scripts** and **statistical analysis code** are provided. Analyses relying on restricted data are demonstrated using mock or simulated datasets.

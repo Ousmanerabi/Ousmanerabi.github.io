@@ -85,12 +85,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
   <ul class="collapse">
   <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data sources</a></li>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management">Data management</a></li>
+  <li><a href="#incidences-adjustments" id="toc-incidences-adjustments" class="nav-link" data-scroll-target="#incidences-adjustments">Incidences adjustments</a></li>
+  <li><a href="#quantify-trends" id="toc-quantify-trends" class="nav-link" data-scroll-target="#quantify-trends">Quantify trends</a></li>
   <li><a href="#factors-associated-with-malaria-incidences" id="toc-factors-associated-with-malaria-incidences" class="nav-link" data-scroll-target="#factors-associated-with-malaria-incidences">Factors associated with malaria incidences</a></li>
+  </ul></li>
   <li><a href="#key-deliverables" id="toc-key-deliverables" class="nav-link" data-scroll-target="#key-deliverables">Key Deliverables</a></li>
   <li><a href="#visual-highlights" id="toc-visual-highlights" class="nav-link" data-scroll-target="#visual-highlights">Visual Highlights</a></li>
   <li><a href="#code-example" id="toc-code-example" class="nav-link" data-scroll-target="#code-example">Code example</a></li>
   <li><a href="#repository-reproducibility" id="toc-repository-reproducibility" class="nav-link" data-scroll-target="#repository-reproducibility">Repository &amp; Reproducibility</a></li>
-  </ul></li>
   </ul>
 </nav>
 </div>
@@ -134,9 +137,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="overview" class="level3">
-<h3 class="anchored" data-anchor-id="overview">Overview</h3>
-<p>The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2022 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso.</p>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2022 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.</p>
 </section>
 <section id="methods" class="level2">
 <h2 class="anchored" data-anchor-id="methods">Methods</h2>
@@ -205,13 +208,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<section id="incidences-adjustments" class="level4">
-<h4 class="anchored" data-anchor-id="incidences-adjustments">Incidences adjustments</h4>
+</section>
+<section id="data-management" class="level3">
+<h3 class="anchored" data-anchor-id="data-management">Data management</h3>
+<p>For this project, I used the standard data analysis framework to <strong>assess data quality</strong> and <strong>correct potential biases</strong> before performing the main analyses.<br>
+This included steps such as data cleaning, consistency checks, facility matching, treatment of missing values, and detection and imputation of outliers.</p>
+<section id="data-management-steps" class="level4">
+<h4 class="anchored" data-anchor-id="data-management-steps">Data Management Steps</h4>
+<ul>
+<li>Standardized health district and facility names (to ensure consistency across years).</li>
+<li>Removed or corrected duplicate and inconsistent records.</li>
+<li>Classified facility reporting activity (active vs inactive).</li>
+<li>Detected and imputed outliers using statistical rules (3σ, MAD, IQR).</li>
+</ul>
+</section>
+</section>
+<section id="incidences-adjustments" class="level3">
+<h3 class="anchored" data-anchor-id="incidences-adjustments">Incidences adjustments</h3>
 <p>Crude malaria incidence was calculated by dividing the number of reported confirmed cases for each health district and month by the district population and multiplying by 1000. Then, crude incidence was adjusted for each factor in accordance with the WHO framework (REF).</p>
 </section>
-<section id="quantify-trends" class="level4">
-<h4 class="anchored" data-anchor-id="quantify-trends">Quantify trends</h4>
-</section>
+<section id="quantify-trends" class="level3">
+<h3 class="anchored" data-anchor-id="quantify-trends">Quantify trends</h3>
 <section id="seasonal-trend-decomposition-based-on-local-regression-smoothening-stl-using-stlplus." class="level4">
 <h4 class="anchored" data-anchor-id="seasonal-trend-decomposition-based-on-local-regression-smoothening-stl-using-stlplus.">Seasonal trend decomposition based on local regression smoothening (STL) using stlplus.</h4>
 <p>STL additive method was used to decompose each time series Yt into seasonal (St), trend (Tt), and remainder (Rt) components.</p>
@@ -249,18 +266,18 @@ Disabled features: fftw, ghostscript, x11</code></pre>
 <span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p><img src="images/Fichier2-01.png" class="img-fluid"></p>
 </section>
-<section id="key-deliverables" class="level3">
-<h3 class="anchored" data-anchor-id="key-deliverables">Key Deliverables</h3>
+</section>
+<section id="key-deliverables" class="level2">
+<h2 class="anchored" data-anchor-id="key-deliverables">Key Deliverables</h2>
 <ul>
 <li><p>Burden of malaria in Burkina Faso from 2016 to 2023 using four incidence rates was estimated</p></li>
 <li><p>The trend in malaria incidence in Burkina Faso from 2016 to 2023 for the four incidences rates was assessed and this allows us to better understand how each adjustment affects the reported malaria burden over time.</p></li>
 <li><p>The factors associated with malaria incidence was assessed.</p></li>
 </ul>
 </section>
-<section id="visual-highlights" class="level3">
-<h3 class="anchored" data-anchor-id="visual-highlights">Visual Highlights</h3>
+<section id="visual-highlights" class="level2">
+<h2 class="anchored" data-anchor-id="visual-highlights">Visual Highlights</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/Fichier2.png" class="img-fluid figure-img"></p>
@@ -281,8 +298,8 @@ Disabled features: fftw, ghostscript, x11</code></pre>
 </figure>
 </div>
 </section>
-<section id="code-example" class="level3">
-<h3 class="anchored" data-anchor-id="code-example">Code example</h3>
+<section id="code-example" class="level2">
+<h2 class="anchored" data-anchor-id="code-example">Code example</h2>
 <section id="normalize-function" class="level5">
 <h5 class="anchored" data-anchor-id="normalize-function">Normalize function</h5>
 <div class="cell">
@@ -382,13 +399,17 @@ Disabled features: fftw, ghostscript, x11</code></pre>
 </div>
 </section>
 </section>
-<section id="repository-reproducibility" class="level3">
-<h3 class="anchored" data-anchor-id="repository-reproducibility">Repository &amp; Reproducibility</h3>
+<section id="repository-reproducibility" class="level2">
+<h2 class="anchored" data-anchor-id="repository-reproducibility">Repository &amp; Reproducibility</h2>
 <ul>
-<li><p>Full code &amp; structure: <a href="https://github.com/Ousmanerabi/Retrospective_analysis">Full code</a></p></li>
-<li><p>Data:</p></li>
+<li><p><strong>Repository:</strong> <a href="https://github.com/Ousmanerabi/Retrospective_analysis">Full code</a></p></li>
+<li><p><strong>Data:</strong></p>
+<ul>
+<li><strong>Public datasets:</strong> DHS, MIS, and climate datasets (e.g., CHIRPS rainfall) are fully open-access.</li>
+<li><strong>Restricted datasets:</strong> Routine HMIS surveillance data and intervention coverage data (ITN, SMC, RDT, ACT, IPTp stockouts) are not publicly available and were accessed under agreement with the Burkina Faso National Malaria Control Programme (PNLP).</li>
 </ul>
-</section>
+<p>For reproducibility, all <strong>data management scripts</strong> and <strong>statistical analysis code</strong> are provided. Analyses relying on restricted data are demonstrated using mock or simulated datasets.</p></li>
+</ul>
 </section>
 
 </main>
