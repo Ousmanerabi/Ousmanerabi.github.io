@@ -15,12 +15,14 @@ permalink: /projects/retrospective_analysis/
 
 ::: callout-note
 [![View Code](https://img.shields.io/badge/View%20Code-GitHub-black?logo=github)](https://github.com/Ousmanerabi/Retrospective_analysis)\
-[![← Back to Projects](https://img.shields.io/badge/←%20Back-Projects-blue)](/projects/)
+[![← Back to Projects](https://img.shields.io/badge/←%20Back-Projects-blue)](https://ousmanerabi.github.io/projects/)
 :::
 
 ## Overview
 
 The aim of this study was to assess the malaria trends in Burkina Faso at the health district level to help understand the malaria transmission level between 2016 and 2023 and to determine the factors associated with malaria incidence to better understand the drivers of malaria in Burkina Faso. This analysis combined publicly available DHS/MIS and climate data with restricted HMIS surveillance data obtained from PNLP under data sharing agreement.
+
+**Role:** Sole author — responsible for data cleaning, quality assessment, analysis, modeling, mapping, and reporting.
 
 ## Methods
 
@@ -45,7 +47,7 @@ I applied a standard data quality workflow before analysis:
 
 -   Classified facility reporting activity (active vs. inactive).
 
--   Detected and imputed outliers using **3σ**, **MAD**, and **IQR** rules.
+-   Detected and imputed outliers using **3 mean+-SD**, **Median absolute deviation (MAD)**, and **Iinterquartile range** rules.
 
 -   Managed missingness; validated reporting rates.
 
@@ -73,11 +75,31 @@ Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ## Visual Highlights
 
+### Incidence estimates
+
 ![Temporal and spatial analysis for the four incidences](images/Fichier2.png)
+
+::: callout-note
+**Key Insight:** Data quality varied substantially by district. Some districts had \>30% inactive facilities, strongly biasing crude incidence estimates.
+:::
+
+### Trend
+
+#### A. Rate variation
 
 ![Spatial relative percent change between 2016 and 2023](images/Fichier6-01.png)
 
+::: callout-note
+**Key Insight:** Data quality varied substantially by district. Some districts had \>30% inactive facilities, strongly biasing crude incidence estimates.
+:::
+
+#### B. Sen's slope coefficient (Mann kendall test)
+
 ![Sen's slope coefficient for malaria incidence](images/Fichier5-02.png)
+
+::: callout-note
+**Key Insight:** Data quality varied substantially by district. Some districts had \>30% inactive facilities, strongly biasing crude incidence estimates.
+:::
 
 ## Code example
 
@@ -196,3 +218,9 @@ STL_result_DF_slopes <- base::unique(STL_result_DF_norm[, c("type", "MK_p", "sen
     -   **Restricted datasets:** Routine HMIS surveillance data and intervention coverage data (ITN, SMC, RDT, ACT, IPTp stockouts) are not publicly available and were accessed under agreement with the Burkina Faso National Malaria Control Programme (PNLP).
 
     For reproducibility, all **data management scripts** and **statistical analysis code** are provided. Analyses relying on restricted data are demonstrated using mock or simulated datasets.
+
+## Public Health Relevance
+
+-   Demonstrated how data quality issues (reporting gaps, inactive facilities) bias malaria burden estimation.
+-   Provided robust adjusted incidence trends to better inform malaria control strategy in Burkina Faso.
+-   Delivered reproducible R workflow (cleaning, validation, modeling, mapping) for future NMCP analyses.
