@@ -13,7 +13,8 @@ format:
 > **Period:** 2016–2023 · **Role:** Lead Data Analyst · **Location:** Burkina Faso
 
 ::: callout-note
-[View code on GitHub](https://github.com/...) · [Project index](/projects/)
+[![View Code](https://img.shields.io/badge/View%20Code-GitHub-black?logo=github)](https://github.com/Ousmanerabi/Retrospective_analysis)\
+[![← Back to Projects](https://img.shields.io/badge/←%20Back-Projects-blue)](/projects/)
 :::
 
 ## Overview
@@ -35,7 +36,7 @@ The aim of this study was to assess the malaria trends in Burkina Faso at the he
 
 ### Data management
 
-We applied a standard data quality workflow before analysis:
+I applied a standard data quality workflow before analysis:
 
 -   Standardized district and facility names across years.
 
@@ -49,7 +50,7 @@ We applied a standard data quality workflow before analysis:
 
 ### Incidence adjustments
 
-Crude malaria incidence was calculated by dividing the number of reported confirmed cases for each health district and month by the district population and multiplying by 1000. Then, crude incidence was adjusted for each factor in accordance with the WHO framework (REF).
+Crude malaria incidence was calculated by dividing the number of reported confirmed cases for each health district and month by the district population and multiplying by 1000. Then, crude incidence was adjusted for each factor in accordance with the WHO framework.
 
 ### Trend quantification
 
@@ -60,7 +61,7 @@ Crude malaria incidence was calculated by dividing the number of reported confir
 ### Factors associated with incidence
 
 Outcome: annual incidence adjusted for testing, reporting, treatment-seeking (Adjustment 3).\
-Covariates (2016–2023): climate, ITN access/use, SMC coverage, stockouts (RDT/ACT/IPTp).\
+Covariates (2016–2023): climate, Insecticide Treated nets access/use, Seasonal Malaria Chemoprevention coverage, stockouts (Rapid Diagnostic Test/ACT/IPTp).\
 Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ## Key Deliverables
