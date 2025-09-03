@@ -8,6 +8,7 @@ format:
     toc: true
     code-fold: true
     #code-tools: true
+permalink: /projects/retrospective_analysis/
 ---
 
 > **Period:** 2016–2023 · **Role:** Lead Data Analyst · **Location:** Burkina Faso
@@ -31,7 +32,7 @@ The aim of this study was to assess the malaria trends in Burkina Faso at the he
 | Tested cases | Received RDT or microscopy | HMIS | Monthly | 2016–2023 |
 | Confirmed cases | Positive RDT or microscopy | HMIS | Monthly | 2016–2023 |
 | Presumed cases | Treated without positive test | HMIS | Monthly | 2016–2023 |
-| Population | District population | HMIS | Annual | 2016–2023 |
+| Population | District population | HMIS | Annual (Monthy est) | 2016–2023 |
 | Treatment-seeking (U5) | Public/private/no care | DHS/MIS | Every 3 years | 2014, 2017–18, 2021 |
 
 ### Data management
