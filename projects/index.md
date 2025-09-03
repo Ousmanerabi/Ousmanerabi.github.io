@@ -1,7 +1,9 @@
 ---
 title: "Key Projects (2020–2024)"
 layout: page
+permalink: /projects/
 summary: "Selected projects in epidemiology, analytics, modeling, and training."
+
 ---
 
 # Key Projects (2020–2024)
