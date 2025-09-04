@@ -101,7 +101,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#normalize-function" id="toc-normalize-function" class="nav-link" data-scroll-target="#normalize-function">Normalize Function</a></li>
   </ul></li>
-  <li><a href="#repository-reproducibility" id="toc-repository-reproducibility" class="nav-link" data-scroll-target="#repository-reproducibility">Repository &amp; Reproducibility</a></li>
   <li><a href="#public-health-relevance" id="toc-public-health-relevance" class="nav-link" data-scroll-target="#public-health-relevance">Public Health Relevance</a></li>
   </ul>
 </nav>
@@ -375,14 +374,14 @@ All analyses are fully reproducible in R. This snippet shows how indicators were
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(vec) <span class="sc">||</span> <span class="fu">all</span>(<span class="fu">is.na</span>(vec))) {</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">"Input vector is non-numeric or all NA; returning original vector"</span>)</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(vec)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  vec_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  vec_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  } </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  vec_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  vec_sd <span class="ot">&lt;-</span> <span class="fu">sd</span>(vec, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) </span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">is.na</span>(vec_sd) <span class="sc">||</span> vec_sd <span class="sc">==</span> <span class="dv">0</span>) {</span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">warning</span>(<span class="st">"Standard deviation is 0 or NA; returning original vector"</span>)</span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(vec)</span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  (vec <span class="sc">-</span> vec_mean) <span class="sc">/</span> vec_sd</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  (vec <span class="sc">-</span> vec_mean) <span class="sc">/</span> vec_sd </span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Create new variables to use in the trend analysis</span></span>
@@ -476,11 +475,16 @@ STL decomposition helped disentangle seasonal variation from long-term malaria t
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>STL_result_DF_slopes <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">unique</span>(STL_result_DF_norm[, <span class="fu">c</span>(<span class="st">"type"</span>, <span class="st">"MK_p"</span>, <span class="st">"sens_slope"</span>, <span class="st">"District"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
-</section>
-</section>
-<section id="repository-reproducibility" class="level2">
-<h2 class="anchored" data-anchor-id="repository-reproducibility">Repository &amp; Reproducibility</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Repository &amp; Reproducibility
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
 <li><p><strong>Repository:</strong> <a href="https://github.com/Ousmanerabi/Retrospective_analysis">Full code</a></p></li>
 <li><p><strong>Data:</strong></p>
@@ -490,6 +494,10 @@ STL decomposition helped disentangle seasonal variation from long-term malaria t
 </ul>
 <p>For reproducibility, all <strong>data management scripts</strong> and <strong>statistical analysis code</strong> are provided.</p></li>
 </ul>
+</div>
+</div>
+</section>
+</section>
 </section>
 <section id="public-health-relevance" class="level2">
 <h2 class="anchored" data-anchor-id="public-health-relevance">Public Health Relevance</h2>

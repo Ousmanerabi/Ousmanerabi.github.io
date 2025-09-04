@@ -121,7 +121,7 @@ This function standardizes the four malaria incidence indicators so they can be 
 All analyses are fully reproducible in R. This snippet shows how indicators were normalized prior to trend analysis.
 :::
 
-```{r normalize}
+```{r, warning=F, message=F}
 #| label: Assessed the trend analysis
 #| warning: false
 #| eval: false
@@ -131,14 +131,14 @@ getNormalized <- function(vec) {
   if (!is.numeric(vec) || all(is.na(vec))) {
     warning("Input vector is non-numeric or all NA; returning original vector")
     return(vec)
-  }
-  vec_mean <- mean(vec, na.rm = TRUE)
-  vec_sd <- sd(vec, na.rm = TRUE)
+  } 
+  vec_mean <- mean(vec, na.rm = TRUE) 
+  vec_sd <- sd(vec, na.rm = TRUE) 
   if (is.na(vec_sd) || vec_sd == 0) {
     warning("Standard deviation is 0 or NA; returning original vector")
     return(vec)
   }
-  (vec - vec_mean) / vec_sd
+  (vec - vec_mean) / vec_sd 
 }
 
 ## Create new variables to use in the trend analysis
@@ -231,6 +231,8 @@ STL_result_DF_slopes <- base::unique(STL_result_DF_norm[, c("type", "MK_p", "sen
 
 ```
 
+::: {.callout-note}
+
 ## Repository & Reproducibility
 
 -   **Repository:** [Full code](https://github.com/Ousmanerabi/Retrospective_analysis)
@@ -241,6 +243,8 @@ STL_result_DF_slopes <- base::unique(STL_result_DF_norm[, c("type", "MK_p", "sen
     -   **Restricted datasets:** Routine HMIS surveillance data and intervention coverage data (ITN, SMC, RDT, ACT, IPTp stockouts) are not publicly available and were accessed under agreement with the Burkina Faso National Malaria Control Programme (PNLP).
 
     For reproducibility, all **data management scripts** and **statistical analysis code** are provided.
+
+:::
 
 ## Public Health Relevance
 
