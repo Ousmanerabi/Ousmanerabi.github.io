@@ -97,10 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#incidence-estimates" id="toc-incidence-estimates" class="nav-link" data-scroll-target="#incidence-estimates">2. Incidence estimates</a></li>
   <li><a href="#malaria-incidence-trends" id="toc-malaria-incidence-trends" class="nav-link" data-scroll-target="#malaria-incidence-trends">3. Malaria Incidence Trends</a></li>
   </ul></li>
-  <li><a href="#code-example" id="toc-code-example" class="nav-link" data-scroll-target="#code-example">Code example</a>
-  <ul class="collapse">
-  <li><a href="#normalize-function" id="toc-normalize-function" class="nav-link" data-scroll-target="#normalize-function">Normalize Function</a></li>
-  </ul></li>
+  <li><a href="#code-example" id="toc-code-example" class="nav-link" data-scroll-target="#code-example">Code example</a></li>
   <li><a href="#repository-reproducibility" id="toc-repository-reproducibility" class="nav-link" data-scroll-target="#repository-reproducibility">Repository &amp; Reproducibility</a></li>
   <li><a href="#public-health-relevance" id="toc-public-health-relevance" class="nav-link" data-scroll-target="#public-health-relevance">Public Health Relevance</a></li>
   </ul>
@@ -350,8 +347,8 @@ Note
 </section>
 <section id="code-example" class="level2">
 <h2 class="anchored" data-anchor-id="code-example">Code example</h2>
-<section id="normalize-function" class="level3">
-<h3 class="anchored" data-anchor-id="normalize-function">Normalize Function</h3>
+<section id="normalize-function" class="level4">
+<h4 class="anchored" data-anchor-id="normalize-function">Normalize Function</h4>
 <p>This function standardizes the four malaria incidence indicators so they can be compared on the same scale across districts.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -396,6 +393,7 @@ All analyses are fully reproducible in R. This snippet shows how indicators were
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
+</section>
 <section id="stl-decomposition" class="level4">
 <h4 class="anchored" data-anchor-id="stl-decomposition">STL Decomposition</h4>
 <p>This function decomposes the normalized time series into seasonal, trend, and remainder components, and applies Mann-Kendall and Sen’s slope tests to assess statistical significance.</p>
@@ -476,7 +474,6 @@ STL decomposition helped disentangle seasonal variation from long-term malaria t
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>STL_result_DF_slopes <span class="ot">&lt;-</span> base<span class="sc">::</span><span class="fu">unique</span>(STL_result_DF_norm[, <span class="fu">c</span>(<span class="st">"type"</span>, <span class="st">"MK_p"</span>, <span class="st">"sens_slope"</span>, <span class="st">"District"</span>)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-</section>
 </section>
 </section>
 <section id="repository-reproducibility" class="level2">

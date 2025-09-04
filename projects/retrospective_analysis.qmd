@@ -112,7 +112,7 @@ Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ## Code example
 
-### Normalize Function
+#### Normalize Function
 
 This function standardizes the four malaria incidence indicators so they can be compared on the same scale across districts.
 
