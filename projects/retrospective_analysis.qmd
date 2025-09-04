@@ -77,7 +77,7 @@ Model: **Generalized Additive Models (GAMs)** for nonlinear effects.
 
 ### 1. Reporting rate
 
-![Fig. Monthly reporting rates per health district](images/weighted.png){fig-align="center" width="422"}
+![**Fig. Monthly reporting rates per health district**](images/weighted.png){fig-align="center" width="422"}
 
 ::: callout-note
 **Key Insight:** Data quality varied considerably from district to district. Some districts reported less than 50% during certain periods, which significantly skewed the crude incidence estimates.
@@ -234,10 +234,10 @@ STL_result_DF_slopes <- base::unique(STL_result_DF_norm[, c("type", "MK_p", "sen
 
 -   **Data:**
 
-    -   **Public datasets:** DHS, MIS, and climate datasets (e.g., CHIRPS rainfall) are fully open-access.
+    -   **Public datasets:** DHS, MIS, and climate datasets (CHIRPS rainfall) are fully open-access.
     -   **Restricted datasets:** Routine HMIS surveillance data and intervention coverage data (ITN, SMC, RDT, ACT, IPTp stockouts) are not publicly available and were accessed under agreement with the Burkina Faso National Malaria Control Programme (PNLP).
 
-    For reproducibility, all **data management scripts** and **statistical analysis code** are provided. Analyses relying on restricted data are demonstrated using mock or simulated datasets.
+    For reproducibility, all **data management scripts** and **statistical analysis code** are provided.
 
 ## Public Health Relevance
 
