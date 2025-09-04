@@ -231,9 +231,9 @@ STL_result_DF_slopes <- base::unique(STL_result_DF_norm[, c("type", "MK_p", "sen
 
 ```
 
-::: {.callout-note}
-
 ## Repository & Reproducibility
+
+::: {.callout-note}
 
 -   **Repository:** [Full code](https://github.com/Ousmanerabi/Retrospective_analysis)
 
