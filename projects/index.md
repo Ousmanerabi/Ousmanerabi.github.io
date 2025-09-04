@@ -41,41 +41,29 @@ Below is a curated selection of projects I led or contributed to between 2020 an
 ## Projects
 <div id="projects" class="projects-grid">
 
-  <div class="project-card" data-tags="analytics epidemiology dhs itn guinea">
-    <a href="/projects/risk_factors.html">Risk Factors – ITN Guinea DHS 2018</a>
-    <div class="project-meta">2021–2022</div>
-  </div>
-
-  <div class="project-card" data-tags="burkina incidence trend mapping hmIS">
-    <a href="/projects/retrospective_analysis.html">Retrospective Analysis of Malaria Trend in Burkina Faso</a>
-    <div class="project-meta">2023–2024</div>
-  </div>
-
-  <div class="project-card" data-tags="burkina guinea togo targeting stratification snt">
-    <a href="/projects/snt-stratification-targeting.md">Data Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)</a>
-    <div class="project-meta">2023</div>
-  </div>
-
-  <div class="project-card" data-tags="microstrat conakry mapping">
-    <a href="/projects/microstratification-conakry.md">Microstratification in Conakry</a>
-    <div class="project-meta">2023–2024</div>
-  </div>
-
-  <div class="project-card" data-tags="mentorship training supervision">
-    <a href="/projects/training-mentorship-2020-2024.md">Training & Mentorship (Graduate Students – Benin & Guinea)</a>
-    <div class="project-meta">2020–2024</div>
-  </div>
-
+<div class="project-card" data-tags="analytics epidemiology dhs itn guinea">
+  <a href="/projects/risk_factors.html">Risk Factors – ITN Guinea DHS 2018</a>
+  <div class="project-meta">2021–2022</div>
 </div>
 
-<script>
-  const input = document.getElementById('proj-search');
-  const cards = [...document.querySelectorAll('#projects .project-card')];
-  input?.addEventListener('input', e => {
-    const q = e.target.value.trim().toLowerCase();
-    cards.forEach(c => {
-      const t = (c.textContent || '').toLowerCase() + ' ' + (c.dataset.tags || '');
-      c.style.display = t.includes(q) ? '' : 'none';
-    });
-  });
-</script>
+<div class="project-card" data-tags="burkina incidence trend mapping hmis">
+  <a href="/projects/retrospective_analysis.html">Retrospective Analysis of Malaria Trend in Burkina Faso</a>
+  <div class="project-meta">2023–2024</div>
+</div>
+
+<div class="project-card" data-tags="burkina guinea togo targeting stratification snt">
+  <a href="/projects/snt-stratification-targeting.html">Data Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)</a>
+  <div class="project-meta">2023</div>
+</div>
+
+<div class="project-card" data-tags="microstrat conakry mapping">
+  <a href="/projects/microstratification-conakry.html">Microstratification in Conakry</a>
+  <div class="project-meta">2023–2024</div>
+</div>
+
+<div class="project-card" data-tags="mentorship training supervision">
+  <a href="/projects/training-mentorship-2020-2024.html">Training & Mentorship (Graduate Students – Benin & Guinea)</a>
+  <div class="project-meta">2020–2024</div>
+</div>
+
+</div>

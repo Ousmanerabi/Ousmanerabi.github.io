@@ -397,37 +397,42 @@ students.</li>
 <h2>Projects</h2>
 <div id="projects" class="projects-grid">
 <div class="project-card" data-tags="analytics epidemiology dhs itn guinea">
-<pre><code>&lt;a href=&quot;/projects/risk_factors.html&quot;&gt;Risk Factors – ITN Guinea DHS 2018&lt;/a&gt;
-&lt;div class=&quot;project-meta&quot;&gt;2021–2022&lt;/div&gt;</code></pre>
+<a href="/projects/risk_factors.html">Risk Factors – ITN Guinea DHS
+2018</a>
+<div class="project-meta">
+2021–2022
 </div>
-<div class="project-card" data-tags="burkina incidence trend mapping hmIS">
-<pre><code>&lt;a href=&quot;/projects/retrospective_analysis.html&quot;&gt;Retrospective Analysis of Malaria Trend in Burkina Faso&lt;/a&gt;
-&lt;div class=&quot;project-meta&quot;&gt;2023–2024&lt;/div&gt;</code></pre>
+</div>
+<div class="project-card" data-tags="burkina incidence trend mapping hmis">
+<a href="/projects/retrospective_analysis.html">Retrospective Analysis
+of Malaria Trend in Burkina Faso</a>
+<div class="project-meta">
+2023–2024
+</div>
 </div>
 <div class="project-card" data-tags="burkina guinea togo targeting stratification snt">
-<pre><code>&lt;a href=&quot;/projects/snt-stratification-targeting.md&quot;&gt;Data Management, Stratification &amp; Intervention Targeting (Togo, Guinea, Burkina Faso)&lt;/a&gt;
-&lt;div class=&quot;project-meta&quot;&gt;2023&lt;/div&gt;</code></pre>
+<a href="/projects/snt-stratification-targeting.html">Data Management,
+Stratification &amp; Intervention Targeting (Togo, Guinea, Burkina
+Faso)</a>
+<div class="project-meta">
+2023
+</div>
 </div>
 <div class="project-card" data-tags="microstrat conakry mapping">
-<pre><code>&lt;a href=&quot;/projects/microstratification-conakry.md&quot;&gt;Microstratification in Conakry&lt;/a&gt;
-&lt;div class=&quot;project-meta&quot;&gt;2023–2024&lt;/div&gt;</code></pre>
+<a href="/projects/microstratification-conakry.html">Microstratification
+in Conakry</a>
+<div class="project-meta">
+2023–2024
+</div>
 </div>
 <div class="project-card" data-tags="mentorship training supervision">
-<pre><code>&lt;a href=&quot;/projects/training-mentorship-2020-2024.md&quot;&gt;Training &amp; Mentorship (Graduate Students – Benin &amp; Guinea)&lt;/a&gt;
-&lt;div class=&quot;project-meta&quot;&gt;2020–2024&lt;/div&gt;</code></pre>
+<a href="/projects/training-mentorship-2020-2024.html">Training &amp;
+Mentorship (Graduate Students – Benin &amp; Guinea)</a>
+<div class="project-meta">
+2020–2024
 </div>
 </div>
-<script>
-  const input = document.getElementById('proj-search');
-  const cards = [...document.querySelectorAll('#projects .project-card')];
-  input?.addEventListener('input', e => {
-    const q = e.target.value.trim().toLowerCase();
-    cards.forEach(c => {
-      const t = (c.textContent || '').toLowerCase() + ' ' + (c.dataset.tags || '');
-      c.style.display = t.includes(q) ? '' : 'none';
-    });
-  });
-</script>
+</div>
 </div>
 
 
