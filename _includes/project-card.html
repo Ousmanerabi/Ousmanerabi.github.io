@@ -1,0 +1,26 @@
+{% assign p = include.project %}
+{% assign tags = p.tags | default: p.categories | default: empty %}
+
+<article class="project-card"
+  data-tags="{{ tags | join: ',' }}"
+  data-hay="{{ p.title }} {{ p.excerpt | strip_html }} {{ p.keywords | join: ' ' }} {{ tags | join: ' ' }}">
+  {% if p.image %}
+    <img class="project-thumb" src="{{ p.image | relative_url }}" alt="{{ p.title | escape }}">
+  {% endif %}
+  <div class="project-body">
+    <h3 class="project-title"><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+    <div class="project-meta">
+      {% if p.date %}{{ p.date | date: "%b %-d, %Y" }} · {% endif %}
+      {% if p.author %}{{ p.author }}{% elsif site.author.name %}{{ site.author.name }}{% endif %}
+    </div>
+    {% if p.excerpt %}<p>{{ p.excerpt | strip_html | truncate: 180 }}</p>{% endif %}
+    {% if tags and tags.size > 0 %}
+      <div class="project-tags">
+        {% for t in tags %}
+          <span class="project-tag">{{ t }}</span>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <a class="project-link" href="{{ p.url | relative_url }}">View project →</a>
+  </div>
+</article>

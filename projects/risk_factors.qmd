@@ -1,6 +1,7 @@
 ---
 title: "Risk Factors of ITN Ownership and Use – Guinea DHS 2018"
 description: "Factors associated with the ownership and use of insecticide-treated nets in Guinea: an analysis of the 2018 Demographic and Health Survey"
+image: /assets/projects/retrospective/adm1_adm2.png  
 date: "2025-08-30"
 categories: [R, Epidemiology, Malaria, DHS]
 format:

@@ -1,6 +1,6 @@
 ---
 title: "Key Projects (2020–2024)"
-layout: page
+layout: projects
 permalink: /projects/
 summary: "Selected projects in epidemiology, analytics, modeling, and training."
 

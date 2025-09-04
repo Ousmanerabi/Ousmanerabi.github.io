@@ -1,0 +1,75 @@
+---
+layout: single
+---
+
+<style>
+/* --- Projects grid --- */
+.projects-toolbar{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center;margin:0 0 1rem}
+.projects-toolbar input[type="search"]{padding:.5rem .75rem;border:1px solid #ddd;border-radius:.5rem;min-width:240px}
+.tag-chip{padding:.35rem .6rem;border:1px solid #ddd;border-radius:999px;font-size:.85rem;cursor:pointer;background:#fff;user-select:none}
+.tag-chip.active{background:#111;color:#fff;border-color:#111}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+.project-card{border:1px solid #eee;border-radius:12px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.project-thumb{aspect-ratio:16/9;object-fit:cover;width:100%}
+.project-body{padding:0.9rem 1rem}
+.project-meta{font-size:.85rem;color:#666;margin:.15rem 0 .5rem}
+.project-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.35rem}
+.project-tag{font-size:.75rem;border:1px solid #eee;border-radius:999px;padding:.15rem .45rem;color:#555}
+.project-title{margin:0 0 .25rem;font-size:1.05rem;line-height:1.3}
+.project-link{display:inline-block;margin-top:.5rem;text-decoration:none;color:#0b5; }
+.project-link:hover{text-decoration:underline}
+</style>
+
+<div class="projects-toolbar">
+  <input id="proj-search" type="search" placeholder="Filter by title, tag, or keyword…">
+  <div id="proj-tags"></div>
+</div>
+
+<div id="projects" class="projects-grid">
+  {% assign items = site.projects | sort: 'date' | reverse %}
+  {% for p in items %}
+    {% include project-card.html project=p %}
+  {% endfor %}
+</div>
+
+<script>
+(function(){
+  const cards = [...document.querySelectorAll('.project-card')];
+  const search = document.getElementById('proj-search');
+  const tagBox = document.getElementById('proj-tags');
+
+  // collect unique tags from data-tags
+  const allTags = new Set();
+  cards.forEach(c=>{
+    (c.dataset.tags||'').split(',').map(s=>s.trim()).filter(Boolean).forEach(t=>allTags.add(t));
+  });
+
+  // render tag chips
+  const activeTags = new Set();
+  [...allTags].sort((a,b)=>a.localeCompare(b)).forEach(tag=>{
+    const chip = document.createElement('button');
+    chip.className='tag-chip';
+    chip.textContent=tag;
+    chip.dataset.tag=tag;
+    chip.onclick=()=>{ 
+      if(activeTags.has(tag)){ activeTags.delete(tag); chip.classList.remove('active'); }
+      else { activeTags.add(tag); chip.classList.add('active'); }
+      filter();
+    };
+    tagBox.appendChild(chip);
+  });
+
+  // filter logic
+  function filter(){
+    const q = (search.value||'').toLowerCase().trim();
+    cards.forEach(c=>{
+      const hay = (c.dataset.hay||'').toLowerCase();
+      const tags = (c.dataset.tags||'').split(',').map(s=>s.trim()).filter(Boolean);
+      const tagMatch = activeTags.size===0 || [...activeTags].every(t=>tags.includes(t));
+      const textMatch = !q || hay.includes(q);
+      c.style.display = (tagMatch && textMatch) ? '' : 'none';
+    });
+  }
+  search.addEventListener('input', filter);
+})();
+</script>
