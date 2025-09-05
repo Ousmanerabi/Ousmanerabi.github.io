@@ -1,0 +1,31 @@
+---
+title: "Subnational tailoring of malaria interventions to prioritize the malaria response"
+description: "Subnational tailoring of malaria interventions to prioritize the malaria response in Guinea and Togo"
+date: "2025-08-30"
+categories: [R, Epidemiology, Malaria, DHS]
+format:
+  html:
+    toc: true
+    code-fold: true
+    #code-tools: true
+---
+
+### Overview
+
+### **Key Highlights**
+
+### **Methods & Tools**
+
+### **Impact**
+
+### Visual Highlights
+
+### Code example
+
+### Repository & Reproducibility
+
+### Skills Demonstrated
+
+### Paper link
+
+### Disclaimer
