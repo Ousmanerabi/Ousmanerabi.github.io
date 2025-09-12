@@ -12,16 +12,103 @@ permalink: /projects/cdisc-sdtm-adam-tlf.html
 
 ## Overview
 
-:::{.callout-note title="Overview"}
+This simulated clinical study demonstrates the full CDISC-compliant programming workflow.\
+The goal is to showcase hands-on experience with **SDTM and ADaM dataset creation**, **TLF generation**, **define.xml**, and **validation procedures**, following industry standards.
 
-This project demonstrates a full clinical programming flow:
+## Objectives
 
--   SDTM (DM, AE)
+-   Create **SDTM domains** (e.g., DM, AE, EX, LB)
 
--   ADaM (ADSL, ADAE)
+-   Derive **ADaM analysis datasets** (ADSL, ADAE, ADLB, ADTTE, etc.)
 
--   TFL (RTFs for demographics, AE summaries)
+-   Generate **Tables, Listings, and Figures (TLFs)** for efficacy and safety
+
+-   Implement **define.xml** for submission
+
+-   Conduct **QC/validation** of deliverables.
+
+## Methods
+
+:::{.callout-note}
+
+Tools & Environment
+
+-   SAS OnDemand for Academics
+
+-   Macros for derivations and QC
+
+-   GitHub for version control & portfolio publication
 
 :::
+
+**Workflow Steps**
+
+1.  Raw to SDTM
+
+    -   Conversion of raw data into standardized SDTM datasets
+
+    -   Controlled terminology applied
+
+    -   Example: `dm.sas` to generate DM + SUPPDM.
+
+2.  SDTN to ADaM
+
+    -   Creation of subject-level analysis dataset (ADSL).
+
+    -   Derivation of efficacy and safety datasets (e.g., ADAE, ADLB, ADTTE).
+
+3.  ADaM to TLFs
+
+    -   Programming of summary tables (e.g., demographics, adverse events).
+
+    -   Listings for safety events
+
+    -   Kaplan–Meier survival plot for time-to-event endpoint.
+
+4.  Documentation & define.xml
+
+    -   Metadata mapping.
+
+    -   Automated generation of define.xml.
+
+5.  Validation
+
+    -   Double programming for selected domains.
+
+    -   QC macros for consistency across SDTM, ADaM, and TLFs.
+
+## Deliverables
+
+-   SDTM Datasets: DM, AE, EX, LB, SUPPDM
+
+-   ADaM Datasets: ADSL, ADAE, ADLB, ADTTE
+
+-   TLFs:
+
+    -   Demographics table
+
+    -   Adverse event summary table
+
+    -   Safety listings
+
+    -   Kaplan-Meier survival curve
+
+-   define.xml
+
+-   Validation Report
+
+## Impact
+
+This project highlights the **end-to-end workflow required in regulatory submissions**, proving competence in:
+
+-   SDTM and ADaM standards
+
+-   Statistical programming for clinical trials
+
+-   Reproducible workflows
+
+-   Industry documentation (define.xml, validation reports).
+
+## Code
 
 [View code on GitHub](https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM)

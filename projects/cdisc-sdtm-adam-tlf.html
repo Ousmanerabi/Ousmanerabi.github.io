@@ -9,7 +9,7 @@
 <meta name="dcterms.date" content="2025-08-30">
 <meta name="description" content="Implementation of CDISC SDTM and ADaM datasets with Tables, Listings, and Figures (TLF) for a mock clinical study, following regulatory standards.">
 
-<title>End-to-end SDTM/ADaM + TLF Package (Mock Clinical Study)</title>
+<title>End-to-end CDISC Workflow (Simulated Study)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,6 +48,8 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
   </ul>
 </nav>
 </div>
@@ -55,7 +57,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">End-to-end SDTM/ADaM + TLF Package (Mock Clinical Study)</h1>
+<h1 class="title">End-to-end CDISC Workflow (Simulated Study)</h1>
   <div class="quarto-categories">
     <div class="quarto-category">SAS</div>
     <div class="quarto-category">CDISC</div>
@@ -93,24 +95,69 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Overview">
+<p>This simulated clinical study demonstrates the full CDISC-compliant programming workflow.<br>
+The goal is to showcase hands-on experience with <strong>SDTM and ADaM dataset creation</strong>, <strong>TLF generation</strong>, <strong>define.xml</strong>, and <strong>validation procedures</strong>, following industry standards.</p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ul>
+<li><p>Create <strong>SDTM domains</strong> (e.g., DM, AE, EX, LB)</p></li>
+<li><p>Derive <strong>ADaM analysis datasets</strong> (ADSL, ADAE, ADLB, ADTTE, etc.)</p></li>
+<li><p>Generate <strong>Tables, Listings, and Figures (TLFs)</strong> for efficacy and safety</p></li>
+<li><p>Implement <strong>define.xml</strong> for submission</p></li>
+<li><p>Conduct <strong>QC/validation</strong> of deliverables.</p></li>
+</ul>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Overview
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This project demonstrates a full clinical programming flow:</p>
+<p>Tools &amp; Environment</p>
 <ul>
-<li><p>SDTM (DM, AE)</p></li>
-<li><p>ADaM (ADSL, ADAE)</p></li>
-<li><p>TFL (RTFs for demographics, AE summaries)</p></li>
+<li><p>SAS OnDemand for Academics</p></li>
+<li><p>Macros for derivations and QC</p></li>
+<li><p>GitHub for version control &amp; portfolio publication</p></li>
 </ul>
 </div>
 </div>
+<p><strong>Workflow Steps</strong></p>
+<ol type="1">
+<li><p>Raw to SDTM</p>
+<ul>
+<li><p>Conversion of raw data into standardized SDTM datasets</p></li>
+<li><p>Controlled terminology applied</p></li>
+<li><p>Example: <code>dm.sas</code> to generate DM + SUPPDM.</p></li>
+</ul></li>
+<li><p>SDTN to ADaM</p>
+<ul>
+<li><p>Creation of subject-level analysis dataset (ADSL).</p></li>
+<li><p>Derivation of efficacy and safety datasets (e.g., ADAE, ADLB, ADTTE).</p></li>
+</ul></li>
+<li><p>ADaM to TLFs</p>
+<ul>
+<li><p>Programming of summary tables (e.g., demographics, adverse events).</p></li>
+<li><p>Listings for safety events</p></li>
+<li><p>Kaplan–Meier survival plot for time-to-event endpoint.</p></li>
+</ul></li>
+<li><p>Documentation &amp; define.xml</p>
+<ul>
+<li><p>Metadata mapping.</p></li>
+<li><p>Automated generation of define.xml.</p></li>
+</ul></li>
+<li><p>Validation</p>
+<ul>
+<li><p>Double programming for selected domains.</p></li>
+<li><p>QC macros for consistency across SDTM, ADaM, and TLFs.</p></li>
+</ul></li>
+</ol>
 <p><a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM">View code on GitHub</a></p>
 </section>
 
