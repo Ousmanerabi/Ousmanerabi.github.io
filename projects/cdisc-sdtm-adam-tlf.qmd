@@ -1,5 +1,5 @@
 ---
-title: "End-to-end CDISC Workflow (Simulated Study)"
+title: "End-to-end CDISC Workflow"
 description: "Implementation of CDISC SDTM and ADaM datasets with Tables, Listings, and Figures (TLF) for a mock clinical study, following regulatory standards."
 date: "2025-08-30"
 categories: [SAS, CDISC, Clinical_Programming, SDTM, ADaM, TLF]
@@ -9,6 +9,12 @@ format:
     code-fold: true
 permalink: /projects/cdisc-sdtm-adam-tlf.html
 ---
+
+:::{.callout-important title="Note"}
+
+This project uses publicly available example datasets provided in *Implementing CDISC Using SAS* (for training purposes only). These datasets are intended for educational use and do not represent real patient data.
+
+:::
 
 ## Overview
 
