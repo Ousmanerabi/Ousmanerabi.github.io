@@ -29,12 +29,12 @@ I am a rigorous biostatistician and epidemiologist with over 9 years of experien
 - Statistical Analysis Plans (SAPs)
 - Statistical Modeling (logistic & linear regression, GEE, GAM, GLM, GLMM Survival analysis)
 - Geospatial analysis & data visualization
-- Complex data management (Surveys, surveillance, environnemntal)
+- Complex data management (Surveys, surveillance, environmental)
 
 ### Professional Skills
 - Cross-Functional Collaboration
 - Communication (publications, training, workshops)
-- Regulatory Compliance (GCP/ICH famliarity)
+- Regulatory Compliance (GCP/ICH familiarity)
 - Quality Control (QC) and data validation
 
 ### International Experience
@@ -42,7 +42,7 @@ I am a rigorous biostatistician and epidemiologist with over 9 years of experien
 <br/><br/>
 
 ## My Transition to Pharma/Industry
-My academic background in epidemiology and biostatistics, combined with hands-on SAS training and CDISC projects, has prepared me to contribute to clinical trials and RWE studies. Projects like my end-to-end CDISC workflow (SDTM/ADaM, TLF, define.xml) demonstrate my ability to deliver regulatory-compliant deliverables, while my R-based DHS analysis showcases transferable skills for RWE and observational studies.
+My academic background in epidemiology and biostatistics, combined with hands-on SAS training and CDISC projects, has prepared me to contribute to clinical trials and RWE studies. Projects like my end-to-end CDISC workflow (SDTM/ADaM, TLF, define.xml) demonstrate my ability to deliver regulatory-compliant deliverables, while my R-based analysis showcases transferable skills for RWE and observational studies.
 
 <a href="/Ousmane Diallo - Resume_updated.pdf" download>Download Resume</a>
 
