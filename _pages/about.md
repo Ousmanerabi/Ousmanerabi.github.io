@@ -11,7 +11,7 @@ redirect_from:
 --- 
 <br/>
 
-I am a rigorous biostatistician and epidemiologist with over 9 years of experience in health data analytics, statistical modeling, and large-scale data management. Certified in SAS Base Programming and Clinical Trials Programming, I am transitioning from academia to the pharmaceutical industry to apply my expertise in CDISC standards (SDTM/ADaM) and real-world evidence (RWE) to clinical research and regulatory submissions. With a proven track record in international projects (e.g., Guinea DHS 2018, West Africa health initiatives), I excel in collaborative environments, delivering submission-ready insights and supporting high-quality publications.
+I am a rigorous biostatistician and epidemiologist with over 9 years of experience in health data analytics, statistical modeling, and large-scale data management. Certified in SAS Base Programming and Clinical Trials Programming, I am transitioning from academia to the pharmaceutical industry to apply my expertise in CDISC standards (SDTM/ADaM) and real-world evidence (RWE) to clinical research and regulatory submissions. With a proven track record in international projects, I excel in collaborative environments, delivering submission-ready insights and supporting high-quality publications.
 
 
 ## Core competencies
@@ -19,13 +19,15 @@ I am a rigorous biostatistician and epidemiologist with over 9 years of experien
 ### Programming & Tools
 - SAS (Certified Base & Clinical Trials; macros, PROC SQL, ODS)
 - R Programming (survey, dplyr, ggplot2, tmap, survival)
+- Python
 - Quarto, GitHub (reproducible workflows)
+- Tableau & Power-BI
 
 ### Clinical & Analytical Standards
 - Clinical Trials Programming
 - Clinical Data Interchange Standards Consortium (CDISC): SDTM, ADaM & define.xml
 - Statistical Analysis Plans (SAPs)
-- Statistical Modeling (logistic regression, GEE, GAM, GLM, GLMM Survival analysis)
+- Statistical Modeling (logistic & linear regression, GEE, GAM, GLM, GLMM Survival analysis)
 - Geospatial analysis & data visualization
 - Complex data management (Surveys, surveillance, environnemntal)
 
