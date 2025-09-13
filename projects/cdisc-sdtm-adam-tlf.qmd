@@ -21,9 +21,9 @@ This project uses publicly available example datasets provided in *Implementing 
 
 :::
 
-:::{.callout-important}
-
 ## Objectives
+
+:::{.callout-important}
 
 -   Create **SDTM domains** (e.g., DM, AE, EX, LB)
 
@@ -61,7 +61,7 @@ Tools & Environment
 
     -   Example: `dm.sas` to generate DM + SUPPDM.
 
-2.  SDTN to ADaM
+2.  SDTM to ADaM
 
     -   Creation of subject-level analysis dataset (ADSL).
 
@@ -106,6 +106,13 @@ Tools & Environment
 -   define.xml
 
 -   Validation Report
+
+## How to run (SAS OnDemand)
+
+1.  Clone the repo into `/myfolders/clinical-trials-programming`\
+2.  Edit `0_setup_paths.sas` (root path macro)\
+3.  Run: `1_raw_to_sdtm.sas` → `2_sdtm_to_adam.sas` → `3_tlfs.sas` → `4_define_xml.sas`\
+4.  Outputs in `/outputs/*`
 
 ## Impact
 

@@ -48,8 +48,10 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
   <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
+  <li><a href="#how-to-run-sas-ondemand" id="toc-how-to-run-sas-ondemand" class="nav-link" data-scroll-target="#how-to-run-sas-ondemand">How to run (SAS OnDemand)</a></li>
   <li><a href="#impact" id="toc-impact" class="nav-link" data-scroll-target="#impact">Impact</a></li>
   <li><a href="#code" id="toc-code" class="nav-link" data-scroll-target="#code">Code</a></li>
   </ul>
@@ -95,6 +97,10 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This simulated clinical study demonstrates the full CDISC-compliant programming workflow.<br>
+The goal is to showcase hands-on experience with <strong>SDTM and ADaM dataset creation</strong>, <strong>TLF generation</strong>, <strong>define.xml</strong>, and <strong>validation procedures</strong>, following industry standards.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -108,17 +114,16 @@ Note
 <p>This project uses publicly available example datasets provided in <em>Implementing CDISC Using SAS</em> (for training purposes only). These datasets are intended for educational use and do not represent real patient data.</p>
 </div>
 </div>
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This simulated clinical study demonstrates the full CDISC-compliant programming workflow.<br>
-The goal is to showcase hands-on experience with <strong>SDTM and ADaM dataset creation</strong>, <strong>TLF generation</strong>, <strong>define.xml</strong>, and <strong>validation procedures</strong>, following industry standards.</p>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Objectives
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -160,7 +165,7 @@ Note
 <li><p>Controlled terminology applied</p></li>
 <li><p>Example: <code>dm.sas</code> to generate DM + SUPPDM.</p></li>
 </ul></li>
-<li><p>SDTN to ADaM</p>
+<li><p>SDTM to ADaM</p>
 <ul>
 <li><p>Creation of subject-level analysis dataset (ADSL).</p></li>
 <li><p>Derivation of efficacy and safety datasets (e.g., ADAE, ADLB, ADTTE).</p></li>
@@ -198,6 +203,18 @@ Note
 <li><p>define.xml</p></li>
 <li><p>Validation Report</p></li>
 </ul>
+</section>
+<section id="how-to-run-sas-ondemand" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-run-sas-ondemand">How to run (SAS OnDemand)</h2>
+<ol type="1">
+<li>Clone the repo into <code>/myfolders/clinical-trials-programming</code><br>
+</li>
+<li>Edit <code>0_setup_paths.sas</code> (root path macro)<br>
+</li>
+<li>Run: <code>1_raw_to_sdtm.sas</code> → <code>2_sdtm_to_adam.sas</code> → <code>3_tlfs.sas</code> → <code>4_define_xml.sas</code><br>
+</li>
+<li>Outputs in <code>/outputs/*</code></li>
+</ol>
 </section>
 <section id="impact" class="level2">
 <h2 class="anchored" data-anchor-id="impact">Impact</h2>
