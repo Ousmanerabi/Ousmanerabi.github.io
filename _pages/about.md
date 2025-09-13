@@ -8,9 +8,11 @@ redirect_from:
   - about.html
 ---
 
-I am a rigorous biostatistician and epidemiologist with over 9 years of experience in health data analytics, statistical modeling, and large-scale data management. Certified in SAS Base Programming and Clinical Trials Programming, I am transitioning from academia to the pharmaceutical industry to apply my expertise in CDISC standards (SDTM/ADaM) and real-world evidence (RWE) to clinical research and regulatory submissions. With a proven track record in international projects (e.g., Guinea DHS 2018, West Africa health initiatives), I excel in collaborative environments, delivering submission-ready insights and supporting high-quality publications.
 --- 
 <br/>
+
+I am a rigorous biostatistician and epidemiologist with over 9 years of experience in health data analytics, statistical modeling, and large-scale data management. Certified in SAS Base Programming and Clinical Trials Programming, I am transitioning from academia to the pharmaceutical industry to apply my expertise in CDISC standards (SDTM/ADaM) and real-world evidence (RWE) to clinical research and regulatory submissions. With a proven track record in international projects (e.g., Guinea DHS 2018, West Africa health initiatives), I excel in collaborative environments, delivering submission-ready insights and supporting high-quality publications.
+
 
 ## Core competencies
 
