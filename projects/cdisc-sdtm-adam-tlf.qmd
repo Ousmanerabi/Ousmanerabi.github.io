@@ -10,16 +10,16 @@ format:
 permalink: /projects/cdisc-sdtm-adam-tlf.html
 ---
 
+## Overview
+
+This simulated clinical study demonstrates the full CDISC-compliant programming workflow.\
+The goal is to showcase hands-on experience with **SDTM and ADaM dataset creation**, **TLF generation**, **define.xml**, and **validation procedures**, following industry standards.
+
 :::{.callout-important title="Note"}
 
 This project uses publicly available example datasets provided in *Implementing CDISC Using SAS* (for training purposes only). These datasets are intended for educational use and do not represent real patient data.
 
 :::
-
-## Overview
-
-This simulated clinical study demonstrates the full CDISC-compliant programming workflow.\
-The goal is to showcase hands-on experience with **SDTM and ADaM dataset creation**, **TLF generation**, **define.xml**, and **validation procedures**, following industry standards.
 
 :::{.callout-important}
 
