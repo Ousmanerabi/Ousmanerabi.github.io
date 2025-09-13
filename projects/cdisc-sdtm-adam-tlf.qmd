@@ -21,6 +21,8 @@ This project uses publicly available example datasets provided in *Implementing 
 This simulated clinical study demonstrates the full CDISC-compliant programming workflow.\
 The goal is to showcase hands-on experience with **SDTM and ADaM dataset creation**, **TLF generation**, **define.xml**, and **validation procedures**, following industry standards.
 
+:::{.callout-important}
+
 ## Objectives
 
 -   Create **SDTM domains** (e.g., DM, AE, EX, LB)
@@ -32,6 +34,8 @@ The goal is to showcase hands-on experience with **SDTM and ADaM dataset creatio
 -   Implement **define.xml** for submission
 
 -   Conduct **QC/validation** of deliverables.
+
+:::
 
 ## Methods
 
