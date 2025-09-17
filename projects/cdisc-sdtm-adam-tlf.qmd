@@ -27,6 +27,20 @@ This project uses publicly available example datasets provided in *Implementing 
 
 -   Create **SDTM domains** (e.g., DM, AE, EX, LB)
 
+    -   Steps to create a datasets for each domain
+
+        -   Create an empty shell (datasets)
+
+        -   Map SDTM domain variables to the raw data
+
+        -   Create a formats
+
+        -   Derive the logic for variables that need calculating
+
+        -   Combine all the datasets
+
+<!-- -->
+
 -   Derive **ADaM analysis datasets** (ADSL, ADAE, ADLB, ADTTE, etc.)
 
 -   Generate **Tables, Listings, and Figures (TLFs)** for efficacy and safety
