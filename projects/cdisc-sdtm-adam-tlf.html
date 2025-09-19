@@ -97,10 +97,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This simulated clinical study demonstrates the full CDISC-compliant programming workflow.<br>
-The goal is to showcase hands-on experience with <strong>SDTM and ADaM dataset creation</strong>, <strong>TLF generation</strong>, <strong>define.xml</strong>, and <strong>validation procedures</strong>, following industry standards.</p>
 <div class="callout callout-style-default callout-important callout-titled" title="Note">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -114,6 +110,10 @@ Note
 <p>This project uses publicly available example datasets provided in <em>Implementing CDISC Using SAS</em> (for training purposes only). These datasets are intended for educational use and do not represent real patient data.</p>
 </div>
 </div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This simulated clinical study demonstrates the full CDISC-compliant programming workflow.<br>
+The goal is to showcase hands-on experience with <strong>SDTM and ADaM dataset creation</strong>, <strong>TLF generation</strong>, <strong>define.xml</strong>, and <strong>validation procedures</strong>, following industry standards.</p>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
@@ -128,17 +128,7 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p>Create <strong>SDTM domains</strong> (e.g., DM, AE, EX, LB)</p>
-<ul>
-<li><p>Steps to create a datasets for each domain</p>
-<ul>
-<li><p>Create an empty shell (datasets)</p></li>
-<li><p>Map SDTM domain variables to the raw data</p></li>
-<li><p>Create a formats</p></li>
-<li><p>Derive the logic for variables that need calculating</p></li>
-<li><p>Combine all the datasets</p></li>
-</ul></li>
-</ul></li>
+<li>Create <strong>SDTM domains</strong> (e.g., DM, AE, EX, LB)</li>
 </ul>
 <!-- -->
 <ul>
@@ -158,11 +148,10 @@ Important
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Tools &amp; Environment
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Tools &amp; Environment</p>
 <ul>
 <li><p>SAS OnDemand for Academics</p></li>
 <li><p>Macros for derivations and QC</p></li>
@@ -170,7 +159,8 @@ Note
 </ul>
 </div>
 </div>
-<p><strong>Workflow Steps</strong></p>
+<section id="workflow-steps" class="level4">
+<h4 class="anchored" data-anchor-id="workflow-steps"><strong>Workflow Steps</strong></h4>
 <ol type="1">
 <li><p>Raw to SDTM</p>
 <ul>
@@ -200,6 +190,10 @@ Note
 <li><p>QC macros for consistency across SDTM, ADaM, and TLFs.</p></li>
 </ul></li>
 </ol>
+</section>
+<section id="code-example" class="level4">
+<h4 class="anchored" data-anchor-id="code-example">Code Example</h4>
+</section>
 </section>
 <section id="deliverables" class="level2">
 <h2 class="anchored" data-anchor-id="deliverables">Deliverables</h2>

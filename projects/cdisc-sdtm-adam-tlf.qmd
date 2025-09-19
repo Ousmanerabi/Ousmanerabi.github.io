@@ -10,34 +10,22 @@ format:
 permalink: /projects/cdisc-sdtm-adam-tlf.html
 ---
 
-## Overview
-
-This simulated clinical study demonstrates the full CDISC-compliant programming workflow.\
-The goal is to showcase hands-on experience with **SDTM and ADaM dataset creation**, **TLF generation**, **define.xml**, and **validation procedures**, following industry standards.
-
 :::{.callout-important title="Note"}
 
 This project uses publicly available example datasets provided in *Implementing CDISC Using SAS* (for training purposes only). These datasets are intended for educational use and do not represent real patient data.
 
 :::
 
+## Overview
+
+This simulated clinical study demonstrates the full CDISC-compliant programming workflow.\
+The goal is to showcase hands-on experience with **SDTM and ADaM dataset creation**, **TLF generation**, **define.xml**, and **validation procedures**, following industry standards.
+
 ## Objectives
 
 :::{.callout-important}
 
 -   Create **SDTM domains** (e.g., DM, AE, EX, LB)
-
-    -   Steps to create a datasets for each domain
-
-        -   Create an empty shell (datasets)
-
-        -   Map SDTM domain variables to the raw data
-
-        -   Create a formats
-
-        -   Derive the logic for variables that need calculating
-
-        -   Combine all the datasets
 
 <!-- -->
 
@@ -55,7 +43,7 @@ This project uses publicly available example datasets provided in *Implementing 
 
 :::{.callout-note}
 
-Tools & Environment
+#### Tools & Environment
 
 -   SAS OnDemand for Academics
 
@@ -65,7 +53,7 @@ Tools & Environment
 
 :::
 
-**Workflow Steps**
+#### **Workflow Steps**
 
 1.  Raw to SDTM
 
@@ -100,6 +88,8 @@ Tools & Environment
     -   Double programming for selected domains.
 
     -   QC macros for consistency across SDTM, ADaM, and TLFs.
+
+#### Code Example
 
 ## Deliverables
 
