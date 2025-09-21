@@ -15,7 +15,7 @@ I intentionally kept this page simple to demonstrate my understanding of the pro
 
 :::{.callout-important}
 
-**Note:** In the corresponding GitHub repository, I used **SAS macros** to create, format, and validate the SDTM domains.\
+**Note:** In the corresponding GitHub repository <https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main>, I used **SAS macros** to create, format, and validate the SDTM domains.\
 These macros were adapted from reference books I studied while preparing for the **SAS Clinical Trials Programming Certification**.
 
 :::
@@ -35,7 +35,7 @@ These macros were adapted from reference books I studied while preparing for the
 Ce code cree un empty dataset pour le domain Demographics (DM). DM domain includes a set of essential standard variables that describe each subject in the clinical trial. The structure of the DM domain is one record per subject. We have just the required variables, variables that must be included in the dataset submission and cannot have missing values. First, we have the identifier variables, study ID, domain, and unique subject ID, then the topic variable, which is the ID of each unique subject within the clinical study. We then have our qualifier variables, the site ID, the sex of the subject, and the country of the site of the clinical trial.
 
 ``` sas
-/* Example: Create empty DM structure */
+/* Create empty DM structure */
 data empty.dm;
 
  /* length for each of the 25 DM variables*/
@@ -66,6 +66,8 @@ data empty.dm;
          ARMNRS= 'Reason Arm and/or Actual Arm is Null'
          ACTARMUD= 'Description of Unplanned Actual Arm'
          COUNTRY='Country';
+         
+  /* kill the PDV execution of the blank observation*/  
   stop;
 run;
 ```
