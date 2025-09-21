@@ -67,7 +67,7 @@ Below is a curated selection of projects I led or contributed to between 2020 an
 </div>
 
 <div class="project-card" data-tags="cdisc-sdtm">
-  <a href="/projects/cdisc-sdtm.html">End-to-end SDTM/ADaM + TLF Package (Mock Study)</a>
+  <a href="/projects/cdisc-sdtm.html">End-to-end Study Data Tabulation Model</a>
   <div class="project-meta">2025</div>
 </div>
 

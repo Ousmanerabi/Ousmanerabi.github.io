@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="From raw sources to SDTM using SAS (SAS OnDemand).">
+<meta name="description" content="From raw sources to SDTM using SAS.">
 
-<title>End-to-end CDISC-SDTM Workflow (Mock Study)</title>
+<title>End-to-end CDISC-SDTM Workflow</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -34,7 +34,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="cdisc-sdtm_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="cdisc-sdtm_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="cdisc-sdtm_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<style>html{ scroll-behavior: smooth; }</style>
 
 
 </head>
@@ -58,7 +57,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">End-to-end CDISC-SDTM Workflow (Mock Study)</h1>
+<h1 class="title">End-to-end CDISC-SDTM Workflow</h1>
   <div class="quarto-categories">
     <div class="quarto-category">CDISC</div>
     <div class="quarto-category">SAS</div>
@@ -70,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    From raw sources to SDTM using SAS (SAS OnDemand).
+    From raw sources to SDTM using SAS.
   </div>
 </div>
 
@@ -87,7 +86,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Cette page a pour objectif les principales étapes de la preparation des donnees brutes pour les donnees SDTM pretes. J’ai choisi de simplifier cette page afin de demontrer ma connaissance de la creation des donnees qui respectent le format SDTM.</p>
+<p>This page outlines the <strong>key steps in preparing raw clinical trial data into SDTM-compliant datasets</strong>.<br>
+I intentionally kept this page simple to demonstrate my understanding of the process of creating datasets that follow the CDISC SDTM standard.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -98,7 +98,8 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A noter que le repertoire github xxx, j’ai utilisé des macro pour la creation, le formatage etc.. de ces domaines. Ces macros sont issus des livres que j’ai lu dans le cadre la preparation a la <strong>Certification SAS Clinical Trials Programming</strong>.</p>
+<p><strong>Note:</strong> In the corresponding GitHub repository, I used <strong>SAS macros</strong> to create, format, and validate the SDTM domains.<br>
+These macros were adapted from reference books I studied while preparing for the <strong>SAS Clinical Trials Programming Certification</strong>.</p>
 </div>
 </div>
 <section id="create-empty-datasets-metadata-driven" class="level3">
@@ -108,6 +109,9 @@ Important
 <li><p>Use <code>data function</code> to define structure (names, labels, types, lengths)</p></li>
 <li><p>Programs ensure all domains have the correct structure before populating</p></li>
 </ul>
+<section id="code-example" class="level4">
+<h4 class="anchored" data-anchor-id="code-example">Code Example</h4>
+<p>Ce code cree un empty dataset pour le domain Demographic (DM). DM domain includes a set of essential standard variables that describe each subject in the clinical trial. The structure of the DM domain is one record per subject. We have just the required variables, variables that must be included in the dataset submission and cannot have missing values. First, we have the identifier variables, study ID, domain, and unique subject ID, then the topic variable, which is the ID of each unique subject within the clinical study. We then have our qualifier variables, the site ID, the sex of the subject, and the country of the site of the clinical trial.</p>
 <pre class="sas"><code>/* Example: Create empty DM structure */
 data empty.dm;
 
@@ -141,6 +145,7 @@ data empty.dm;
          COUNTRY='Country';
   stop;
 run;</code></pre>
+</section>
 </section>
 <section id="map-raw-variables-sdtm-variables" class="level3">
 <h3 class="anchored" data-anchor-id="map-raw-variables-sdtm-variables">2. Map Raw Variables (SDTM Variables)</h3>
@@ -602,5 +607,4 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="cdisc-sdtm_files/libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
