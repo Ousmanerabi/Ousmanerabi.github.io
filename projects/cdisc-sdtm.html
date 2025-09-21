@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="From raw sources to SDTM using SAS.">
+<meta name="description" content="From raw clinical trial data sources to SDTM using SAS">
 
-<title>End-to-end CDISC-SDTM Workflow</title>
+<title>Prepare Raw Clinical Trial Data into Study Data Tabulation Model (SDTM)-compliant datasets</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -57,7 +57,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">End-to-end CDISC-SDTM Workflow</h1>
+<h1 class="title">Prepare Raw Clinical Trial Data into Study Data Tabulation Model (SDTM)-compliant datasets</h1>
   <div class="quarto-categories">
     <div class="quarto-category">CDISC</div>
     <div class="quarto-category">SAS</div>
@@ -69,7 +69,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    From raw sources to SDTM using SAS.
+    From raw clinical trial data sources to SDTM using SAS
   </div>
 </div>
 
@@ -111,7 +111,9 @@ These macros were adapted from reference books I studied while preparing for the
 </ul>
 <section id="code-example" class="level4">
 <h4 class="anchored" data-anchor-id="code-example">Code Example</h4>
-<p>Ce code cree un empty dataset pour le domain Demographic (DM). DM domain includes a set of essential standard variables that describe each subject in the clinical trial. The structure of the DM domain is one record per subject. We have just the required variables, variables that must be included in the dataset submission and cannot have missing values. First, we have the identifier variables, study ID, domain, and unique subject ID, then the topic variable, which is the ID of each unique subject within the clinical study. We then have our qualifier variables, the site ID, the sex of the subject, and the country of the site of the clinical trial.</p>
+<section id="demographics-dm-domain" class="level5">
+<h5 class="anchored" data-anchor-id="demographics-dm-domain">1. Demographics (DM) Domain</h5>
+<p>Ce code cree un empty dataset pour le domain Demographics (DM). DM domain includes a set of essential standard variables that describe each subject in the clinical trial. The structure of the DM domain is one record per subject. We have just the required variables, variables that must be included in the dataset submission and cannot have missing values. First, we have the identifier variables, study ID, domain, and unique subject ID, then the topic variable, which is the ID of each unique subject within the clinical study. We then have our qualifier variables, the site ID, the sex of the subject, and the country of the site of the clinical trial.</p>
 <pre class="sas"><code>/* Example: Create empty DM structure */
 data empty.dm;
 
@@ -145,6 +147,33 @@ data empty.dm;
          COUNTRY='Country';
   stop;
 run;</code></pre>
+</section>
+<section id="supplemental-supp-domain" class="level5">
+<h5 class="anchored" data-anchor-id="supplemental-supp-domain">2. Supplemental (SUPP) Domain</h5>
+<p>The supplemental qualifiers special purpose dataset model is used to capture non-standard variables.</p>
+<p>Supplemental domains are associated with parent records in domains of either the general observation class datasets, i.e.&nbsp;events, findings, interventions, or demographics. These domains are represented as SUPP for each domain containing sponsor-defined variables.</p>
+<pre class="sas"><code>/* Create a temporary empty dataset using a data step */
+
+data empty_suppDM;
+
+/* Define the length for each variable*/
+
+     length STUDYID $15 RDOMAIN $2 USUBJID $25 IDVAR $8 IDVARVAL $200 QNAM
+     $8 QLABEL $40 QVAL $200 QORIG $20 QEVAL $8;
+     
+/*Define the label for each variable*/
+
+     label STUDYID='Study Identifier' RDOMAIN='Related Domain Abbreviation'
+     USUBJID='Unique Subject Identifier' IDVAR='Identifying Variable'
+     IDVARVAL='Identifying Variable Value' QNAM='Qualifier Variable Name'
+     QLABEL='Qualifier Variable Label' QVAL='Data Value' QORIG='Origin'
+     QEVAL='Evaluator';
+     
+/* kill the PDV execution of the blank observation*/   
+  stop;
+  
+run;</code></pre>
+</section>
 </section>
 </section>
 <section id="map-raw-variables-sdtm-variables" class="level3">

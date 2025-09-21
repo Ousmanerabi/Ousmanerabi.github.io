@@ -1,6 +1,6 @@
 ---
-title: "End-to-end CDISC-SDTM Workflow"
-description: "From raw sources to SDTM using SAS."
+title: "Prepare Raw Clinical Trial Data into Study Data Tabulation Model (SDTM)-compliant datasets"
+description: "From raw clinical trial data sources to SDTM using SAS"
 format:
   html:
     toc: true
@@ -75,6 +75,30 @@ run;
 The supplemental qualifiers special purpose dataset model is used to capture non-standard variables.
 
 Supplemental domains are associated with parent records in domains of either the general observation class datasets, i.e. events, findings, interventions, or demographics. These domains are represented as SUPP for each domain containing sponsor-defined variables.
+
+``` SAS
+/* Create a temporary empty dataset using a data step */
+
+data empty_suppDM;
+
+/* Define the length for each variable*/
+
+     length STUDYID $15 RDOMAIN $2 USUBJID $25 IDVAR $8 IDVARVAL $200 QNAM
+     $8 QLABEL $40 QVAL $200 QORIG $20 QEVAL $8;
+     
+/*Define the label for each variable*/
+
+     label STUDYID='Study Identifier' RDOMAIN='Related Domain Abbreviation'
+     USUBJID='Unique Subject Identifier' IDVAR='Identifying Variable'
+     IDVARVAL='Identifying Variable Value' QNAM='Qualifier Variable Name'
+     QLABEL='Qualifier Variable Label' QVAL='Data Value' QORIG='Origin'
+     QEVAL='Evaluator';
+     
+/* kill the PDV execution of the blank observation*/   
+  stop;
+  
+run;
+```
 
 ### 2. Map Raw Variables (SDTM Variables)
 
