@@ -1,0 +1,97 @@
+---
+title: "End-to-end CDISC-SDTM Workflow (Mock Study)"
+description: "From raw sources to SDTM using SAS (SAS OnDemand)."
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    smooth-scroll: true
+    anchor-sections: true
+    number-sections: false
+categories: [CDISC, SAS, SDTM, ADaM, TLF]
+permalink: /projects/cdisc-sdtm-adam-tlf.html
+---
+
+Cette page a pour objectif les principales étapes de la preparation des donnees brutes pour les donnees SDTM pretes. J'ai choisi de simplifier cette page afin de demontrer ma connaissance de la creation des donnees qui respectent le format SDTM.
+
+:::{.callout-important}
+
+A noter que le repertoire github xxx, j'ai utilisé des macro pour la creation, le formatage etc.. de ces domaines. Ces macros sont issus des livres que j'ai lu dans le cadre la preparation a la **Certification SAS Clinical Trials Programming**.
+
+:::
+
+### 1. Create Empty Datasets (Metadata-Driven)
+
+-   Start from SDTM metadata (stdm_metadata.csv)
+
+-   Use `data function` to define structure (names, labels, types, lengths)
+
+-   Programs ensure all domains have the correct structure before populating
+
+``` sas
+/* Example: Create empty DM structure */
+data empty.dm;
+
+ /* length for each of the 25 DM variables*/
+ 
+  lenght STUDYID $15 DOMAIN $2 USUBJID $25 SUBJID $7 RFSTDTC $16
+  RFENDTC $16 RFXSDTC $16 RFICDTC $16 RFPENDTC $16 DTHDTC $16 DTHFL $2
+  SITEID $7 BRTHDTC $16 AGE 8 AGEU $10 SEX $2 RACE $80 ARMCD $8 ARM $40
+  ACTARMCD $8 ACTARM $40 ARMRS $40 ACTARMUD $40 COUNTRY $3;
+  
+ /* The label for all the variables using a label statement*/
+  
+  label STUDYID="Study Identifier"
+         DOMAIN=label="Domain Abbreviation"
+         USUBJID="Unique Subject Identifier"
+         SUBJID="Subject Identifier for the Study"
+         RFSTDTC="Subject Reference Start Date/Time"
+         RFENDTC = "Subject Reference End Date/Time"
+         RFXSTDTC='Date/Time of First Study Treatment'
+         RFXENDTC='Date/Time of Last Study Treatment'
+         RFICDTC='Date/Time of Informed Consent'
+         RFPENDTC='Date/Time of End of Participation'
+         DTHDTC='Date/Time of Death'
+         DTHFL='Subject Death Flag' SITEID='Study Site Identifier'
+         BRTHDTC='Date/Time of Birth' AGE='Age' AGEU='Age Units' SEX='Sex'
+         RACE='Race' ARMCD='Planned Arm Code'
+         ARM='Description of Planned Arm'
+         ACTARMCD='Actual Arm Code' ACTARM='Description of Actual Arm'
+         ARMNRS= 'Reason Arm and/or Actual Arm is Null'
+         ACTARMUD= 'Description of Unplanned Actual Arm'
+         COUNTRY='Country';
+  stop;
+run;
+```
+
+### 2. Map Raw Variables (SDTM Variables)
+
+-   Load raw data
+
+### 3. Create Formats (Controlled Terminology)
+
+-   Define SAS formats for coded values
+
+-   Improves consistency and simplifies mapping
+
+``` sas
+/*Creating custom formats for the variables sex, race, arm, and armcd*/
+
+proc format;
+     value sex 1='M' 2='F' .='U';
+
+     value race 1='White' 2='Black or African American' 3='Asian';
+
+     value armcd 0='PLACEBO' 1='ALG123';
+
+     value arm 0='Placebo' 1='Analgezia HCL 30mg';
+
+run;
+```
+
+### 4. Derive Variables (Logic/Calculations)
+
+-   Derive analysis-ready variables not present in raw (ISO8601 dates, study day, flags)
+
+-   Handle missing or partial dates, safety flags, baseline derivations

@@ -1,135 +1,95 @@
 ---
-title: "End-to-end CDISC Workflow"
-description: "Implementation of CDISC SDTM and ADaM datasets with Tables, Listings, and Figures (TLF) for a mock clinical study, following regulatory standards."
-date: "2025-08-30"
-categories: [SAS, CDISC, Clinical_Programming, SDTM, ADaM, TLF]
+title: "End-to-end CDISC Workflow (Mock Study)"
+description: "From raw sources to SDTM, ADaM, and TLFs using SAS (SAS OnDemand)."
 format:
   html:
     toc: true
+    toc-depth: 3
     code-fold: true
+    smooth-scroll: true
+    anchor-sections: true
+    number-sections: false
+categories: [CDISC, SAS, SDTM, ADaM, TLF]
 permalink: /projects/cdisc-sdtm-adam-tlf.html
 ---
 
-:::{.callout-important title="Note"}
+> > This portfolio project shows an end-to-end CDISC pipeline implemented in **SAS OnDemand**: curation of raw-like sources → **SDTM domains** → **ADaM analysis datasets** → **TLFs** (tables/listings/figures).\
+> > **Repo:** <https://github.com/Ousmanerabi/clinical-trials-programming-portfolio>
+>
+> ## At a glance
+>
+> -   **Objective:** produce regulatory-ready data flow (SDTM → ADaM → TLF) for a mock clinical study.
+> -   **Stack:** SAS (OnDemand), CDISC SDTM & ADaM principles.
+> -   **What you’ll see here:** a concise walkthrough, code excerpts, and links to the full programs and outputs.
+>
+> ::: callout-note
+> **Why a mock study?**\
+> To demonstrate real-world clinical programming skills without sharing proprietary datasets, while following CDISC conventions and good programming practices.
+> :::
+>
+> ## Data sources & scope
+>
+> -   **Inputs:** synthetic/raw-like CSV/XLSX files and SAS datasets stored in the repo (for demonstration).
+> -   **Study artifacts:** trial design shells and example CRF mapping logic where needed.
+> -   **Outputs:** SDTM domains (e.g., `DM`, `AE`, `EX`, `VS`), then ADaM datasets (e.g., `ADSL`, `ADAE`), and selected TLFs.
+>
+> **Repository layout (key folders)**
+>
+> clinical-trials-programming-portfolio/
+> 01_RAW/ \# raw-like inputs (csv/xlsx/sas7bdat)
+>
+> 02_SDTM/\
+> programs/ \# SAS programs (domain-specific)\
+> out/ \# SDTM outputs (sas7bdat/preview png)\
+> 03_ADaM/
+>
+> programs/ \# SAS programs (ADSL, ADAE, etc.)\
+> out/ \# ADaM outputs\
+> 04_TLF/\
+> programs/ \# TLF SAS code (tables, listings, figures)\
+> out/ \# rendered artefacts (rtf/pdf/png)\
+> docs/ \# helper docs (specs, trial design)
 
-This project uses publicly available example datasets provided in *Implementing CDISC Using SAS* (for training purposes only). These datasets are intended for educational use and do not represent real patient data.
+## SDTM (Study Data Tabulation Model)
 
+**Goal:** create standardized, submission-ready domains that mirror CRF content and study design.
+
+**Highlights** - Patient key: `USUBJID` built from `STUDYID` + subject identifier.\
+- Controlled terminology & value-level mapping (e.g., `SEX`, `ARM`, `AESER`).\
+- Date handling (partial dates), label/length alignment.
+
+**Example — DM (Demography) derivation (excerpt)**
+
+``` sas
+/* 02_SDTM/programs/sdtm_dm.sas */ 
+
+data sdtm.dm(label="Demographics"); 
+
+set raw.demography; 
+
+length STUDYID $12 USUBJID $40 DOMAIN $2 ARM $20 ARMCD $8 SEX $1 AGEU $5; 
+
+DOMAIN = "DM"; 
+
+USUBJID = catx("-", STUDYID, put(SUBJID, z4.)); 
+
+AGEU = "YEARS"; 
+
+/* … additional recodes / controlled terms … */
+
+ keep STUDYID DOMAIN USUBJID SUBJID SEX AGE AGEU ARM ARMCD; run;
+
+proc sort data=sdtm.dm; by USUBJID; 
+
+run;
+```
+
+-   Full program:
+    <https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM/programs>
+
+-   SDTM outputs:
+    <https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM/out>
+
+::: callout-tip\
+**Quality gates (SDTM):** uniqueness of `USUBJID`, required variables by domain, controlled codes, and basic cross-domain checks (e.g., `DM` vs `AE` subject coverage).
 :::
-
-## Overview
-
-This simulated clinical study demonstrates the full CDISC-compliant programming workflow.\
-The goal is to showcase hands-on experience with **SDTM and ADaM dataset creation**, **TLF generation**, **define.xml**, and **validation procedures**, following industry standards.
-
-## Objectives
-
-:::{.callout-important}
-
--   Create **SDTM domains** (e.g., DM, AE, EX, LB)
-
-<!-- -->
-
--   Derive **ADaM analysis datasets** (ADSL, ADAE, ADLB, ADTTE, etc.)
-
--   Generate **Tables, Listings, and Figures (TLFs)** for efficacy and safety
-
--   Implement **define.xml** for submission
-
--   Conduct **QC/validation** of deliverables.
-
-:::
-
-## Methods
-
-:::{.callout-note}
-
-#### Tools & Environment
-
--   SAS OnDemand for Academics
-
--   Macros for derivations and QC
-
--   GitHub for version control & portfolio publication
-
-:::
-
-#### **Workflow Steps**
-
-1.  Raw to SDTM
-
-    -   Conversion of raw data into standardized SDTM datasets
-
-    -   Controlled terminology applied
-
-    -   Example: `dm.sas` to generate DM + SUPPDM.
-
-2.  SDTM to ADaM
-
-    -   Creation of subject-level analysis dataset (ADSL).
-
-    -   Derivation of efficacy and safety datasets (e.g., ADAE, ADLB, ADTTE).
-
-3.  ADaM to TLFs
-
-    -   Programming of summary tables (e.g., demographics, adverse events).
-
-    -   Listings for safety events
-
-    -   Kaplan–Meier survival plot for time-to-event endpoint.
-
-4.  Documentation & define.xml
-
-    -   Metadata mapping.
-
-    -   Automated generation of define.xml.
-
-5.  Validation
-
-    -   Double programming for selected domains.
-
-    -   QC macros for consistency across SDTM, ADaM, and TLFs.
-
-#### Code Example
-
-## Deliverables
-
--   SDTM Datasets: DM, AE, EX, LB, SUPPDM
-
--   ADaM Datasets: ADSL, ADAE, ADLB, ADTTE
-
--   TLFs:
-
-    -   Demographics table
-
-    -   Adverse event summary table
-
-    -   Safety listings
-
-    -   Kaplan-Meier survival curve
-
--   define.xml
-
--   Validation Report
-
-## How to run (SAS OnDemand)
-
-1.  Clone the repo into `/myfolders/clinical-trials-programming`\
-2.  Edit `0_setup_paths.sas` (root path macro)\
-3.  Run: `1_raw_to_sdtm.sas` → `2_sdtm_to_adam.sas` → `3_tlfs.sas` → `4_define_xml.sas`\
-4.  Outputs in `/outputs/*`
-
-## Impact
-
-This project highlights the **end-to-end workflow required in regulatory submissions**, proving competence in:
-
--   SDTM and ADaM standards
-
--   Statistical programming for clinical trials
-
--   Reproducible workflows
-
--   Industry documentation (define.xml, validation reports).
-
-## Code
-
-[View code on GitHub](https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM)

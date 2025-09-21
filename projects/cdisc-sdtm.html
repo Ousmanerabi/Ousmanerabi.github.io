@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="From raw sources to SDTM, ADaM, and TLFs using SAS (SAS OnDemand).">
+<meta name="description" content="From raw sources to SDTM using SAS (SAS OnDemand).">
 
-<title>End-to-end CDISC Workflow (Mock Study)</title>
+<title>End-to-end CDISC-SDTM Workflow (Mock Study)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,16 +24,16 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="cdisc-sdtm-adam-tlf_files/libs/clipboard/clipboard.min.js"></script>
-<script src="cdisc-sdtm-adam-tlf_files/libs/quarto-html/quarto.js"></script>
-<script src="cdisc-sdtm-adam-tlf_files/libs/quarto-html/popper.min.js"></script>
-<script src="cdisc-sdtm-adam-tlf_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="cdisc-sdtm-adam-tlf_files/libs/quarto-html/anchor.min.js"></script>
-<link href="cdisc-sdtm-adam-tlf_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="cdisc-sdtm-adam-tlf_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="cdisc-sdtm-adam-tlf_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="cdisc-sdtm-adam-tlf_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="cdisc-sdtm-adam-tlf_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="cdisc-sdtm_files/libs/clipboard/clipboard.min.js"></script>
+<script src="cdisc-sdtm_files/libs/quarto-html/quarto.js"></script>
+<script src="cdisc-sdtm_files/libs/quarto-html/popper.min.js"></script>
+<script src="cdisc-sdtm_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="cdisc-sdtm_files/libs/quarto-html/anchor.min.js"></script>
+<link href="cdisc-sdtm_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="cdisc-sdtm_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="cdisc-sdtm_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="cdisc-sdtm_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="cdisc-sdtm_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <style>html{ scroll-behavior: smooth; }</style>
 
 
@@ -47,7 +47,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#sdtm-study-data-tabulation-model" id="toc-sdtm-study-data-tabulation-model" class="nav-link active" data-scroll-target="#sdtm-study-data-tabulation-model">SDTM (Study Data Tabulation Model)</a></li>
+  <li><a href="#create-empty-datasets-metadata-driven" id="toc-create-empty-datasets-metadata-driven" class="nav-link active" data-scroll-target="#create-empty-datasets-metadata-driven">1. Create Empty Datasets (Metadata-Driven)</a></li>
+  <li><a href="#map-raw-variables-sdtm-variables" id="toc-map-raw-variables-sdtm-variables" class="nav-link" data-scroll-target="#map-raw-variables-sdtm-variables">2. Map Raw Variables (SDTM Variables)</a></li>
+  <li><a href="#create-formats-controlled-terminology" id="toc-create-formats-controlled-terminology" class="nav-link" data-scroll-target="#create-formats-controlled-terminology">3. Create Formats (Controlled Terminology)</a></li>
+  <li><a href="#derive-variables-logiccalculations" id="toc-derive-variables-logiccalculations" class="nav-link" data-scroll-target="#derive-variables-logiccalculations">4. Derive Variables (Logic/Calculations)</a></li>
   </ul>
 </nav>
 </div>
@@ -55,7 +58,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">End-to-end CDISC Workflow (Mock Study)</h1>
+<h1 class="title">End-to-end CDISC-SDTM Workflow (Mock Study)</h1>
   <div class="quarto-categories">
     <div class="quarto-category">CDISC</div>
     <div class="quarto-category">SAS</div>
@@ -67,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    From raw sources to SDTM, ADaM, and TLFs using SAS (SAS OnDemand).
+    From raw sources to SDTM using SAS (SAS OnDemand).
   </div>
 </div>
 
@@ -84,85 +87,92 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<blockquote class="blockquote">
-<blockquote class="blockquote">
-<p>This portfolio project shows an end-to-end CDISC pipeline implemented in <strong>SAS OnDemand</strong>: curation of raw-like sources → <strong>SDTM domains</strong> → <strong>ADaM analysis datasets</strong> → <strong>TLFs</strong> (tables/listings/figures).<br>
-<strong>Repo:</strong> <a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio" class="uri">https://github.com/Ousmanerabi/clinical-trials-programming-portfolio</a></p>
-</blockquote>
-<h2 id="at-a-glance" class="anchored">At a glance</h2>
-<ul>
-<li><strong>Objective:</strong> produce regulatory-ready data flow (SDTM → ADaM → TLF) for a mock clinical study.</li>
-<li><strong>Stack:</strong> SAS (OnDemand), CDISC SDTM &amp; ADaM principles.</li>
-<li><strong>What you’ll see here:</strong> a concise walkthrough, code excerpts, and links to the full programs and outputs.</li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>Cette page a pour objectif les principales étapes de la preparation des donnees brutes pour les donnees SDTM pretes. J’ai choisi de simplifier cette page afin de demontrer ma connaissance de la creation des donnees qui respectent le format SDTM.</p>
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Why a mock study?</strong><br>
-To demonstrate real-world clinical programming skills without sharing proprietary datasets, while following CDISC conventions and good programming practices.</p>
+<p>A noter que le repertoire github xxx, j’ai utilisé des macro pour la creation, le formatage etc.. de ces domaines. Ces macros sont issus des livres que j’ai lu dans le cadre la preparation a la <strong>Certification SAS Clinical Trials Programming</strong>.</p>
 </div>
 </div>
-<h2 id="data-sources-scope" class="anchored">Data sources &amp; scope</h2>
+<section id="create-empty-datasets-metadata-driven" class="level3">
+<h3 class="anchored" data-anchor-id="create-empty-datasets-metadata-driven">1. Create Empty Datasets (Metadata-Driven)</h3>
 <ul>
-<li><strong>Inputs:</strong> synthetic/raw-like CSV/XLSX files and SAS datasets stored in the repo (for demonstration).</li>
-<li><strong>Study artifacts:</strong> trial design shells and example CRF mapping logic where needed.</li>
-<li><strong>Outputs:</strong> SDTM domains (e.g., <code>DM</code>, <code>AE</code>, <code>EX</code>, <code>VS</code>), then ADaM datasets (e.g., <code>ADSL</code>, <code>ADAE</code>), and selected TLFs.</li>
+<li><p>Start from SDTM metadata (stdm_metadata.csv)</p></li>
+<li><p>Use <code>data function</code> to define structure (names, labels, types, lengths)</p></li>
+<li><p>Programs ensure all domains have the correct structure before populating</p></li>
 </ul>
-<p><strong>Repository layout (key folders)</strong></p>
-<p>clinical-trials-programming-portfolio/ 01_RAW/ # raw-like inputs (csv/xlsx/sas7bdat)</p>
-<p>02_SDTM/<br>
-programs/ # SAS programs (domain-specific)<br>
-out/ # SDTM outputs (sas7bdat/preview png)<br>
-03_ADaM/</p>
-<p>programs/ # SAS programs (ADSL, ADAE, etc.)<br>
-out/ # ADaM outputs<br>
-04_TLF/<br>
-programs/ # TLF SAS code (tables, listings, figures)<br>
-out/ # rendered artefacts (rtf/pdf/png)<br>
-docs/ # helper docs (specs, trial design)</p>
-</blockquote>
-<section id="sdtm-study-data-tabulation-model" class="level2">
-<h2 class="anchored" data-anchor-id="sdtm-study-data-tabulation-model">SDTM (Study Data Tabulation Model)</h2>
-<p><strong>Goal:</strong> create standardized, submission-ready domains that mirror CRF content and study design.</p>
-<p><strong>Highlights</strong> - Patient key: <code>USUBJID</code> built from <code>STUDYID</code> + subject identifier.<br>
-- Controlled terminology &amp; value-level mapping (e.g., <code>SEX</code>, <code>ARM</code>, <code>AESER</code>).<br>
-- Date handling (partial dates), label/length alignment.</p>
-<p><strong>Example — DM (Demography) derivation (excerpt)</strong></p>
-<pre class="sas"><code>/* 02_SDTM/programs/sdtm_dm.sas */ 
+<pre class="sas"><code>/* Example: Create empty DM structure */
+data empty.dm;
 
-data sdtm.dm(label="Demographics"); 
+ /* length for each of the 25 DM variables*/
+ 
+  lenght STUDYID $15 DOMAIN $2 USUBJID $25 SUBJID $7 RFSTDTC $16
+  RFENDTC $16 RFXSDTC $16 RFICDTC $16 RFPENDTC $16 DTHDTC $16 DTHFL $2
+  SITEID $7 BRTHDTC $16 AGE 8 AGEU $10 SEX $2 RACE $80 ARMCD $8 ARM $40
+  ACTARMCD $8 ACTARM $40 ARMRS $40 ACTARMUD $40 COUNTRY $3;
+  
+ /* The label for all the variables using a label statement*/
+  
+  label STUDYID="Study Identifier"
+         DOMAIN=label="Domain Abbreviation"
+         USUBJID="Unique Subject Identifier"
+         SUBJID="Subject Identifier for the Study"
+         RFSTDTC="Subject Reference Start Date/Time"
+         RFENDTC = "Subject Reference End Date/Time"
+         RFXSTDTC='Date/Time of First Study Treatment'
+         RFXENDTC='Date/Time of Last Study Treatment'
+         RFICDTC='Date/Time of Informed Consent'
+         RFPENDTC='Date/Time of End of Participation'
+         DTHDTC='Date/Time of Death'
+         DTHFL='Subject Death Flag' SITEID='Study Site Identifier'
+         BRTHDTC='Date/Time of Birth' AGE='Age' AGEU='Age Units' SEX='Sex'
+         RACE='Race' ARMCD='Planned Arm Code'
+         ARM='Description of Planned Arm'
+         ACTARMCD='Actual Arm Code' ACTARM='Description of Actual Arm'
+         ARMNRS= 'Reason Arm and/or Actual Arm is Null'
+         ACTARMUD= 'Description of Unplanned Actual Arm'
+         COUNTRY='Country';
+  stop;
+run;</code></pre>
+</section>
+<section id="map-raw-variables-sdtm-variables" class="level3">
+<h3 class="anchored" data-anchor-id="map-raw-variables-sdtm-variables">2. Map Raw Variables (SDTM Variables)</h3>
+<ul>
+<li>Load raw data</li>
+</ul>
+</section>
+<section id="create-formats-controlled-terminology" class="level3">
+<h3 class="anchored" data-anchor-id="create-formats-controlled-terminology">3. Create Formats (Controlled Terminology)</h3>
+<ul>
+<li><p>Define SAS formats for coded values</p></li>
+<li><p>Improves consistency and simplifies mapping</p></li>
+</ul>
+<pre class="sas"><code>/*Creating custom formats for the variables sex, race, arm, and armcd*/
 
-set raw.demography; 
+proc format;
+     value sex 1='M' 2='F' .='U';
 
-length STUDYID $12 USUBJID $40 DOMAIN $2 ARM $20 ARMCD $8 SEX $1 AGEU $5; 
+     value race 1='White' 2='Black or African American' 3='Asian';
 
-DOMAIN = "DM"; 
+     value armcd 0='PLACEBO' 1='ALG123';
 
-USUBJID = catx("-", STUDYID, put(SUBJID, z4.)); 
-
-AGEU = "YEARS"; 
-
-/* … additional recodes / controlled terms … */
-
- keep STUDYID DOMAIN USUBJID SUBJID SEX AGE AGEU ARM ARMCD; run;
-
-proc sort data=sdtm.dm; by USUBJID; 
+     value arm 0='Placebo' 1='Analgezia HCL 30mg';
 
 run;</code></pre>
+</section>
+<section id="derive-variables-logiccalculations" class="level3">
+<h3 class="anchored" data-anchor-id="derive-variables-logiccalculations">4. Derive Variables (Logic/Calculations)</h3>
 <ul>
-<li><p>Full program: <a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM/programs" class="uri">https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM/programs</a></p></li>
-<li><p>SDTM outputs: <a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM/out" class="uri">https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM/out</a></p></li>
+<li><p>Derive analysis-ready variables not present in raw (ISO8601 dates, study day, flags)</p></li>
+<li><p>Handle missing or partial dates, safety flags, baseline derivations</p></li>
 </ul>
-<div class="callout-tip\">
-<p><strong>Quality gates (SDTM):</strong> uniqueness of <code>USUBJID</code>, required variables by domain, controlled codes, and basic cross-domain checks (e.g., <code>DM</code> vs <code>AE</code> subject coverage).</p>
-</div>
 </section>
 
 </main>
@@ -592,5 +602,5 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 
 
 
-<script src="cdisc-sdtm-adam-tlf_files/libs/quarto-html/zenscroll-min.js"></script>
+<script src="cdisc-sdtm_files/libs/quarto-html/zenscroll-min.js"></script>
 </body></html>
