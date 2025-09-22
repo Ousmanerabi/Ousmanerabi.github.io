@@ -10,125 +10,41 @@ categories: [CDISC, SAS, SDTM, ADaM, TLF]
 permalink: /projects/cdisc-sdtm.html
 ---
 
-This page outlines the **key steps in preparing raw clinical trial data into SDTM-compliant datasets**.\
-I intentionally kept this page simple to demonstrate my understanding of the process of creating datasets that follow the CDISC SDTM standard.
-
 :::{.callout-important}
 
-**Note:** In the corresponding GitHub repository <https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main>, I used **SAS macros** to create, format, and validate the SDTM domains.\
-These macros were adapted from reference books I studied while preparing for the **SAS Clinical Trials Programming Certification**.
+Note: In the corresponding GitHub repository <https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main>, I used SAS macros to create, format, and validate the SDTM domains.\
+These macros were adapted from reference books I studied while preparing for the SAS Clinical Trials Programming Certification.
 
 :::
 
-### 1. Create Empty Datasets (Metadata-Driven)
+### Objective 
 
--   Start from SDTM metadata (stdm_metadata.csv)
+This project demonstrates the preparation of raw clinical trial data into CDISC SDTM-ready format. The example focuses on the Demographics (DM) domain, which captures subject-level information required for regulatory submission. The DM domain follows the standard SDTM structure, with one record per subject.
 
--   Use `data function` to define structure (names, labels, types, lengths)
+### Methodology
 
--   Programs ensure all domains have the correct structure before populating
+The process was simplified for demonstration purposes but reflects the key steps followed in industry practice:
 
-#### Code Example
+1.  Identify required variables based on **SDTM Implementation Guide (SDTMIG v3.4)**
+    -   Identifier variables : `STUDYID`, `DOMAIN`, `USUBJID`
 
-##### 1. Demographics (DM) Domain
+    -   Topic variables: `USUBJID`
 
-Ce code cree un empty dataset pour le domain Demographics (DM). DM domain includes a set of essential standard variables that describe each subject in the clinical trial. The structure of the DM domain is one record per subject. We have just the required variables, variables that must be included in the dataset submission and cannot have missing values. First, we have the identifier variables, study ID, domain, and unique subject ID, then the topic variable, which is the ID of each unique subject within the clinical study. We then have our qualifier variables, the site ID, the sex of the subject, and the country of the site of the clinical trial.
+    -   Timing variables : `RFSTDTC`, `RFENDTC`, **`RFXSTDTC`**, `RFXENDTC`
 
-``` sas
-/* Create empty DM structure */
-data empty.dm;
+    -   Qualifier variables : `SITEID`, `SEX`, `AGE`, `RACE`, `COUNTRY`
+2.  Create an empty dataset structure using SAS macro
+3.  Apply metadata-driven macros to format variables and enforce controlled terminology
+4.  Validate dataset structure to ensure compliance with CDISC standards
 
- /* length for each of the 25 DM variables*/
- 
-  lenght STUDYID $15 DOMAIN $2 USUBJID $25 SUBJID $7 RFSTDTC $16
-  RFENDTC $16 RFXSDTC $16 RFICDTC $16 RFPENDTC $16 DTHDTC $16 DTHFL $2
-  SITEID $7 BRTHDTC $16 AGE 8 AGEU $10 SEX $2 RACE $80 ARMCD $8 ARM $40
-  ACTARMCD $8 ACTARM $40 ARMRS $40 ACTARMUD $40 COUNTRY $3;
-  
- /* The label for all the variables using a label statement*/
-  
-  label STUDYID="Study Identifier"
-         DOMAIN=label="Domain Abbreviation"
-         USUBJID="Unique Subject Identifier"
-         SUBJID="Subject Identifier for the Study"
-         RFSTDTC="Subject Reference Start Date/Time"
-         RFENDTC = "Subject Reference End Date/Time"
-         RFXSTDTC='Date/Time of First Study Treatment'
-         RFXENDTC='Date/Time of Last Study Treatment'
-         RFICDTC='Date/Time of Informed Consent'
-         RFPENDTC='Date/Time of End of Participation'
-         DTHDTC='Date/Time of Death'
-         DTHFL='Subject Death Flag' SITEID='Study Site Identifier'
-         BRTHDTC='Date/Time of Birth' AGE='Age' AGEU='Age Units' SEX='Sex'
-         RACE='Race' ARMCD='Planned Arm Code'
-         ARM='Description of Planned Arm'
-         ACTARMCD='Actual Arm Code' ACTARM='Description of Actual Arm'
-         ARMNRS= 'Reason Arm and/or Actual Arm is Null'
-         ACTARMUD= 'Description of Unplanned Actual Arm'
-         COUNTRY='Country';
-         
-  /* kill the PDV execution of the blank observation*/  
-  stop;
-run;
-```
+### Tools
 
-##### 2. Supplemental (SUPP) Domain
+-   **SAS OnDemand for Academics :** used to build and test the dataset
 
-The supplemental qualifiers special purpose dataset model is used to capture non-standard variables.
+-   **Macro:** adapted from textbooks used in SAS Clinical Trials Programming certification preparation (*Implementing CDISC Using SAS*, *Validating Clinical Trial Data Reporting with SAS*)
 
-Supplemental domains are associated with parent records in domains of either the general observation class datasets, i.e. events, findings, interventions, or demographics. These domains are represented as SUPP for each domain containing sponsor-defined variables.
+-   **CDISC SDTMIG v3.2:** for required/expected variable definitions
 
-``` SAS
-/* Create a temporary empty dataset using a data step */
+### Outputs
 
-data empty_suppDM;
-
-/* Define the length for each variable*/
-
-     length STUDYID $15 RDOMAIN $2 USUBJID $25 IDVAR $8 IDVARVAL $200 QNAM
-     $8 QLABEL $40 QVAL $200 QORIG $20 QEVAL $8;
-     
-/*Define the label for each variable*/
-
-     label STUDYID='Study Identifier' RDOMAIN='Related Domain Abbreviation'
-     USUBJID='Unique Subject Identifier' IDVAR='Identifying Variable'
-     IDVARVAL='Identifying Variable Value' QNAM='Qualifier Variable Name'
-     QLABEL='Qualifier Variable Label' QVAL='Data Value' QORIG='Origin'
-     QEVAL='Evaluator';
-     
-/* kill the PDV execution of the blank observation*/   
-  stop;
-  
-run;
-```
-
-### 2. Map Raw Variables (SDTM Variables)
-
--   Load raw data
-
-### 3. Create Formats (Controlled Terminology)
-
--   Define SAS formats for coded values
-
--   Improves consistency and simplifies mapping
-
-``` sas
-/*Creating custom formats for the variables sex, race, arm, and armcd*/
-
-proc format;
-     value sex 1='M' 2='F' .='U';
-
-     value race 1='White' 2='Black or African American' 3='Asian';
-
-     value armcd 0='PLACEBO' 1='ALG123';
-
-     value arm 0='Placebo' 1='Analgezia HCL 30mg';
-
-run;
-```
-
-### 4. Derive Variables (Logic/Calculations)
-
--   Derive analysis-ready variables not present in raw (ISO8601 dates, study day, flags)
-
--   Handle missing or partial dates, safety flags, baseline derivations
+Below is the expected structure of the DM domain:
