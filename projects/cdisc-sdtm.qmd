@@ -1,6 +1,5 @@
 ---
 title: "Study Data Tabulation Model (SDTM)-Demographics (DM)"
-date: last-modified
 description: "From raw sources to SDTM-compliant DM (plus SUPPDM)"
 categories: [CDISC, SAS, SDTM, MACRO]
 format:
