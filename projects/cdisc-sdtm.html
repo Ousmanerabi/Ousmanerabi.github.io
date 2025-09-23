@@ -96,26 +96,68 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Note:</strong> In the corresponding GitHub repository <a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main" class="uri">https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main</a>, I used <strong>SAS macros</strong> to create, format, and validate the SDTM domains.<br>
-These macros were adapted from reference books I studied while preparing for the <strong>SAS Clinical Trials Programming Certification</strong>.</p>
+<p>Note: In the corresponding GitHub repository <a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main" class="uri">https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main</a>, I used SAS macros to create, format, and validate the SDTM domains.<br>
+These macros were adapted from reference books I studied while preparing for the SAS Clinical Trials Programming Certification.</p>
 </div>
 </div>
 <section id="objective" class="level3">
 <h3 class="anchored" data-anchor-id="objective">Objective</h3>
-<p>This project demonstrates the preparation of raw clinical trial data into CDISC SDTM-ready format. The example focuses on the <strong>Demographics (DM) domain</strong>, which captures subject-level information required for regulatory submission. The DM domain follows the standard SDTM structure, with <strong>one record per subject</strong>.</p>
+<p>This project demonstrates the preparation of raw clinical trial data into CDISC SDTM-ready format. The example focuses on the Demographics (DM) domain, which captures subject-level information required for regulatory submission. The DM domain follows the standard SDTM structure, with one record per subject.</p>
 </section>
 <section id="methodology" class="level3">
 <h3 class="anchored" data-anchor-id="methodology">Methodology</h3>
 <p>The process was simplified for demonstration purposes but reflects the key steps followed in industry practice:</p>
 <ol type="1">
-<li>Identify required variables based on SDTM Implementation Guide (SDTMIG v3.4)
+<li><p>Identify required variables based on <strong>SDTM Implementation Guide (SDTMIG v3.4)</strong></p>
 <ul>
 <li><p>Identifier variables : <code>STUDYID</code>, <code>DOMAIN</code>, <code>USUBJID</code></p></li>
 <li><p>Topic variables: <code>USUBJID</code></p></li>
 <li><p>Timing variables : <code>RFSTDTC</code>, <code>RFENDTC</code>, <strong><code>RFXSTDTC</code></strong>, <code>RFXENDTC</code></p></li>
 <li><p>Qualifier variables : <code>SITEID</code>, <code>SEX</code>, <code>AGE</code>, <code>RACE</code>, <code>COUNTRY</code></p></li>
 </ul></li>
-<li>Create an empty dataset structure using SAS macro</li>
+<li><p>Create an empty dataset structure using SAS macro</p>
+<p>▶ Code</p></li>
+</ol>
+<pre><code>**** CREATE EMPTY DM DATASET CALLED EMPTY_DM;
+%make_empty_dataset(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
+**** GET DEMOGRAPHICS DATA;
+proc sort
+  data=source.demographic
+  out=demographic;
+    by subject;
+run;
+**** DERIVE THE MAJORITY OF SDTM DM VARIABLES;
+options missing = ' ';
+data dm;
+  set EMPTY_DM
+    demog_dose(rename=(race=_race));
+    studyid = 'XYZ123';
+    domain = 'DM';
+    usubjid = left(uniqueid);
+    subjid = put(subject,3.); 
+    rfstdtc = put(firstdose,yymmdd10.);  
+    rfendtc = put(lastdose,yymmdd10.); 
+    rfxstdtc = put(firstdose,yymmdd10.);  
+    rfxendtc = put(lastdose,yymmdd10.);
+    rficdtc = put(icdate,yymmdd10.);
+    rfpendtc = put(lastdoc,yymmdd10.);
+    dthfl = 'N';
+    siteid = substr(subjid,1,1) || "00";
+    brthdtc = put(dob,yymmdd10.);
+    age = floor ((intck('month',dob,firstdose) - 
+          (day(firstdose) &lt; day(dob))) / 12);
+    if age ne . then
+      ageu = 'YEARS';
+    sex = put(gender,sex_demographic_gender.);
+    race = put(_race,race_demographic_race.);
+    armcd = put(trt,armcd_demographic_trt.);
+    arm = put(trt,arm_demographic_trt.);
+    actarmcd = put(trt,armcd_demographic_trt.);
+    actarm = put(trt,arm_demographic_trt.);
+    country = "USA"; 
+run;
+    </code></pre>
+<ol type="1">
 <li>Apply metadata-driven macros to format variables and enforce controlled terminology</li>
 <li>Validate dataset structure to ensure compliance with CDISC standards</li>
 </ol>

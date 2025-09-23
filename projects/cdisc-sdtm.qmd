@@ -6,6 +6,7 @@ format:
     toc: true
     toc-depth: 3
     code-fold: true
+    #css: styles.css
 categories: [CDISC, SAS, SDTM, ADaM, TLF]
 permalink: /projects/cdisc-sdtm.html
 ---
@@ -34,7 +35,55 @@ The process was simplified for demonstration purposes but reflects the key steps
 
     -   Qualifier variables : `SITEID`, `SEX`, `AGE`, `RACE`, `COUNTRY`
 2.  Create an empty dataset structure using SAS macro
+
+#### Code example
+
+```         
+**** CREATE EMPTY DM DATASET CALLED EMPTY_DM;
+%make_empty_dataset(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
+**** GET DEMOGRAPHICS DATA;
+proc sort
+  data=source.demographic
+  out=demographic;
+    by subject;
+run;
+**** DERIVE THE MAJORITY OF SDTM DM VARIABLES;
+options missing = ' ';
+data dm;
+  set EMPTY_DM
+    demog_dose(rename=(race=_race));
+    studyid = 'XYZ123';
+    domain = 'DM';
+    usubjid = left(uniqueid);
+    subjid = put(subject,3.); 
+    rfstdtc = put(firstdose,yymmdd10.);  
+    rfendtc = put(lastdose,yymmdd10.); 
+    rfxstdtc = put(firstdose,yymmdd10.);  
+    rfxendtc = put(lastdose,yymmdd10.);
+    rficdtc = put(icdate,yymmdd10.);
+    rfpendtc = put(lastdoc,yymmdd10.);
+    dthfl = 'N';
+    siteid = substr(subjid,1,1) || "00";
+    brthdtc = put(dob,yymmdd10.);
+    age = floor ((intck('month',dob,firstdose) - 
+          (day(firstdose) < day(dob))) / 12);
+    if age ne . then
+      ageu = 'YEARS';
+    sex = put(gender,sex_demographic_gender.);
+    race = put(_race,race_demographic_race.);
+    armcd = put(trt,armcd_demographic_trt.);
+    arm = put(trt,arm_demographic_trt.);
+    actarmcd = put(trt,armcd_demographic_trt.);
+    actarm = put(trt,arm_demographic_trt.);
+    country = "USA"; 
+run;
+  
+```
+
 3.  Apply metadata-driven macros to format variables and enforce controlled terminology
+
+    #### Code example
+
 4.  Validate dataset structure to ensure compliance with CDISC standards
 
 ### Tools
