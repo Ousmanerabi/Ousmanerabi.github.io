@@ -1,99 +1,297 @@
 ---
-title: "Prepare Raw Clinical Trial Data into Study Data Tabulation Model (SDTM)-compliant datasets"
-description: "From raw clinical trial data sources to SDTM using SAS"
+title: "Study Data Tabulation Model (SDTM)-Demographics (DM)"
+date: last-modified
+description: "From raw sources to SDTM-compliant DM (plus SUPPDM)"
+categories: [CDISC, SAS, SDTM, MACRO]
 format:
   html:
     toc: true
     toc-depth: 3
     code-fold: true
+    code-summary: "Show SAS code"
+    number-sections: false
+    df-print: kable
     #css: styles.css
-categories: [CDISC, SAS, SDTM, ADaM, TLF]
+
+page-layout: full
 permalink: /projects/cdisc-sdtm.html
 ---
 
-:::{.callout-important}
+## Overview
 
-Note: In the corresponding GitHub repository <https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main>, I used SAS macros to create, format, and validate the SDTM domains.\
-These macros were adapted from reference books I studied while preparing for the SAS Clinical Trials Programming Certification.
+This page documents the **end-to-end build of SDTM DM** (and **SUPPDM** when needed) from raw sources.\
+Focus: *empty dataset from metadata → variable mapping → derivations → QC → export*.
+
+::: callout-note
+**Context**\
+- Tools: *SAS OnDemand* (9.4), macros from my study notes.\
+- Source folders (OnDemand):\
+- `SOURCE` → raw tables (e.g., `DEMOGRAPHIC`, `DOSING`)\
+- `LIB` → formats (user-defined formats)\
+- `TARGET` → SDTM outputs (`DM.sas7bdat`, `SUPPDM.sas7bdat`)\
+- Metadata: `/home/.../SDTM_METADATA1.csv` (variable list and attributes).
+:::
+
+------------------------------------------------------------------------
+
+## Inputs
+
+-   **Raw**: `SOURCE.DEMOGRAPHIC`, `SOURCE.DOSING`\
+-   **Formats**: `LIB.` catalog (e.g., `sex_demographic_gender.` etc.)\
+-   **Study metadata** (CSV): variable order, type, length, labels, and keys (for sort).
+
+<details>
+
+<summary><strong>SAS — Library setup</strong></summary>
+
+\`\`\`sas
+
+/\* Common paths & librefs \**/*
+
+*%include "/home/*<USER>/CDISC/appendix/common.sas";
+
+/\* expects:
+
+libname source "/home/<USER>/CDISC/data";
+
+libname lib "/home/<USER>/CDISC/formats";
+
+libname target "/home/<USER>/CDISC/sdtm";
+
+\*/
+
+</details>
+
+## 1) Create EMPTY DM from Metadata
+
+We first create an **empty shell** (`EMPTY_DM`) using the CSV metadata so that attributes (type/length/label/order) are correct and we can **append real data into it**.
+
+<details><summary><strong>SAS — Build EMPTY_DM</strong></summary>
+
+```         
+/* Create empty DM based on metadata CSV */
+%make_empty_dataset(
+  metadatafile=/home/<USER>/CDISC/Chap2/SDTM_METADATA1.csv,
+  dataset=DM
+);
+/* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */
+```
+
+</details>
+
+:::{.callout-tip}
+
+If you don’t use a macro, you can `PROC IMPORT` the metadata and create the shell with `DATA _NULL_` + `CALL EXECUTE`, or keep a hand-crafted `length/label/format` block.
 
 :::
 
-### Objective 
+## 2) Mapping (Raw data to SDTM DM)
 
-This project demonstrates the preparation of raw clinical trial data into CDISC SDTM-ready format. The example focuses on the Demographics (DM) domain, which captures subject-level information required for regulatory submission. The DM domain follows the standard SDTM structure, with one record per subject.
+Key SDTM variables for DM (subset):
 
-### Methodology
+| Class | Variables (examples) | Notes |
+|----|----|----|
+| Identifier | `STUDYID`, `DOMAIN`, `USUBJID`, `SUBJID` | 1 record per subject |
+| Timing | `RFSTDTC`, `RFENDTC`, `RFXSTDTC`, `RFXENDTC`, `BRTHDTC` | ISO 8601 dates |
+| Qualifier | `SITEID`, `SEX`, `RACE`, `COUNTRY`, `AGE`, `AGEU` | Coded via formats where applicable |
+| Arm | `ARMCD`, `ARM`, `ACTARMCD`, `ACTARM` | From treatment assignments |
 
-The process was simplified for demonstration purposes but reflects the key steps followed in industry practice:
-
-1.  Identify required variables based on **SDTM Implementation Guide (SDTMIG v3.4)**
-    -   Identifier variables : `STUDYID`, `DOMAIN`, `USUBJID`
-
-    -   Topic variables: `USUBJID`
-
-    -   Timing variables : `RFSTDTC`, `RFENDTC`, **`RFXSTDTC`**, `RFXENDTC`
-
-    -   Qualifier variables : `SITEID`, `SEX`, `AGE`, `RACE`, `COUNTRY`
-2.  Create an empty dataset structure using SAS macro
-
-#### Code example
+<details><summary><strong>SAS — Prepare dosing & demographics</strong></summary>
 
 ```         
-**** CREATE EMPTY DM DATASET CALLED EMPTY_DM;
-%make_empty_dataset(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
-**** GET DEMOGRAPHICS DATA;
-proc sort
-  data=source.demographic
-  out=demographic;
-    by subject;
+/* First/last dose (for RFSTDTC/RFENDTC) */
+proc sort data=source.dosing(keep=subject startdt enddt) out=dosing;
+  by subject startdt;
 run;
-**** DERIVE THE MAJORITY OF SDTM DM VARIABLES;
-options missing = ' ';
-data dm;
-  set EMPTY_DM
-    demog_dose(rename=(race=_race));
-    studyid = 'XYZ123';
-    domain = 'DM';
-    usubjid = left(uniqueid);
-    subjid = put(subject,3.); 
-    rfstdtc = put(firstdose,yymmdd10.);  
-    rfendtc = put(lastdose,yymmdd10.); 
-    rfxstdtc = put(firstdose,yymmdd10.);  
-    rfxendtc = put(lastdose,yymmdd10.);
-    rficdtc = put(icdate,yymmdd10.);
-    rfpendtc = put(lastdoc,yymmdd10.);
-    dthfl = 'N';
-    siteid = substr(subjid,1,1) || "00";
-    brthdtc = put(dob,yymmdd10.);
-    age = floor ((intck('month',dob,firstdose) - 
-          (day(firstdose) < day(dob))) / 12);
-    if age ne . then
-      ageu = 'YEARS';
-    sex = put(gender,sex_demographic_gender.);
-    race = put(_race,race_demographic_race.);
-    armcd = put(trt,armcd_demographic_trt.);
-    arm = put(trt,arm_demographic_trt.);
-    actarmcd = put(trt,armcd_demographic_trt.);
-    actarm = put(trt,arm_demographic_trt.);
-    country = "USA"; 
+
+data dosing;
+  set dosing; by subject;
+  retain firstdose lastdose;
+  if first.subject then do; firstdose=.; lastdose=.; end;
+  firstdose = min(firstdose, startdt, enddt);
+  lastdose  = max(lastdose , startdt, enddt);
+  if last.subject;
 run;
-  
+
+/* Demographics */
+proc sort data=source.demographic out=demographic;
+  by subject;
+run;
+
+/* Merge for mapping */
+data demog_dose;
+  merge demographic dosing;
+  by subject;
+run;
 ```
 
-3.  Apply metadata-driven macros to format variables and enforce controlled terminology
+<details><details><summary><strong>SAS — Map to DM variables</strong></summary>
 
-    #### Code example
+```         
+options missing=' ';
+data dm;
+  set EMPTY_DM
+      demog_dose(rename=(race=_race));
 
-4.  Validate dataset structure to ensure compliance with CDISC standards
+  studyid = 'XYZ123';
+  domain  = 'DM';
+  usubjid = left(uniqueid);
+  subjid  = put(subject, 3.);
 
-### Tools
+  /* Timing (ISO 8601 text) */
+  rfstdtc = put(firstdose, yymmdd10.);
+  rfendtc = put(lastdose , yymmdd10.);
+  rfxstdtc= rfstdtc;
+  rfxendtc= rfendtc;
+  brthdtc = put(dob, yymmdd10.);
 
--   **SAS OnDemand for Academics :** used to build and test the dataset
+  /* Age & unit */
+  age  = floor((intck('month',dob,firstdose) - (day(firstdose) < day(dob))) / 12);
+  if age ne . then ageu = 'YEARS';
 
--   **Macro:** adapted from textbooks used in SAS Clinical Trials Programming certification preparation (*Implementing CDISC Using SAS*, *Validating Clinical Trial Data Reporting with SAS*)
+  /* Qualifiers (formats required in LIB.) */
+  sex     = put(gender, sex_demographic_gender.);
+  race    = put(_race , race_demographic_race.);
+  armcd   = put(trt   , armcd_demographic_trt.);
+  arm     = put(trt   , arm_demographic_trt.);
+  actarmcd= armcd;
+  actarm  = arm;
 
--   **CDISC SDTMIG v3.2:** for required/expected variable definitions
+  /* Site & country */
+  siteid  = substr(subjid,1,1) || "00";
+  country = "USA";
+run;
+```
 
-### Outputs
+</details>
 
-Below is the expected structure of the DM domain:
+## 3) SUPPDM (Optional)
+
+Use SUPPDM for **non-standard qualifiers**, e.g., “Race, Other” or “Randomization Date”.
+<details><summary><strong>SAS — EMPTY_SUPPDM + populate</strong></summary>
+
+```         
+/* Empty SUPPDM shell */
+%make_empty_dataset(
+  metadatafile=/home/<USER>/CDISC/Chap2/SDTM_METADATA1.csv,
+  dataset=SUPPDM
+);
+
+data suppdm;
+  set EMPTY_SUPPDM dm;
+
+  keep &SUPPDMKEEPSTRING;
+
+  /* Example 1: Other Race */
+  if not missing(orace) then do;
+    rdomain='DM'; qnam='RACEOTH'; qlabel='Race, Other';
+    qval=left(orace); qorig='CRF Page 1'; output;
+  end;
+
+  /* Example 2: Randomization Date */
+  if not missing(randdt) then do;
+    rdomain='DM'; qnam='RANDDTC'; qlabel='Randomization Date';
+    qval=left(put(randdt,yymmdd10.)); qorig='CRF Page 1'; output;
+  end;
+run;
+```
+
+</details>
+
+## 4) Order, Keys & Export
+
+Sort by **metadata-defined** keys and save to `TARGET`.
+
+<details><summary><strong>SAS — Sort & Save</strong></summary>
+
+```         
+/* Build sort lists from metadata */
+%make_sort_order(
+  metadatafile=/home/<USER>/CDISC/Chap2/SDTM_METADATA1.csv,
+  dataset=DM
+);
+
+proc sort data=dm(keep=&DMKEEPSTRING) out=target.dm;
+  by &DMSORTSTRING;
+run;
+
+/* SUPPDM */
+%make_sort_order(
+  metadatafile=/home/<USER>/CDISC/Chap2/SDTM_METADATA1.csv,
+  dataset=SUPPDM
+);
+
+proc sort data=suppdm out=target.suppdm;
+  by &SUPPDMSORTSTRING;
+run;
+```
+
+</details>
+
+------------------------------------------------------------------------
+
+## 5) QC & Validation
+
+-   **Structural checks**: variable names, type, length, labels match metadata
+
+-   **Controlled terminology**: values mapped via formats/codelists
+
+-   **Timing**: ISO 8601, completeness of `RFSTDTC`/`RFXSTDTC` etc.
+
+-   **Keys**: 1 record per subject; `USUBJID` uniqueness
+
+-   **Cross-domain**: consistency with EX/AE/VS if applicable
+
+<details><summary><strong>SAS — Quick sanity checks</strong></summary>
+
+```         
+/* 1 record per USUBJID? */
+proc sql;
+  select usubjid, count(*) as n
+  from target.dm
+  group by usubjid
+  having calculated n > 1;
+quit;
+
+/* Required fields not missing? (example) */
+proc freq data=target.dm;
+  tables studyid*usubjid*domain / missing list;
+run;
+```
+
+</details>
+
+------------------------------------------------------------------------
+
+## 6) Known pitfalls (and fixes)
+
+-   **ERROR 180-322 after macro call**
+
+    -   The `%make_empty_dataset` macro **should not** end with `RUN;`.
+
+        Ensure the macro itself doesn’t emit stray `run;` at callsite. Keep `RUN;` **inside** the macro’s generated DATA steps only.
+
+-   **Formats not found (`NOTE 484-185`)**
+
+    -   Point `fmtsearch` to your formats catalog:\
+
+        `options fmtsearch=(lib work);` and confirm the format names in `PUT()` match exactly.
+
+-   **Zero-obs shells**
+
+    -   Seeing `NOTE: The data set WORK.EMPTY_DM has 0 observations` is **expected** for the shell — records arrive when you append mapped data
+
+------------------------------------------------------------------------
+
+## 7) What’s next?
+
+-   Add **screenshots or short tables** showing the final `TARGET.DM` structure (variables + labels).
+
+-   If you also build **AE**, re-use this pattern (shell → mapping → derivations → SUPPxx → sort/export).
+
+```         
+<!-- Placeholders for outputs you will add later -->
+<div class="note" style="opacity:.85">
+  <em>Coming soon:</em> structure snapshot of TARGET.DM, record counts, and Pinnacle21-like checks summary.
+</div>
+```

@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="From raw clinical trial data sources to SDTM using SAS">
+<meta name="dcterms.date" content="2025-09-23">
+<meta name="description" content="From raw sources to SDTM-compliant DM (plus SUPPDM)">
 
-<title>Prepare Raw Clinical Trial Data into Study Data Tabulation Model (SDTM)-compliant datasets</title>
+<title>Study Data Tabulation Model (SDTM)-Demographics (DM)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -40,43 +41,53 @@ ul.task-list li input[type="checkbox"] {
 
 <body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#objective" id="toc-objective" class="nav-link active" data-scroll-target="#objective">Objective</a></li>
-  <li><a href="#methodology" id="toc-methodology" class="nav-link" data-scroll-target="#methodology">Methodology</a></li>
-  <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
-  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
+  <li><a href="#create-empty-dm-from-metadata" id="toc-create-empty-dm-from-metadata" class="nav-link" data-scroll-target="#create-empty-dm-from-metadata">1) Create EMPTY DM from Metadata</a></li>
+  <li><a href="#mapping-raw-data-to-sdtm-dm" id="toc-mapping-raw-data-to-sdtm-dm" class="nav-link" data-scroll-target="#mapping-raw-data-to-sdtm-dm">2) Mapping (Raw data to SDTM DM)</a></li>
+  <li><a href="#suppdm-optional" id="toc-suppdm-optional" class="nav-link" data-scroll-target="#suppdm-optional">3) SUPPDM (Optional)</a></li>
+  <li><a href="#order-keys-export" id="toc-order-keys-export" class="nav-link" data-scroll-target="#order-keys-export">4) Order, Keys &amp; Export</a></li>
+  <li><a href="#qc-validation" id="toc-qc-validation" class="nav-link" data-scroll-target="#qc-validation">5) QC &amp; Validation</a></li>
+  <li><a href="#known-pitfalls-and-fixes" id="toc-known-pitfalls-and-fixes" class="nav-link" data-scroll-target="#known-pitfalls-and-fixes">6) Known pitfalls (and fixes)</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">7) What’s next?</a></li>
   </ul>
 </nav>
 </div>
-<main class="content" id="quarto-document-content">
+<main class="content column-page-left" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Prepare Raw Clinical Trial Data into Study Data Tabulation Model (SDTM)-compliant datasets</h1>
+<h1 class="title">Study Data Tabulation Model (SDTM)-Demographics (DM)</h1>
   <div class="quarto-categories">
     <div class="quarto-category">CDISC</div>
     <div class="quarto-category">SAS</div>
     <div class="quarto-category">SDTM</div>
-    <div class="quarto-category">ADaM</div>
-    <div class="quarto-category">TLF</div>
+    <div class="quarto-category">MACRO</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    From raw clinical trial data sources to SDTM using SAS
+    From raw sources to SDTM-compliant DM (plus SUPPDM)
   </div>
 </div>
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">September 23, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -86,93 +97,309 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div class="callout callout-style-default callout-important callout-titled">
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This page documents the <strong>end-to-end build of SDTM DM</strong> (and <strong>SUPPDM</strong> when needed) from raw sources.<br>
+Focus: <em>empty dataset from metadata → variable mapping → derivations → QC → export</em>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Note: In the corresponding GitHub repository <a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main" class="uri">https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main</a>, I used SAS macros to create, format, and validate the SDTM domains.<br>
-These macros were adapted from reference books I studied while preparing for the SAS Clinical Trials Programming Certification.</p>
+<p><strong>Context</strong><br>
+- Tools: <em>SAS OnDemand</em> (9.4), macros from my study notes.<br>
+- Source folders (OnDemand):<br>
+- <code>SOURCE</code> → raw tables (e.g., <code>DEMOGRAPHIC</code>, <code>DOSING</code>)<br>
+- <code>LIB</code> → formats (user-defined formats)<br>
+- <code>TARGET</code> → SDTM outputs (<code>DM.sas7bdat</code>, <code>SUPPDM.sas7bdat</code>)<br>
+- Metadata: <code>/home/.../SDTM_METADATA1.csv</code> (variable list and attributes).</p>
 </div>
 </div>
-<section id="objective" class="level3">
-<h3 class="anchored" data-anchor-id="objective">Objective</h3>
-<p>This project demonstrates the preparation of raw clinical trial data into CDISC SDTM-ready format. The example focuses on the Demographics (DM) domain, which captures subject-level information required for regulatory submission. The DM domain follows the standard SDTM structure, with one record per subject.</p>
+<hr>
 </section>
-<section id="methodology" class="level3">
-<h3 class="anchored" data-anchor-id="methodology">Methodology</h3>
-<p>The process was simplified for demonstration purposes but reflects the key steps followed in industry practice:</p>
-<ol type="1">
-<li><p>Identify required variables based on <strong>SDTM Implementation Guide (SDTMIG v3.4)</strong></p>
+<section id="inputs" class="level2">
+<h2 class="anchored" data-anchor-id="inputs">Inputs</h2>
 <ul>
-<li><p>Identifier variables : <code>STUDYID</code>, <code>DOMAIN</code>, <code>USUBJID</code></p></li>
-<li><p>Topic variables: <code>USUBJID</code></p></li>
-<li><p>Timing variables : <code>RFSTDTC</code>, <code>RFENDTC</code>, <strong><code>RFXSTDTC</code></strong>, <code>RFXENDTC</code></p></li>
-<li><p>Qualifier variables : <code>SITEID</code>, <code>SEX</code>, <code>AGE</code>, <code>RACE</code>, <code>COUNTRY</code></p></li>
-</ul></li>
-<li><p>Create an empty dataset structure using SAS macro</p>
-<p>▶ Code</p></li>
-</ol>
-<pre><code>**** CREATE EMPTY DM DATASET CALLED EMPTY_DM;
-%make_empty_dataset(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
-**** GET DEMOGRAPHICS DATA;
-proc sort
-  data=source.demographic
-  out=demographic;
-    by subject;
+<li><strong>Raw</strong>: <code>SOURCE.DEMOGRAPHIC</code>, <code>SOURCE.DOSING</code><br>
+</li>
+<li><strong>Formats</strong>: <code>LIB.</code> catalog (e.g., <code>sex_demographic_gender.</code> etc.)<br>
+</li>
+<li><strong>Study metadata</strong> (CSV): variable order, type, length, labels, and keys (for sort).</li>
+</ul>
+<details>
+<summary>
+<strong>SAS — Library setup</strong>
+</summary>
+<p>```sas</p>
+<p>/* Common paths &amp; librefs *<em>/</em></p>
+<p><em>%include “/home/</em><user>/CDISC/appendix/common.sas”;</user></p>
+<p>/* expects:</p>
+<p>libname source “/home/<user>/CDISC/data”;</user></p>
+<p>libname lib “/home/<user>/CDISC/formats”;</user></p>
+<p>libname target “/home/<user>/CDISC/sdtm”;</user></p>
+<p>*/</p>
+</details>
+</section>
+<section id="create-empty-dm-from-metadata" class="level2">
+<h2 class="anchored" data-anchor-id="create-empty-dm-from-metadata">1) Create EMPTY DM from Metadata</h2>
+<p>We first create an <strong>empty shell</strong> (<code>EMPTY_DM</code>) using the CSV metadata so that attributes (type/length/label/order) are correct and we can <strong>append real data into it</strong>.</p>
+<details>
+<summary>
+<strong>SAS — Build EMPTY_DM</strong>
+</summary>
+<pre><code>/* Create empty DM based on metadata CSV */
+%make_empty_dataset(
+  metadatafile=/home/&lt;USER&gt;/CDISC/Chap2/SDTM_METADATA1.csv,
+  dataset=DM
+);
+/* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */</code></pre>
+</details>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you don’t use a macro, you can <code>PROC IMPORT</code> the metadata and create the shell with <code>DATA _NULL_</code> + <code>CALL EXECUTE</code>, or keep a hand-crafted <code>length/label/format</code> block.</p>
+</div>
+</div>
+</section>
+<section id="mapping-raw-data-to-sdtm-dm" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-raw-data-to-sdtm-dm">2) Mapping (Raw data to SDTM DM)</h2>
+<p>Key SDTM variables for DM (subset):</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Class</th>
+<th>Variables (examples)</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Identifier</td>
+<td><code>STUDYID</code>, <code>DOMAIN</code>, <code>USUBJID</code>, <code>SUBJID</code></td>
+<td>1 record per subject</td>
+</tr>
+<tr class="even">
+<td>Timing</td>
+<td><code>RFSTDTC</code>, <code>RFENDTC</code>, <code>RFXSTDTC</code>, <code>RFXENDTC</code>, <code>BRTHDTC</code></td>
+<td>ISO 8601 dates</td>
+</tr>
+<tr class="odd">
+<td>Qualifier</td>
+<td><code>SITEID</code>, <code>SEX</code>, <code>RACE</code>, <code>COUNTRY</code>, <code>AGE</code>, <code>AGEU</code></td>
+<td>Coded via formats where applicable</td>
+</tr>
+<tr class="even">
+<td>Arm</td>
+<td><code>ARMCD</code>, <code>ARM</code>, <code>ACTARMCD</code>, <code>ACTARM</code></td>
+<td>From treatment assignments</td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>
+<strong>SAS — Prepare dosing &amp; demographics</strong>
+</summary>
+<pre><code>/* First/last dose (for RFSTDTC/RFENDTC) */
+proc sort data=source.dosing(keep=subject startdt enddt) out=dosing;
+  by subject startdt;
 run;
-**** DERIVE THE MAJORITY OF SDTM DM VARIABLES;
-options missing = ' ';
+
+data dosing;
+  set dosing; by subject;
+  retain firstdose lastdose;
+  if first.subject then do; firstdose=.; lastdose=.; end;
+  firstdose = min(firstdose, startdt, enddt);
+  lastdose  = max(lastdose , startdt, enddt);
+  if last.subject;
+run;
+
+/* Demographics */
+proc sort data=source.demographic out=demographic;
+  by subject;
+run;
+
+/* Merge for mapping */
+data demog_dose;
+  merge demographic dosing;
+  by subject;
+run;</code></pre>
+<details>
+<details>
+<summary>
+<strong>SAS — Map to DM variables</strong>
+</summary>
+<pre><code>options missing=' ';
 data dm;
   set EMPTY_DM
-    demog_dose(rename=(race=_race));
-    studyid = 'XYZ123';
-    domain = 'DM';
-    usubjid = left(uniqueid);
-    subjid = put(subject,3.); 
-    rfstdtc = put(firstdose,yymmdd10.);  
-    rfendtc = put(lastdose,yymmdd10.); 
-    rfxstdtc = put(firstdose,yymmdd10.);  
-    rfxendtc = put(lastdose,yymmdd10.);
-    rficdtc = put(icdate,yymmdd10.);
-    rfpendtc = put(lastdoc,yymmdd10.);
-    dthfl = 'N';
-    siteid = substr(subjid,1,1) || "00";
-    brthdtc = put(dob,yymmdd10.);
-    age = floor ((intck('month',dob,firstdose) - 
-          (day(firstdose) &lt; day(dob))) / 12);
-    if age ne . then
-      ageu = 'YEARS';
-    sex = put(gender,sex_demographic_gender.);
-    race = put(_race,race_demographic_race.);
-    armcd = put(trt,armcd_demographic_trt.);
-    arm = put(trt,arm_demographic_trt.);
-    actarmcd = put(trt,armcd_demographic_trt.);
-    actarm = put(trt,arm_demographic_trt.);
-    country = "USA"; 
+      demog_dose(rename=(race=_race));
+
+  studyid = 'XYZ123';
+  domain  = 'DM';
+  usubjid = left(uniqueid);
+  subjid  = put(subject, 3.);
+
+  /* Timing (ISO 8601 text) */
+  rfstdtc = put(firstdose, yymmdd10.);
+  rfendtc = put(lastdose , yymmdd10.);
+  rfxstdtc= rfstdtc;
+  rfxendtc= rfendtc;
+  brthdtc = put(dob, yymmdd10.);
+
+  /* Age &amp; unit */
+  age  = floor((intck('month',dob,firstdose) - (day(firstdose) &lt; day(dob))) / 12);
+  if age ne . then ageu = 'YEARS';
+
+  /* Qualifiers (formats required in LIB.) */
+  sex     = put(gender, sex_demographic_gender.);
+  race    = put(_race , race_demographic_race.);
+  armcd   = put(trt   , armcd_demographic_trt.);
+  arm     = put(trt   , arm_demographic_trt.);
+  actarmcd= armcd;
+  actarm  = arm;
+
+  /* Site &amp; country */
+  siteid  = substr(subjid,1,1) || "00";
+  country = "USA";
+run;</code></pre>
+</details>
+</details></details></section>
+<section id="suppdm-optional" class="level2">
+<h2 class="anchored" data-anchor-id="suppdm-optional">3) SUPPDM (Optional)</h2>
+Use SUPPDM for <strong>non-standard qualifiers</strong>, e.g., “Race, Other” or “Randomization Date”.
+<details>
+<summary>
+<strong>SAS — EMPTY_SUPPDM + populate</strong>
+</summary>
+<pre><code>/* Empty SUPPDM shell */
+%make_empty_dataset(
+  metadatafile=/home/&lt;USER&gt;/CDISC/Chap2/SDTM_METADATA1.csv,
+  dataset=SUPPDM
+);
+
+data suppdm;
+  set EMPTY_SUPPDM dm;
+
+  keep &amp;SUPPDMKEEPSTRING;
+
+  /* Example 1: Other Race */
+  if not missing(orace) then do;
+    rdomain='DM'; qnam='RACEOTH'; qlabel='Race, Other';
+    qval=left(orace); qorig='CRF Page 1'; output;
+  end;
+
+  /* Example 2: Randomization Date */
+  if not missing(randdt) then do;
+    rdomain='DM'; qnam='RANDDTC'; qlabel='Randomization Date';
+    qval=left(put(randdt,yymmdd10.)); qorig='CRF Page 1'; output;
+  end;
+run;</code></pre>
+</details>
+</section>
+<section id="order-keys-export" class="level2">
+<h2 class="anchored" data-anchor-id="order-keys-export">4) Order, Keys &amp; Export</h2>
+<p>Sort by <strong>metadata-defined</strong> keys and save to <code>TARGET</code>.</p>
+<details>
+<summary>
+<strong>SAS — Sort &amp; Save</strong>
+</summary>
+<pre><code>/* Build sort lists from metadata */
+%make_sort_order(
+  metadatafile=/home/&lt;USER&gt;/CDISC/Chap2/SDTM_METADATA1.csv,
+  dataset=DM
+);
+
+proc sort data=dm(keep=&amp;DMKEEPSTRING) out=target.dm;
+  by &amp;DMSORTSTRING;
 run;
-    </code></pre>
-<ol type="1">
-<li>Apply metadata-driven macros to format variables and enforce controlled terminology</li>
-<li>Validate dataset structure to ensure compliance with CDISC standards</li>
-</ol>
+
+/* SUPPDM */
+%make_sort_order(
+  metadatafile=/home/&lt;USER&gt;/CDISC/Chap2/SDTM_METADATA1.csv,
+  dataset=SUPPDM
+);
+
+proc sort data=suppdm out=target.suppdm;
+  by &amp;SUPPDMSORTSTRING;
+run;</code></pre>
+</details>
+<hr>
 </section>
-<section id="tools" class="level3">
-<h3 class="anchored" data-anchor-id="tools">Tools</h3>
+<section id="qc-validation" class="level2">
+<h2 class="anchored" data-anchor-id="qc-validation">5) QC &amp; Validation</h2>
 <ul>
-<li><p><strong>SAS OnDemand for Academics :</strong> used to build and test the dataset</p></li>
-<li><p><strong>Macro:</strong> adapted from textbooks used in SAS Clinical Trials Programming certification preparation (<em>Implementing CDISC Using SAS</em>, <em>Validating Clinical Trial Data Reporting with SAS</em>)</p></li>
-<li><p><strong>CDISC SDTMIG v3.2:</strong> for required/expected variable definitions</p></li>
+<li><p><strong>Structural checks</strong>: variable names, type, length, labels match metadata</p></li>
+<li><p><strong>Controlled terminology</strong>: values mapped via formats/codelists</p></li>
+<li><p><strong>Timing</strong>: ISO 8601, completeness of <code>RFSTDTC</code>/<code>RFXSTDTC</code> etc.</p></li>
+<li><p><strong>Keys</strong>: 1 record per subject; <code>USUBJID</code> uniqueness</p></li>
+<li><p><strong>Cross-domain</strong>: consistency with EX/AE/VS if applicable</p></li>
 </ul>
+<details>
+<summary>
+<strong>SAS — Quick sanity checks</strong>
+</summary>
+<pre><code>/* 1 record per USUBJID? */
+proc sql;
+  select usubjid, count(*) as n
+  from target.dm
+  group by usubjid
+  having calculated n &gt; 1;
+quit;
+
+/* Required fields not missing? (example) */
+proc freq data=target.dm;
+  tables studyid*usubjid*domain / missing list;
+run;</code></pre>
+</details>
+<hr>
 </section>
-<section id="outputs" class="level3">
-<h3 class="anchored" data-anchor-id="outputs">Outputs</h3>
-<p>Below is the expected structure of the DM domain:</p>
+<section id="known-pitfalls-and-fixes" class="level2">
+<h2 class="anchored" data-anchor-id="known-pitfalls-and-fixes">6) Known pitfalls (and fixes)</h2>
+<ul>
+<li><p><strong>ERROR 180-322 after macro call</strong></p>
+<ul>
+<li><p>The <code>%make_empty_dataset</code> macro <strong>should not</strong> end with <code>RUN;</code>.</p>
+<p>Ensure the macro itself doesn’t emit stray <code>run;</code> at callsite. Keep <code>RUN;</code> <strong>inside</strong> the macro’s generated DATA steps only.</p></li>
+</ul></li>
+<li><p><strong>Formats not found (<code>NOTE 484-185</code>)</strong></p>
+<ul>
+<li><p>Point <code>fmtsearch</code> to your formats catalog:<br>
+</p>
+<p><code>options fmtsearch=(lib work);</code> and confirm the format names in <code>PUT()</code> match exactly.</p></li>
+</ul></li>
+<li><p><strong>Zero-obs shells</strong></p>
+<ul>
+<li>Seeing <code>NOTE: The data set WORK.EMPTY_DM has 0 observations</code> is <strong>expected</strong> for the shell — records arrive when you append mapped data</li>
+</ul></li>
+</ul>
+<hr>
+</section>
+<section id="whats-next" class="level2">
+<h2 class="anchored" data-anchor-id="whats-next">7) What’s next?</h2>
+<ul>
+<li><p>Add <strong>screenshots or short tables</strong> showing the final <code>TARGET.DM</code> structure (variables + labels).</p></li>
+<li><p>If you also build <strong>AE</strong>, re-use this pattern (shell → mapping → derivations → SUPPxx → sort/export).</p></li>
+</ul>
+<pre><code>&lt;!-- Placeholders for outputs you will add later --&gt;
+&lt;div class="note" style="opacity:.85"&gt;
+  &lt;em&gt;Coming soon:&lt;/em&gt; structure snapshot of TARGET.DM, record counts, and Pinnacle21-like checks summary.
+&lt;/div&gt;</code></pre>
 </section>
 
 </main>
