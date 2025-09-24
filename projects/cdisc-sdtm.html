@@ -50,11 +50,13 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
   <li><a href="#create-empty-dm-from-metadata" id="toc-create-empty-dm-from-metadata" class="nav-link" data-scroll-target="#create-empty-dm-from-metadata">1) Create EMPTY DM from Metadata</a></li>
   <li><a href="#mapping-raw-data-to-sdtm-dm-using-sdtmig-v3.4" id="toc-mapping-raw-data-to-sdtm-dm-using-sdtmig-v3.4" class="nav-link" data-scroll-target="#mapping-raw-data-to-sdtm-dm-using-sdtmig-v3.4">2) Mapping (Raw data to SDTM DM using SDTMIG v3.4)</a></li>
-  <li><a href="#suppdm-optional" id="toc-suppdm-optional" class="nav-link" data-scroll-target="#suppdm-optional">3) SUPPDM (Optional)</a></li>
-  <li><a href="#order-keys-export" id="toc-order-keys-export" class="nav-link" data-scroll-target="#order-keys-export">4) Order, Keys &amp; Export</a></li>
-  <li><a href="#qc-validation" id="toc-qc-validation" class="nav-link" data-scroll-target="#qc-validation">5) QC &amp; Validation</a></li>
-  <li><a href="#known-pitfalls-and-fixes" id="toc-known-pitfalls-and-fixes" class="nav-link" data-scroll-target="#known-pitfalls-and-fixes">6) Known pitfalls (and fixes)</a></li>
-  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">7) What’s next?</a></li>
+  <li><a href="#create-formats" id="toc-create-formats" class="nav-link" data-scroll-target="#create-formats">3) Create formats</a></li>
+  <li><a href="#derive-the-logic-variables-that-need-calculating-dosing-for-example" id="toc-derive-the-logic-variables-that-need-calculating-dosing-for-example" class="nav-link" data-scroll-target="#derive-the-logic-variables-that-need-calculating-dosing-for-example">4) Derive the logic variables that need calculating (Dosing for example)</a></li>
+  <li><a href="#combine-all-the-data" id="toc-combine-all-the-data" class="nav-link" data-scroll-target="#combine-all-the-data">5) Combine all the data</a></li>
+  <li><a href="#suppdm-optional" id="toc-suppdm-optional" class="nav-link" data-scroll-target="#suppdm-optional">6) SUPPDM (Optional)</a></li>
+  <li><a href="#order-keys-export" id="toc-order-keys-export" class="nav-link" data-scroll-target="#order-keys-export">7) Order, Keys &amp; Export</a></li>
+  <li><a href="#qc-validation" id="toc-qc-validation" class="nav-link" data-scroll-target="#qc-validation">8) QC &amp; Validation</a></li>
+  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">9) What’s next?</a></li>
   </ul>
 </nav>
 </div>
@@ -91,7 +93,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <blockquote class="blockquote">
-<p>Source code &amp; metadata: see GitHub repo (02_SDTM).<br>
+<p>Source code &amp; metadata: <a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM">see GitHub repo (02_SDTM).</a><br>
 Environment: SAS OnDemand 9.4.</p>
 </blockquote>
 <section id="overview" class="level2">
@@ -315,76 +317,101 @@ Tip
 </tr>
 </tbody>
 </table>
+</section>
+<section id="create-formats" class="level2">
+<h2 class="anchored" data-anchor-id="create-formats">3) Create formats</h2>
+</section>
+<section id="derive-the-logic-variables-that-need-calculating-dosing-for-example" class="level2">
+<h2 class="anchored" data-anchor-id="derive-the-logic-variables-that-need-calculating-dosing-for-example">4) Derive the logic variables that need calculating (Dosing for example)</h2>
 <details>
 <summary>
-<strong>SAS — Prepare dosing &amp; demographics</strong>
+<strong>SAS — Prepare dosing </strong>
 </summary>
 <pre><code>/* First/last dose (for RFSTDTC/RFENDTC) */
-proc sort data=source.dosing(keep=subject startdt enddt) out=dosing;
-  by subject startdt;
+
+**** GET FIRST AND LAST DOSE DATE FOR RFSTDTC AND RFENDTC;
+proc sort data=source.dosing(keep=subject startdt enddt) 
+  out=dosing;
+   by subject startdt;
 run;
+
+**** FIRSTDOSE=FIRST DOSING AND LASTDOSE=LAST DOSING;
 
 data dosing;
-  set dosing; by subject;
-  retain firstdose lastdose;
-  if first.subject then do; firstdose=.; lastdose=.; end;
+  set dosing; 
+    by subject;
+    
+    retain firstdose lastdose;
+    
+  if first.subject then 
+    do; 
+      firstdose=.; 
+       lastdose=.; 
+    end;
+    
   firstdose = min(firstdose, startdt, enddt);
   lastdose  = max(lastdose , startdt, enddt);
+  
   if last.subject;
-run;
-
-/* Demographics */
-proc sort data=source.demographic out=demographic;
-  by subject;
-run;
-
-/* Merge for mapping */
-data demog_dose;
-  merge demographic dosing;
-  by subject;
 run;</code></pre>
+</details></section>
+<section id="combine-all-the-data" class="level2">
+<h2 class="anchored" data-anchor-id="combine-all-the-data">5) Combine all the data</h2>
 <details>
 <details>
 <summary>
 <strong>SAS — Map to DM variables</strong>
 </summary>
-<pre><code>options missing=' ';
+<pre><code>**** GET DEMOGRAPHICS DATA;
+proc sort
+  data=source.demographic
+  out=demographic;
+    by subject;
+run;
+
+**** MERGE DEMOGRAPHICS AND FIRST DOSE DATE;
+data demog_dose;
+  merge demographic
+        dosing;
+    by subject;
+run;
+
+
+**** DERIVE THE MAJORITY OF SDTM DM VARIABLES;
+options missing = ' ';
 data dm;
   set EMPTY_DM
-      demog_dose(rename=(race=_race));
+    demog_dose(rename=(race=_race));
 
-  studyid = 'XYZ123';
-  domain  = 'DM';
-  usubjid = left(uniqueid);
-  subjid  = put(subject, 3.);
-
-  /* Timing (ISO 8601 text) */
-  rfstdtc = put(firstdose, yymmdd10.);
-  rfendtc = put(lastdose , yymmdd10.);
-  rfxstdtc= rfstdtc;
-  rfxendtc= rfendtc;
-  brthdtc = put(dob, yymmdd10.);
-
-  /* Age &amp; unit */
-  age  = floor((intck('month',dob,firstdose) - (day(firstdose) &lt; day(dob))) / 12);
-  if age ne . then ageu = 'YEARS';
-
-  /* Qualifiers (formats required in LIB.) */
-  sex     = put(gender, sex_demographic_gender.);
-  race    = put(_race , race_demographic_race.);
-  armcd   = put(trt   , armcd_demographic_trt.);
-  arm     = put(trt   , arm_demographic_trt.);
-  actarmcd= armcd;
-  actarm  = arm;
-
-  /* Site &amp; country */
-  siteid  = substr(subjid,1,1) || "00";
-  country = "USA";
-run;</code></pre>
+    studyid = 'XYZ123';
+    domain = 'DM';
+    usubjid = left(uniqueid);
+    subjid = put(subject,3.); 
+    rfstdtc = put(firstdose,yymmdd10.);  
+    rfendtc = put(lastdose,yymmdd10.); 
+    rfxstdtc = put(firstdose,yymmdd10.);  
+    rfxendtc = put(lastdose,yymmdd10.);
+    rficdtc = put(icdate,yymmdd10.);
+    rfpendtc = put(lastdoc,yymmdd10.);
+    dthfl = 'N';
+    siteid = substr(subjid,1,1) || "00";
+    brthdtc = put(dob,yymmdd10.);
+    age = floor ((intck('month',dob,firstdose) - 
+          (day(firstdose) &lt; day(dob))) / 12);
+    if age ne . then
+      ageu = 'YEARS';
+    sex = put(gender,sex_demographic_gender.);
+    race = put(_race,race_demographic_race.);
+    armcd = put(trt,armcd_demographic_trt.);
+    arm = put(trt,arm_demographic_trt.);
+    actarmcd = put(trt,armcd_demographic_trt.);
+    actarm = put(trt,arm_demographic_trt.);
+    country = "USA"; 
+run; </code></pre>
 </details>
-</details></details></section>
+</details></section>
 <section id="suppdm-optional" class="level2">
-<h2 class="anchored" data-anchor-id="suppdm-optional">3) SUPPDM (Optional)</h2>
+<h2 class="anchored" data-anchor-id="suppdm-optional">6) SUPPDM (Optional)</h2>
 Use SUPPDM for <strong>non-standard qualifiers</strong>, e.g., “Race, Other” or “Randomization Date”.
 <details>
 <summary>
@@ -416,7 +443,7 @@ run;</code></pre>
 </details>
 </section>
 <section id="order-keys-export" class="level2">
-<h2 class="anchored" data-anchor-id="order-keys-export">4) Order, Keys &amp; Export</h2>
+<h2 class="anchored" data-anchor-id="order-keys-export">7) Order, Keys &amp; Export</h2>
 <p>Sort by <strong>metadata-defined</strong> keys and save to <code>TARGET</code>.</p>
 <details>
 <summary>
@@ -445,7 +472,7 @@ run;</code></pre>
 <hr>
 </section>
 <section id="qc-validation" class="level2">
-<h2 class="anchored" data-anchor-id="qc-validation">5) QC &amp; Validation</h2>
+<h2 class="anchored" data-anchor-id="qc-validation">8) QC &amp; Validation</h2>
 <ul>
 <li><p><strong>Structural checks</strong>: variable names, type, length, labels match metadata</p></li>
 <li><p><strong>Controlled terminology</strong>: values mapped via formats/codelists</p></li>
@@ -470,31 +497,9 @@ proc freq data=target.dm;
   tables studyid*usubjid*domain / missing list;
 run;</code></pre>
 </details>
-<hr>
-</section>
-<section id="known-pitfalls-and-fixes" class="level2">
-<h2 class="anchored" data-anchor-id="known-pitfalls-and-fixes">6) Known pitfalls (and fixes)</h2>
-<ul>
-<li><p><strong>ERROR 180-322 after macro call</strong></p>
-<ul>
-<li><p>The <code>%make_empty_dataset</code> macro <strong>should not</strong> end with <code>RUN;</code>.</p>
-<p>Ensure the macro itself doesn’t emit stray <code>run;</code> at callsite. Keep <code>RUN;</code> <strong>inside</strong> the macro’s generated DATA steps only.</p></li>
-</ul></li>
-<li><p><strong>Formats not found (<code>NOTE 484-185</code>)</strong></p>
-<ul>
-<li><p>Point <code>fmtsearch</code> to your formats catalog:<br>
-</p>
-<p><code>options fmtsearch=(lib work);</code> and confirm the format names in <code>PUT()</code> match exactly.</p></li>
-</ul></li>
-<li><p><strong>Zero-obs shells</strong></p>
-<ul>
-<li>Seeing <code>NOTE: The data set WORK.EMPTY_DM has 0 observations</code> is <strong>expected</strong> for the shell — records arrive when you append mapped data</li>
-</ul></li>
-</ul>
-<hr>
 </section>
 <section id="whats-next" class="level2">
-<h2 class="anchored" data-anchor-id="whats-next">7) What’s next?</h2>
+<h2 class="anchored" data-anchor-id="whats-next">9) What’s next?</h2>
 <ul>
 <li><p>Add <strong>screenshots or short tables</strong> showing the final <code>TARGET.DM</code> structure (variables + labels).</p></li>
 <li><p>If you also build <strong>AE</strong>, re-use this pattern (shell → mapping → derivations → SUPPxx → sort/export).</p></li>

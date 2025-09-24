@@ -11,7 +11,7 @@ categories: [CDISC, SAS, SDTM, MACRO]
 permalink: /projects/cdisc-sdtm.html
 ---
 
-> Source code & metadata: see GitHub repo (02_SDTM).\
+> Source code & metadata: [see GitHub repo (02_SDTM).](https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM)\
 > Environment: SAS OnDemand 9.4.
 
 ## Overview
@@ -190,76 +190,110 @@ Key SDTM variables for DM (subset):
 | Qualifier | `SITEID`, `SEX`, `RACE`, `COUNTRY`, `AGE`, `AGEU` | Coded via formats where applicable |
 | Arm | `ARMCD`, `ARM`, `ACTARMCD`, `ACTARM` | From treatment assignments |
 
-<details><summary><strong>SAS — Prepare dosing & demographics</strong></summary>
+## 3) Create formats
+
+``` sas
+/* Creating custom format for the variables sex, race, arm, and armcd.*/
+
+proc format;
+	value sex 1='M' 2='F' .='U';
+	value race 1='White' 2='Black or African American' 3='Asian';
+	value armcd 0='PLACEBO' 1='ALG123';
+	value arm 0='Placebo' 1='Analgezia HCL 30mg';
+run;
+```
+
+## 4) Derive the logic variables that need calculating (Dosing for example)
+
+<details><summary><strong>SAS — Prepare dosing </strong></summary>
 
 ```         
 /* First/last dose (for RFSTDTC/RFENDTC) */
-proc sort data=source.dosing(keep=subject startdt enddt) out=dosing;
-  by subject startdt;
+
+**** GET FIRST AND LAST DOSE DATE FOR RFSTDTC AND RFENDTC;
+proc sort 
+  data=source.dosing(keep=subject startdt enddt) 
+  out=dosing;
+   by subject startdt;
 run;
+
+**** FIRSTDOSE=FIRST DOSING AND LASTDOSE=LAST DOSING;
 
 data dosing;
-  set dosing; by subject;
-  retain firstdose lastdose;
-  if first.subject then do; firstdose=.; lastdose=.; end;
+  set dosing; 
+    by subject;
+    
+    retain firstdose lastdose;
+    
+  if first.subject then 
+    do; 
+       firstdose=.; 
+       lastdose=.; 
+    end;
+    
   firstdose = min(firstdose, startdt, enddt);
   lastdose  = max(lastdose , startdt, enddt);
+  
   if last.subject;
 run;
-
-/* Demographics */
-proc sort data=source.demographic out=demographic;
-  by subject;
-run;
-
-/* Merge for mapping */
-data demog_dose;
-  merge demographic dosing;
-  by subject;
-run;
 ```
+
+## 5) Combine all the data
 
 <details><details><summary><strong>SAS — Map to DM variables</strong></summary>
 
 ```         
-options missing=' ';
+**** GET DEMOGRAPHICS DATA;
+proc sort
+  data=source.demographic
+  out=demographic;
+    by subject;
+run;
+
+**** MERGE DEMOGRAPHICS AND FIRST DOSE DATE;
+data demog_dose;
+  merge demographic
+        dosing;
+    by subject;
+run;
+
+
+**** DERIVE THE MAJORITY OF SDTM DM VARIABLES;
+options missing = ' ';
 data dm;
   set EMPTY_DM
-      demog_dose(rename=(race=_race));
+    demog_dose(rename=(race=_race));
 
-  studyid = 'XYZ123';
-  domain  = 'DM';
-  usubjid = left(uniqueid);
-  subjid  = put(subject, 3.);
-
-  /* Timing (ISO 8601 text) */
-  rfstdtc = put(firstdose, yymmdd10.);
-  rfendtc = put(lastdose , yymmdd10.);
-  rfxstdtc= rfstdtc;
-  rfxendtc= rfendtc;
-  brthdtc = put(dob, yymmdd10.);
-
-  /* Age & unit */
-  age  = floor((intck('month',dob,firstdose) - (day(firstdose) < day(dob))) / 12);
-  if age ne . then ageu = 'YEARS';
-
-  /* Qualifiers (formats required in LIB.) */
-  sex     = put(gender, sex_demographic_gender.);
-  race    = put(_race , race_demographic_race.);
-  armcd   = put(trt   , armcd_demographic_trt.);
-  arm     = put(trt   , arm_demographic_trt.);
-  actarmcd= armcd;
-  actarm  = arm;
-
-  /* Site & country */
-  siteid  = substr(subjid,1,1) || "00";
-  country = "USA";
-run;
+    studyid = 'XYZ123';
+    domain = 'DM';
+    usubjid = left(uniqueid);
+    subjid = put(subject,3.); 
+    rfstdtc = put(firstdose,yymmdd10.);  
+    rfendtc = put(lastdose,yymmdd10.); 
+    rfxstdtc = put(firstdose,yymmdd10.);  
+    rfxendtc = put(lastdose,yymmdd10.);
+    rficdtc = put(icdate,yymmdd10.);
+    rfpendtc = put(lastdoc,yymmdd10.);
+    dthfl = 'N';
+    siteid = substr(subjid,1,1) || "00";
+    brthdtc = put(dob,yymmdd10.);
+    age = floor ((intck('month',dob,firstdose) - 
+          (day(firstdose) < day(dob))) / 12);
+    if age ne . then
+      ageu = 'YEARS';
+    sex = put(gender,sex.);
+    race = put(_race,race.);
+    armcd = put(trt,armcd.);
+    arm = put(trt,arm.);
+    actarmcd = put(trt,armcd.);
+    actarm = put(trt,arm.);
+    country = "USA"; 
+run; 
 ```
 
 </details>
 
-## 3) SUPPDM (Optional)
+## 6) SUPPDM (Optional)
 
 Use SUPPDM for **non-standard qualifiers**, e.g., “Race, Other” or “Randomization Date”.
 <details><summary><strong>SAS — EMPTY_SUPPDM + populate</strong></summary>
@@ -292,7 +326,7 @@ run;
 
 </details>
 
-## 4) Order, Keys & Export
+## 7) Order, Keys & Export
 
 Sort by **metadata-defined** keys and save to `TARGET`.
 
@@ -324,7 +358,7 @@ run;
 
 ------------------------------------------------------------------------
 
-## 5) QC & Validation
+## 8) QC & Validation
 
 -   **Structural checks**: variable names, type, length, labels match metadata
 
@@ -355,29 +389,7 @@ run;
 
 </details>
 
-------------------------------------------------------------------------
-
-## 6) Known pitfalls (and fixes)
-
--   **ERROR 180-322 after macro call**
-
-    -   The `%make_empty_dataset` macro **should not** end with `RUN;`.
-
-        Ensure the macro itself doesn’t emit stray `run;` at callsite. Keep `RUN;` **inside** the macro’s generated DATA steps only.
-
--   **Formats not found (`NOTE 484-185`)**
-
-    -   Point `fmtsearch` to your formats catalog:\
-
-        `options fmtsearch=(lib work);` and confirm the format names in `PUT()` match exactly.
-
--   **Zero-obs shells**
-
-    -   Seeing `NOTE: The data set WORK.EMPTY_DM has 0 observations` is **expected** for the shell — records arrive when you append mapped data
-
-------------------------------------------------------------------------
-
-## 7) What’s next?
+## 9) What’s next?
 
 -   Add **screenshots or short tables** showing the final `TARGET.DM` structure (variables + labels).
 
