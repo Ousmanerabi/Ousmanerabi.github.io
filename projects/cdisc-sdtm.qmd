@@ -1,25 +1,24 @@
 ---
 title: "Study Data Tabulation Model (SDTM)-Demographics (DM)"
-description: "From raw sources to SDTM-compliant DM (plus SUPPDM)"
-categories: [CDISC, SAS, SDTM, MACRO]
+description: "From metadata-driven empty shells to mapped DM and SUPPDM — clean, reproducible, and CDISC-ready"
 format:
   html:
     toc: true
     toc-depth: 3
     code-fold: true
-    code-summary: "Show SAS code"
     number-sections: false
-    df-print: kable
-    #css: styles.css
-
-page-layout: full
+categories: [CDISC, SAS, SDTM, MACRO]
 permalink: /projects/cdisc-sdtm.html
 ---
 
+> Source code & metadata: see GitHub repo (02_SDTM).\
+> Environment: SAS OnDemand 9.4.
+
 ## Overview
 
-This page documents the **end-to-end build of SDTM DM** (and **SUPPDM** when needed) from raw sources.\
-Focus: *empty dataset from metadata → variable mapping → derivations → QC → export*.
+-   **Goal:** Build SDTM **DM** (Demographics) + **SUPPDM** from raw/source data using a **metadata-driven** approach (empty shells → mapping → derivations → sort/export).
+-   **Why:** Ensure CDISC consistency (identifiers, timing in ISO 8601, roles/keys) and reproducibility in SAS OnDemand.
+-   **Outputs:** `TARGET.DM` (1 record per subject) and `TARGET.SUPPDM` (non-standard qualifiers).
 
 ::: callout-note
 **Context**\
@@ -35,29 +34,32 @@ Focus: *empty dataset from metadata → variable mapping → derivations → QC 
 
 ## Inputs
 
--   **Raw**: `SOURCE.DEMOGRAPHIC`, `SOURCE.DOSING`\
--   **Formats**: `LIB.` catalog (e.g., `sex_demographic_gender.` etc.)\
--   **Study metadata** (CSV): variable order, type, length, labels, and keys (for sort).
+-   **Metadata CSV:** `SDTM_METADATA1.csv` (variables, roles, lengths, types, sort keys).
+-   **Source data:**
+    -   `SOURCE.DEMOGRAPHIC` (1 ligne/sujet, ex. `subject`, `dob`, `gender`, `trt`, `uniqueid`)\
+    -   `SOURCE.DOSING` (ex. `subject`, `startdt`, `enddt`)
+-   **Formats (libref `LIB`):** `sex_demographic_gender.`, `race_demographic_race.`, `armcd_demographic_trt.`, `$arm_demographic_trt.`\
+-   **Environment:** SAS OnDemand 9.4; librefs `SOURCE`, `LIB`, `TARGET`.
 
 <details>
 
 <summary><strong>SAS — Library setup</strong></summary>
 
-\`\`\`sas
+``` sas
+/* Common paths & librefs */ 
 
-/\* Common paths & librefs \**/*
+%include "/home/u64197545/CDISC/appendix/common.sas"; 
 
-*%include "/home/*<USER>/CDISC/appendix/common.sas";
+/* expects: 
 
-/\* expects:
+ libname source "/home/u64197545/CDISC/data";
 
-libname source "/home/<USER>/CDISC/data";
+ libname lib  "/home/u64197545/CDISC/formats"; 
 
-libname lib "/home/<USER>/CDISC/formats";
+libname target  "/home/u64197545/CDISC/sdtm"; 
 
-libname target "/home/<USER>/CDISC/sdtm";
-
-\*/
+*/
+```
 
 </details>
 
@@ -68,11 +70,104 @@ We first create an **empty shell** (`EMPTY_DM`) using the CSV metadata so that a
 <details><summary><strong>SAS — Build EMPTY_DM</strong></summary>
 
 ```         
-/* Create empty DM based on metadata CSV */
-%make_empty_dataset(
-  metadatafile=/home/<USER>/CDISC/Chap2/SDTM_METADATA1.csv,
-  dataset=DM
-);
+*---------------------------------------------------------------*;
+* make_empty_dataset.sas creates a zero record dataset based on a 
+* dataset metadata spreadsheet.  The dataset created is called
+* EMPTY_** where "**" is the name of the dataset.  This macro also
+* creates a global macro variable called **KEEPSTRING that holds 
+* the dataset variables desired and listed in the order they  
+* should appear.  [The variable order is dictated by VARNUM in the 
+* metadata spreadsheet.]
+*
+* MACRO PARAMETERS:
+* metadatafile = the CSV file containing the dataset metadata
+* dataset = the dataset or domain name you want to extract
+
+	*---------------------------------------------------------------*;
+
+
+/* Create empty based on metadata CSV */
+%macro make_empty_dataset(metadatafile=, dataset=);
+
+/* Import csv file and rename it _temp */
+	proc import datafile="&metadatafile" out=_temp dbms=csv replace;
+		guessingrows=max;
+		delimiter=";";
+		encoding='utf-8';
+	run;
+
+
+
+	** sort the dataset by expected specified variable order (varnum);
+
+	proc sort data=_temp;
+		where domain="&dataset";
+		by varnum;
+	run;
+
+
+
+	** create keepstring macro variable and load metadata 
+    ** information into macro variables;
+	
+	
+	
+	%global &dataset.KEEPSTRING;
+
+
+	data _null_;
+		set _temp nobs=nobs end=eof;
+
+		if _n_=1 then
+			call symput("vars", compress(put(nobs, 3.)));
+		call symputx('var'    || compress(put(_n_, 3.)), variable);
+		call symputx('label'  || compress(put(_n_, 3.)), label);
+		call symputx('length' || compress(put(_n_, 3.)), put(length, 3.));
+		** valid ODM types include TEXT, INTEGER, FLOAT, DATETIME, 
+
+			        ** DATE, TIME and map to SAS numeric or character;
+
+		if upcase(type) in ("INTEGER", "FLOAT") then
+			call symputx('type' || compress(put(_n_, 3.)), "");
+		else if upcase(type) in ("TEXT", "DATE", "DATETIME", "TIME") then
+			call symputx('type' || compress(put(_n_, 3.)), "$");
+		else
+			put "ERR" "OR: not using a valid ODM type.  " type=;
+		** create **KEEPSTRING macro variable;
+		length keepstring $ 32767;
+		retain keepstring;
+		keepstring=compress(keepstring) || "|" || left(variable);
+
+		if eof then
+			call symputx(upcase(compress("&dataset" || 'KEEPSTRING')), 
+				left(trim(translate(keepstring, " ", "|"))));
+	run;
+
+
+
+	** create a 0-observation template data set used for assigning 
+
+		    ** variable attributes to the actual data sets;
+
+	data EMPTY_&dataset;
+		%do i=1 %to &vars;
+			attrib &&var&i label="&&label&i" 
+			%if "&&length&i" ne "" %then
+				length=&&type&i.&&length&i...;
+			;
+
+			%if &&type&i=$ %then
+				retain &&var&i '';
+			%else
+				retain &&var&i .;
+			;
+		%end;
+
+		if 0;
+	run;
+
+%mend make_empty_dataset;
+
 /* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */
 ```
 
@@ -84,7 +179,7 @@ If you don’t use a macro, you can `PROC IMPORT` the metadata and create the sh
 
 :::
 
-## 2) Mapping (Raw data to SDTM DM)
+## 2) Mapping (Raw data to SDTM DM using SDTMIG v3.4)
 
 Key SDTM variables for DM (subset):
 

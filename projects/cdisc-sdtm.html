@@ -6,7 +6,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="From raw sources to SDTM-compliant DM (plus SUPPDM)">
+<meta name="description" content="From metadata-driven empty shells to mapped DM and SUPPDM — clean, reproducible, and CDISC-ready">
 
 <title>Study Data Tabulation Model (SDTM)-Demographics (DM)</title>
 <style>
@@ -40,7 +40,7 @@ ul.task-list li input[type="checkbox"] {
 
 <body>
 
-<div id="quarto-content" class="page-columns page-rows-contents page-layout-full">
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
   <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
@@ -49,7 +49,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#inputs" id="toc-inputs" class="nav-link" data-scroll-target="#inputs">Inputs</a></li>
   <li><a href="#create-empty-dm-from-metadata" id="toc-create-empty-dm-from-metadata" class="nav-link" data-scroll-target="#create-empty-dm-from-metadata">1) Create EMPTY DM from Metadata</a></li>
-  <li><a href="#mapping-raw-data-to-sdtm-dm" id="toc-mapping-raw-data-to-sdtm-dm" class="nav-link" data-scroll-target="#mapping-raw-data-to-sdtm-dm">2) Mapping (Raw data to SDTM DM)</a></li>
+  <li><a href="#mapping-raw-data-to-sdtm-dm-using-sdtmig-v3.4" id="toc-mapping-raw-data-to-sdtm-dm-using-sdtmig-v3.4" class="nav-link" data-scroll-target="#mapping-raw-data-to-sdtm-dm-using-sdtmig-v3.4">2) Mapping (Raw data to SDTM DM using SDTMIG v3.4)</a></li>
   <li><a href="#suppdm-optional" id="toc-suppdm-optional" class="nav-link" data-scroll-target="#suppdm-optional">3) SUPPDM (Optional)</a></li>
   <li><a href="#order-keys-export" id="toc-order-keys-export" class="nav-link" data-scroll-target="#order-keys-export">4) Order, Keys &amp; Export</a></li>
   <li><a href="#qc-validation" id="toc-qc-validation" class="nav-link" data-scroll-target="#qc-validation">5) QC &amp; Validation</a></li>
@@ -58,7 +58,7 @@ ul.task-list li input[type="checkbox"] {
   </ul>
 </nav>
 </div>
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -73,12 +73,12 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    From raw sources to SDTM-compliant DM (plus SUPPDM)
+    From metadata-driven empty shells to mapped DM and SUPPDM — clean, reproducible, and CDISC-ready
   </div>
 </div>
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta">
 
     
   
@@ -90,10 +90,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<blockquote class="blockquote">
+<p>Source code &amp; metadata: see GitHub repo (02_SDTM).<br>
+Environment: SAS OnDemand 9.4.</p>
+</blockquote>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This page documents the <strong>end-to-end build of SDTM DM</strong> (and <strong>SUPPDM</strong> when needed) from raw sources.<br>
-Focus: <em>empty dataset from metadata → variable mapping → derivations → QC → export</em>.</p>
+<ul>
+<li><strong>Goal:</strong> Build SDTM <strong>DM</strong> (Demographics) + <strong>SUPPDM</strong> from raw/source data using a <strong>metadata-driven</strong> approach (empty shells → mapping → derivations → sort/export).</li>
+<li><strong>Why:</strong> Ensure CDISC consistency (identifiers, timing in ISO 8601, roles/keys) and reproducibility in SAS OnDemand.</li>
+<li><strong>Outputs:</strong> <code>TARGET.DM</code> (1 record per subject) and <code>TARGET.SUPPDM</code> (non-standard qualifiers).</li>
+</ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -118,24 +125,34 @@ Note
 <section id="inputs" class="level2">
 <h2 class="anchored" data-anchor-id="inputs">Inputs</h2>
 <ul>
-<li><strong>Raw</strong>: <code>SOURCE.DEMOGRAPHIC</code>, <code>SOURCE.DOSING</code><br>
+<li><strong>Metadata CSV:</strong> <code>SDTM_METADATA1.csv</code> (variables, roles, lengths, types, sort keys).</li>
+<li><strong>Source data:</strong>
+<ul>
+<li><code>SOURCE.DEMOGRAPHIC</code> (1 ligne/sujet, ex. <code>subject</code>, <code>dob</code>, <code>gender</code>, <code>trt</code>, <code>uniqueid</code>)<br>
 </li>
-<li><strong>Formats</strong>: <code>LIB.</code> catalog (e.g., <code>sex_demographic_gender.</code> etc.)<br>
+<li><code>SOURCE.DOSING</code> (ex. <code>subject</code>, <code>startdt</code>, <code>enddt</code>)</li>
+</ul></li>
+<li><strong>Formats (libref <code>LIB</code>):</strong> <code>sex_demographic_gender.</code>, <code>race_demographic_race.</code>, <code>armcd_demographic_trt.</code>, <code>$arm_demographic_trt.</code><br>
 </li>
-<li><strong>Study metadata</strong> (CSV): variable order, type, length, labels, and keys (for sort).</li>
+<li><strong>Environment:</strong> SAS OnDemand 9.4; librefs <code>SOURCE</code>, <code>LIB</code>, <code>TARGET</code>.</li>
 </ul>
 <details>
 <summary>
 <strong>SAS — Library setup</strong>
 </summary>
-<p>```sas</p>
-<p>/* Common paths &amp; librefs *<em>/</em></p>
-<p><em>%include “/home/</em><user>/CDISC/appendix/common.sas”;</user></p>
-<p>/* expects:</p>
-<p>libname source “/home/<user>/CDISC/data”;</user></p>
-<p>libname lib “/home/<user>/CDISC/formats”;</user></p>
-<p>libname target “/home/<user>/CDISC/sdtm”;</user></p>
-<p>*/</p>
+<pre class="sas"><code>/* Common paths &amp; librefs */ 
+
+%include "/home/u64197545/CDISC/appendix/common.sas"; 
+
+/* expects: 
+
+ libname source "/home/u64197545/CDISC/data";
+
+ libname lib  "/home/u64197545/CDISC/formats"; 
+
+libname target  "/home/u64197545/CDISC/sdtm"; 
+
+*/</code></pre>
 </details>
 </section>
 <section id="create-empty-dm-from-metadata" class="level2">
@@ -145,11 +162,104 @@ Note
 <summary>
 <strong>SAS — Build EMPTY_DM</strong>
 </summary>
-<pre><code>/* Create empty DM based on metadata CSV */
-%make_empty_dataset(
-  metadatafile=/home/&lt;USER&gt;/CDISC/Chap2/SDTM_METADATA1.csv,
-  dataset=DM
-);
+<pre><code>*---------------------------------------------------------------*;
+* make_empty_dataset.sas creates a zero record dataset based on a 
+* dataset metadata spreadsheet.  The dataset created is called
+* EMPTY_** where "**" is the name of the dataset.  This macro also
+* creates a global macro variable called **KEEPSTRING that holds 
+* the dataset variables desired and listed in the order they  
+* should appear.  [The variable order is dictated by VARNUM in the 
+* metadata spreadsheet.]
+*
+* MACRO PARAMETERS:
+* metadatafile = the CSV file containing the dataset metadata
+* dataset = the dataset or domain name you want to extract
+
+    *---------------------------------------------------------------*;
+
+
+/* Create empty based on metadata CSV */
+%macro make_empty_dataset(metadatafile=, dataset=);
+
+/* Import csv file and rename it _temp */
+    proc import datafile="&amp;metadatafile" out=_temp dbms=csv replace;
+        guessingrows=max;
+        delimiter=";";
+        encoding='utf-8';
+    run;
+
+
+
+    ** sort the dataset by expected specified variable order (varnum);
+
+    proc sort data=_temp;
+        where domain="&amp;dataset";
+        by varnum;
+    run;
+
+
+
+    ** create keepstring macro variable and load metadata 
+    ** information into macro variables;
+    
+    
+    
+    %global &amp;dataset.KEEPSTRING;
+
+
+    data _null_;
+        set _temp nobs=nobs end=eof;
+
+        if _n_=1 then
+            call symput("vars", compress(put(nobs, 3.)));
+        call symputx('var'    || compress(put(_n_, 3.)), variable);
+        call symputx('label'  || compress(put(_n_, 3.)), label);
+        call symputx('length' || compress(put(_n_, 3.)), put(length, 3.));
+        ** valid ODM types include TEXT, INTEGER, FLOAT, DATETIME, 
+
+                    ** DATE, TIME and map to SAS numeric or character;
+
+        if upcase(type) in ("INTEGER", "FLOAT") then
+            call symputx('type' || compress(put(_n_, 3.)), "");
+        else if upcase(type) in ("TEXT", "DATE", "DATETIME", "TIME") then
+            call symputx('type' || compress(put(_n_, 3.)), "$");
+        else
+            put "ERR" "OR: not using a valid ODM type.  " type=;
+        ** create **KEEPSTRING macro variable;
+        length keepstring $ 32767;
+        retain keepstring;
+        keepstring=compress(keepstring) || "|" || left(variable);
+
+        if eof then
+            call symputx(upcase(compress("&amp;dataset" || 'KEEPSTRING')), 
+                left(trim(translate(keepstring, " ", "|"))));
+    run;
+
+
+
+    ** create a 0-observation template data set used for assigning 
+
+            ** variable attributes to the actual data sets;
+
+    data EMPTY_&amp;dataset;
+        %do i=1 %to &amp;vars;
+            attrib &amp;&amp;var&amp;i label="&amp;&amp;label&amp;i" 
+            %if "&amp;&amp;length&amp;i" ne "" %then
+                length=&amp;&amp;type&amp;i.&amp;&amp;length&amp;i...;
+            ;
+
+            %if &amp;&amp;type&amp;i=$ %then
+                retain &amp;&amp;var&amp;i '';
+            %else
+                retain &amp;&amp;var&amp;i .;
+            ;
+        %end;
+
+        if 0;
+    run;
+
+%mend make_empty_dataset;
+
 /* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */</code></pre>
 </details>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -166,8 +276,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="mapping-raw-data-to-sdtm-dm" class="level2">
-<h2 class="anchored" data-anchor-id="mapping-raw-data-to-sdtm-dm">2) Mapping (Raw data to SDTM DM)</h2>
+<section id="mapping-raw-data-to-sdtm-dm-using-sdtmig-v3.4" class="level2">
+<h2 class="anchored" data-anchor-id="mapping-raw-data-to-sdtm-dm-using-sdtmig-v3.4">2) Mapping (Raw data to SDTM DM using SDTMIG v3.4)</h2>
 <p>Key SDTM variables for DM (subset):</p>
 <table class="caption-top table">
 <colgroup>
