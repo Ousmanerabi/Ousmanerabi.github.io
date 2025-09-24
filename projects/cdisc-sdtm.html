@@ -53,10 +53,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#create-formats" id="toc-create-formats" class="nav-link" data-scroll-target="#create-formats">3) Create formats</a></li>
   <li><a href="#derive-the-logic-variables-that-need-calculating-dosing-for-example" id="toc-derive-the-logic-variables-that-need-calculating-dosing-for-example" class="nav-link" data-scroll-target="#derive-the-logic-variables-that-need-calculating-dosing-for-example">4) Derive the logic variables that need calculating (Dosing for example)</a></li>
   <li><a href="#combine-all-the-data" id="toc-combine-all-the-data" class="nav-link" data-scroll-target="#combine-all-the-data">5) Combine all the data</a></li>
-  <li><a href="#suppdm-optional" id="toc-suppdm-optional" class="nav-link" data-scroll-target="#suppdm-optional">6) SUPPDM (Optional)</a></li>
-  <li><a href="#order-keys-export" id="toc-order-keys-export" class="nav-link" data-scroll-target="#order-keys-export">7) Order, Keys &amp; Export</a></li>
-  <li><a href="#qc-validation" id="toc-qc-validation" class="nav-link" data-scroll-target="#qc-validation">8) QC &amp; Validation</a></li>
-  <li><a href="#whats-next" id="toc-whats-next" class="nav-link" data-scroll-target="#whats-next">9) What’s next?</a></li>
+  <li><a href="#order-keys-export" id="toc-order-keys-export" class="nav-link" data-scroll-target="#order-keys-export">6) Order, Keys &amp; Export</a></li>
+  <li><a href="#qc-validation" id="toc-qc-validation" class="nav-link" data-scroll-target="#qc-validation">7) QC &amp; Validation</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">8) Outputs</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul>
 </nav>
 </div>
@@ -320,7 +320,20 @@ Tip
 </section>
 <section id="create-formats" class="level2">
 <h2 class="anchored" data-anchor-id="create-formats">3) Create formats</h2>
-</section>
+<details>
+<summary>
+<strong>SAS — Creating custom format </strong>
+</summary>
+<pre class="sas"><code>/* Creating custom format for the variables sex, race, arm, and armcd.*/
+
+proc format;
+    value sex 1='M' 2='F' .='U';
+    value race 1='White' 2='Black or African American' 3='Asian';
+    value armcd 0='PLACEBO' 1='ALG123';
+    value arm 0='Placebo' 1='Analgezia HCL 30mg';
+run;</code></pre>
+<details>
+</details></details></section>
 <section id="derive-the-logic-variables-that-need-calculating-dosing-for-example" class="level2">
 <h2 class="anchored" data-anchor-id="derive-the-logic-variables-that-need-calculating-dosing-for-example">4) Derive the logic variables that need calculating (Dosing for example)</h2>
 <details>
@@ -330,7 +343,8 @@ Tip
 <pre><code>/* First/last dose (for RFSTDTC/RFENDTC) */
 
 **** GET FIRST AND LAST DOSE DATE FOR RFSTDTC AND RFENDTC;
-proc sort data=source.dosing(keep=subject startdt enddt) 
+proc sort 
+  data=source.dosing(keep=subject startdt enddt) 
   out=dosing;
    by subject startdt;
 run;
@@ -345,7 +359,7 @@ data dosing;
     
   if first.subject then 
     do; 
-      firstdose=.; 
+       firstdose=.; 
        lastdose=.; 
     end;
     
@@ -357,7 +371,6 @@ run;</code></pre>
 </details></section>
 <section id="combine-all-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="combine-all-the-data">5) Combine all the data</h2>
-<details>
 <details>
 <summary>
 <strong>SAS — Map to DM variables</strong>
@@ -400,79 +413,82 @@ data dm;
           (day(firstdose) &lt; day(dob))) / 12);
     if age ne . then
       ageu = 'YEARS';
-    sex = put(gender,sex_demographic_gender.);
-    race = put(_race,race_demographic_race.);
-    armcd = put(trt,armcd_demographic_trt.);
-    arm = put(trt,arm_demographic_trt.);
-    actarmcd = put(trt,armcd_demographic_trt.);
-    actarm = put(trt,arm_demographic_trt.);
+    sex = put(gender,sex.);
+    race = put(_race,race.);
+    armcd = put(trt,armcd.);
+    arm = put(trt,arm.);
+    actarmcd = put(trt,armcd.);
+    actarm = put(trt,arm.);
     country = "USA"; 
 run; </code></pre>
 </details>
-</details></section>
-<section id="suppdm-optional" class="level2">
-<h2 class="anchored" data-anchor-id="suppdm-optional">6) SUPPDM (Optional)</h2>
-Use SUPPDM for <strong>non-standard qualifiers</strong>, e.g., “Race, Other” or “Randomization Date”.
-<details>
-<summary>
-<strong>SAS — EMPTY_SUPPDM + populate</strong>
-</summary>
-<pre><code>/* Empty SUPPDM shell */
-%make_empty_dataset(
-  metadatafile=/home/&lt;USER&gt;/CDISC/Chap2/SDTM_METADATA1.csv,
-  dataset=SUPPDM
-);
-
-data suppdm;
-  set EMPTY_SUPPDM dm;
-
-  keep &amp;SUPPDMKEEPSTRING;
-
-  /* Example 1: Other Race */
-  if not missing(orace) then do;
-    rdomain='DM'; qnam='RACEOTH'; qlabel='Race, Other';
-    qval=left(orace); qorig='CRF Page 1'; output;
-  end;
-
-  /* Example 2: Randomization Date */
-  if not missing(randdt) then do;
-    rdomain='DM'; qnam='RANDDTC'; qlabel='Randomization Date';
-    qval=left(put(randdt,yymmdd10.)); qorig='CRF Page 1'; output;
-  end;
-run;</code></pre>
-</details>
 </section>
 <section id="order-keys-export" class="level2">
-<h2 class="anchored" data-anchor-id="order-keys-export">7) Order, Keys &amp; Export</h2>
+<h2 class="anchored" data-anchor-id="order-keys-export">6) Order, Keys &amp; Export</h2>
 <p>Sort by <strong>metadata-defined</strong> keys and save to <code>TARGET</code>.</p>
 <details>
 <summary>
-<strong>SAS — Sort &amp; Save</strong>
+<strong>SAS — Sort</strong>
 </summary>
-<pre><code>/* Build sort lists from metadata */
-%make_sort_order(
-  metadatafile=/home/&lt;USER&gt;/CDISC/Chap2/SDTM_METADATA1.csv,
-  dataset=DM
-);
+<pre class="sas"><code>*----------------------------------------------------------------*;
+* make_sort_order.sas creates a global macro variable called  
+* **SORTSTRING where ** is the name of the dataset that contains  
+* the KEYSEQUENCE metadata specified sort order for a given dataset.
+*
+* MACRO PARAMETERS:
+* metadatafile = the file containing the dataset metadata
+* dataset = the dataset or domain name
 
-proc sort data=dm(keep=&amp;DMKEEPSTRING) out=target.dm;
-  by &amp;DMSORTSTRING;
+    *----------------------------------------------------------------*;
+
+%macro make_sort_order(metadatafile=, dataset=);
+
+
+    proc import datafile="&amp;metadatafile" out=_temp dbms=csv replace;
+        guessingrows=max;
+        delimiter=";";
+        encoding='utf-8';
+    run;
+
+
+    proc sort data=_temp;
+        where keysequence ne . and domain="&amp;dataset";
+        by keysequence;
+    run;
+
+    ** create **SORTSTRING macro variable;
+    %global &amp;dataset.SORTSTRING;
+
+    data _null_;
+        set _temp end=eof;
+        length domainkeys $ 200;
+        retain domainkeys '';
+        domainkeys=trim(domainkeys) || ' ' || trim(put(variable, 8.));
+
+        if eof then
+            call symputx(compress("&amp;dataset" || "SORTSTRING"), domainkeys);
+    run;
+
+%mend make_sort_order;</code></pre>
+<details>
+<summary>
+<strong>SAS — Save</strong>
+</summary>
+<pre><code>
+**** SORT DM ACCORDING TO METADATA AND SAVE PERMANENT DATASET;
+%make_sort_order(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
+
+proc sort
+  data=dm(keep = &amp;DMKEEPSTRING)
+  out=target.dm;
+    by &amp;DMSORTSTRING;
 run;
-
-/* SUPPDM */
-%make_sort_order(
-  metadatafile=/home/&lt;USER&gt;/CDISC/Chap2/SDTM_METADATA1.csv,
-  dataset=SUPPDM
-);
-
-proc sort data=suppdm out=target.suppdm;
-  by &amp;SUPPDMSORTSTRING;
-run;</code></pre>
+</code></pre>
 </details>
 <hr>
-</section>
+</details></section>
 <section id="qc-validation" class="level2">
-<h2 class="anchored" data-anchor-id="qc-validation">8) QC &amp; Validation</h2>
+<h2 class="anchored" data-anchor-id="qc-validation">7) QC &amp; Validation</h2>
 <ul>
 <li><p><strong>Structural checks</strong>: variable names, type, length, labels match metadata</p></li>
 <li><p><strong>Controlled terminology</strong>: values mapped via formats/codelists</p></li>
@@ -498,16 +514,29 @@ proc freq data=target.dm;
 run;</code></pre>
 </details>
 </section>
-<section id="whats-next" class="level2">
-<h2 class="anchored" data-anchor-id="whats-next">9) What’s next?</h2>
-<ul>
-<li><p>Add <strong>screenshots or short tables</strong> showing the final <code>TARGET.DM</code> structure (variables + labels).</p></li>
-<li><p>If you also build <strong>AE</strong>, re-use this pattern (shell → mapping → derivations → SUPPxx → sort/export).</p></li>
-</ul>
-<pre><code>&lt;!-- Placeholders for outputs you will add later --&gt;
-&lt;div class="note" style="opacity:.85"&gt;
-  &lt;em&gt;Coming soon:&lt;/em&gt; structure snapshot of TARGET.DM, record counts, and Pinnacle21-like checks summary.
-&lt;/div&gt;</code></pre>
+<section id="outputs" class="level2">
+<h2 class="anchored" data-anchor-id="outputs">8) Outputs</h2>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SDTM_DM_Table.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>SDTM-DM</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SDTM-Contents1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>Proc content</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/SDTM-Contents2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption>PROC contents</figcaption>
+</figure>
+</div>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
 </section>
 
 </main>

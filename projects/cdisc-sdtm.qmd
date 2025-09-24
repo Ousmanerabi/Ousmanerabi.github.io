@@ -192,6 +192,8 @@ Key SDTM variables for DM (subset):
 
 ## 3) Create formats
 
+<details><summary><strong>SAS — Creating custom format </strong></summary>
+
 ``` sas
 /* Creating custom format for the variables sex, race, arm, and armcd.*/
 
@@ -202,6 +204,8 @@ proc format;
 	value arm 0='Placebo' 1='Analgezia HCL 30mg';
 run;
 ```
+
+<details>
 
 ## 4) Derive the logic variables that need calculating (Dosing for example)
 
@@ -240,7 +244,7 @@ run;
 
 ## 5) Combine all the data
 
-<details><details><summary><strong>SAS — Map to DM variables</strong></summary>
+<details><summary><strong>SAS — Map to DM variables</strong></summary>
 
 ```         
 **** GET DEMOGRAPHICS DATA;
@@ -293,72 +297,75 @@ run;
 
 </details>
 
-## 6) SUPPDM (Optional)
-
-Use SUPPDM for **non-standard qualifiers**, e.g., “Race, Other” or “Randomization Date”.
-<details><summary><strong>SAS — EMPTY_SUPPDM + populate</strong></summary>
-
-```         
-/* Empty SUPPDM shell */
-%make_empty_dataset(
-  metadatafile=/home/<USER>/CDISC/Chap2/SDTM_METADATA1.csv,
-  dataset=SUPPDM
-);
-
-data suppdm;
-  set EMPTY_SUPPDM dm;
-
-  keep &SUPPDMKEEPSTRING;
-
-  /* Example 1: Other Race */
-  if not missing(orace) then do;
-    rdomain='DM'; qnam='RACEOTH'; qlabel='Race, Other';
-    qval=left(orace); qorig='CRF Page 1'; output;
-  end;
-
-  /* Example 2: Randomization Date */
-  if not missing(randdt) then do;
-    rdomain='DM'; qnam='RANDDTC'; qlabel='Randomization Date';
-    qval=left(put(randdt,yymmdd10.)); qorig='CRF Page 1'; output;
-  end;
-run;
-```
-
-</details>
-
-## 7) Order, Keys & Export
+## 6) Order, Keys & Export
 
 Sort by **metadata-defined** keys and save to `TARGET`.
 
-<details><summary><strong>SAS — Sort & Save</strong></summary>
+<details><summary><strong>SAS — Sort</strong></summary>
+
+``` sas
+*----------------------------------------------------------------*;
+* make_sort_order.sas creates a global macro variable called  
+* **SORTSTRING where ** is the name of the dataset that contains  
+* the KEYSEQUENCE metadata specified sort order for a given dataset.
+*
+* MACRO PARAMETERS:
+* metadatafile = the file containing the dataset metadata
+* dataset = the dataset or domain name
+
+	*----------------------------------------------------------------*;
+
+%macro make_sort_order(metadatafile=, dataset=);
+
+
+	proc import datafile="&metadatafile" out=_temp dbms=csv replace;
+		guessingrows=max;
+		delimiter=";";
+		encoding='utf-8';
+	run;
+
+
+	proc sort data=_temp;
+		where keysequence ne . and domain="&dataset";
+		by keysequence;
+	run;
+
+	** create **SORTSTRING macro variable;
+	%global &dataset.SORTSTRING;
+
+	data _null_;
+		set _temp end=eof;
+		length domainkeys $ 200;
+		retain domainkeys '';
+		domainkeys=trim(domainkeys) || ' ' || trim(put(variable, 8.));
+
+		if eof then
+			call symputx(compress("&dataset" || "SORTSTRING"), domainkeys);
+	run;
+
+%mend make_sort_order;
+```
+
+<details><summary><strong>SAS — Save</strong></summary>
 
 ```         
-/* Build sort lists from metadata */
-%make_sort_order(
-  metadatafile=/home/<USER>/CDISC/Chap2/SDTM_METADATA1.csv,
-  dataset=DM
-);
 
-proc sort data=dm(keep=&DMKEEPSTRING) out=target.dm;
-  by &DMSORTSTRING;
+**** SORT DM ACCORDING TO METADATA AND SAVE PERMANENT DATASET;
+%make_sort_order(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
+
+proc sort
+  data=dm(keep = &DMKEEPSTRING)
+  out=target.dm;
+    by &DMSORTSTRING;
 run;
 
-/* SUPPDM */
-%make_sort_order(
-  metadatafile=/home/<USER>/CDISC/Chap2/SDTM_METADATA1.csv,
-  dataset=SUPPDM
-);
-
-proc sort data=suppdm out=target.suppdm;
-  by &SUPPDMSORTSTRING;
-run;
 ```
 
 </details>
 
 ------------------------------------------------------------------------
 
-## 8) QC & Validation
+## 7) QC & Validation
 
 -   **Structural checks**: variable names, type, length, labels match metadata
 
@@ -389,15 +396,12 @@ run;
 
 </details>
 
-## 9) What’s next?
+## 8) Outputs
 
--   Add **screenshots or short tables** showing the final `TARGET.DM` structure (variables + labels).
+![SDTM-DM](images/SDTM_DM_Table.png){fig-align="center" width="80%"}
 
--   If you also build **AE**, re-use this pattern (shell → mapping → derivations → SUPPxx → sort/export).
+![Proc content](images/SDTM-Contents1.png){fig-align="center" width="80%"}
 
-```         
-<!-- Placeholders for outputs you will add later -->
-<div class="note" style="opacity:.85">
-  <em>Coming soon:</em> structure snapshot of TARGET.DM, record counts, and Pinnacle21-like checks summary.
-</div>
-```
+![PROC contents](images/SDTM-Contents2.png){fig-align="center" width="80%"}
+
+## 
