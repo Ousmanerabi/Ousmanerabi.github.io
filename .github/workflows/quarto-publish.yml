@@ -32,10 +32,6 @@ jobs:
             any::survey
             any::tmap
             any::survival
-            any::sf
-            any::leaflet
-            any::DT
-            any::plotly
 
       - name: Set up Quarto
         uses: quarto-dev/quarto-actions/setup@v2
@@ -46,7 +42,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: docs  # ← docs au lieu de _site
 
       - name: Deploy to GitHub Pages
         id: deployment
