@@ -151,11 +151,11 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 ### Factors associated with incidence
 
-\- **Model Type**: Generalized Additive Models (GAMs) for non-linear relationships
+-   **Model Type**: Generalized Additive Models (GAMs) for non-linear relationships
 
-- **Covariates**: Climate variables, ITN coverage, SMC implementation, stockout indicators
+-   **Covariates**: Climate variables, ITN coverage, SMC implementation, stockout indicators
 
-- **Outcome**: Fully adjusted incidence (Adjustment 3)
+-   **Outcome**: Fully adjusted incidence (Adjustment 3)
 
 ## Key Findings & Impact
 
@@ -165,25 +165,21 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 ![Fig. Monthly reporting rates per health district](images/weighted.png){fig-align="center" width="422"}
 
-::: callout-note
 **Key Insight:** Reporting completeness varied dramatically (50-100% across districts), with systematic gaps that biased crude incidence estimates. This finding led to policy recommendations for surveillance system strengthening.
-:::
 
 ------------------------------------------------------------------------
 
 ### Burden Estimation Results
 
-### 
-
 ![Fig. Incidence estimates following WHO framework. A-D: Temporal trend for the four incidences (crude incidence, incidence adjusted by testing rate, incidence adjusted by testing rate and reporting rate, incidence adjusted by testing rate, reporting rate and care-seeking rate; E-D: Spatial analysis for the four incidences from 2023.](images/Fichier2-02.png){fig-align="center" width="573"}
 
-::: callout-note
 **Key Insight:**
 
-\- **Adjustments 2 & 3 revealed hidden burden**: Poor reporting in northern/eastern districts inflated true incidence
-- **Care-seeking adjustment critical**: Added \~450 cases/1,000 in Gorom-Gorom, Gaoua, Kaya
-- **Policy Impact**: Demonstrated need for integrated care-seeking behavior in burden estimation
-:::
+-    **Adjustments 2 & 3 revealed hidden burden**: Poor reporting in northern/eastern districts inflated true incidence
+
+-   **Care-seeking adjustment critical**: Added \~450 cases/1,000 in Gorom-Gorom, Gaoua, Kaya
+
+-   **Policy Impact**: Demonstrated need for integrated care-seeking behavior in burden estimation
 
 ------------------------------------------------------------------------
 
@@ -193,13 +189,13 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 ![Fig. Sen’s slope coefficient for the trend of malaria incidence adjusted for testing rate, weighted reporting rate and care-seeking rate; Gray color: not significant.](images/Fichier5-02.png){fig-align="center" width="533"}
 
-::: callout-note
 **Key Insight:**
 
-\- **Increasing trends**: Gorom-Gorom, Sapone, Kampti (climate/intervention factors)
-- **Declining trends**: 39 of 70 districts showed significant improvements
-- **Spatial clustering**: Northern border regions showed persistent high transmission
-:::
+-   **Increasing trends**: Gorom-Gorom, Sapone, Kampti (climate/intervention factors)
+
+-   **Declining trends**: 39 of 70 districts showed significant improvements
+
+-   **Spatial clustering**: Northern border regions showed persistent high transmission
 
 ------------------------------------------------------------------------
 
@@ -207,46 +203,49 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 ### Advanced R Programming
 
-\- **Time Series Analysis**: STL decomposition, trend testing, forecasting
-- **Spatial Statistics**: District-level mapping, spatial autocorrelation analysis
-- **Data Pipeline**: Automated quality control, validation, and reporting workflows
-- **Reproducible Research**: Version-controlled analysis with comprehensive documentation
+-   **Time Series Analysis**: STL decomposition, trend testing, forecasting
+
+-   **Spatial Statistics**: District-level mapping, spatial autocorrelation analysis
+
+-   **Data Pipeline**: Automated quality control, validation, and reporting workflows
+
+-   **Reproducible Research**: Version-controlled analysis with comprehensive documentation
 
 ### Statistical Methods Expertise
 
-\- **GAM Modeling**: Non-linear relationship detection between climate and incidence
+-   **GAM Modeling**: Non-linear relationship detection between climate and incidence
 
-- **Robust Statistics**: Multiple outlier detection methods (MAD, IQR, Z-score)
+-   **Robust Statistics**: Multiple outlier detection methods (MAD, IQR, Z-score)
 
-- **Survey Integration**: Complex sampling design incorporation from DHS/MIS data
+-   **Survey Integration**: Complex sampling design incorporation from DHS/MIS data
 
 ### Public Health Applications
 
-- **Surveillance System Evaluation**: Quantified data quality impacts on burden estimates
+-   **Surveillance System Evaluation**: Quantified data quality impacts on burden estimates
 
-- **Policy Translation**: Converted complex statistical findings into actionable recommendations
+-   **Policy Translation**: Converted complex statistical findings into actionable recommendations
 
-- **Intervention Assessment**: Evaluated ITN, SMC, and case management program effectiveness
+-   **Intervention Assessment**: Evaluated ITN, SMC, and case management program effectiveness
 
 ## Deliverables & Impact
 
 **Technical Outputs**:
 
-- Comprehensive R analytical pipeline (fully documented)
+-   Comprehensive R analytical pipeline (fully documented)
 
-- Interactive dashboard for district-level monitoring
+-   Interactive dashboard for district-level monitoring
 
-- Policy brief for National Malaria Control Programme
+-   Policy brief for National Malaria Control Programme
 
-- Manuscript for peer-reviewed publication
+-   Manuscript for peer-reviewed publication
 
 **Policy Impact**:
 
-- Informed 2024-2028 National Malaria Strategic Plan development
+-   Informed 2024-2028 National Malaria Strategic Plan development
 
-- Guided resource allocation for surveillance system strengthening
+-   Guided resource allocation for surveillance system strengthening
 
-- Provided evidence base for targeted intervention deployment
+-   Provided evidence base for targeted intervention deployment
 
 **Methodological Contributions**:
 
@@ -258,7 +257,6 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 ## Repository & Reproducibility
 
-::: callout-note
 -   **Repository:** [Full code](https://github.com/Ousmanerabi/Retrospective_analysis)
 
 -   **Data availability:**
@@ -266,9 +264,6 @@ monthly_DS_incidence <- monthly_DS_incide %>%
     -   **Public:** DHS/MIS surveys, and CHIRPS climate data are fully open-access.
     -   **Restricted:** HMIS surveillance data (available under PNLP data sharing agreement).
     -   **Reproducibility:** Complete analytical code provided for transparency
-:::
-
-## 
 
 ## Collaboration & Leadership
 
