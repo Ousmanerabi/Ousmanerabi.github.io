@@ -12,32 +12,81 @@ format:
 
 # SDTM-Demographics (DM) Automation with SAS
 
-Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.
+*Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.*
 
 [View Code on Github](https://github.com/ousmanerabi/02_SDTM)
 
-## Overview {.section-title}
+## Introduction
 
-**Goal**: Build SDTM DM (Demographics) and SUPPDM from raw/source data using a metadata-driven approach (empty shells → mapping → derivations → sort/export).
+The **Clinical Data Interchange Standards Consortium (CDISC)** Study Data Tabulation Model (SDTM) is the regulatory standard for organizing and formatting clinical trial data for submission to health authorities like the FDA and EMA. This project demonstrates a **metadata-driven approach** to automate SDTM Demographics (DM) domain creation using SAS.
 
-**Why**: Ensure CDISC consistency (identifiers, timing in ISO 8601, roles/keys) and reproducibility in SAS OnDemand.
+## What is SDTM?
 
-**Outputs**: TARGET.DM (1 record per subject) and TARGET.SUPPDM (non-standard qualifiers).
+SDTM provides a standardized structure for clinical trial data that:
 
-::: callout-note
-**Context**: Tools: SAS OnDemand 9.4, macros from study notes. Source folders: SOURCE (raw tables), LIB (formats), TARGET (SDTM outputs). Metadata: SDTM_METADATA1.csv.
-:::
+-   Ensures consistency across studies and sponsors
 
-## Inputs {.section-title}
+-   Facilitates regulatory review and approval processes
 
--   **Metadata CSV**: SDTM_METADATA1.csv (variables, roles, lengths, types, sort keys).
+-   Enables data integration and meta-analyses
+
+-   Reduces submission timelines through standardization
+
+## Project Overview
+
+### Objective
+
+Build SDTM DM (Demographics) and SUPPDM datasets from raw clinical data using an automated, metadata-driven workflow that ensures CDISC compliance and reproducibility.
+
+### Key Benefits
+
+-   **Metadata-driven**: Single source of truth for variable specifications
+
+-   **Reproducible**: Standardized workflow across studies
+
+-   **Compliant**: Ensures CDISC SDTMIG v3.4 standards
+
+-   **Efficient**: Reduces manual programming errors
+
+### Technical Approach
+
+Raw Data → Metadata → Empty Shell → Mapping → Derivations → Validation → Export
+
+### Deliverables
+
+-   **TARGET.DM**: One record per subject with demographics data
+
+-   **TARGET.SUPPDM**: Supplemental qualifiers for non-standard variables
+
+-   **Validation Reports**: QC checks ensuring data integrity
+
+## Inputs
+
+-   **Metadata Specification**:
+
+    -   File: SDTM_METADATA1.csv (variables, roles, lengths, types, sort keys).
+
+        -   Variable definitions (names, types, lengths, labels)
+
+        -   CDISC role classifications (Identifier, Timing, Qualifier)
+
+        -   Sort order specifications
+
 -   **Source Data**:
-    -   SOURCE.DEMOGRAPHIC (1 row per subject, e.g., subject, dob, gender, trt, uniqueid)
-    -   SOURCE.DOSING (e.g., subject, startdt, enddt)
--   **Formats** (libref LIB): sex_demographic_gender, race_demographic_race, armcd_demographic_trt, \$arm_demographic_trt.
--   **Environment**: SAS OnDemand 9.4; librefs SOURCE, LIB, TARGET.
 
-## 1. Library Setup {.section-title}
+    -   SOURCE.DEMOGRAPHIC (1 row per subject, e.g., subject, dob, gender, trt, uniqueid)
+
+    -   SOURCE.DOSING (e.g., subject, startdt, enddt)
+
+-   **Environment Setup**
+
+    -   **Platform:** SAS OnDemand 9.4
+
+    -   **Libraries:** SOURCE (raw data), LIB (formats), TARGET (outputs)
+
+## Technical Implementation
+
+### 1. Library Setup
 
 ```         
 /* Common paths & librefs */
@@ -49,9 +98,9 @@ Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinica
 */
 ```
 
-## 2. Create EMPTY DM from Metadata {.section-title}
+### 2. Create EMPTY DM from Metadata
 
-Create an empty shell (EMPTY_DM) using the CSV metadata to ensure correct attributes (type, length, label, order).
+The `make_empty_dataset` macro creates dataset templates with proper CDISC attributes:
 
 ```         
 /* Create empty based on metadata CSV */
@@ -115,21 +164,22 @@ Create an empty shell (EMPTY_DM) using the CSV metadata to ensure correct attrib
 /* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */
 ```
 
-## 3. Mapping (Raw Data to SDTM DM) {.section-title}
+### 3. STDM Variable Mapping
 
-Mapping raw data to SDTM DM variables using SDTMIG v3.4.
+SDTM DM variables are classified according to CDISC standards (SDTMIG v3.4):
 
-| Class | Variables (examples) | Notes |
+| Variable Class | Examples | Purpose |
 |------------------------|------------------------|------------------------|
-| Identifier | STUDYID, DOMAIN, USUBJID, SUBJID | 1 record per subject |
-| Timing | RFSTDTC, RFENDTC, RFXSTDTC, RFXENDTC, BRTHDTC | ISO 8601 dates |
-| Qualifier | SITEID, SEX, RACE, COUNTRY, AGE, AGEU | Coded via formats where applicable |
-| Arm | ARMCD, ARM, ACTARMCD, ACTARM | From treatment assignments |
+| Identifier | STUDYID, DOMAIN, USUBJID, SUBJID | Unique subject identification |
+| Timing | RFSTDTC, RFENDTC, BRTHDTC | Study and reference dates (ISO 8601) |
+| Qualifier | SEX, RACE, COUNTRY, AGE | Demographic characteristics |
+| Treatment | ARMCD, ARM, ACTARM | Planned and actual treatments |
 
-## 4. Create Formats {.section-title}
+### 4. Controlled Terminology
 
 ```         
 /* Creating custom format for the variables sex, race, arm, and armcd */
+
 proc format;
     value sex 1='M' 2='F' .='U';
     value race 1='White' 2='Black or African American' 3='Asian';
@@ -138,10 +188,12 @@ proc format;
 run;
 ```
 
-## 5. Derive Logic Variables (Dosing) {.section-title}
+### 5. Reference Date Derivation
+
+Calculate first and last dosing dates for study reference timing:
 
 ```         
-/* First/last dose (for RFSTDTC/RFENDTC) */
+/* Derive first/last dose per subject (RFSTDTC/RFENDTC) */
 proc sort 
   data=source.dosing(keep=subject startdt enddt) 
   out=dosing;
@@ -163,7 +215,7 @@ data dosing;
 run;
 ```
 
-## 6. Combine All Data {.section-title}
+### 6. Combine All Data
 
 ```         
 /* Get demographics data */
@@ -212,10 +264,11 @@ data dm;
 run;
 ```
 
-## 7. Order, Keys & Export {.section-title}
+## 7. Dataset Finalization
 
 ```         
-/* Create sort order */
+/* Create sorting specification from metadata */
+
 %macro make_sort_order(metadatafile=, dataset=);
     proc import datafile="&metadatafile" out=_temp dbms=csv replace;
         guessingrows=max;
@@ -239,7 +292,8 @@ run;
     run;
 %mend make_sort_order;
 
-/* Sort DM according to metadata and save permanent dataset */
+/* Apply metadata-driven sorting and create final dataset */
+
 %make_sort_order(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
 proc sort
   data=dm(keep = &DMKEEPSTRING)
@@ -248,13 +302,9 @@ proc sort
 run;
 ```
 
-## 8. QC & Validation {.section-title}
+### Quality Control & Validation
 
--   **Structural checks**: Variable names, type, length, labels match metadata.
--   **Controlled terminology**: Values mapped via formats/codelists.
--   **Timing**: ISO 8601, completeness of RFSTDTC/RFXSTDTC.
--   **Keys**: 1 record per subject; USUBJID uniqueness.
--   **Cross-domain**: Consistency with EX/AE/VS if applicable.
+Automated QC Checks
 
 ```         
 /* 1 record per USUBJID? */
@@ -271,7 +321,15 @@ proc freq data=target.dm;
 run;
 ```
 
-## 9. Outputs {.section-title}
+Validation Framework
+
+-   **Structural checks**: Variable names, type, length, labels match metadata.
+-   **Controlled terminology**: Values mapped via formats/codelists.
+-   **Timing**: ISO 8601, completeness of RFSTDTC/RFXSTDTC.
+-   **Keys**: 1 record per subject; USUBJID uniqueness.
+-   **Cross-domain**: Consistency with EX/AE/VS if applicable.
+
+### Results
 
 **SDTM-DM**: Datasets DM.sas7bdat and SUPPDM.sas7bdat compliant with CDISC standards.
 
@@ -288,7 +346,7 @@ run;
 **Note**: The sample dataset above is an example. Actual data can be visualized or tabulated for further illustration.
 :::
 
-## Contact {.contact-section}
+## Contact
 
 Interested in this project or my expertise in biostatistics and CDISC? Contact me!
 
