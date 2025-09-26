@@ -10,7 +10,6 @@ format:
     code-fold: true
     fig-width: 8
     fig-height: 4
-    #code-tools: true
 permalink: /projects/retrospective_analysis/
 ---
 

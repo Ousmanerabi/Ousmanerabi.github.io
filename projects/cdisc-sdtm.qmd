@@ -6,15 +6,8 @@ date: "2025-08-30"
 keywords: "SDTM, CDISC, SAS, clinical data, biostatistics, portfolio"
 format:
   html:
-    theme: cosmo
-    css: styles.css
     toc: true
-    toc-depth: 2
     code-fold: true
-    code-tools: true
-    code-block-bg: "#f8f9fa"
-    code-block-border-left: "#007bff"
-    page-layout: full
 ---
 
 # SDTM-Demographics (DM) Automation with SAS
