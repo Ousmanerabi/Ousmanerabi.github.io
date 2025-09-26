@@ -1,0 +1,80 @@
+---
+title: "Contact"
+---
+
+## Let's Discuss Your Project
+
+I am available for collaborations and consulting opportunities in biostatistics, epidemiology, and clinical research. Whether you need support with data analysis, regulatory submissions, or training, I'm here to help deliver high-quality, evidence-based solutions.
+
+## Services Offered
+
+### Statistical Analysis & Consulting
+- Clinical trial design and analysis
+- Real-world evidence studies
+- Observational research
+- Survival analysis and time-to-event modeling
+- Complex survey data analysis
+
+### CDISC & Regulatory Support
+- SDTM and ADaM implementation
+- Define.xml creation and validation
+- Regulatory submission preparation
+- Quality control and data validation
+- FDA/EMA compliance consulting
+
+### Training & Mentorship
+- SAS programming for clinical trials
+- R programming for biostatistics
+- CDISC standards training
+- Statistical methods workshops
+- Reproducible research practices
+
+### Data Management & Visualization
+- Database design and management
+- Interactive dashboard creation
+- Geospatial analysis and mapping
+- Automated reporting solutions
+
+## Contact Information
+
+### Professional Networks
+- **LinkedIn**: [linkedin.com/in/ousmane-rabi](https://linkedin.com/in/ousmane-rabi)
+- **GitHub**: [github.com/ousmanerabi](https://github.com/ousmanerabi)
+
+### Email
+**Primary**: [ousmanerabi12@gmail.com](mailto:your.email@domain.com)
+
+### Location
+Based in [Chicago, USA] - Available for remote collaborations worldwide
+
+## Project Inquiry
+
+When reaching out, please include:
+
+1. **Project Overview**: Brief description of your needs
+2. **Timeline**: Expected project duration and key milestones
+3. **Technical Requirements**: Specific tools, standards, or methodologies needed
+4. **Collaboration Preferences**: Remote, on-site, or hybrid arrangements
+
+## Ready to Accelerate Your Research?
+
+I bring over 9 years of experience in transforming complex health data into actionable insights. My expertise in both academic research and industry standards positions me to deliver solutions that meet the highest quality and regulatory requirements.
+
+### What Sets Me Apart
+
+- **Proven Track Record**: Successfully delivered regulatory-compliant analyses
+- **International Experience**: Worked with diverse teams across multiple continents
+- **Continuous Learning**: Stay current with evolving industry standards and methodologies
+- **Quality Focus**: Committed to reproducible, well-documented, and validated results
+
+### Client Testimonials
+
+*"[Include testimonials from previous clients or collaborators if available]"*
+
+---
+
+**Looking forward to discussing how we can work together to advance your research goals and deliver impactful results.**
+
+---
+
+*Response time: I typically respond to inquiries within 24-48 hours. For urgent matters, please mention "URGENT" in your subject line.*

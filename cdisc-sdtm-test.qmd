@@ -1,0 +1,100 @@
+---
+title: "Study Data Tabulation Model (SDTM) Automation with SAS"
+description: "Automatisation SDTM-DM/SUPPDM via approche pilotée par métadonnées (SAS OnDemand), par Ousmane Diallo."
+author: "Ousmane Diallo"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    smooth-scroll: true
+    code-fold: false
+    link-external-newwindow: true
+    theme: cosmo
+page-layout: full
+# Pour SEO additionnel (facultatif) :
+include-in-header: |
+  <meta name="keywords" content="SDTM, CDISC, SAS, clinical data, biostatistics, portfolio">
+  <meta name="author" content="Ousmane Diallo">
+# URL finale (adapter si besoin)
+# permalink: /projects/cdisc-sdtm.html
+---
+
+<!-- ===== Styles locaux ===== -->
+
+```{=html}
+<style>
+  .header-section {
+    background: linear-gradient(90deg, #0d6efd, #0b5ed7);
+    color: #fff;
+    padding: 1.75rem 1.25rem;
+    border-radius: 12px;
+    margin: 0 0 1.5rem 0;
+    text-align: center;
+  }
+  .badges{display:flex;flex-wrap:wrap;gap:6px;margin:.5rem 0 0}
+  .badge{display:inline-block;font-size:.78rem;line-height:1;padding:.25rem .5rem;border-radius:999px;background:#eef2ff;color:#1f2a5a;border:1px solid #dfe6ff}
+  .section-title{color:#0d6efd;margin-top:1.5rem}
+  .code-box{border:1px solid #e5e7eb;border-radius:8px;padding:.75rem 1rem;background:#fafafa;margin:.5rem 0 1rem}
+  .btn-github{background:#28a745;color:#fff;border-radius:10rem;padding:.5rem 1rem;display:inline-block}
+  .btn-github:hover{background:#218838;color:#fff;text-decoration:none}
+  .small-note{font-size:.95rem;opacity:.9}
+  .table-responsive{margin:.5rem 0 1rem}
+</style>
+```
+
+:::: header-section
+<h1 class="h2">
+
+SDTM-Demographics (DM) Automation with SAS
+
+</h1>
+
+<p>Automatisation de la création de tables SDTM DM & SUPPDM (CDISC) via une approche pilotée par métadonnées (SAS OnDemand).</p>
+
+`<a class="btn-github" href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM"`{=html}Voir le code sur GitHub</a>
+
+::: badges
+```         
+<span class="badge">SAS OnDemand 9.4</span>
+<span class="badge">SDTM IG 3.4</span>
+<span class="badge">DM + SUPPDM</span>
+<span class="badge">Metadata-driven</span>
+```
+:::
+::::
+
+## Overview
+
+**Goal** — Construire **SDTM DM** (1 enregistrement / sujet) et **SUPPDM** (qualificateurs non standards) depuis des tables sources, en : 1) créant des **coquilles vides** depuis un CSV de métadonnées,\
+2) **mappant** et **dérivant** les variables SDTM,\
+3) appliquant **formats / tri** et **export** vers la lib `TARGET`.
+
+**Outputs** — `TARGET.DM` et `TARGET.SUPPDM` conformes SDTM, validés par `PROC CONTENTS` et contrôles structurels.
+
+::: callout-note
+**Idée-clé** : *metadata → EMPTY_DM → mapping/derivations → sort/order → TARGET*.
+:::
+
+## Inputs
+
+-   **Metadata CSV** — `SDTM_METADATA1.csv` (variables, types, longueurs, labels, rôles, clés).
+-   **Données sources** (libref `SOURCE`)
+    -   `SOURCE.DEMOGRAPHIC` (ex. `subject`, `dob`, `gender`, `trt`, `uniqueid`)\
+    -   `SOURCE.DOSING` (ex. `subject`, `startdt`, `enddt`)
+-   **Formats** (libref `LIB`)
+    -   `sex_demographic_gender.`, `race_demographic_race.`, `armcd_demographic_trt.`, `$arm_demographic_trt.`
+-   **Cible** (libref `TARGET`) — contiendra `DM` et `SUPPDM`
+-   **Macros** — `%make_empty_dataset` et `%make_sort_order` (inclues via `common.sas`)
+
+::: {.alert .alert-info .small-note}
+SAS OnDemand : définir <code>libname source</code>, <code>libname lib</code>, <code>libname target</code> dans <code>appendix/common.sas</code>.\
+Exécuter <code>%include</code> en tête de job.
+:::
+
+## 1) Library Setup
+
+<details>
+
+<summary><strong>Afficher/Masquer le code</strong></summary>
+
+\`\`\`sas /\* Common paths & librefs */ %include "/home/uXXXXXX/CDISC/appendix/common.sas"; /* Attendu dans common.sas : libname source "/home/uXXXXXX/CDISC/data"; libname lib "/home/uXXXXXX/CDISC/formats"; libname target "/home/uXXXXXX/CDISC/sdtm"; \*/ options fmtsearch=(lib work);

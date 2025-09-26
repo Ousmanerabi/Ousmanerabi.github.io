@@ -1,0 +1,400 @@
+/* CSS complet pour la page d'accueil - Ousmane Rabi */
+
+/* Variables CSS */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --text-dark: #2c3e50;
+    --text-medium: #555;
+    --text-light: #666;
+    --bg-light: #fafafa;
+    --bg-white: #ffffff;
+    --bg-card: #f8f9fa;
+    --border-light: #eee;
+    --shadow-light: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-medium: 0 10px 30px rgba(0,0,0,0.1);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Layout général */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
+}
+
+/* Hide default Quarto title */
+.quarto-title-block {
+    display: none !important;
+}
+
+/* Main content container */
+#quarto-content main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background: var(--bg-white);
+    border-radius: 10px;
+    box-shadow: var(--shadow-light);
+}
+
+/* Header styling pour h4 */
+h4:first-of-type {
+    font-size: 1.8em;
+    color: var(--text-dark);
+    margin: 0 0 20px 0;
+    font-weight: 400;
+    line-height: 1.4;
+    text-align: left;
+}
+
+/* Projects buttons */
+.projects-button-container {
+    text-align: center;
+    margin: 30px 0;
+    clear: both;
+}
+
+.btn.projects-button {
+    display: inline-block;
+    background: var(--primary-gradient);
+    color: white;
+    padding: 12px 25px;
+    margin: 0 10px 10px 0;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.btn.projects-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* About section */
+.about-geo {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 10px;
+    border-left: 5px solid var(--primary-color);
+    margin: 25px 0;
+    font-size: 1.05em;
+    line-height: 1.7;
+    clear: both;
+}
+
+.about-geo strong {
+    color: var(--primary-color);
+}
+
+/* Section headers */
+#quarto-content h2 {
+    color: var(--text-dark);
+    font-size: 2em;
+    margin: 50px 0 25px 0;
+    position: relative;
+    font-weight: 400;
+    clear: both;
+}
+
+#quarto-content h2:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 3px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
+}
+
+/* First section spacing */
+#quarto-content h2:first-of-type {
+    margin-top: 30px;
+}
+
+/* Competency Grid */
+.competency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+    clear: both;
+}
+
+.competency-card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid var(--primary-color);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.competency-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    background: var(--bg-white);
+}
+
+.competency-card h3 {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.competency-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.competency-card li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+.competency-card li:before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Transition Section */
+.transition-section {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 60px 50px;
+    text-align: center;
+    margin: 50px 0;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    clear: both;
+}
+
+.transition-section * {
+    position: relative;
+    z-index: 1;
+}
+
+.transition-section strong {
+    color: rgba(255,255,255,0.95);
+}
+
+/* FAQs */
+.faqs-container {
+    margin: 30px 0;
+    clear: both;
+}
+
+.faq {
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+
+.faq summary {
+    background: var(--bg-card);
+    padding: 20px;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-dark);
+    transition: background 0.3s ease;
+    list-style: none;
+}
+
+.faq summary:hover {
+    background: var(--bg-white);
+}
+
+.faq summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-answer {
+    padding: 20px;
+    background: var(--bg-white);
+    line-height: 1.7;
+    border-top: 1px solid var(--border-light);
+}
+
+.faq-answer strong {
+    color: var(--primary-color);
+}
+
+/* Quick facts table */
+.quick-facts {
+    margin: 20px 0;
+    clear: both;
+}
+
+.quick-facts table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.quick-facts th,
+.quick-facts td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.quick-facts th {
+    background: var(--bg-card);
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.quick-facts td strong {
+    color: var(--primary-color);
+}
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+/* Prevent any floating issues */
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #quarto-content main {
+        padding: 20px 15px;
+        margin: 10px;
+    }
+    
+    .competency-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    h4:first-of-type {
+        font-size: 1.5em;
+    }
+    
+    .projects-button-container {
+        text-align: center;
+    }
+    
+    .btn.projects-button {
+        display: block;
+        margin: 10px auto;
+        max-width: 200px;
+    }
+    
+    .transition-section {
+        padding: 25px 20px;
+    }
+    
+    .about-geo {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #quarto-content h2 {
+        font-size: 1.6em;
+    }
+    
+    .competency-card {
+        padding: 25px;
+    }
+    
+    .faq summary {
+        padding: 15px;
+    }
+    
+    .faq-answer {
+        padding: 15px;
+    }
+}
+
+/* Styles pour vos classes actuelles */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.service-card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    background: var(--bg-white);
+}
+
+.service-icon {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    display: block;
+    line-height: 1;
+}
+
+.service-card h3 {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+
+.service-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.service-card li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+.service-card li:before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2em;
+}

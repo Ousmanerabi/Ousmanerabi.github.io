@@ -1,0 +1,13 @@
+---
+title: "Test"
+format:
+  html:
+    css: assets/css/styles.css
+---
+
+<div class="competency-grid">
+  <div class="competency-card">
+    <h3>Test Card</h3>
+    <p>Si vous voyez cette carte avec une bordure et un fond gris, le CSS fonctionne.</p>
+  </div>
+</div>

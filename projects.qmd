@@ -1,0 +1,73 @@
+---
+title: "Key Projects (2020–2025)"
+description: "Selected projects in epidemiology, analytics, modeling, and training."
+image: "images/Photo-bio2"
+format:
+  html:
+    theme: [cosmo, default]
+    css: assets/css/main.css
+    toc: true
+    code-fold: true
+    code-summary: "View Code"
+---
+
+# Key Projects (2020–2025) {.header-section}
+Below is a curated selection of projects I led or contributed to between 2020 and 2025. Each page summarizes the context, methods, deliverables, and impact.
+
+<a href="contact.qmd" class="btn-github">Work With Me</a>
+
+## Thematic Areas {.section-title}
+- **Modeling**: Scenario modeling to guide policy.  
+- **Analytics**: Statistical and geospatial analysis for decision-making.  
+- **SNT Support**: Data pipelines, stratification, and intervention targeting.  
+- **Training**: Capacity building for graduate students.
+
+## R & Epidemiology Projects {.section-title}
+<div id="R & Epidemiology Projects" class="projects-grid">
+
+<div class="project-card" data-tags="analytics epidemiology dhs itn guinea">
+  <a href="/projects/risk_factors.html">Risk Factors – ITN Guinea DHS 2018</a>
+  <div class="project-meta">2021–2022</div>
+</div>
+
+<div class="project-card" data-tags="burkina incidence trend mapping hmis">
+  <a href="/projects/retrospective_analysis.html">Retrospective Analysis of Malaria Trend in Burkina Faso</a>
+  <div class="project-meta">2023–2024</div>
+</div>
+
+<div class="project-card" data-tags="burkina guinea togo targeting stratification snt">
+  <a href="/projects/snt-stratification-targeting.html">Data Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)</a>
+  <div class="project-meta">2023</div>
+</div>
+
+<div class="project-card" data-tags="microstrat conakry mapping">
+  <a href="/projects/microstratification-conakry.html">Microstratification in Conakry</a>
+  <div class="project-meta">2023–2024</div>
+</div>
+
+<div class="project-card" data-tags="mentorship training supervision">
+  <a href="/projects/training-mentorship-2020-2024.html">Training & Mentorship (Graduate Students – Benin & Guinea)</a>
+  <div class="project-meta">2020–2024</div>
+</div>
+
+</div>
+
+## CDISC & SAS Clinical Programming {.section-title}
+<div id="CDISC & SAS Clinical Programming" class="projects-grid">
+
+<div class="project-card" data-tags="cdisc define.xml validation">
+  <a href="/projects/cdisc-define-xml.html">define.xml Generation & Validation Workflow</a>
+  <div class="project-meta">2025</div>
+</div>
+
+<div class="project-card" data-tags="cdisc-sdtm">
+  <a href="/projects/cdisc-sdtm.html">End-to-end Study Data Tabulation Model</a>
+  <div class="project-meta">2025</div>
+</div>
+
+<div class="project-card" data-tags="cdisc-sdtm-adam-tlf">
+  <a href="/projects/cdisc-adam-bds.html">ADaM BDS Derivations for Efficacy & Safety</a>
+  <div class="project-meta">2025</div>
+</div>
+
+</div>

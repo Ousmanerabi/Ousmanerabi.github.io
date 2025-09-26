@@ -1,0 +1,46 @@
+# _quarto.yml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Ousmane Diallo, MPH-PhD"
+  description: "Biostatistician & Epidemiologist"
+  site-url: "https://ousmanerabi.github.io"
+  repo-url: "https://github.com/ousmanerabi/ousmanerabi.github.io"
+  
+  navbar:
+    background: primary
+    search: false
+    left:
+      - text: "Home"
+        file: index.qmd
+      - text: "About"
+        file: about.qmd
+      - text: "Portfolio"
+        file: portfolio.qmd
+      - text: "Contact"
+        file: contact.qmd
+    right:
+      - icon: github
+        href: "https://github.com/ousmanerabi"
+        aria-label: GitHub
+      - icon: linkedin
+        href: "https://linkedin.com/in/ousmane-rabi"
+        aria-label: LinkedIn
+
+  page-footer:
+    background: light
+    center: |
+      © 2025 Ousmane Diallo - Biostatistician & Epidemiologist
+    right: |
+      Built with [Quarto](https://quarto.org/)
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: false
+    page-layout: article
+    grid:
+      body-width: 900px

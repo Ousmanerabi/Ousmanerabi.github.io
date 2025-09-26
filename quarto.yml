@@ -1,0 +1,28 @@
+project:
+  type: website
+  output-dir: docs
+website:
+  title: "Ousmane"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+      - href: projects/cdisc-sdtm.qmd
+        text: Projects
+      - href: cv.pdf
+        text: CV
+      - href: contact.qmd
+        text: Contact
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 2
+    code-fold: true
+    code-tools: true
+    code-block-bg: "#f8f9fa"
+    code-block-border-left: "#007bff"
+    page-layout: full

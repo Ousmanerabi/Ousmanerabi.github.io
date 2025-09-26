@@ -1,273 +1,197 @@
 ---
-title: "Study Data Tabulation Model (SDTM)-Demographics (DM)"
-description: "From metadata-driven empty shells to mapped DM and SUPPDM — clean, reproducible, and CDISC-ready"
+title: "Study Data Tabulation Model (SDTM) Automation with SAS"
+description: "Automation of SDTM-Demographics (DM)/SUPP creation in SAS for CDISC-compliant clinical data using a metadata-driven approach."
+author: "Ousmane DIALLO"
+date: "2025-08-30"
+keywords: "SDTM, CDISC, SAS, clinical data, biostatistics, portfolio"
 format:
   html:
+    theme: cosmo
+    css: styles.css
     toc: true
-    toc-depth: 3
+    toc-depth: 2
     code-fold: true
-    number-sections: false
-categories: [CDISC, SAS, SDTM, MACRO]
-permalink: /projects/cdisc-sdtm.html
+    code-tools: true
+    code-block-bg: "#f8f9fa"
+    code-block-border-left: "#007bff"
+    page-layout: full
 ---
 
-> Source code & metadata: [see GitHub repo (02_SDTM).](https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM)\
-> Environment: SAS OnDemand 9.4.
+# SDTM-Demographics (DM) Automation with SAS
 
-## Overview
+Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.
 
--   **Goal:** Build SDTM **DM** (Demographics) + **SUPPDM** from raw/source data using a **metadata-driven** approach (empty shells → mapping → derivations → sort/export).
--   **Why:** Ensure CDISC consistency (identifiers, timing in ISO 8601, roles/keys) and reproducibility in SAS OnDemand.
--   **Outputs:** `TARGET.DM` (1 record per subject) and `TARGET.SUPPDM` (non-standard qualifiers).
+[View Code on Github](https://github.com/ousmanerabi/02_SDTM)
+
+## Overview {.section-title}
+
+**Goal**: Build SDTM DM (Demographics) and SUPPDM from raw/source data using a metadata-driven approach (empty shells → mapping → derivations → sort/export).
+
+**Why**: Ensure CDISC consistency (identifiers, timing in ISO 8601, roles/keys) and reproducibility in SAS OnDemand.
+
+**Outputs**: TARGET.DM (1 record per subject) and TARGET.SUPPDM (non-standard qualifiers).
 
 ::: callout-note
-**Context**\
-- Tools: *SAS OnDemand* (9.4), macros from my study notes.\
-- Source folders (OnDemand):\
-- `SOURCE` → raw tables (e.g., `DEMOGRAPHIC`, `DOSING`)\
-- `LIB` → formats (user-defined formats)\
-- `TARGET` → SDTM outputs (`DM.sas7bdat`, `SUPPDM.sas7bdat`)\
-- Metadata: `/home/.../SDTM_METADATA1.csv` (variable list and attributes).
+**Context**: Tools: SAS OnDemand 9.4, macros from study notes. Source folders: SOURCE (raw tables), LIB (formats), TARGET (SDTM outputs). Metadata: SDTM_METADATA1.csv.
 :::
 
-------------------------------------------------------------------------
+## Inputs {.section-title}
 
-## Inputs
+-   **Metadata CSV**: SDTM_METADATA1.csv (variables, roles, lengths, types, sort keys).
+-   **Source Data**:
+    -   SOURCE.DEMOGRAPHIC (1 row per subject, e.g., subject, dob, gender, trt, uniqueid)
+    -   SOURCE.DOSING (e.g., subject, startdt, enddt)
+-   **Formats** (libref LIB): sex_demographic_gender, race_demographic_race, armcd_demographic_trt, \$arm_demographic_trt.
+-   **Environment**: SAS OnDemand 9.4; librefs SOURCE, LIB, TARGET.
 
--   **Metadata CSV:** `SDTM_METADATA1.csv` (variables, roles, lengths, types, sort keys).
--   **Source data:**
-    -   `SOURCE.DEMOGRAPHIC` (1 ligne/sujet, ex. `subject`, `dob`, `gender`, `trt`, `uniqueid`)\
-    -   `SOURCE.DOSING` (ex. `subject`, `startdt`, `enddt`)
--   **Formats (libref `LIB`):** `sex_demographic_gender.`, `race_demographic_race.`, `armcd_demographic_trt.`, `$arm_demographic_trt.`\
--   **Environment:** SAS OnDemand 9.4; librefs `SOURCE`, `LIB`, `TARGET`.
+## 1. Library Setup {.section-title}
 
-<details>
-
-<summary><strong>SAS — Library setup</strong></summary>
-
-``` sas
-/* Common paths & librefs */ 
-
-%include "/home/u64197545/CDISC/appendix/common.sas"; 
-
-/* expects: 
-
+```         
+/* Common paths & librefs */
+%include "/home/u64197545/CDISC/appendix/common.sas";
+/* expects:
  libname source "/home/u64197545/CDISC/data";
-
- libname lib  "/home/u64197545/CDISC/formats"; 
-
-libname target  "/home/u64197545/CDISC/sdtm"; 
-
+ libname lib "/home/u64197545/CDISC/formats";
+ libname target "/home/u64197545/CDISC/sdtm";
 */
 ```
 
-</details>
+## 2. Create EMPTY DM from Metadata {.section-title}
 
-## 1) Create EMPTY DM from Metadata
-
-We first create an **empty shell** (`EMPTY_DM`) using the CSV metadata so that attributes (type/length/label/order) are correct and we can **append real data into it**.
-
-<details><summary><strong>SAS — Build EMPTY_DM</strong></summary>
+Create an empty shell (EMPTY_DM) using the CSV metadata to ensure correct attributes (type, length, label, order).
 
 ```         
-*---------------------------------------------------------------*;
-* make_empty_dataset.sas creates a zero record dataset based on a 
-* dataset metadata spreadsheet.  The dataset created is called
-* EMPTY_** where "**" is the name of the dataset.  This macro also
-* creates a global macro variable called **KEEPSTRING that holds 
-* the dataset variables desired and listed in the order they  
-* should appear.  [The variable order is dictated by VARNUM in the 
-* metadata spreadsheet.]
-*
-* MACRO PARAMETERS:
-* metadatafile = the CSV file containing the dataset metadata
-* dataset = the dataset or domain name you want to extract
-
-	*---------------------------------------------------------------*;
-
-
 /* Create empty based on metadata CSV */
 %macro make_empty_dataset(metadatafile=, dataset=);
-
 /* Import csv file and rename it _temp */
-	proc import datafile="&metadatafile" out=_temp dbms=csv replace;
-		guessingrows=max;
-		delimiter=";";
-		encoding='utf-8';
-	run;
+    proc import datafile="&metadatafile" out=_temp dbms=csv replace;
+        guessingrows=max;
+        delimiter=";";
+        encoding='utf-8';
+    run;
 
+    /* Sort the dataset by expected specified variable order (varnum) */
+    proc sort data=_temp;
+        where domain="&dataset";
+        by varnum;
+    run;
 
+    /* Create keepstring macro variable and load metadata information into macro variables */
+    %global &dataset.KEEPSTRING;
 
-	** sort the dataset by expected specified variable order (varnum);
+    data _null_;
+        set _temp nobs=nobs end=eof;
+        if _n_=1 then
+            call symput("vars", compress(put(nobs, 3.)));
+        call symputx('var'    || compress(put(_n_, 3.)), variable);
+        call symputx('label'  || compress(put(_n_, 3.)), label);
+        call symputx('length' || compress(put(_n_, 3.)), put(length, 3.));
+        /* Valid ODM types include TEXT, INTEGER, FLOAT, DATETIME, DATE, TIME and map to SAS numeric or character */
+        if upcase(type) in ("INTEGER", "FLOAT") then
+            call symputx('type' || compress(put(_n_, 3.)), "");
+        else if upcase(type) in ("TEXT", "DATE", "DATETIME", "TIME") then
+            call symputx('type' || compress(put(_n_, 3.)), "$");
+        else
+            put "ERR" "OR: not using a valid ODM type.  " type=;
+        /* Create KEEPSTRING macro variable */
+        length keepstring $ 32767;
+        retain keepstring;
+        keepstring=compress(keepstring) || "|" || left(variable);
+        if eof then
+            call symputx(upcase(compress("&dataset" || 'KEEPSTRING')), 
+                left(trim(translate(keepstring, " ", "|"))));
+    run;
 
-	proc sort data=_temp;
-		where domain="&dataset";
-		by varnum;
-	run;
-
-
-
-	** create keepstring macro variable and load metadata 
-    ** information into macro variables;
-	
-	
-	
-	%global &dataset.KEEPSTRING;
-
-
-	data _null_;
-		set _temp nobs=nobs end=eof;
-
-		if _n_=1 then
-			call symput("vars", compress(put(nobs, 3.)));
-		call symputx('var'    || compress(put(_n_, 3.)), variable);
-		call symputx('label'  || compress(put(_n_, 3.)), label);
-		call symputx('length' || compress(put(_n_, 3.)), put(length, 3.));
-		** valid ODM types include TEXT, INTEGER, FLOAT, DATETIME, 
-
-			        ** DATE, TIME and map to SAS numeric or character;
-
-		if upcase(type) in ("INTEGER", "FLOAT") then
-			call symputx('type' || compress(put(_n_, 3.)), "");
-		else if upcase(type) in ("TEXT", "DATE", "DATETIME", "TIME") then
-			call symputx('type' || compress(put(_n_, 3.)), "$");
-		else
-			put "ERR" "OR: not using a valid ODM type.  " type=;
-		** create **KEEPSTRING macro variable;
-		length keepstring $ 32767;
-		retain keepstring;
-		keepstring=compress(keepstring) || "|" || left(variable);
-
-		if eof then
-			call symputx(upcase(compress("&dataset" || 'KEEPSTRING')), 
-				left(trim(translate(keepstring, " ", "|"))));
-	run;
-
-
-
-	** create a 0-observation template data set used for assigning 
-
-		    ** variable attributes to the actual data sets;
-
-	data EMPTY_&dataset;
-		%do i=1 %to &vars;
-			attrib &&var&i label="&&label&i" 
-			%if "&&length&i" ne "" %then
-				length=&&type&i.&&length&i...;
-			;
-
-			%if &&type&i=$ %then
-				retain &&var&i '';
-			%else
-				retain &&var&i .;
-			;
-		%end;
-
-		if 0;
-	run;
-
+    /* Create a 0-observation template data set used for assigning variable attributes */
+    data EMPTY_&dataset;
+        %do i=1 %to &vars;
+            attrib &&var&i label="&&label&i" 
+            %if "&&length&i" ne "" %then
+                length=&&type&i.&&length&i...;
+            ;
+            %if &&type&i=$ %then
+                retain &&var&i '';
+            %else
+                retain &&var&i .;
+            ;
+        %end;
+        if 0;
+    run;
 %mend make_empty_dataset;
 
 /* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */
 ```
 
-</details>
+## 3. Mapping (Raw Data to SDTM DM) {.section-title}
 
-:::{.callout-tip}
-
-If you don’t use a macro, you can `PROC IMPORT` the metadata and create the shell with `DATA _NULL_` + `CALL EXECUTE`, or keep a hand-crafted `length/label/format` block.
-
-:::
-
-## 2) Mapping (Raw data to SDTM DM using SDTMIG v3.4)
-
-Key SDTM variables for DM (subset):
+Mapping raw data to SDTM DM variables using SDTMIG v3.4.
 
 | Class | Variables (examples) | Notes |
-|----|----|----|
-| Identifier | `STUDYID`, `DOMAIN`, `USUBJID`, `SUBJID` | 1 record per subject |
-| Timing | `RFSTDTC`, `RFENDTC`, `RFXSTDTC`, `RFXENDTC`, `BRTHDTC` | ISO 8601 dates |
-| Qualifier | `SITEID`, `SEX`, `RACE`, `COUNTRY`, `AGE`, `AGEU` | Coded via formats where applicable |
-| Arm | `ARMCD`, `ARM`, `ACTARMCD`, `ACTARM` | From treatment assignments |
+|------------------------|------------------------|------------------------|
+| Identifier | STUDYID, DOMAIN, USUBJID, SUBJID | 1 record per subject |
+| Timing | RFSTDTC, RFENDTC, RFXSTDTC, RFXENDTC, BRTHDTC | ISO 8601 dates |
+| Qualifier | SITEID, SEX, RACE, COUNTRY, AGE, AGEU | Coded via formats where applicable |
+| Arm | ARMCD, ARM, ACTARMCD, ACTARM | From treatment assignments |
 
-## 3) Create formats
+## 4. Create Formats {.section-title}
 
-<details><summary><strong>SAS — Creating custom format </strong></summary>
-
-``` sas
-/* Creating custom format for the variables sex, race, arm, and armcd.*/
-
+```         
+/* Creating custom format for the variables sex, race, arm, and armcd */
 proc format;
-	value sex 1='M' 2='F' .='U';
-	value race 1='White' 2='Black or African American' 3='Asian';
-	value armcd 0='PLACEBO' 1='ALG123';
-	value arm 0='Placebo' 1='Analgezia HCL 30mg';
+    value sex 1='M' 2='F' .='U';
+    value race 1='White' 2='Black or African American' 3='Asian';
+    value armcd 0='PLACEBO' 1='ALG123';
+    value arm 0='Placebo' 1='Analgezia HCL 30mg';
 run;
 ```
 
-<details>
-
-## 4) Derive the logic variables that need calculating (Dosing for example)
-
-<details><summary><strong>SAS — Prepare dosing </strong></summary>
+## 5. Derive Logic Variables (Dosing) {.section-title}
 
 ```         
 /* First/last dose (for RFSTDTC/RFENDTC) */
-
-**** GET FIRST AND LAST DOSE DATE FOR RFSTDTC AND RFENDTC;
 proc sort 
   data=source.dosing(keep=subject startdt enddt) 
   out=dosing;
    by subject startdt;
 run;
 
-**** FIRSTDOSE=FIRST DOSING AND LASTDOSE=LAST DOSING;
-
 data dosing;
   set dosing; 
     by subject;
-    
     retain firstdose lastdose;
-    
   if first.subject then 
     do; 
        firstdose=.; 
        lastdose=.; 
     end;
-    
   firstdose = min(firstdose, startdt, enddt);
   lastdose  = max(lastdose , startdt, enddt);
-  
   if last.subject;
 run;
 ```
 
-## 5) Combine all the data
-
-<details><summary><strong>SAS — Map to DM variables</strong></summary>
+## 6. Combine All Data {.section-title}
 
 ```         
-**** GET DEMOGRAPHICS DATA;
+/* Get demographics data */
 proc sort
   data=source.demographic
   out=demographic;
     by subject;
 run;
 
-**** MERGE DEMOGRAPHICS AND FIRST DOSE DATE;
+/* Merge demographics and first dose date */
 data demog_dose;
   merge demographic
         dosing;
     by subject;
 run;
 
-
-**** DERIVE THE MAJORITY OF SDTM DM VARIABLES;
+/* Derive the majority of SDTM DM variables */
 options missing = ' ';
 data dm;
   set EMPTY_DM
     demog_dose(rename=(race=_race));
-
     studyid = 'XYZ123';
     domain = 'DM';
     usubjid = left(uniqueid);
@@ -292,92 +216,52 @@ data dm;
     actarmcd = put(trt,armcd.);
     actarm = put(trt,arm.);
     country = "USA"; 
-run; 
+run;
 ```
 
-</details>
-
-## 6) Order, Keys & Export
-
-Sort by **metadata-defined** keys and save to `TARGET`.
-
-<details><summary><strong>SAS — Sort</strong></summary>
-
-``` sas
-*----------------------------------------------------------------*;
-* make_sort_order.sas creates a global macro variable called  
-* **SORTSTRING where ** is the name of the dataset that contains  
-* the KEYSEQUENCE metadata specified sort order for a given dataset.
-*
-* MACRO PARAMETERS:
-* metadatafile = the file containing the dataset metadata
-* dataset = the dataset or domain name
-
-	*----------------------------------------------------------------*;
-
-%macro make_sort_order(metadatafile=, dataset=);
-
-
-	proc import datafile="&metadatafile" out=_temp dbms=csv replace;
-		guessingrows=max;
-		delimiter=";";
-		encoding='utf-8';
-	run;
-
-
-	proc sort data=_temp;
-		where keysequence ne . and domain="&dataset";
-		by keysequence;
-	run;
-
-	** create **SORTSTRING macro variable;
-	%global &dataset.SORTSTRING;
-
-	data _null_;
-		set _temp end=eof;
-		length domainkeys $ 200;
-		retain domainkeys '';
-		domainkeys=trim(domainkeys) || ' ' || trim(put(variable, 8.));
-
-		if eof then
-			call symputx(compress("&dataset" || "SORTSTRING"), domainkeys);
-	run;
-
-%mend make_sort_order;
-```
-
-<details><summary><strong>SAS — Save</strong></summary>
+## 7. Order, Keys & Export {.section-title}
 
 ```         
+/* Create sort order */
+%macro make_sort_order(metadatafile=, dataset=);
+    proc import datafile="&metadatafile" out=_temp dbms=csv replace;
+        guessingrows=max;
+        delimiter=";";
+        encoding='utf-8';
+    run;
 
-**** SORT DM ACCORDING TO METADATA AND SAVE PERMANENT DATASET;
+    proc sort data=_temp;
+        where keysequence ne . and domain="&dataset";
+        by keysequence;
+    run;
+
+    %global &dataset.SORTSTRING;
+    data _null_;
+        set _temp end=eof;
+        length domainkeys $ 200;
+        retain domainkeys '';
+        domainkeys=trim(domainkeys) || ' ' || trim(put(variable, 8.));
+        if eof then
+            call symputx(compress("&dataset" || "SORTSTRING"), domainkeys);
+    run;
+%mend make_sort_order;
+
+/* Sort DM according to metadata and save permanent dataset */
 %make_sort_order(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
-
 proc sort
   data=dm(keep = &DMKEEPSTRING)
   out=target.dm;
     by &DMSORTSTRING;
 run;
-
 ```
 
-</details>
+## 8. QC & Validation {.section-title}
 
-------------------------------------------------------------------------
-
-## 7) QC & Validation
-
--   **Structural checks**: variable names, type, length, labels match metadata
-
--   **Controlled terminology**: values mapped via formats/codelists
-
--   **Timing**: ISO 8601, completeness of `RFSTDTC`/`RFXSTDTC` etc.
-
--   **Keys**: 1 record per subject; `USUBJID` uniqueness
-
--   **Cross-domain**: consistency with EX/AE/VS if applicable
-
-<details><summary><strong>SAS — Quick sanity checks</strong></summary>
+-   **Structural checks**: Variable names, type, length, labels match metadata.
+-   **Controlled terminology**: Values mapped via formats/codelists.
+-   **Timing**: ISO 8601, completeness of RFSTDTC/RFXSTDTC.
+-   **Keys**: 1 record per subject; USUBJID uniqueness.
+-   **Cross-domain**: Consistency with EX/AE/VS if applicable.
 
 ```         
 /* 1 record per USUBJID? */
@@ -388,20 +272,31 @@ proc sql;
   having calculated n > 1;
 quit;
 
-/* Required fields not missing? (example) */
+/* Required fields not missing? */
 proc freq data=target.dm;
   tables studyid*usubjid*domain / missing list;
 run;
 ```
 
-</details>
+## 9. Outputs {.section-title}
 
-## 8) Outputs
+**SDTM-DM**: Datasets DM.sas7bdat and SUPPDM.sas7bdat compliant with CDISC standards.
 
-![SDTM-DM](images/SDTM_DM_Table.png){fig-align="center" width="80%"}
+**Sample DM Dataset**:
 
-![Proc content](images/SDTM-Contents1.png){fig-align="center" width="80%"}
+| USUBJID | STUDYID | SEX | AGE | RACE  | ARMCD   |
+|---------|---------|-----|-----|-------|---------|
+| 001     | XYZ123  | M   | 45  | White | PLACEBO |
+| 002     | XYZ123  | F   | 32  | Asian | ALG123  |
 
-![PROC contents](images/SDTM-Contents2.png){fig-align="center" width="80%"}
+**Proc Contents**: Structure and attributes of the final dataset.
 
-## 
+::: callout-note
+**Note**: The sample dataset above is an example. Actual data can be visualized or tabulated for further illustration.
+:::
+
+## Contact {.contact-section}
+
+Interested in this project or my expertise in biostatistics and CDISC? Contact me!
+
+Send an EmailLinkedIn

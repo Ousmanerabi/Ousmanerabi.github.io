@@ -1,0 +1,55 @@
+---
+title: "Projects"
+description: "Ousmane Diallo - Projects | Learn about my recent research projects and clinical programming work here."
+---
+
+# Projects
+
+**Author**  
+Ousmane Diallo, MPH-PhD
+
+**Keywords**  
+biostatistics, epidemiology, CDISC standards, clinical trials programming, real-world evidence, statistical modeling, regulatory compliance, SAS & R programming
+
+## CDISC & Regulatory Programming
+*Industry-standard clinical programming and regulatory-compliant datasets for pharmaceutical submissions*
+
+[define.xml Generation & Validation Workflow](projects/cdisc-define-xml.html)
+
+[End-to-end Study Data Tabulation Model](projects/cdisc-sdtm.html)
+
+[ADaM BDS Derivations for Efficacy & Safety](projects/cdisc-adam-bds.html)
+
+## Statistical Modeling & Real-World Evidence
+*Advanced analytics and evidence generation for clinical decision-making*
+
+[Survival Analysis for Clinical Endpoints](projects/survival-analysis-clinical.html)
+
+[Real-World Evidence Study Design](projects/rwe-study-design.html)
+
+[Geospatial Analysis for Health Surveillance](projects/geospatial-health-surveillance.html)
+
+## Geospatial Analysis & Epidemiology
+*Spatial analysis and disease surveillance across West African populations*
+
+[Risk Factors – ITN Guinea DHS 2018](projects/risk_factors.html)
+
+[Microstratification in Conakry](projects/microstratification-conakry.html)
+
+[Retrospective Analysis of Malaria Trend in Burkina Faso](projects/retrospective_analysis.html)
+
+## Data Management & Multi-country Studies
+*Complex data integration and cross-national research coordination*
+
+[Data Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)](projects/snt-stratification-targeting.html)
+
+[Complex Survey Data Analysis with R](projects/complex-survey-analysis.html)
+
+## Capacity Building & Training
+*Graduate student mentorship and institutional capacity development*
+
+[Training & Mentorship (Graduate Students – Benin & Guinea)](projects/training-mentorship-2020-2024.html)
+
+---
+
+*Interested in collaborating on biostatistics, epidemiology, or clinical programming projects?* **[Contact me](contact.qmd)** *to discuss opportunities.*

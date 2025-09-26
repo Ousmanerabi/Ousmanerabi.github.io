@@ -1,0 +1,149 @@
+---
+title: "Ousmane Diallo, MPH-PhD"
+description: "Biostatistician | Epidemiologist | CDISC Expert"
+draft: false
+format:
+  html:
+    css: assets/css/styles.css
+    page-layout: article
+    toc: false
+---
+
+#### **Biostatistics & Epidemiology Solutions for Clinical Research**
+
+I'm **Ousmane Diallo**. I develop statistical models, regulatory-compliant workflows, and data analytics solutions to accelerate discovery in **pharmaceutical and clinical research**. My work integrates biostatistics, epidemiology, and CDISC standards to deliver insights for clinical trials and regulatory submissions.
+
+::: projects-button-container
+[🔍 View Projects](portfolio.qmd){.btn .projects-button} [📬 Work With Me](contact.qmd){.btn .projects-button}
+:::
+
+With a background in **epidemiology**, **biostatistics**, and **SAS clinical programming**, I specialize in building CDISC-compliant solutions that accelerate pharmaceutical research. My work bridges **statistical analysis, regulatory standards, and real-world evidence**, supporting both academic research and industry applications.
+
+## About Ousmane Diallo
+
+::: about-geo
+Ousmane Diallo is a **rigorous biostatistician and epidemiologist** specializing in **health data analytics, statistical modeling, CDISC standards, and real-world evidence (RWE)**. With over 9 years of experience, he collaborates with **academic researchers, pharmaceutical teams, and international health organizations** to design regulatory-compliant analyses, reproducible workflows, and evidence-based solutions. His work connects biostatistics with **clinical research and regulatory science**, supporting discovery in both academia and industry.
+:::
+
+## Core Competencies
+
+<div class="services-grid">
+
+<div class="service-card">
+<div class="service-icon">💻</div>
+
+### Programming & Tools
+
+- SAS (Certified Base & Clinical Trials)
+- R Programming (tidyverse, survival, spatial)
+- Python • Quarto • GitHub
+- Tableau & Power-BI
+</div>
+
+<div class="service-card">
+<div class="service-icon">🏥</div>
+
+### Clinical & Regulatory Standards
+
+- CDISC: SDTM, ADaM & define.xml
+- Clinical Trials Programming
+- Statistical Analysis Plans (SAPs)
+- GCP/ICH Compliance & Validation
+</div>
+
+<div class="service-card">
+<div class="service-icon">📊</div>
+
+### Statistical & Analytical Methods
+
+- Advanced Statistical Modeling (GLM, Survival)
+- Real-World Evidence (RWE)
+- Geospatial Analysis & Visualization
+- Complex Survey Data Analysis
+</div>
+
+<div class="service-card">
+<div class="service-icon">🌍</div>
+
+### Professional & Collaborative Skills
+
+- Cross-Functional Team Collaboration
+- International Project Management
+- Training & Mentorship Programs
+- Quality Control & Data Validation
+</div>
+
+</div>
+
+## Professional Credentials
+
+- 🎓 **Certified SAS Base Programming & Clinical Trials Programming**
+- ⚙️ **9+ Years Experience** in Health Data Analytics & Statistical Modeling
+- 🧬 **CDISC Implementation Expert** with proven regulatory submission experience
+- 🌍 **International Collaboration** across Guinea, Burkina Faso, Togo, Benin
+
+## Key Projects & Achievements
+
+- 🔗 Developed **end-to-end CDISC workflows** for **regulatory submissions** in pharmaceutical research
+- 🕸 Led **geospatial analysis projects** for malaria surveillance and **intervention targeting** across West Africa
+- 🦠 Implemented **statistical modeling pipelines** for real-world evidence studies and **observational research**
+- 📂 **Open-source workflows** and **reproducible analyses** available on [GitHub](https://github.com/ousmanerabi)
+
+**Ready to accelerate your clinical research with regulatory-compliant insights?**
+
+👉 [Contact Me](contact.qmd) to discuss collaborations or consulting opportunities.
+
+## My Transition to Pharma/Industry
+
+::::::: transition-highlight
+My academic background in **epidemiology and biostatistics**, combined with **hands-on SAS training and CDISC projects**, has prepared me to contribute to **clinical trials and RWE studies**. Projects like my **end-to-end CDISC workflow** (SDTM/ADaM, TLF, define.xml) demonstrate my ability to deliver **regulatory-compliant deliverables**, while my **R-based analyses** showcase transferable skills for **RWE and observational studies**.
+
+**Available for**: Clinical Biostatistician • Statistical Programmer • Data Scientist roles
+:::::::
+
+## Frequently Asked Questions
+
+::::::: faqs-container
+<details class="faq">
+<summary>What types of projects do you specialize in?</summary>
+::: faq-answer
+I specialize in **clinical research projects**, collaborating with **pharmaceutical companies**, **academic institutions**, and **health organizations**. My expertise includes **CDISC implementation**, **statistical analysis for clinical trials**, **real-world evidence studies**, and **regulatory submission support** across both **industry** and **academic settings**.
+:::
+</details>
+
+<details class="faq">
+<summary>What kind of data do you analyze?</summary>
+::: faq-answer
+As a **biostatistician and epidemiologist**, I work with **clinical trial data**, **real-world evidence datasets**, **health surveillance data**, and **complex survey data** requiring advanced statistical methods for analysis. I also develop **CDISC-compliant datasets (SDTM/ADaM)** and create **regulatory submission packages**. I work at **all stages** of the research process, from **study design** to **final reporting**.
+:::
+</details>
+
+<details class="faq">
+<summary>Do you offer training or consulting?</summary>
+::: faq-answer
+Yes! I provide **mentorship** and **consulting** in **biostatistics**, **SAS programming**, and **CDISC standards** for **students** and **research teams**. I also offer training in **clinical trials programming**, **statistical analysis plans**, and **regulatory compliance workflows**.
+:::
+</details>
+
+<details class="faq">
+<summary>Where are you based and available for work?</summary>
+::: faq-answer
+I am actively seeking **clinical biostatistician** and **statistical programmer** positions in the **pharmaceutical industry**. I'm available for **remote work** and **relocation** opportunities worldwide, with experience in **international collaborations**.
+:::
+</details>
+:::::::
+
+## Quick Facts
+
+::: quick-facts
+| Attribute | Detail |
+|---------------------------|---------------------------------------------|
+| **Name** | Ousmane Diallo |
+| **Specialization** | Biostatistics, Epidemiology, CDISC Standards |
+| **Experience** | 9+ years in health data analytics & statistical modeling |
+| **Certifications** | SAS Base Programming & Clinical Trials Programming |
+| **Industry Focus** | Pharmaceutical, Clinical Research, Regulatory Science |
+| **Skills** | SAS, R, Python, CDISC (SDTM/ADaM), Statistical Modeling, RWE |
+| **Availability** | Seeking clinical biostatistician & statistical programmer roles |
+| **Portfolio** | [View Projects](portfolio.qmd) |
+:::
