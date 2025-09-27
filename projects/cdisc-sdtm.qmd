@@ -60,9 +60,9 @@ Raw Data → Metadata → Empty Shell → Mapping → Derivations → Validation
 
 -   **Validation Reports**: QC checks ensuring data integrity
 
-## Inputs
+    ## Data Inputs
 
--   **Metadata Specification**:
+    ### **Metadata Specification**: 
 
     -   File: SDTM_METADATA1.csv (variables, roles, lengths, types, sort keys).
 
@@ -72,13 +72,13 @@ Raw Data → Metadata → Empty Shell → Mapping → Derivations → Validation
 
         -   Sort order specifications
 
--   **Source Data**:
+    ### **Source Data**:
 
     -   SOURCE.DEMOGRAPHIC (1 row per subject, e.g., subject, dob, gender, trt, uniqueid)
 
     -   SOURCE.DOSING (e.g., subject, startdt, enddt)
 
--   **Environment Setup**
+    ### **Environment Setup**
 
     -   **Platform:** SAS OnDemand 9.4
 
@@ -264,7 +264,7 @@ data dm;
 run;
 ```
 
-## 7. Dataset Finalization
+### 7. Dataset Finalization
 
 ```         
 /* Create sorting specification from metadata */
@@ -304,7 +304,7 @@ run;
 
 ### Quality Control & Validation
 
-Automated QC Checks
+#### Automated QC Checks
 
 ```         
 /* 1 record per USUBJID? */
@@ -321,7 +321,7 @@ proc freq data=target.dm;
 run;
 ```
 
-Validation Framework
+#### Validation Framework
 
 -   **Structural checks**: Variable names, type, length, labels match metadata.
 -   **Controlled terminology**: Values mapped via formats/codelists.
@@ -331,9 +331,7 @@ Validation Framework
 
 ### Results
 
-**SDTM-DM**: Datasets DM.sas7bdat and SUPPDM.sas7bdat compliant with CDISC standards.
-
-**Sample output**:
+#### **Sample output**:
 
 | USUBJID | STUDYID | SEX | AGE | RACE  | ARMCD   | RFSTDTC    |
 |---------|---------|-----|-----|-------|---------|------------|
