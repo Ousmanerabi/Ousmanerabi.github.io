@@ -18,7 +18,7 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 
 [End-to-end Study Data Tabulation Model](projects/cdisc-sdtm.html)
 
-[ADaM BDS Derivations for Efficacy & Safety](projects/cdisc-adam-bds.html)
+[ADaM BDS Derivations for Efficacy & Safety](projects/ADaM BDS Derivations for Efficacy & Safety.html)
 
 ## Statistical Modeling & Real-World Evidence
 *Advanced analytics and evidence generation for clinical decision-making*
