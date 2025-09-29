@@ -66,7 +66,7 @@ Below is a curated selection of projects I led or contributed to between 2020 an
 </div>
 
 <div class="project-card" data-tags="cdisc-sdtm-adam-tlf">
-  <a href="/projects/cdisc-adam-bds.html">ADaM BDS Derivations for Efficacy & Safety</a>
+  <a href="/projects/ADaM BDS Derivations for Efficacy & Safety.html">ADaM BDS Derivations for Efficacy & Safety</a>
   <div class="project-meta">2025</div>
 </div>
 
