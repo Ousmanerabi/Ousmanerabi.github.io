@@ -62,7 +62,7 @@ Raw Data → Metadata → Empty Shell → Mapping → Derivations → Validation
 
     ## Data Inputs
 
-    ### **Metadata Specification**: 
+    ### **Metadata Specification**:
 
     -   File: SDTM_METADATA1.csv (variables, roles, lengths, types, sort keys).
 
@@ -364,4 +364,4 @@ This metadata-driven approach provides:
 
 Interested in this project or my expertise in biostatistics and CDISC standards?
 
-[**Send an Email**](mailto:contact@example.com) \| [**LinkedIn**](https://linkedin.com/in/example)
+[**Send an Email**](ousmanerabi12@gmail.com) \| [**LinkedIn**](www.linkedin.com/in/ousmane-diallo8)

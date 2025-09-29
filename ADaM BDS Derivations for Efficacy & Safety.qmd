@@ -1,0 +1,42 @@
+---
+title: "Analysis Data Subject Level (ADSL) Generation with SAS"
+description: "Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration"
+date: "2025-08-30"
+keywords: "ADaM, ADSL, CDISC, SAS, clinical trials, biostatistics, regulatory"
+format:
+  html:
+    toc: true
+    code-fold: true
+---
+
+# Analysis Data Subject Level (ADSL) Generation with SAS
+
+*Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration.*
+
+## Introduction
+
+The **Analysis Data Subject Level (ADSL)** dataset is the cornerstone of clinical trial statistical analysis under the CDISC Analysis Data Model (ADaM) standard. ADSL provides one record per subject containing all subject-level information needed for efficacy and safety analyses.
+
+### What is ADaM ADSL?
+
+ADSL serves as the foundation dataset that:
+
+-   Contains one record per subject with subject-level analysis variables
+
+-   Defines analysis populations (Safety, ITT, Per-Protocol)
+
+-   Provides treatment information and study periods
+
+-   Links to all other ADaM datasets through USUBJID
+
+-   Ensures consistency across all statistical analyses
+
+### Regulatory Importance
+
+-   **FDA Requirement**: Essential for regulatory submissions
+
+-   **Analysis Foundation**: Referenced by all BDS and OCCDS datasets
+
+-   **Population Definition**: Critical for primary endpoint analyses
+
+-   **Traceability**: Links analysis results back to SDTM source

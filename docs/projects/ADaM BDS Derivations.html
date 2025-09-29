@@ -6,12 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ousmane DIALLO">
 <meta name="dcterms.date" content="2025-08-30">
-<meta name="keywords" content="SDTM, CDISC, SAS, clinical data, biostatistics, portfolio">
-<meta name="description" content="Automation of SDTM-Demographics (DM)/SUPP creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.">
+<meta name="keywords" content="ADaM, ADSL, CDISC, SAS, clinical trials, biostatistics, regulatory">
+<meta name="description" content="Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration">
 
-<title>Study Data Tabulation Model (SDTM) Automation with SAS – Ousmane Diallo, MPH-PhD</title>
+<title>Analysis Data Subject Level (ADSL) Generation with SAS – Ousmane Diallo, MPH-PhD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,63 +130,26 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#sdtm-demographics-dm-automation-with-sas" id="toc-sdtm-demographics-dm-automation-with-sas" class="nav-link active" data-scroll-target="#sdtm-demographics-dm-automation-with-sas">SDTM-Demographics (DM) Automation with SAS</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#what-is-sdtm" id="toc-what-is-sdtm" class="nav-link" data-scroll-target="#what-is-sdtm">What is SDTM?</a></li>
-  <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a>
-  <ul class="collapse">
-  <li><a href="#objective" id="toc-objective" class="nav-link" data-scroll-target="#objective">Objective</a></li>
-  <li><a href="#key-benefits" id="toc-key-benefits" class="nav-link" data-scroll-target="#key-benefits">Key Benefits</a></li>
-  <li><a href="#technical-approach" id="toc-technical-approach" class="nav-link" data-scroll-target="#technical-approach">Technical Approach</a></li>
-  <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
-  </ul></li>
-  <li><a href="#technical-implementation" id="toc-technical-implementation" class="nav-link" data-scroll-target="#technical-implementation">Technical Implementation</a>
-  <ul class="collapse">
-  <li><a href="#library-setup" id="toc-library-setup" class="nav-link" data-scroll-target="#library-setup">1. Library Setup</a></li>
-  <li><a href="#create-empty-dm-from-metadata" id="toc-create-empty-dm-from-metadata" class="nav-link" data-scroll-target="#create-empty-dm-from-metadata">2. Create EMPTY DM from Metadata</a></li>
-  <li><a href="#stdm-variable-mapping" id="toc-stdm-variable-mapping" class="nav-link" data-scroll-target="#stdm-variable-mapping">3. STDM Variable Mapping</a></li>
-  <li><a href="#controlled-terminology" id="toc-controlled-terminology" class="nav-link" data-scroll-target="#controlled-terminology">4. Controlled Terminology</a></li>
-  <li><a href="#reference-date-derivation" id="toc-reference-date-derivation" class="nav-link" data-scroll-target="#reference-date-derivation">5. Reference Date Derivation</a></li>
-  <li><a href="#combine-all-data" id="toc-combine-all-data" class="nav-link" data-scroll-target="#combine-all-data">6. Combine All Data</a></li>
-  <li><a href="#dataset-finalization" id="toc-dataset-finalization" class="nav-link" data-scroll-target="#dataset-finalization">7. Dataset Finalization</a></li>
-  <li><a href="#quality-control-validation" id="toc-quality-control-validation" class="nav-link" data-scroll-target="#quality-control-validation">Quality Control &amp; Validation</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#technical-impact" id="toc-technical-impact" class="nav-link" data-scroll-target="#technical-impact">Technical Impact</a></li>
-  </ul></li>
-  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
-  </ul></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Study Data Tabulation Model (SDTM) Automation with SAS</h1>
+<h1 class="title">Analysis Data Subject Level (ADSL) Generation with SAS</h1>
 </div>
 
 <div>
   <div class="description">
-    Automation of SDTM-Demographics (DM)/SUPP creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.
+    Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration
   </div>
 </div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Ousmane DIALLO </p>
-          </div>
-  </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
@@ -203,407 +165,15 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>SDTM, CDISC, SAS, clinical data, biostatistics, portfolio</p>
+    <p>ADaM, ADSL, CDISC, SAS, clinical trials, biostatistics, regulatory</p>
   </div>
 </div>
 
 </header>
 
 
-<section id="sdtm-demographics-dm-automation-with-sas" class="level1">
-<h1>SDTM-Demographics (DM) Automation with SAS</h1>
-<p><em>Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.</em></p>
-<p><a href="https://github.com/ousmanerabi/02_SDTM">View Code on Github</a></p>
-<section id="introduction" class="level2">
-<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>The <strong>Clinical Data Interchange Standards Consortium (CDISC)</strong> Study Data Tabulation Model (SDTM) is the regulatory standard for organizing and formatting clinical trial data for submission to health authorities like the FDA and EMA. This project demonstrates a <strong>metadata-driven approach</strong> to automate SDTM Demographics (DM) domain creation using SAS.</p>
-</section>
-<section id="what-is-sdtm" class="level2">
-<h2 class="anchored" data-anchor-id="what-is-sdtm">What is SDTM?</h2>
-<p>SDTM provides a standardized structure for clinical trial data that:</p>
-<ul>
-<li><p>Ensures consistency across studies and sponsors</p></li>
-<li><p>Facilitates regulatory review and approval processes</p></li>
-<li><p>Enables data integration and meta-analyses</p></li>
-<li><p>Reduces submission timelines through standardization</p></li>
-</ul>
-</section>
-<section id="project-overview" class="level2">
-<h2 class="anchored" data-anchor-id="project-overview">Project Overview</h2>
-<section id="objective" class="level3">
-<h3 class="anchored" data-anchor-id="objective">Objective</h3>
-<p>Build SDTM DM (Demographics) and SUPPDM datasets from raw clinical data using an automated, metadata-driven workflow that ensures CDISC compliance and reproducibility.</p>
-</section>
-<section id="key-benefits" class="level3">
-<h3 class="anchored" data-anchor-id="key-benefits">Key Benefits</h3>
-<ul>
-<li><p><strong>Metadata-driven</strong>: Single source of truth for variable specifications</p></li>
-<li><p><strong>Reproducible</strong>: Standardized workflow across studies</p></li>
-<li><p><strong>Compliant</strong>: Ensures CDISC SDTMIG v3.4 standards</p></li>
-<li><p><strong>Efficient</strong>: Reduces manual programming errors</p></li>
-</ul>
-</section>
-<section id="technical-approach" class="level3">
-<h3 class="anchored" data-anchor-id="technical-approach">Technical Approach</h3>
-<p>Raw Data → Metadata → Empty Shell → Mapping → Derivations → Validation → Export</p>
-</section>
-<section id="deliverables" class="level3">
-<h3 class="anchored">Deliverables</h3>
-<ul>
-<li><p><strong>TARGET.DM</strong>: One record per subject with demographics data</p></li>
-<li><p><strong>TARGET.SUPPDM</strong>: Supplemental qualifiers for non-standard variables</p></li>
-<li><p><strong>Validation Reports</strong>: QC checks ensuring data integrity</p>
-<h2 id="data-inputs" class="anchored" data-anchor-id="deliverables">Data Inputs</h2>
-<h3 id="metadata-specification" class="anchored"><strong>Metadata Specification</strong>:</h3>
-<ul>
-<li><p>File: SDTM_METADATA1.csv (variables, roles, lengths, types, sort keys).</p>
-<ul>
-<li><p>Variable definitions (names, types, lengths, labels)</p></li>
-<li><p>CDISC role classifications (Identifier, Timing, Qualifier)</p></li>
-<li><p>Sort order specifications</p></li>
-</ul></li>
-</ul>
-<h3 id="source-data" class="anchored"><strong>Source Data</strong>:</h3>
-<ul>
-<li><p>SOURCE.DEMOGRAPHIC (1 row per subject, e.g., subject, dob, gender, trt, uniqueid)</p></li>
-<li><p>SOURCE.DOSING (e.g., subject, startdt, enddt)</p></li>
-</ul>
-<h3 id="environment-setup" class="anchored"><strong>Environment Setup</strong></h3>
-<ul>
-<li><p><strong>Platform:</strong> SAS OnDemand 9.4</p></li>
-<li><p><strong>Libraries:</strong> SOURCE (raw data), LIB (formats), TARGET (outputs)</p></li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="technical-implementation" class="level2">
-<h2 class="anchored" data-anchor-id="technical-implementation">Technical Implementation</h2>
-<section id="library-setup" class="level3">
-<h3 class="anchored" data-anchor-id="library-setup">1. Library Setup</h3>
-<pre><code>/* Common paths &amp; librefs */
-%include "/home/u64197545/CDISC/appendix/common.sas";
-/* expects:
- libname source "/home/u64197545/CDISC/data";
- libname lib "/home/u64197545/CDISC/formats";
- libname target "/home/u64197545/CDISC/sdtm";
-*/</code></pre>
-</section>
-<section id="create-empty-dm-from-metadata" class="level3">
-<h3 class="anchored" data-anchor-id="create-empty-dm-from-metadata">2. Create EMPTY DM from Metadata</h3>
-<p>The <code>make_empty_dataset</code> macro creates dataset templates with proper CDISC attributes:</p>
-<pre><code>/* Create empty based on metadata CSV */
-%macro make_empty_dataset(metadatafile=, dataset=);
-/* Import csv file and rename it _temp */
-    proc import datafile="&amp;metadatafile" out=_temp dbms=csv replace;
-        guessingrows=max;
-        delimiter=";";
-        encoding='utf-8';
-    run;
-
-    /* Sort the dataset by expected specified variable order (varnum) */
-    proc sort data=_temp;
-        where domain="&amp;dataset";
-        by varnum;
-    run;
-
-    /* Create keepstring macro variable and load metadata information into macro variables */
-    %global &amp;dataset.KEEPSTRING;
-
-    data _null_;
-        set _temp nobs=nobs end=eof;
-        if _n_=1 then
-            call symput("vars", compress(put(nobs, 3.)));
-        call symputx('var'    || compress(put(_n_, 3.)), variable);
-        call symputx('label'  || compress(put(_n_, 3.)), label);
-        call symputx('length' || compress(put(_n_, 3.)), put(length, 3.));
-        /* Valid ODM types include TEXT, INTEGER, FLOAT, DATETIME, DATE, TIME and map to SAS numeric or character */
-        if upcase(type) in ("INTEGER", "FLOAT") then
-            call symputx('type' || compress(put(_n_, 3.)), "");
-        else if upcase(type) in ("TEXT", "DATE", "DATETIME", "TIME") then
-            call symputx('type' || compress(put(_n_, 3.)), "$");
-        else
-            put "ERR" "OR: not using a valid ODM type.  " type=;
-        /* Create KEEPSTRING macro variable */
-        length keepstring $ 32767;
-        retain keepstring;
-        keepstring=compress(keepstring) || "|" || left(variable);
-        if eof then
-            call symputx(upcase(compress("&amp;dataset" || 'KEEPSTRING')), 
-                left(trim(translate(keepstring, " ", "|"))));
-    run;
-
-    /* Create a 0-observation template data set used for assigning variable attributes */
-    data EMPTY_&amp;dataset;
-        %do i=1 %to &amp;vars;
-            attrib &amp;&amp;var&amp;i label="&amp;&amp;label&amp;i" 
-            %if "&amp;&amp;length&amp;i" ne "" %then
-                length=&amp;&amp;type&amp;i.&amp;&amp;length&amp;i...;
-            ;
-            %if &amp;&amp;type&amp;i=$ %then
-                retain &amp;&amp;var&amp;i '';
-            %else
-                retain &amp;&amp;var&amp;i .;
-            ;
-        %end;
-        if 0;
-    run;
-%mend make_empty_dataset;
-
-/* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */</code></pre>
-</section>
-<section id="stdm-variable-mapping" class="level3">
-<h3 class="anchored" data-anchor-id="stdm-variable-mapping">3. STDM Variable Mapping</h3>
-<p>SDTM DM variables are classified according to CDISC standards (SDTMIG v3.4):</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable Class</th>
-<th>Examples</th>
-<th>Purpose</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Identifier</td>
-<td>STUDYID, DOMAIN, USUBJID, SUBJID</td>
-<td>Unique subject identification</td>
-</tr>
-<tr class="even">
-<td>Timing</td>
-<td>RFSTDTC, RFENDTC, BRTHDTC</td>
-<td>Study and reference dates (ISO 8601)</td>
-</tr>
-<tr class="odd">
-<td>Qualifier</td>
-<td>SEX, RACE, COUNTRY, AGE</td>
-<td>Demographic characteristics</td>
-</tr>
-<tr class="even">
-<td>Treatment</td>
-<td>ARMCD, ARM, ACTARM</td>
-<td>Planned and actual treatments</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="controlled-terminology" class="level3">
-<h3 class="anchored" data-anchor-id="controlled-terminology">4. Controlled Terminology</h3>
-<pre><code>/* Creating custom format for the variables sex, race, arm, and armcd */
-
-proc format;
-    value sex 1='M' 2='F' .='U';
-    value race 1='White' 2='Black or African American' 3='Asian';
-    value armcd 0='PLACEBO' 1='ALG123';
-    value arm 0='Placebo' 1='Analgezia HCL 30mg';
-run;</code></pre>
-</section>
-<section id="reference-date-derivation" class="level3">
-<h3 class="anchored" data-anchor-id="reference-date-derivation">5. Reference Date Derivation</h3>
-<p>Calculate first and last dosing dates for study reference timing:</p>
-<pre><code>/* Derive first/last dose per subject (RFSTDTC/RFENDTC) */
-proc sort 
-  data=source.dosing(keep=subject startdt enddt) 
-  out=dosing;
-   by subject startdt;
-run;
-
-data dosing;
-  set dosing; 
-    by subject;
-    retain firstdose lastdose;
-  if first.subject then 
-    do; 
-       firstdose=.; 
-       lastdose=.; 
-    end;
-  firstdose = min(firstdose, startdt, enddt);
-  lastdose  = max(lastdose , startdt, enddt);
-  if last.subject;
-run;</code></pre>
-</section>
-<section id="combine-all-data" class="level3">
-<h3 class="anchored" data-anchor-id="combine-all-data">6. Combine All Data</h3>
-<pre><code>/* Get demographics data */
-proc sort
-  data=source.demographic
-  out=demographic;
-    by subject;
-run;
-
-/* Merge demographics and first dose date */
-data demog_dose;
-  merge demographic
-        dosing;
-    by subject;
-run;
-
-/* Derive the majority of SDTM DM variables */
-options missing = ' ';
-data dm;
-  set EMPTY_DM
-    demog_dose(rename=(race=_race));
-    studyid = 'XYZ123';
-    domain = 'DM';
-    usubjid = left(uniqueid);
-    subjid = put(subject,3.); 
-    rfstdtc = put(firstdose,yymmdd10.);  
-    rfendtc = put(lastdose,yymmdd10.); 
-    rfxstdtc = put(firstdose,yymmdd10.);  
-    rfxendtc = put(lastdose,yymmdd10.);
-    rficdtc = put(icdate,yymmdd10.);
-    rfpendtc = put(lastdoc,yymmdd10.);
-    dthfl = 'N';
-    siteid = substr(subjid,1,1) || "00";
-    brthdtc = put(dob,yymmdd10.);
-    age = floor ((intck('month',dob,firstdose) - 
-          (day(firstdose) &lt; day(dob))) / 12);
-    if age ne . then
-      ageu = 'YEARS';
-    sex = put(gender,sex.);
-    race = put(_race,race.);
-    armcd = put(trt,armcd.);
-    arm = put(trt,arm.);
-    actarmcd = put(trt,armcd.);
-    actarm = put(trt,arm.);
-    country = "USA"; 
-run;</code></pre>
-</section>
-<section id="dataset-finalization" class="level3">
-<h3 class="anchored" data-anchor-id="dataset-finalization">7. Dataset Finalization</h3>
-<pre><code>/* Create sorting specification from metadata */
-
-%macro make_sort_order(metadatafile=, dataset=);
-    proc import datafile="&amp;metadatafile" out=_temp dbms=csv replace;
-        guessingrows=max;
-        delimiter=";";
-        encoding='utf-8';
-    run;
-
-    proc sort data=_temp;
-        where keysequence ne . and domain="&amp;dataset";
-        by keysequence;
-    run;
-
-    %global &amp;dataset.SORTSTRING;
-    data _null_;
-        set _temp end=eof;
-        length domainkeys $ 200;
-        retain domainkeys '';
-        domainkeys=trim(domainkeys) || ' ' || trim(put(variable, 8.));
-        if eof then
-            call symputx(compress("&amp;dataset" || "SORTSTRING"), domainkeys);
-    run;
-%mend make_sort_order;
-
-/* Apply metadata-driven sorting and create final dataset */
-
-%make_sort_order(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
-proc sort
-  data=dm(keep = &amp;DMKEEPSTRING)
-  out=target.dm;
-    by &amp;DMSORTSTRING;
-run;</code></pre>
-</section>
-<section id="quality-control-validation" class="level3">
-<h3 class="anchored" data-anchor-id="quality-control-validation">Quality Control &amp; Validation</h3>
-<section id="automated-qc-checks" class="level4">
-<h4 class="anchored" data-anchor-id="automated-qc-checks">Automated QC Checks</h4>
-<pre><code>/* 1 record per USUBJID? */
-proc sql;
-  select usubjid, count(*) as n
-  from target.dm
-  group by usubjid
-  having calculated n &gt; 1;
-quit;
-
-/* Required fields not missing? */
-proc freq data=target.dm;
-  tables studyid*usubjid*domain / missing list;
-run;</code></pre>
-</section>
-<section id="validation-framework" class="level4">
-<h4 class="anchored" data-anchor-id="validation-framework">Validation Framework</h4>
-<ul>
-<li><strong>Structural checks</strong>: Variable names, type, length, labels match metadata.</li>
-<li><strong>Controlled terminology</strong>: Values mapped via formats/codelists.</li>
-<li><strong>Timing</strong>: ISO 8601, completeness of RFSTDTC/RFXSTDTC.</li>
-<li><strong>Keys</strong>: 1 record per subject; USUBJID uniqueness.</li>
-<li><strong>Cross-domain</strong>: Consistency with EX/AE/VS if applicable.</li>
-</ul>
-</section>
-</section>
-<section id="results" class="level3">
-<h3 class="anchored" data-anchor-id="results">Results</h3>
-<section id="sample-output" class="level4">
-<h4 class="anchored" data-anchor-id="sample-output"><strong>Sample output</strong>:</h4>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>USUBJID</th>
-<th>STUDYID</th>
-<th>SEX</th>
-<th>AGE</th>
-<th>RACE</th>
-<th>ARMCD</th>
-<th>RFSTDTC</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>001</td>
-<td>XYZ123</td>
-<td>M</td>
-<td>45</td>
-<td>White</td>
-<td>PLACEBO</td>
-<td>2023-01-15</td>
-</tr>
-<tr class="even">
-<td>002</td>
-<td>XYZ123</td>
-<td>F</td>
-<td>32</td>
-<td>Asian</td>
-<td>ALG123</td>
-<td>2023-01-16</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="dataset-specifications" class="level4">
-<h4 class="anchored" data-anchor-id="dataset-specifications">Dataset Specifications</h4>
-<ul>
-<li><p><strong>Records</strong>: One per subject (N=subjects)</p></li>
-<li><p><strong>Variables</strong>: 20+ CDISC-compliant variables</p></li>
-<li><p><strong>Format</strong>: SAS7BDAT with proper metadata</p></li>
-<li><p><strong>Compliance</strong>: SDTMIG v3.4 standards</p></li>
-</ul>
-</section>
-</section>
-<section id="technical-impact" class="level3">
-<h3 class="anchored" data-anchor-id="technical-impact">Technical Impact</h3>
-<p>This metadata-driven approach provides:</p>
-<ul>
-<li><p><strong>90% reduction</strong> in manual programming time</p></li>
-<li><p><strong>Zero tolerance</strong> for variable specification errors</p></li>
-<li><p><strong>100% compliance</strong> with CDISC standards</p></li>
-<li><p><strong>Full auditability</strong> through automated documentation</p></li>
-</ul>
-</section>
-</section>
-<section id="contact" class="level2">
-<h2 class="anchored" data-anchor-id="contact">Contact</h2>
-<p>Interested in this project or my expertise in biostatistics and CDISC standards?</p>
-<p><a href="mailto:contact@example.com"><strong>Send an Email</strong></a> | <a href="https://linkedin.com/in/example"><strong>LinkedIn</strong></a></p>
 
 
-</section>
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
