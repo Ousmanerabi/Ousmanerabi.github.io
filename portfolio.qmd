@@ -39,6 +39,7 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 [Retrospective Analysis of Malaria Trend in Burkina Faso](projects/retrospective_analysis.html)
 
 ## Data Management & Multi-country Studies
+
 *Complex data integration and cross-national research coordination*
 
 [Data Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)](projects/snt-stratification-targeting.html)
@@ -46,6 +47,7 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 [Complex Survey Data Analysis with R](projects/complex-survey-analysis.html)
 
 ## Capacity Building & Training
+
 *Graduate student mentorship and institutional capacity development*
 
 [Training & Mentorship (Graduate Students – Benin & Guinea)](projects/training-mentorship-2020-2024.html)

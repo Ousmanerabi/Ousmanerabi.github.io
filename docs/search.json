@@ -894,5 +894,33 @@
     "title": "Analysis Data Subject Level (ADSL) Generation with SAS",
     "section": "",
     "text": "The Analysis Data Subject Level (ADSL) dataset is the cornerstone of clinical trial statistical analysis under the CDISC Analysis Data Model (ADaM) standard. ADSL provides one record per subject containing all subject-level information needed for efficacy and safety analyses.\n\n\nADSL serves as the foundation dataset that:\n\nContains one record per subject with subject-level analysis variables\nDefines analysis populations (Safety, ITT, Per-Protocol)\nProvides treatment information and study periods\nLinks to all other ADaM datasets through USUBJID\nEnsures consistency across all statistical analyses\n\n\n\n\n\nFDA Requirement: Essential for regulatory submissions\nAnalysis Foundation: Referenced by all BDS and OCCDS datasets\nPopulation Definition: Critical for primary endpoint analyses\nTraceability: Links analysis results back to SDTM source"
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "Key Projects (2020–2025)",
+    "section": "",
+    "text": "Below is a curated selection of projects I led or contributed to between 2020 and 2025. Each page summarizes the context, methods, deliverables, and impact.\nWork With Me\n\n\n\nModeling: Scenario modeling to guide policy.\n\nAnalytics: Statistical and geospatial analysis for decision-making.\n\nSNT Support: Data pipelines, stratification, and intervention targeting.\n\nTraining: Capacity building for graduate students.\n\n\n\n\n\n\nRisk Factors – ITN Guinea DHS 2018\n\n2021–2022\n\n\n\nRetrospective Analysis of Malaria Trend in Burkina Faso\n\n2023–2024\n\n\n\nData Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)\n\n2023\n\n\n\nMicrostratification in Conakry\n\n2023–2024\n\n\n\nTraining & Mentorship (Graduate Students – Benin & Guinea)\n\n2020–2024\n\n\n\n\n\n\n\n\ndefine.xml Generation & Validation Workflow\n\n2025\n\n\n\nEnd-to-end Study Data Tabulation Model\n\n2025\n\n\n\nADaM BDS Derivations for Efficacy & Safety\n\n2025"
+  },
+  {
+    "objectID": "projects.html#thematic-areas",
+    "href": "projects.html#thematic-areas",
+    "title": "Key Projects (2020–2025)",
+    "section": "",
+    "text": "Modeling: Scenario modeling to guide policy.\n\nAnalytics: Statistical and geospatial analysis for decision-making.\n\nSNT Support: Data pipelines, stratification, and intervention targeting.\n\nTraining: Capacity building for graduate students."
+  },
+  {
+    "objectID": "projects.html#r-epidemiology-projects",
+    "href": "projects.html#r-epidemiology-projects",
+    "title": "Key Projects (2020–2025)",
+    "section": "",
+    "text": "Risk Factors – ITN Guinea DHS 2018\n\n2021–2022\n\n\n\nRetrospective Analysis of Malaria Trend in Burkina Faso\n\n2023–2024\n\n\n\nData Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)\n\n2023\n\n\n\nMicrostratification in Conakry\n\n2023–2024\n\n\n\nTraining & Mentorship (Graduate Students – Benin & Guinea)\n\n2020–2024"
+  },
+  {
+    "objectID": "projects.html#cdisc-sas-clinical-programming",
+    "href": "projects.html#cdisc-sas-clinical-programming",
+    "title": "Key Projects (2020–2025)",
+    "section": "",
+    "text": "define.xml Generation & Validation Workflow\n\n2025\n\n\n\nEnd-to-end Study Data Tabulation Model\n\n2025\n\n\n\nADaM BDS Derivations for Efficacy & Safety\n\n2025"
   }
 ]

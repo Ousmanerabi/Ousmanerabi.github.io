@@ -14,7 +14,7 @@ format:
 
 *Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration.*
 
-[View Code on Github](https://github.com/ousmanerabi/02_SDTM)
+[View Code on Github](https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/03_ADAM)
 
 ## Introduction
 
