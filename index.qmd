@@ -139,7 +139,7 @@ I am actively seeking **Biostatistician**, **RWE Epidemiologist** and ***Data Sc
 | Attribute | Detail |
 |---------------------------|---------------------------------------------|
 | **Name** | Ousmane Diallo |
-| **Specialization** | Biostatistics, Epidemiology, CDISC Standards |
+| **Specialization** | Biostatistics, Epidemiology, HEOR, CDISC Standards |
 | **Experience** | 9+ years in health data analytics & statistical modeling |
 | **Certifications** | SAS Base Programming & Clinical Trials Programming |
 | **Industry Focus** | Pharmaceutical, Clinical Research, Regulatory Science |
