@@ -128,7 +128,7 @@ Yes! I provide **mentorship** and **consulting** in **biostatistics**, **SAS pro
 <details class="faq">
 <summary>Where are you based and available for work?</summary>
 ::: faq-answer
-I am actively seeking **clinical biostatistician** and **statistical programmer** positions in the **pharmaceutical industry**. I'm available for **remote work** and **relocation** opportunities worldwide, with experience in **international collaborations**.
+I am actively seeking **Biostatistician**, **RWE Epidemiologist** and ***Data Scientist*** positions in the **pharmaceutical industry**. I'm available for **remote work** and **relocation** opportunities worldwide, with experience in **international collaborations**.
 :::
 </details>
 :::::::

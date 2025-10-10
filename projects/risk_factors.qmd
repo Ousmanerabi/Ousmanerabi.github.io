@@ -35,37 +35,37 @@ Developed analytical framework addressing both household-level ownership and ind
 
 ### Study Design
 
-- **Data Source**: Guinea DHS 2018 (nationally representative)
-- **Study Population**: Households and individuals across Guinea's administrative regions
-- **Analytical Approach**: Multi-level logistic regression with survey weights
+-   **Data Source**: Guinea DHS 2018 (nationally representative)
+-   **Study Population**: Households and individuals across Guinea's administrative regions
+-   **Analytical Approach**: Multi-level logistic regression with survey weights
 
 ### Key Variables Analyzed
 
 **Outcomes**:
 
-- ITN ownership at household level
+-   ITN ownership at household level
 
-- ITN usage the previous night (among those with access) at individual-level
+-   ITN usage the previous night (among those with access) at individual-level
 
 **Predictors**:
 
-- **Socioeconomic**: Wealth quintiles, education level, household size
+-   **Socioeconomic**: Wealth quintiles, education level, household size
 
-- **Demographic**: Age and sex of household head, marital status, pregnancy status
+-   **Demographic**: Age and sex of household head, marital status, pregnancy status
 
-- **Geographic**: Urban/rural residence, administrative region
+-   **Geographic**: Urban/rural residence, administrative region
 
-- **Structural**: Number of rooms, presence of children under 5
+-   **Structural**: Number of rooms, presence of children under 5
 
 ### Statistical Methods
 
 **Complex Survey Design Adjustment**:
 
-- Survey weights applied for population representativeness
+-   Survey weights applied for population representativeness
 
-- Stratification and clustering accounted for in variance estimation
+-   Stratification and clustering accounted for in variance estimation
 
-- Design effects calculated for precision assessment
+-   Design effects calculated for precision assessment
 
 **Analytical Framework**:
 
@@ -144,29 +144,29 @@ models <- explanatory_vars %>%
 
 **Geographic Disparities**:
 
-- Significant regional variation in ownership rates
+-   Significant regional variation in ownership rates
 
-- Urban-rural differentials identified
+-   Urban-rural differentials identified
 
-- Hotspot mapping revealed priority intervention areas
+-   Hotspot mapping revealed priority intervention areas
 
 **Socioeconomic Determinants**:
 
-- Wealth quintile emerged as strongest predictor
+-   Wealth quintile emerged as strongest predictor
 
-- Education level positively associated with ownership
+-   Education level positively associated with ownership
 
-- Household composition effects documented
+-   Household composition effects documented
 
 ### Usage Among Those with Access
 
 **Behavioral Factors**:
 
-- Gap identified between access and utilization
+-   Gap identified between access and utilization
 
-- Individual-level characteristics influence usage patterns
+-   Individual-level characteristics influence usage patterns
 
-- Opportunity for targeted behavior change interventions
+-   Opportunity for targeted behavior change interventions
 
 ## Technical Implementation
 
@@ -180,9 +180,9 @@ models <- explanatory_vars %>%
 
 ### Data Management
 
-- Complex survey data cleaning and validation
-- Multiple imputation for missing data
-- Quality control procedures implemented
+-   Complex survey data cleaning and validation
+-   Multiple imputation for missing data
+-   Quality control procedures implemented
 
 ### Visualization Approach
 
@@ -206,49 +206,50 @@ guinea_map <- tm_shape(guinea_regions) +
 
 ### Policy Implications
 
-- **Targeted Distribution**: Evidence-based identification of priority populations
+-   **Targeted Distribution**: Evidence-based identification of priority populations
 
-- **Resource Allocation**: Geographic prioritization for intervention funding
+-   **Resource Allocation**: Geographic prioritization for intervention funding
 
-- **Program Design**: Tailored approaches for different demographic groups
+-   **Program Design**: Tailored approaches for different demographic groups
 
 ### Public Health Impact
 
-- Informed national malaria control strategy development
-- Evidence for behavior change communication messaging
-- Baseline data for intervention impact evaluation
+-   Informed national malaria control strategy development
+-   Evidence for behavior change communication messaging
+-   Baseline data for intervention impact evaluation
 
 ### Methodological Contributions
 
-- Demonstrated complex survey analysis best practices
-- Reproducible analytical workflow established
-- Template for similar cross-sectional studies
+-   Demonstrated complex survey analysis best practices
+-   Reproducible analytical workflow established
+-   Template for similar cross-sectional studies
 
 ## Deliverables
 
 **Technical Outputs**:
 
-- Comprehensive statistical analysis report
+-   Comprehensive statistical analysis report
 
-- Interactive geospatial visualizations
+-   Interactive geospatial visualizations
 
-- Reproducible R analysis code
+-   Reproducible R analysis code
 
-- Policy brief with actionable recommendations
+-   Policy brief with actionable recommendations
 
 **Skills Demonstrated**:
 
-- **Survey Methodology**: Complex sampling design analysis
+-   **Survey Methodology**: Complex sampling design analysis
 
-- **Statistical Modeling**: Multi-level logistic regression
+-   **Statistical Modeling**: Multi-level logistic regression
 
-- **Geospatial Analysis**: Regional disparity mapping
+-   **Geospatial Analysis**: Regional disparity mapping
 
-- **Reproducible Research**: Version-controlled analytical workflows
+-   **Reproducible Research**: Version-controlled analytical workflows
 
-- **Policy Translation**: Research-to-practice communication
+-   **Policy Translation**: Research-to-practice communication
 
 ## 
+
 ## Code Repository
 
 **Reproducibility**: Full analytical code and documentation available on <https://github.com/Ousmanerabi/Risk_factors_ITN_Guinea_DHS_2018>
@@ -259,6 +260,6 @@ guinea_map <- tm_shape(guinea_regions) +
 
 **Scientific Contribution**: This analysis was published as a peer-reviewed research article, contributing to the evidence base for malaria prevention strategies in West Africa. The methodology developed in this study has been referenced by subsequent DHS analyses in the region.
 
----
+------------------------------------------------------------------------
 
 This project demonstrates expertise in epidemiological research, complex survey analysis, and evidence-based public health recommendations using industry-standard statistical methods and reproducible research practices.\*

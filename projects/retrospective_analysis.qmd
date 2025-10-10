@@ -30,7 +30,7 @@ The aim of this study was to assess the malaria trends in Burkina Faso at the he
 ### Data sources & Integration
 
 | Variable | Definition | Source | Temporal | Period |
-|---------------|---------------|---------------|---------------|---------------|
+|----|----|----|----|----|
 | Suspected cases | Clinical malaria suspicion (fever) | HMIS | Monthly | 2016–2023 (excl. 2019) |
 | Tested cases | Received RDT or microscopy | HMIS | Monthly | 2016–2023 |
 | Confirmed cases | Positive RDT or microscopy | HMIS | Monthly | 2016–2023 |
@@ -101,13 +101,13 @@ Crude malaria incidence was calculated by dividing the number of reported confir
 
 **Incidence Adjustment Framework** (WHO Guidelines):
 
-- **Crude**: Raw confirmed cases / population × 1,000
+-   **Crude**: Raw confirmed cases / population × 1,000
 
-- **Adjustment 1**: Account for testing rate variations
+-   **Adjustment 1**: Account for testing rate variations
 
-- **Adjustment 2**: Account for facility reporting completeness
+-   **Adjustment 2**: Account for facility reporting completeness
 
-- **Adjustment 3**: Account for care-seeking behavior patterns
+-   **Adjustment 3**: Account for care-seeking behavior patterns
 
 ### Statistical Analysis Methods
 
@@ -174,7 +174,7 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 **Key Insight:**
 
--    **Adjustments 2 & 3 revealed hidden burden**: Poor reporting in northern/eastern districts inflated true incidence
+-   **Adjustments 2 & 3 revealed hidden burden**: Poor reporting in northern/eastern districts inflated true incidence
 
 -   **Care-seeking adjustment critical**: Added \~450 cases/1,000 in Gorom-Gorom, Gaoua, Kaya
 
@@ -248,11 +248,11 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 **Methodological Contributions**:
 
-- Established best practices for HMIS data quality assessment
+-   Established best practices for HMIS data quality assessment
 
-- Developed reproducible workflow for routine surveillance analysis
+-   Developed reproducible workflow for routine surveillance analysis
 
-- Created template for multi-country burden estimation studies
+-   Created template for multi-country burden estimation studies
 
 ## Repository & Reproducibility
 
@@ -272,6 +272,6 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 -   World Health Organization
 
----
+------------------------------------------------------------------------
 
 This project demonstrates expertise in epidemiological surveillance, advanced time series analysis, multi-source data integration, and evidence-based policy support using state-of-the-art statistical methods and reproducible research practices.

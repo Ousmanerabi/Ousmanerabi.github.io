@@ -14,7 +14,7 @@ format:
 
 *Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.*
 
-[View Code on Github](https://github.com/ousmanerabi/02_SDTM)
+[View Code on Github](https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM)
 
 ## Introduction
 
@@ -93,7 +93,7 @@ Raw Data → Metadata → Empty Shell → Mapping → Derivations → Validation
 %include "/home/u64197545/CDISC/appendix/common.sas";
 /* expects:
  libname source "/home/u64197545/CDISC/data";
- libname lib "/home/u64197545/CDISC/formats";
+ libname library "/home/u64197545/CDISC/formats";
  libname target "/home/u64197545/CDISC/sdtm";
 */
 ```
@@ -169,7 +169,7 @@ The `make_empty_dataset` macro creates dataset templates with proper CDISC attri
 SDTM DM variables are classified according to CDISC standards (SDTMIG v3.4):
 
 | Variable Class | Examples | Purpose |
-|------------------------|------------------------|------------------------|
+|----|----|----|
 | Identifier | STUDYID, DOMAIN, USUBJID, SUBJID | Unique subject identification |
 | Timing | RFSTDTC, RFENDTC, BRTHDTC | Study and reference dates (ISO 8601) |
 | Qualifier | SEX, RACE, COUNTRY, AGE | Demographic characteristics |
