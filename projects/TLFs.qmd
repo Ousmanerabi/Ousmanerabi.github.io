@@ -61,7 +61,7 @@ ADaM Datasets → SAS Programs → QC Validation → TLF Outputs → PDF/RTF
 #### Input Datasets
 
 | **Dataset** | **Purpose** | **Key Variables** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **ADSL** | Subject-level analysis data | USUBJID, TRT01P, SAFFL, ITTFL, AGE, SEX |
 | **ADLB** | Laboratory results | PARAMCD, AVAL, BASE, CHG, ANRIND |
 | **ADVS** | Vital signs | PARAMCD, AVAL, BASE, CHG |
@@ -70,31 +70,531 @@ ADaM Datasets → SAS Programs → QC Validation → TLF Outputs → PDF/RTF
 
 ### Tables Implementation
 
-#### Table: Demographics and Baseline Characteristics
+#### Table 1.1 : Demographics and Baseline Characteristics
 
-## Technical Implementation
+**Purpose**: Summarize subject demographics and baseline disease characteristics by treatment group.
 
-### 1. Library Setup
+**Statistical Methods**: Descriptive statistics (N, mean, SD, median, range for continuous; n, % for categorical); Wilcoxon test, chisquare test and fisher test.
 
-```         
-/* Library and macro setup */
-%include "/home/u64197545/ADaM/programs/setup.sas";
-
-/* Expected libraries:
-   - SDTM: Source SDTM datasets
-   - ADAM: Output ADaM datasets  
-   - LIBRARY: Formats and macros
+``` sas
+DEMOGRAPHICS AND BASELINE CHARACTERISTICS TABLES GENERATION
+  ============================================================================
+  This SAS program generates summary tables for demographics and baseline 
+  characteristics from the ADaM ADSL dataset (Subject Level Analysis Dataset).
+  It produces three PDF tables:
+  - Table 1.1: Using PROC TABULATE for basic summaries by treatment group.
+  - Table 1.2: Using PROC REPORT for detailed summaries with computed percentages.
+  - Table 1.3: Using PROC REPORT with statistical tests (Wilcoxon for age, 
+              Chi-square for sex, Fisher's exact for race) and p-values.
+              
+*=============================================================================
+  SECTION 1: DEFINE FORMATS FOR TREATMENT, SEX, RACE, AND AGE GROUPS
+  ============================================================================
+  Custom formats are created to label categorical variables for readability 
+  in output tables. Numeric and character formats are distinguished by the 
+  $ prefix for character variables.
 */
+proc format;
+/* Numeric format for treatment arm (trt01pn) */
+    value trt01pn
+        0 = "Placebo"
+        1 = "Active";
+    
+/* Character format for sex (note the $ for character) */
+    value $sexn
+        " " = "Missing"
+        "M" = "Male"
+        "F" = "Female";
+    
+/* Character format for race (note the $ for character) */
+    value $racen
+        "WHITE" = "White"
+        "BLACK OR AFRICAN AMERICAN" = "Black"
+        "ASIAN" = "Other";
+    
+/* Character format for age group (note the $ for character) */
+    value $agegrpn
+        "<55 YEARS" = "<55"
+        ">=55 YEARS" = ">=55";
+run;
 
-libname sdtm "/home/u64197545/data/sdtm";
-libname adam "/home/u64197545/data/adam";
-libname library "/home/u64197545/data/library";
+/*=============================================================================
+  SECTION 2: GENERATE TABLE 1.1 USING PROC TABULATE
+  ============================================================================
+  This procedure creates a simple summary table for age statistics and 
+  categorical distributions of sex and race by treatment group, including 
+  an overall column. Output is formatted as PDF with HTMLBlue style.
+*/
+options nodate nonumber missing = ' ';  /* Suppress date/number headers and treat missing as blank */
+ods escapechar='#';  /* Enable ODS escape for special formatting in titles/footnotes */
+ods pdf style=htmlblue file='/home/u64197545/CDISC/adam/table1.1.pdf';  /* Open PDF output with style */
 
-/* Load standard ADaM formats */
-%include library(adamfmt);
+proc tabulate
+    data = adam.adsl  /* Input dataset: ADSL from ADaM library */
+    missing;  /* Include missing values in analysis */
+
+    class trt01pn sex race;  /* Class variables for grouping */
+    var age;  /* Continuous variable for statistics */
+    
+    table 
+        /* Age row: Statistics (N, Mean, Std Dev, Min, Max) */
+        age = 'Age' * (n = 'n' * f = 8. mean = 'Mean' * f = 5.1 
+                       std = 'Standard Deviation' * f = 5.1
+                       min = 'Min' * f = 3. Max = 'Max' * f = 3.)
+        
+        /* Sex row: N and column percentages */
+        sex = 'Sex' * (n = 'n' * f = 3. colpctn = '%' * f = 4.1)
+        
+        /* Race row: N and column percentages */
+        race = 'Race' * (n = 'n' * f = 3. colpctn = '%' * f = 4.1),
+        
+        /* Columns: By treatment (with blank label) and overall */
+        (trt01pn = "  ") (all = 'Overall');
+
+    /* Apply formats to variables */
+    format trt01pn trt01pn. race $racen. sex $sexn.;
+
+    /* Titles and footnotes with ODS escape for dynamic elements */
+    title1 j=l 'Hands-on-training' 
+           j=r 'Page #{thispage} of #{lastpage}';  /* Left: Title, Right: Page numbers */
+    title2 j=c 'Table 1.1';  /* Centered table title */
+    title3 j=c 'Demographics and Baseline Characteristics';  /* Centered subtitle */
+    footnote1 j=l '* Other includes Asian, Native American, and other races.';  /* Left-aligned footnote */
+    footnote2 j=l "Created by %sysfunc(getoption(sysin)) on &sysdate9..";  /* Dynamic creation info */
+run; 
+
+ods pdf close;  /* Close PDF output */
+
+/*=============================================================================
+  SECTION 3: PREPARE DATA FOR PROC REPORT (TABLE 1.2)
+  ============================================================================
+  Create numeric versions of categorical variables (sexn, racen) for easier 
+  analysis in PROC REPORT. Also rename treatment variable for consistency.
+*/
+data adsl_num;
+    set adam.adsl;  /* Input: Original ADSL */
+    
+    /* Derive numeric sex variable */
+    if sex = 'M' then sexn = 1;
+    else if sex = 'F' then sexn = 2;
+    else sexn = .;  /* Missing for other values */
+    
+    /* Derive numeric race variable (grouping 'Other' races) */
+    if race = 'WHITE' then racen = 1;
+    else if race = 'BLACK OR AFRICAN AMERICAN' then racen = 2;
+    else if race = 'ASIAN' then racen = 3;
+    else if race = 'AMERICAN INDIAN OR ALASKA NATIVE' then racen = 3;
+    else racen = 3;  /* Default to 'Other' */
+    
+    /* Rename treatment for consistency */
+    trtpn = trt01pn;
+run;
+
+/* Define numeric formats for the derived variables */
+proc format;
+    value trtpn
+        0 = "Placebo"
+        1 = "Active";
+    
+    value sexn
+        . = "Missing"
+        1 = "Male"
+        2 = "Female";
+    
+    value racen
+        1 = "White"
+        2 = "Black"
+        3 = "Other*";
+run;
+
+/*=============================================================================
+  SECTION 4: GENERATE TABLE 1.2 USING PROC REPORT
+  ============================================================================
+  PROC REPORT creates a detailed demographics table with nested rows for age 
+  statistics, sex, and race, including computed percentages and column headers 
+  with sample sizes.
+*/
+options nodate nonumber missing=' ';  /* Suppress headers and handle missing values */
+ods escapechar='#';  /* Enable special formatting */
+ods pdf style=htmlblue file='/home/u64197545/CDISC/adam/table1.2.pdf';  /* Open PDF */
+
+proc report data=adsl_num nowindows missing headline;  /* No windows, include missing, bold headers */
+    column (trtpn,  /* Across variable: Treatment groups */
+            (("Age" 
+              age=agen age=agemean age=agestd age=agemin age=agemax)  /* Age statistics */
+             sexn,(sexn=sexnn sexnpct)  /* Sex: N and % */
+             racen,(racen=racenn racenpct)));  /* Race: N and % */
+    
+    /* Define treatment across variable */
+    define trtpn / across format=trtpn. "  ";                         
+    
+    /* Define age statistics */
+    define agen / analysis n format=3. 'N';
+    define agemean / analysis mean format=5.1 'Mean';
+    define agestd / analysis std format=5.1 'SD';
+    define agemin / analysis min format=3. 'Min';
+    define agemax / analysis max format=3. 'Max';
+    
+    /* Define sex across and statistics */
+    define sexn / across "Sex" format=sexn.;         
+    define sexnn / analysis n format=3. 'N';                    
+    define sexnpct / computed format=percent5. '(%)';           
+    
+    /* Define race across and statistics */
+    define racen / across "Race" format=racen.;                    
+    define racenn / analysis n format=3. width=6 'N';                    
+    define racenpct / computed format=percent5. '(%)';           
+    
+    /* Compute totals for percentages */
+    compute before;                                              
+        totga = sum(_c6_,_c8_,_c10_);  /* Total N for age group */
+        totgp = sum(_c23_,_c25_,_c27_);  /* Total N for sex group */
+        totra = sum(_c12_,_c14_,_c16_);  /* Total N for race group */
+        totrp = sum(_c29_,_c31_,_c33_);  /* Overall total for percentages */
+    endcomp;
+    
+    /* Compute sex percentages */
+    compute sexnpct;                                           
+        _c7_ = _c6_ / totga;                                              
+        _c9_ = _c8_ / totga;                                              
+        _c11_ = _c10_ / totga;                                              
+        _c24_ = _c23_ / totgp;                                              
+        _c26_ = _c25_ / totgp;                                              
+        _c28_ = _c27_ / totgp;                                              
+    endcomp;
+    
+    /* Compute race percentages */
+    compute racenpct;                                           
+        _c13_ = _c12_ / totra;                                              
+        _c15_ = _c14_ / totra;                                              
+        _c17_ = _c16_ / totra;                                              
+        _c30_ = _c29_ / totrp;                                              
+        _c32_ = _c31_ / totrp;                                              
+        _c34_ = _c33_ / totrp;                                              
+    endcomp;
+    
+    /* Titles and footnotes */
+    title1 j=l 'Hands-on-training' j=r;  /* Left: Training title, Right: Page info (dynamic) */
+    title2 j=c 'Table 1.2';  /* Centered table title */
+    title3 j=c 'Demographics and Baseline Characteristics';  /* Centered subtitle */
+    
+    footnote1 j=l '* Other includes Asian, Native American, and other races.';  /* Footnote for race grouping */
+    footnote2 j=l "Created by %sysfunc(getoption(sysin)) on &sysdate9..";  /* Dynamic creation info */
+run; 
+
+ods pdf close;  /* Close PDF */
+
+/*=============================================================================
+  SECTION 5: DUPLICATE ADSL FOR OVERALL COLUMN CALCULATIONS
+  ============================================================================
+  Duplicate the ADSL dataset to include an "Overall" treatment group (trtpn=2) 
+  for summary calculations across all subjects.
+*/
+data adsl;
+    set adsl_num;  /* Input: Numeric version of ADSL */
+    output;  /* Output original records */
+    trtpn = 2;  /* Set treatment to Overall */
+    output;  /* Output duplicated records with Overall flag */
+run;
+
+/*=============================================================================
+  SECTION 6: AGE STATISTICS WITH P-VALUE (Wilcoxon Rank-Sum Test)
+  ============================================================================
+  Compute descriptive statistics for age by treatment group and perform a 
+  non-parametric Wilcoxon test for p-value comparison between Placebo and Active.
+*/
+**** GET P VALUE FROM NON PARAMETRIC COMPARISON OF AGE MEANS.;
+proc npar1way 
+    data = adsl  /* Input: Duplicated ADSL */
+    wilcoxon  /* Wilcoxon rank-sum test */
+    noprint;  /* Suppress printed output */
+    
+    where trtpn in (0,1);  /* Limit to Placebo and Active only */
+    class trtpn;  /* Grouping by treatment */
+    var age;  /* Variable for test */
+    output out=pvalue wilcoxon;  /* Output p-value to dataset */
+run;
+
+proc sort 
+    data=adsl;  /* Sort for BY processing */
+    by trtpn;
+run;
+ 
+***** GET AGE DESCRIPTIVE STATISTICS N, MEAN, STD, MIN, AND MAX.;
+proc univariate 
+    data = adsl noprint;  /* Univariate analysis, no print */
+    by trtpn;  /* By treatment group */
+
+    var age;  /* Variable for statistics */
+    output out = age 
+           n = _n mean = _mean std = _std min = _min max = _max;  /* Output statistics */
+run;
+
+**** FORMAT AGE DESCRIPTIVE STATISTICS FOR THE TABLE.;
+data age;
+    set age;  /* Input: Univariate output */
+
+    format n mean std min max $14.;  /* Format for character output */
+    drop _n _mean _std _min _max;  /* Drop raw stats */
+
+    n = put(_n,5.);  /* Format N */
+    mean = put(_mean,7.1);  /* Format mean */
+    std = put(_std,8.2);  /* Format std dev */
+    min = put(_min,7.1);  /* Format min */
+    max = put(_max,7.1);  /* Format max */
+run;
+
+**** TRANSPOSE AGE DESCRIPTIVE STATISTICS INTO COLUMNS.;
+proc transpose 
+    data = age 
+    out = age 
+    prefix = col;  /* Prefix for transposed variables (col0, col1, col2) */
+    var n mean std min max;  /* Variables to transpose */
+    id trtpn;  /* ID for new column names (by treatment) */
+run; 
+ 
+**** CREATE AGE FIRST ROW FOR THE TABLE.;
+data label;
+    set pvalue(keep = p2_wil rename = (p2_wil = pvalue));  /* Keep and rename p-value */
+    length label $ 85;  /* Length for label */
+    label = "#S={font_weight=bold} Age (years)";  /* Bold header with ODS escape */
+run;
+ 
+**** APPEND AGE DESCRIPTIVE STATISTICS TO AGE P VALUE ROW AND 
+**** CREATE AGE DESCRIPTIVE STATISTIC ROW LABELS.; 
+data age;
+    length label $ 85 col0 col1 col2 $ 25 ;  /* Define lengths */
+    set label age;  /* Combine p-value row with stats */
+
+    keep label col0 col1 col2 pvalue ;  /* Keep relevant columns */
+    if _n_ > 1 then  /* For stat rows (skip header) */
+        select;
+            when(_NAME_ = 'n')    label = "#{nbspace 6}N";  /* Indented N label */
+            when(_NAME_ = 'mean') label = "#{nbspace 6}Mean";  /* Indented Mean */
+            when(_NAME_ = 'std')  label = "#{nbspace 6}Standard Deviation";  /* Indented SD */
+            when(_NAME_ = 'min')  label = "#{nbspace 6}Minimum";  /* Indented Min */
+            when(_NAME_ = 'max')  label = "#{nbspace 6}Maximum";  /* Indented Max */
+            otherwise;
+        end;
+run;
+**** END OF AGE STATISTICS PROGRAMMING *****************************;
+
+/*=============================================================================
+  SECTION 7: SEX STATISTICS WITH P-VALUE (Pearson's Chi-Square Test)
+  ============================================================================
+  Compute frequencies and percentages for sex by treatment, perform Chi-square 
+  test, and format for table inclusion.
+*/
+**** GET SIMPLE FREQUENCY COUNTS FOR SEX.;
+proc freq 
+    data = adsl 
+    noprint;  /* No printed output */
+    where trtpn ne .;  /* Exclude missing treatment */
+    tables trtpn * sexn / missing outpct out = sexn;  /* Cross-tab with row % */
+run;
+ 
+**** FORMAT SEX N(%) AS DESIRED.;
+data sexn;
+    set sexn;
+    where sexn ne .;  /* Exclude missing sex */
+    length value $25;  /* Length for formatted value */
+    value = put(count,4.) || ' (' || put(pct_row,5.1)||'%)';  /* Format as N (%) */
+run;
+
+proc sort
+    data = sexn;
+    by sexn;  /* Sort by sex for transposition */
+run;
+ 
+**** TRANSPOSE THE SEX SUMMARY STATISTICS.;
+proc transpose 
+    data = sexn 
+    out = sexn(drop = _name_)  /* Drop transpose name */
+    prefix = col;  /* Prefix for columns */
+    by sexn;  /* BY sex */
+    var value;  /* Variable to transpose */
+    id trtpn;  /* ID by treatment */
+run;
+ 
+**** PERFORM A CHI-SQUARE TEST ON SEX COMPARING ACTIVE VS PLACEBO.;
+proc freq 
+    data = adsl 
+    noprint;
+    where sexn ne . and trtpn not in (.,2);  /* Exclude missing and Overall */
+    table sexn * trtpn / chisq;  /* Chi-square test */
+    output out = pvalue pchi;  /* Output p-value */
+run;
+
+**** CREATE SEX FIRST ROW FOR THE TABLE.;
+data label;
+    set pvalue(keep = p_pchi rename = (p_pchi = pvalue));  /* Rename p-value */
+    length label $ 85;
+    label = "#S={font_weight=bold} Sex";  /* Bold header */
+run;
+
+**** APPEND SEX DESCRIPTIVE STATISTICS TO SEX P VALUE ROW AND 
+**** CREATE SEX DESCRIPTIVE STATISTIC ROW LABELS.; 
+data sexn;
+    length label $ 85 col0 col1 col2 $ 25 ;
+    set label sexn;  /* Combine */
+
+    keep label col0 col1 col2 pvalue ;
+    if _n_ > 1 then  /* For stat rows */
+        label= "#{nbspace 6}" || put(sexn,sexn.);  /* Indented label with format */
+run;
+**** END OF SEX STATISTICS PROGRAMMING *****************************;
+
+/*=============================================================================
+  SECTION 8: RACE STATISTICS WITH P-VALUE (Fisher's Exact Test)
+  ============================================================================
+  Similar to sex: Frequencies, percentages, and Fisher's exact test for race.
+*/
+**** GET SIMPLE FREQUENCY COUNTS FOR RACE;
+proc freq 
+    data = adsl 
+    noprint;
+    where trtpn ne .; 
+    tables trtpn * racen / missing outpct out = racen;
+run;
+ 
+**** FORMAT RACE N(%) AS DESIRED;
+data racen;
+    set racen;
+    where racen ne .;
+    length value $25;
+    value = put(count,4.) || ' (' || put(pct_row,5.1)||'%)';
+run;
+
+proc sort
+    data = racen;
+    by racen;
+run;
+ 
+**** TRANSPOSE THE RACE SUMMARY STATISTICS;
+proc transpose 
+    data = racen 
+    out = racen(drop = _name_) 
+    prefix=col;
+    by racen;
+    var value;
+    id trtpn;
+run;
+ 
+**** PERFORM A FISHER'S EXACT TEST ON RACE COMPARING ACTIVE VS PLACEBO.;
+proc freq 
+    data = adsl 
+    noprint;
+    where racen ne . and trtpn not in (.,2);
+    table racen * trtpn / exact;  /* Exact test (Fisher's) */
+    output out = pvalue exact;
+run;
+ 
+**** CREATE RACE FIRST ROW FOR THE TABLE.;
+data label;
+    set pvalue(keep = xp2_fish rename = (xp2_fish = pvalue));  /* Fisher's p-value */
+    length label $ 85;
+    label = "#S={font_weight=bold} Race";
+run;
+
+**** APPEND RACE DESCRIPTIVE STATISTICS TO RACE P VALUE ROW AND 
+**** CREATE RACE DESCRIPTIVE STATISTIC ROW LABELS.; 
+data racen;
+    length label $ 85 col0 col1 col2 $ 25 ;
+    set label racen;
+
+    keep label col0 col1 col2 pvalue ;
+    if _n_ > 1 then 
+        label= "#{nbspace 6}" || put(racen,racen.);
+run;
+**** END OF RACE STATISTICS PROGRAMMING *******************************;
+
+/*=============================================================================
+  SECTION 9: CONCATENATE STATISTICS AND PREPARE FOR FINAL TABLE
+  ============================================================================
+  Combine age, sex, and race datasets into one for PROC REPORT, with a group 
+  variable for line spacing.
+*/
+data forreport;
+    set age(in = in1)  /* Age stats */
+        sexn(in = in2)  /* Sex stats */
+        racen(in = in3);  /* Race stats */
+
+    group = sum(in1 * 1, in2 * 2, in3 * 3);  /* Group identifier for spacing */
+run;
+
+/*=============================================================================
+  SECTION 10: COMPUTE SAMPLE SIZES FOR COLUMN HEADERS
+  ============================================================================
+  Use DATA _NULL_ to count subjects by treatment group and store in macro 
+  variables for dynamic column headers.
+*/
+data _null_;
+    set adsl end=eof;  /* Input: Duplicated ADSL */
+
+    **** CREATE COUNTER FOR N0 = PLACEBO, N1 = ACTIVE.;
+    if trtpn = 0 then n0 + 1;  /* Increment Placebo count */
+    else if trtpn = 1 then n1 + 1;  /* Increment Active count */
+
+    **** CREATE OVERALL COUNTER NT.; 
+    nt + 1;  /* Increment total */
+  
+    **** CREATE MACRO VARIABLES &N0, &N1, AND &NT.;
+    if eof then  /* At end of data */
+        do;     
+            call symput("n0",compress('(N='||put(n0,4.) || ')'));  /* Macro for Placebo N */
+            call symput("n1",compress('(N='||put(n1,4.) || ')'));  /* Macro for Active N */
+            call symput("nt",compress('(N='||put(nt,4.) || ')'));  /* Macro for Overall N */
+        end;
+run;
+
+/*=============================================================================
+  SECTION 11: GENERATE TABLE 1.3 USING PROC REPORT WITH P-VALUES
+  ============================================================================
+  Final demographics table combining all statistics with p-values, using macro 
+  variables for sample sizes in headers.
+*/
+options nodate nonumber missing = ' ';
+ods escapechar='#';
+ods pdf style=htmlblue file='/home/u64197545/CDISC/adam/table1.3.pdf';
+
+proc report
+    data=forreport  /* Combined stats */
+    nowindows
+    spacing=1  /* Compact spacing */
+    headline  /* Bold headers */
+    headskip  /* Skip header lines */
+    split = "|";  /* Split headers on | */
+
+    columns (group label col1 col0 col2 pvalue);  /* Columns: Group, Label, Stats, P-value */
+
+    define group   /order order = internal noprint;  /* Hidden group for ordering */
+    define label   /display " ";  /* Row labels */
+    define col0    /display style(column)=[asis=on] "Placebo|&n0";  /* Placebo column with N */
+    define col1    /display style(column)=[asis=on] "Active|&n1";  /* Active column with N */
+    define col2    /display style(column)=[asis=on] "Overall|&nt";  /* Overall column with N */
+    define pvalue  /display center " |P-value**" f = pvalue6.4;  /* Centered p-value column */
+
+    /* Add line break after each group */
+    compute after group;
+        line '#{newline}';
+    endcomp;
+
+    /* Titles and footnotes */
+    title1 j=l 'Hands-on-training' 
+           j=r 'Page #{thispage} of #{lastpage}';
+    title2 j=c 'Table 1.3';
+    title3 j=c 'Demographics and Baseline Characteristics';
+
+    footnote1 j=l '* Other includes Asian, Native American, and other races.';
+    footnote2 j=l "** P-values:  Age = Wilcoxon rank-sum, Sex = Pearson's"  
+                 " chi-square, Race = Fisher's exact test.";
+    footnote3 j=l "Created by %sysfunc(getoption(sysin)) on &sysdate9..";  
+run; 
+ods pdf close;  /* Close PDF */
+              
 ```
 
-### 2. Population Definition Logic
+### Listings Impelementation
 
 ```         
 /* Define analysis populations based on business rules */
@@ -319,22 +819,253 @@ data adam.adsl;
 run;
 ```
 
-### Quality Control & Validation
+#### Table 1.2 Adverse Events Summary
 
-#### 1. Population Reconciliation
+Purpose: Summarize treatment-emergent adverse events by system organ class and preferred term
 
 ```         
-/* Verify population counts */
-proc freq data=adam.adsl;
-    title "Analysis Population Counts";
-    tables saffl ittfl complfl / missing;
+*=============================================================================
+  SECTION 12: ADAE DATASET DERIVATIONS
+  ============================================================================
+  Derive flags in the ADAE dataset for first occurrence of maximum severity 
+  at subject, system organ class (SOC), and preferred term (PT) levels.
+*/
+*** ADAE***;
+
+proc sort
+    data=adam.adae;  /* Sort ADAE by subject and severity */
+    by usubjid aesevn;
 run;
 
-/* Cross-tabulation of populations */
-proc freq data=adam.adsl;
-    title "Population Overlap Analysis";
-    tables saffl*ittfl*complfl / missing list;
+data adae;
+    set adam.adae;
+    by usubjid aesevn;  /* BY processing */
+
+    if last.usubjid then  /* Last record per subject */
+        aoccifl = 'Y';  /* Flag for first max severity per subject */
+
+    label aoccifl = "1st Max Sev./Int. Occurrence Flag";
 run;
+
+proc sort
+    data=adae;  /* Sort by subject, body system, and severity */
+    by usubjid aebodsys aesevn;
+run;
+
+data adae;
+    set adae;
+    by usubjid aebodsys aesevn;
+
+    if last.aebodsys then  /* Last record per body system per subject */
+        aoccsifl = 'Y';  /* Flag for first max severity within SOC */
+
+    label aoccsifl = "1st Max Sev./Int. Occur Within SOC Flag";
+run;
+
+proc sort
+    data=adae;  /* Sort by subject, PT, and severity */
+    by usubjid aedecod aesevn;
+run;
+
+data adae;
+    set adae;
+    by usubjid aedecod aesevn;
+
+    if last.aedecod then  /* Last record per PT per subject */
+        aoccpifl = 'Y';  /* Flag for first max severity within PT */
+
+    label aoccpifl = "1st Max Sev./Int. Occur Within PT Flag";
+run;
+
+**** END OF ADAM ADAE ADAM DATASET DERIVATIONS;
+
+/*=============================================================================
+  SECTION 13: COMPUTE TREATMENT POPULATION COUNTS FOR AE TABLE
+  ============================================================================
+  Use PROC SQL to count unique subjects by treatment and store in macro variables.
+*/
+**** PUT COUNTS OF TREATMENT POPULATIONS INTO MACRO VARIABLES;
+proc sql noprint;
+    select count(unique usubjid) format = 3. into :n0 from adsl where trtpn=0;  /* Placebo N */
+    select count(unique usubjid) format = 3. into :n1 from adsl where trtpn=1;  /* Active N */
+    select count(unique usubjid) format = 3. into :n2 from adsl;  /* Overall N */
+quit;
+
+/*=============================================================================
+  SECTION 14: DUPLICATE ADAE FOR OVERALL CALCULATIONS
+  ============================================================================
+  Duplicate ADAE records with an Overall treatment flag (trtan=2).
+*/
+**** OUTPUT A SUMMARY TREATMENT SET OF RECORDS. TRTPN=2;
+data adae;
+    set adae;  /* Input: Flagged ADAE */
+    output;  /* Original records */
+    trtan=2;  /* Overall flag */
+    output;  /* Duplicated records */
+run;
+
+/*=============================================================================
+  SECTION 15: GENERATE AE SUMMARY COUNTS USING PROC SQL
+  ============================================================================
+  Create summary tables for AE frequencies by treatment, severity, body system, 
+  and preferred term using the derived flags.
+*/
+**** BY SEVERITY ONLY COUNTS;
+proc sql noprint;
+    create table All as  /* Overall event counts */
+        select trtan,               
+               sum(aoccifl='Y') as frequency from adae  /* Sum flags for events */
+        group by trtan;
+quit;
+
+proc sql noprint;
+    create table AllBySev as  /* By severity */
+        select aesev, trtan,               
+               sum(aoccifl='Y') as frequency from adae
+        group by aesev, trtan;
+quit;
+
+**** BY BODY SYSTEM AND SEVERITY COUNTS;
+proc sql noprint;
+    create table AllBodysys as  /* By body system */
+        select trtan, aebodsys,               
+               sum(aoccsifl='Y') as frequency from adae
+        group by trtan, aebodsys;
+quit;
+
+proc sql noprint;
+    create table AllBodysysBysev as  /* By body system and severity */
+        select aesev, trtan, aebodsys,               
+               sum(aoccsifl='Y') as frequency from adae
+        group by aesev, trtan, aebodsys;
+quit;
+
+**** BY PREFERRED TERM AND SEVERITY COUNTS;
+proc sql noprint;
+    create table AllPT as  /* By preferred term */
+        select trtan, aebodsys, aedecod,               
+               sum(aoccpifl='Y') as frequency from adae
+        group by trtan, aebodsys, aedecod;
+quit;
+
+proc sql noprint;
+    create table AllPTBySev as  /* By preferred term and severity */
+        select aesev, trtan, aebodsys, aedecod,               
+               sum(aoccpifl='Y') as frequency from adae
+        group by aesev, trtan, aebodsys, aedecod;
+quit;
+
+/*=============================================================================
+  SECTION 16: COMBINE AND FORMAT AE COUNTS
+  ============================================================================
+  Concatenate all summary tables, add descriptions and sorter for ordering, 
+  and format N(%) values.
+*/
+**** PUT ALL COUNT DATA TOGETHER;
+data all;
+    set All(in=in1)  /* Overall */
+        AllBySev(in=in2)  /* By severity */
+        AllBodysys(in=in3)  /* By body system */
+        AllBodysysBysev(in=in4)  /* By body system and severity */
+        AllPT(in=in5)  /* By PT */
+        AllPTBySev(in=in6);  /* By PT and severity */
+
+    length description $ 40 sorter $ 200;  /* Define lengths */
+    
+    /* Assign row descriptions based on input set */
+    if in1 then
+        description = 'Any Event';  /* Overall event row */
+    else if in2 or in4 or in6 then
+        description = '#{nbspace 6} ' || propcase(aesev);  /* Indented severity */
+    else if in3 then
+        description = aebodsys;  /* Body system */
+    else if in5 then
+        description = '#{nbspace 3}' || aedecod;  /* Indented PT */
+
+    sorter = aebodsys || aedecod || aesev;  /* Sorter for ordering */
+run;
+
+proc sort
+    data=all;
+    by sorter aebodsys aedecod description;  /* Sort for hierarchy */
+run;
+
+**** TRANSPOSE THE FREQUENCY COUNTS;
+proc transpose
+    data=all
+    out=flat
+    prefix=count;  /* Prefix: count0, count1, count2 */
+    by sorter aebodsys aedecod description;  /* BY for rows */
+    id trtan;  /* ID by treatment for columns */
+    var frequency;  /* Variable to transpose */
+run;
+
+proc sort
+    data=flat;
+    by aebodsys aedecod sorter;  /* Final sort */
+run;
+
+**** CREATE A SECTION BREAK VARIABLE AND FORMATTED COLUMNS;
+data flat;
+    set flat;
+    by aebodsys aedecod sorter;  /* BY processing */
+
+    retain section 1;  /* Section counter for breaks */
+
+    length col0 col1 col2 $ 20;  /* Lengths for formatted columns */
+    
+    /* Format N(%) for each treatment column if non-missing/non-zero */
+    if count0 not in (.,0) then
+        col0 = put(count0,3.) || " (" || put(count0/&n0*100,5.1) || "%)";  /* Placebo N(%) */
+    if count1 not in (.,0) then
+        col1 = put(count1,3.) || " (" || put(count1/&n1*100,5.1) || "%)";  /* Active N(%) */
+    if count2 not in (.,0) then
+        col2 = put(count2,3.) || " (" || put(count2/&n2*100,5.1) || "%)";  /* Overall N(%) */
+  
+    if sum(count1,count2,count3)>0 then  /* Output if any count >0 (note: count3 may not exist, adjust if needed) */
+        output;
+    if last.aedecod then  /* Increment section after each PT */
+        section + 1;
+run;
+
+/*=============================================================================
+  SECTION 17: GENERATE AE TABLE 1.4 USING PROC REPORT
+  ============================================================================
+  Final AE summary table by body system, preferred term, and severity, with 
+  N(%) and section breaks.
+*/
+**** USE PROC REPORT TO WRITE THE AE TABLE TO FILE.; 
+options nodate nonumber missing = ' ';
+ods escapechar='#';
+ods pdf style=htmlblue file='/home/u64197545/CDISC/adam/table2.pdf';  /* Note: Filename mismatch with title; consider renaming to table5.4.pdf */
+
+proc report
+    data=flat  /* Transposed AE counts */
+    nowindows
+    split = "|";  /* Split headers on | */
+
+    columns section description col1 col0 col2;  /* Columns: Section, Description, Stats */
+
+    define section     /order order = internal noprint;  /* Hidden section for breaks */
+    define description /display style(header)=[just=left] 
+    "Body System|#{nbspace 3} Preferred Term|#{nbspace 6} Severity";  /* Hierarchical header */
+    define col0        /display "Placebo|N=&n0";  /* Placebo column */
+    define col1        /display "Active|N=&n1";  /* Active column */
+    define col2        /display "Overall|N=&n2";  /* Overall column */
+
+    /* Line break after sections */
+    compute after section;
+        line '#{newline}';
+    endcomp;
+
+    /* Titles (note: Table 1.4 but file is table2.pdf; align as needed) */
+    title1 j=l 'Hands-on-training' 
+           j=r 'Page #{thispage} of #{lastpage}';
+    title2 j=c 'Table 1.4';
+    title3 j=c 'Adverse Events';
+    title4 j=c "By Body System, Preferred Term, and Greatest Severity";
+run; 
+ods pdf close;  /* Close PDF */
 ```
 
 #### 2. Treatment Assigment Validation
