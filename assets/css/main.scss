@@ -1,139 +1,393 @@
+/* styles.css - Custom styles for Quarto website */
+
+/* Variables CSS */
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --primary-color: #667eea;
+    --secondary-color: #764ba2;
+    --text-dark: #2c3e50;
+    --text-medium: #555;
+    --text-light: #666;
+    --bg-light: #fafafa;
+    --bg-white: #ffffff;
+    --bg-card: #f8f9fa;
+    --border-light: #eee;
+    --shadow-light: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-medium: 0 10px 30px rgba(0,0,0,0.1);
+    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Layout général */
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f8f9fa;
-  color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
 }
-.navbar {
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+/* Hero Section */
+.hero-section {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 80px 20px;
+    text-align: center;
+    margin: -20px -15px 40px -15px;
+    box-shadow: var(--shadow-light);
 }
-.header-section {
-  background: linear-gradient(90deg, #007bff, #0056b3);
-  color: white;
-  padding: 2rem;
-  text-align: center;
-  border-radius: 8px;
-  margin-bottom: 2rem;
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
 }
+
+.hero-title {
+    font-size: 3.2em;
+    margin-bottom: 20px;
+    font-weight: 300;
+    letter-spacing: -1px;
+}
+
+.hero-tagline {
+    font-size: 1.2em;
+    opacity: 0.9;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.skills-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+.tag {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 16px;
+    border-radius: 25px;
+    font-size: 0.95em;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    background: var(--bg-white);
+    margin: -30px auto 40px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    padding: 0;
+}
+
+.intro-section {
+    padding: 60px 50px;
+    text-align: center;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-white);
+}
+
+.intro-section .section-title {
+    font-size: 2.4em;
+    margin-bottom: 30px;
+    color: var(--text-dark);
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.intro-section p {
+    font-size: 1.15em;
+    color: var(--text-medium);
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Sections */
+.section {
+    padding: 50px;
+    border-bottom: 1px solid var(--border-light);
+    background: var(--bg-white);
+}
+
+.section:last-child {
+    border-bottom: none;
+}
+
 .section-title {
-  color: #007bff;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+    font-size: 2em;
+    margin-bottom: 35px;
+    color: var(--text-dark);
+    position: relative;
+    font-weight: 400;
 }
-.code-block {
-  background-color: #f8f9fa;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 1rem;
-  margin-bottom: 1rem;
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 4px;
+    background: var(--primary-gradient);
+    border-radius: 2px;
 }
-.code-toggle {
-  cursor: pointer;
-  color: #007bff;
-  text-decoration: underline;
-  margin-bottom: 0.5rem;
+
+/* Competency Grid */
+.competency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
 }
-.table-responsive {
-  margin-bottom: 1rem;
+
+.competency-card {
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 15px;
+    border-left: 5px solid var(--primary-color);
+    transition: all 0.3s ease;
+    position: relative;
 }
-.btn-github {
-  background-color: #28a745;
-  color: white;
+
+.competency-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    background: var(--bg-white);
 }
-.btn-github:hover {
-  background-color: #218838;
+
+.competency-card h3 {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
+
+.competency-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.competency-card li {
+    margin-bottom: 10px;
+    padding-left: 25px;
+    position: relative;
+    color: var(--text-medium);
+    line-height: 1.6;
+}
+
+.competency-card li:before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+/* Transition Section */
+.transition-section {
+    background: var(--primary-gradient);
+    color: white;
+    padding: 60px 50px;
+    text-align: center;
+    margin: 50px 0;
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.transition-section:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="90" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+    opacity: 0.3;
+}
+
+.transition-section * {
+    position: relative;
+    z-index: 1;
+}
+
+.transition-section .section-title {
+    color: white;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+}
+
+.transition-section .section-title:after {
+    background: rgba(255,255,255,0.4);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.transition-section p {
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    opacity: 0.95;
+}
+
+.cta-button {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    padding: 15px 35px;
+    text-decoration: none;
+    border-radius: 30px;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+    font-weight: 500;
+    font-size: 1.05em;
+}
+
+.cta-button:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    color: white;
+    text-decoration: none;
+}
+
+/* Font Awesome Icons */
+.fa, .fas, .far, .fab {
+    color: var(--primary-color);
+    margin-right: 8px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.4em;
+    }
+    
+    .hero-tagline {
+        font-size: 1.1em;
+    }
+    
+    .hero-section, 
+    .intro-section, 
+    .section, 
+    .transition-section {
+        padding: 40px 25px;
+    }
+    
+    .competency-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .skills-tags {
+        gap: 8px;
+    }
+    
+    .tag {
+        font-size: 0.85em;
+        padding: 6px 12px;
+    }
+    
+    .section-title {
+        font-size: 1.8em;
+    }
+    
+    .intro-section .section-title {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2em;
+    }
+    
+    .hero-section, 
+    .intro-section, 
+    .section, 
+    .transition-section {
+        padding: 30px 20px;
+    }
+    
+    .competency-card {
+        padding: 25px;
+    }
+}
+
+/* Quarto specific adjustments */
+#quarto-content {
+    padding: 0;
+}
+
+.quarto-title-block {
+    display: none;
+}
+
+/* Navigation adjustments */
+.navbar {
+    box-shadow: var(--shadow-light);
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.3em;
+}
+
+/* Additional styles for content pages */
+.quarto-title {
+    color: var(--text-dark);
+    border-bottom: 3px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* Portfolio project styling */
+h3 {
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-top: 2em;
+}
+
+/* Contact page enhancements */
 .contact-section {
-  background-color: #e9ecef;
-  padding: 2rem;
-  border-radius: 8px;
-  text-align: center;
+    background: var(--bg-card);
+    padding: 30px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid var(--primary-color);
 }
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  margin-top: 0.5rem;
+
+/* Code blocks */
+pre {
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 20px;
 }
-.project-card {
-  border: 1px solid #eee;
-  border-radius: 12px;
-  padding: 16px;
-  background: #fff;
-  box-shadow: 0 1px 3px rgba(0,0,0,.06);
+
+/* Links */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
-.project-card a {
-  font-weight: 600;
-  display: block;
-  margin-bottom: 4px;
-}
-.project-meta {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-.search {
-  max-width: 640px;
-  margin: 0.75rem 0 1.25rem;
-}
-.search input {
-  width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid #ddd;
-  border-radius: 999px;
-}
-.services-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1rem;
-}
-.service-card {
-  border: 1px solid #eee;
-  border-radius: 8px;
-  padding: 1rem;
-  background: #fff;
-  text-align: center;
-}
-.service-icon {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-.faqs-container {
-  margin-top: 2rem;
-}
-.faq {
-  margin-bottom: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  background: #f9f9f9;
-}
-.faq-question {
-  font-weight: bold;
-  cursor: pointer;
-}
-.faq-answer {
-  margin-top: 0.5rem;
-  padding-left: 1rem;
-}
-.quick-facts {
-  margin-top: 2rem;
-}
-.quick-facts table {
-  width: 100%;
-  border-collapse: collapse;
-}
-.quick-facts th, .quick-facts td {
-  border: 1px solid #ddd;
-  padding: 0.5rem;
-  text-align: left;
-}
-.projects-button {
-  background-color: #28a745;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  text-decoration: none;
-  margin: 0.5rem;
-}
-.projects-button:hover {
-  background-color: #218838;
+
+a:hover {
+    color: var(--secondary-color);
+    text-decoration: underline;
 }
