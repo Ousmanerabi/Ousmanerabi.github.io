@@ -14,11 +14,13 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 ## CDISC & Regulatory Programming
 *Industry-standard clinical programming and regulatory-compliant datasets for pharmaceutical submissions*
 
-[define.xml Generation & Validation Workflow](projects/cdisc-define-xml.html)
-
 [End-to-end Study Data Tabulation Model](projects/cdisc-sdtm.html)
 
 [ADaM BDS Derivations for Efficacy & Safety](projects/ADaM BDS Derivations for Efficacy & Safety.html)
+
+[Tables Listings and Figures](projects/TLFs.html)
+
+[define.xml Generation & Validation Workflow](projects/cdisc-define-xml.html)
 
 ## Statistical Modeling & Real-World Evidence
 *Advanced analytics and evidence generation for clinical decision-making*
