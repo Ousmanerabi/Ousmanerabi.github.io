@@ -2,45 +2,110 @@
 project:
   type: website
   output-dir: docs
+  resources:
+    - robots.txt  # Ajoutez d'autres ressources si nécessaire (ex. : sitemap.xml, _headers)
 
 website:
   title: "Ousmane Diallo, MPH-PhD"
-  description: "Biostatistician & Epidemiologist"
+  description: "Biostatistician & Epidemiologist specializing in health data analytics, statistical modeling, and clinical research."
   site-url: "https://ousmanediallo.com/"
   repo-url: "https://github.com/ousmanerabi/ousmanerabi.github.io"
+  favicon: "images/favicon.jpg"  # Ajoutez un favicon si vous en avez un ; sinon, supprimez cette ligne
+  image: "images/bio-photo-2.jpg"  # Utilisez votre photo de bio comme image par défaut du site
+  image-alt: "Ousmane Diallo, MPH-PhD - Biostatistician & Epidemiologist"
+  twitter-card: true  # Active les cartes Twitter pour les partages
+  open-graph: true  # Active Open Graph pour les partages sociaux
+  search: true  # Active la barre de recherche dans la navbar
+  back-to-top-navigation: true  # Bouton "Retour en haut" 
+  draft-mode: unlinked  # Masque les drafts non liés (optionnel)
   
   navbar:
-    background: primary
-    search: false
     left:
-      - text: "Home"
-        file: index.qmd
-      - text: "About"
-        file: about.qmd
-      - text: "Portfolio"
-        file: portfolio.qmd
-      - text: "Contact"
-        file: contact.qmd
-    right:
+      - icon: house-door-fill  # Icône maison pour Home
+        href: index.qmd
+        text: Home
+        aria-label: Home
+      - icon: person-lines-fill  # Icône personne pour About
+        href: about.qmd
+        text: About
+        aria-label: About
+      - icon: file-earmark-code-fill  # Icône code pour Portfolio (adapté de Projects)
+        href: portfolio.qmd
+        text: Portfolio
+        aria-label: Portfolio
+      - icon: chat-square-text-fill  # Icône chat pour Contact
+        href: contact.qmd
+        text: Contact
+        aria-label: Contact
+      # Intégrez les icônes sociales dans la navbar left comme chez Anderson, ou gardez-les à droite si préféré
       - icon: github
         href: "https://github.com/ousmanerabi"
         aria-label: GitHub
+        target: "_blank"
       - icon: linkedin
-        href: "https://linkedin.com/in/ousmane-rabi"
+        href: "https://linkedin.com/in/ousmane-rabi"  # Corrigez si l'URL est /ousmane-diallo8 comme dans about.qmd
         aria-label: LinkedIn
-
+        target: "_blank"
+    # logo: "/images/votre-logo.png"  # Ajoutez un logo si vous en avez un (ex. : initiales ou icône)
+    background: "#0454a4"  # Couleur de fond bleu comme chez Anderson ; ajustez si besoin
+    pinned: true  # Navbar fixée en haut
+    collapse: true  # Collapsible sur mobile
+    toggle-position: right  # Bouton toggle à droite
+  
+  body-footer: "Ousmane Diallo, MPH-PhD -- Biostatistician & Epidemiologist based in [votre localisation]. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."  # Ajoutez une bio courte pour le footer du body
+  
   page-footer:
-    background: light
-    center: |
-      © 2025 Ousmane Diallo - Biostatistician & Epidemiologist
-    right: |
-      Built with [Quarto](https://quarto.org/)
+    background: light  # Garde le fond clair
+    center: 
+      - text: "Website by Ousmane Diallo | &copy; 2025 |"
+      - icon: github
+        href: "https://github.com/ousmanerabi"
+        aria-label: GitHub
+        target: "_blank"
+      - icon: linkedin
+        href: "https://linkedin.com/in/ousmane-diallo8"
+        aria-label: LinkedIn
+        target: "_blank"
+    # right: |  # Optionnel : déplacez le crédit Quarto ici si préféré
+    #   Built with [Quarto](https://quarto.org/)
+
+author:  # Bloc auteur global pour le site (utilisé dans les métadonnées)
+  name: "Ousmane Diallo"
+  honorific: "MPH-PhD"
+  # orcid: 0000-0000-0000-0000  # Ajoutez votre ORCID si vous en avez un
+  affiliations:
+    - name: "[Votre affiliation principale, ex. : Université ou Entreprise]"
+    - name: "[Autre affiliation]"
+  email: "votre.email@example.com"  # Ajoutez votre email si vous voulez le rendre public
+  url: "https://ousmanediallo.com/"
+  image: "images/bio-photo-2.jpg"
 
 format:
   html:
-    theme: cosmo
-    css: styles.css
-    toc: false
-    page-layout: article
+    theme: cosmo  # Garde le thème
+    css: styles.css  # Ou assets/css/styles.css si vous l'avez déplacé
+    toc: true  # Active la table des matières par défaut (comme chez Anderson ; peut être surchargé par page)
+    code-fold: true  # Plie le code par défaut
+    code-summary: "View code"  # Texte pour déplier le code
+    # include-in-header: _includes/schema.html  # Ajoutez si vous avez un fichier schema pour SEO
+    page-layout: article  # Garde le layout article
     grid:
-      body-width: 900px
+      body-width: 900px  # Garde la largeur du corps
+
+editor: visual  # Active l'éditeur visuel si vous utilisez VS Code/RStudio
+
+execute:
+  freeze: auto  # Évite de re-exécuter le code inchangé
+
+metadata:  # Métadonnées globales pour SEO
+  keywords: ["biostatistics", "epidemiology", "health data science", "SAS programming", "CDISC standards", "clinical trials", "real-world evidence"]
+  author: "Ousmane Diallo, MPH-PhD"
+  description: "Biostatistician & Epidemiologist specializing in health data analytics, statistical modeling, large-scale data management, and clinical research."
+  image: "images/bio-photo-2.jpg"
+  lang: "en"  # Ou "fr" si le site est en français
+  robots: "index, follow"  # Autorise l'indexation
+  twitter-card: true
+  open-graph: true
+  # geo:  # Optionnel pour localisation
+  #   location: "[Votre ville], [Pays]"
+  #   region: "[Code région]"

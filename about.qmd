@@ -1,63 +1,85 @@
 ---
-title: "About Me"
+title: "About Ousmane Diallo, MPH, PhD"
+description: "Ousmane Diallo, MPH, PhD is a health data scientist, Epidemiologist, Biostatistician, "
+image: images/bio-photo-2.jpg
+about:
+  template: solana
+  image-title: Ousmane Diallo, MPH, PhD
+  image-alt: Ousmane Diallo, MPH, PhD
+  image-shape: round
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://linkedin.com/in/ousmane-diallo8
+      target: _blank
+    - icon: github
+      text: GitHub
+      href: https://github.com/Ousmanerabi
+      target: _blank
+    - icon: fingerprint
+toc: false
+format:
+ html:
+  css: assets/css/remove-author-keyword.css
 ---
 
-## My Journey
+### My Journey
 
 I am a rigorous biostatistician and epidemiologist with over 9 years of experience in health data analytics, statistical modeling, and large-scale data management. Certified in SAS Base Programming and Clinical Trials Programming, I am transitioning from academia to the pharmaceutical industry to apply my expertise in CDISC standards (SDTM/ADaM) and real-world evidence (RWE) to clinical research and regulatory submissions.
 
 With a proven track record in international projects, I excel in collaborative environments, delivering submission-ready insights and supporting high-quality publications.
 
-## Education
+### Education
 
 - **Master's in Public Health** - Aix Marseille University
-- **PHD IN INFECTIOUS DISEASE EPIDEMIOLOGY** - Aix Marseille University
+- **PHD in Infectious Disease** - Aix Marseille University
 - **SAS Certifications** - Base Programming and Clinical Trials Programming
 - **Additional Training** - Introduction to the Principles and Practice of Clinical Research
-- **Additional Training** - Infectious Disease Transmission Models for    Decision-Makers & R Programming
+- **Additional Training** - Infectious Disease Transmission Models for Decision-Makers & R
+Programming
 
 
-## Professional Experience
+### Professional Experience
 
-### Academic Research [8 Years]
+#### Academic Research [8 Years]
 - Led multiple epidemiological studies involving complex survey data
 - Developed statistical models for population health research
 - Published findings in peer-reviewed journals
 
-### Statistical Consulting [ 1 Year]
+#### Statistical Consulting [ 1 Year]
 - Provided biostatistical expertise to research teams
 - Designed and implemented analysis plans for clinical studies
 - Trained researchers in statistical methods and software
 
-### International Collaborations
+#### International Collaborations
 - Collaborated with international research teams on health data projects
 - Experience with multi-country surveillance systems
 - Cross-cultural project management and communication
 
-## Technical Expertise
+### Technical Expertise
 
-### Programming Languages
+#### Programming Languages
 - **SAS**: Advanced proficiency with macros, PROC SQL, ODS
 - **R**: Extensive use of tidyverse, survival analysis, geospatial packages
 - **Python**: Data manipulation and statistical analysis
 
-### Specialized Skills
+#### Specialized Skills
 - CDISC standards implementation (SDTM, ADaM, define.xml)
 - Regulatory submission preparation
 - Real-world evidence generation
 - Geospatial analysis and visualization
 - Complex survey data analysis
 
-## Publications & Presentations
+### Publications & Presentations
 
 [Add your publications, presentations, or notable projects here]
 
-## Professional Development
+### Professional Development
 
 - Continuous learning in pharmaceutical industry standards
 - Regular attendance at biostatistics and epidemiology conferences
 - Active member of relevant professional associations
 
-## What Drives Me
+### What Drives Me
 
 I am passionate about transforming complex health data into actionable insights that can improve patient outcomes and support evidence-based decision making in healthcare and pharmaceutical development.
