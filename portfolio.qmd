@@ -1,6 +1,8 @@
 ---
 title: "Projects"
 description: "Ousmane Diallo - Projects | Learn about my recent research projects and clinical programming work here."
+author: "Ousmane DIALLO"
+highlight-style: pygments
 ---
 
 # Projects
@@ -20,7 +22,7 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 
 [Tables Listings and Figures](projects/Tables Listings and Figures.html)
 
-[define.xml Generation & Validation Workflow](projects/cdisc-define-xml.html)
+[define.xml Generation & Validation Workflow](projects/sdtm-validation-project.html)
 
 ## Statistical Modeling & Real-World Evidence
 *Advanced analytics and evidence generation for clinical decision-making*
