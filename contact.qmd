@@ -2,6 +2,8 @@
 title: "Contact"
 ---
 
+# Contact
+
 ## Let's Discuss Your Project
 
 I am available for collaborations and consulting opportunities in biostatistics, epidemiology, and clinical research. Whether you need support with data analysis, regulatory submissions, or training, I'm here to help deliver high-quality, evidence-based solutions.

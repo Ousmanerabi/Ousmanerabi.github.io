@@ -2,7 +2,7 @@
 title: "Tables, Listings, and Figures (TLF) for Clinical Study Reports"
 description: "Automated generation of regulatory-compliant TLF outputs from ADaM datasets for FDA/EMA submission"
 author: "Ousmane DIALLO"
-date: "2025-08-30"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 keywords: "TLFs clinical tables, ADaM, SAS, regulatory submissions, biostatistics"
 format:
   html:
@@ -49,7 +49,7 @@ ADaM Datasets → SAS Programs → Statistical Analysis → Formatting → PDF/R
 #### Input Datasets
 
 | **Dataset** | **Purpose** | **Key Variables** |
-|------------------------|------------------------|----------------------------------------------|
+|-------------------|-------------------|-----------------------------------|
 | **ADSL** | Subject-level analysis data | USUBJID, TRT01PN, SAFFL, ITTFL, AGE, SEX |
 | **ADLB** | Laboratory results | PARAMCD, AVAL, BASE, CHG, ANRIND |
 | **ADAE** | Adverse events | AEDECOD, AESOC, AESEV, AEREL, TRTEMFL |
@@ -208,7 +208,7 @@ proc report data=adsl split="|" spacing=3 headline;
 run;
 ```
 
-#### Features: 
+#### Features:
 
 -   Custom page breaks with continuation text
 

@@ -2,7 +2,7 @@
 title: "Study Data Tabulation Model (SDTM) Mapping & Validation Project"
 description: "Clinical Data Standards Implementation"
 author: "Ousmane DIALLO"
-date: "2025-08-30"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 categories:
   - CDISC
   - PINNACLE 21
@@ -11,17 +11,20 @@ categories:
   - BIOSTATISTICS
   - DEFINE.XML
   - VALIDATION
-keywords: ["cdisc", "Pinnacle 21"]
+slug: "sdtm-validation-project"
+keywords: ["SDTM", "CDISC", "Pinnacle 21", "Define.xml", "clinical trials", "data standards"]
 highlight-style: pygments
+page-layout: article
 format:
   html:
     toc: true
     toc-depth: 2
-    theme: cosmo
+    #theme: cosmo
     html-math-method: katex
     code-fold: true
     code-summary: "Show code"
-    embed-resources: true
+    #embed-resources: true
+    css: ../assets/css/remove-keyword.css
 ---
 
 # Study Data Tabulation Model (SDTM) Mapping & Validation Project
@@ -229,9 +232,7 @@ Remaining errors are attributable to source data limitations and newly created d
 
 ## Contact
 
-**Interested in this project or my expertise in biostatistics and CDISC standards?**
+Questions about this TLF implementation or clinical trial reporting expertise?
 
-- 📧 [Send an Email](mailto:ousmanerabi12@gmail.com)
-- 💼 [LinkedIn](https://www.linkedin.com/in/ousmane-diallo8)
-
+[**LinkedIn**](www.linkedin.com/in/ousmane-diallo8) \| [**View All Projects**](/portfolio)
 ---
