@@ -2,7 +2,7 @@
 title: "Time Series Analysis of Malaria Trends — Burkina Faso (2016–2023)"
 description: "Quantify the trend in malaria incidence at health district level and identify the factors associated with malaria incidence in Burkina Faso from 2016-2023 using routine cases data"
 image: /assets/projects/retrospective/adm1_adm2.png 
-date: "2025-08-30"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 categories: [R, Epidemiology, Malaria, DHS, climate, Time series]
 format:
   html:

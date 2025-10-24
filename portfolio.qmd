@@ -2,6 +2,10 @@
 title: "Projects"
 description: "Ousmane Diallo - Projects | Learn about my recent research projects and clinical programming work here."
 author: "Ousmane DIALLO"
+format:
+  html:
+    toc: true
+    code-fold: true
 highlight-style: pygments
 ---
 
