@@ -176,6 +176,68 @@ $$
 
 where ΔC is the incremental cost and ΔE the incremental effectiveness (reduction in BMI Z-score).
 
+#### R code
+```{r}
+#| label: costs-effects
+#| eval: false
+#| code-fold: true
+#| code-summary: "Cost-Effectiveness Analysis"
+
+# ============================================================================
+# Define unit costs (EUR) for each type of consultation
+# ============================================================================
+unit <- list(
+  med = 20,    # Medical consultation
+  psy = 40,    # Psychology consultation
+  diet = 40,   # Dietitian consultation
+  incl = 60    # Inclusion visit
+)
+
+# ============================================================================
+# Calculate costs and effects for REPOP intervention vs no care
+# ============================================================================
+ce <- sim %>% 
+  mutate(
+    # Total cost of REPOP intervention
+    # Sum of all consultations weighted by their unit costs
+    # coalesce() replaces NA with 0 to handle missing consultation counts
+    cost_repop = coalesce(n_consult_med, 0) * unit$med + 
+                 coalesce(n_consult_psy, 0) * unit$psy + 
+                 coalesce(n_consult_diet, 0) * unit$diet + 
+                 coalesce(n_consult_incl, 0) * unit$incl,
+    
+    # Cost of no care scenario (reference = 0)
+    cost_nocare = 0,
+    
+    # Effect: reduction in BMI Z-score (higher = better)
+    # Negative sign converts decrease in Z to a positive outcome
+    eff_repop = -(delta_z_repop),     # Effect with REPOP
+    eff_nocare = -(delta_z_nocare),   # Effect without care
+    
+    # Incremental cost (difference between REPOP and no care)
+    incr_cost = cost_repop - cost_nocare,
+    
+    # Incremental effect (difference in effectiveness)
+    incr_eff = eff_repop - eff_nocare
+  )
+
+# ============================================================================
+# Summarize cost-effectiveness metrics
+# ============================================================================
+summary_ce <- ce %>% 
+  summarize(
+    n = n(),                                           # Sample size
+    mean_cost = mean(cost_repop, na.rm = TRUE),       # Mean cost of REPOP
+    mean_eff_R = mean(eff_repop, na.rm = TRUE),       # Mean effect with REPOP
+    mean_eff_N = mean(eff_nocare, na.rm = TRUE),      # Mean effect without care
+    dC = mean(incr_cost, na.rm = TRUE),               # Mean incremental cost (ΔC)
+    dE = mean(incr_eff, na.rm = TRUE),                # Mean incremental effect (ΔE)
+    ICER = dC / dE                                     # Incremental Cost-Effectiveness Ratio
+  )
+
+summary_ce
+```
+
 #### **Uncertainty Analysis**
 
 To account for sampling uncertainty, a non-parametric bootstrap method was applied with 10,000 replications.
@@ -184,6 +246,75 @@ The 95% confidence interval for the ICER was derived using the percentile method
 
 This approach is recommended when no strong assumptions can be made regarding the distribution of incremental costs and effects.
 The resulting bootstrap replications were plotted on the cost-effectiveness (CE) plane, illustrating the joint uncertainty around the incremental cost and incremental effectiveness estimates.
+
+```{r}
+#| label: Non-parametric bootstrap of mean ΔC, ΔE, and ICER
+#| eval: false
+#| code-fold: true
+#| code-summary: "Non-parametric bootstrap"
+ 
+
+# Number of bootstrap replicates
+B <- 10000L
+n <- nrow(ce)
+
+# Generate bootstrap sample indices (with replacement)
+idx <- replicate(B, sample.int(n, replace = TRUE))
+
+# Perform bootstrap iterations
+boot <- map_dfr(1:B, function(b) {
+  # Extract bootstrap sample
+  s <- ce[idx[, b], , drop = FALSE]
+  
+  # Calculate mean incremental cost and effect for this sample
+  dC <- mean(s$incr_cost, na.rm = TRUE)
+  dE <- mean(s$incr_eff, na.rm = TRUE)
+  
+  # Return bootstrap replicate
+  tibble(
+    mean_cost = dC,
+    mean_eff = dE,
+    icer = dC / dE    # ICER for this bootstrap sample
+  )
+})
+
+# Calculate 95% confidence interval for ICER
+# Filter out infinite values (when dE = 0)
+ci_icer <- quantile(
+  boot$icer[is.finite(boot$icer)], 
+  probs = c(0.025, 0.975), 
+  na.rm = TRUE
+)
+
+# Display results
+list(
+  point_estimates = summary_ce,
+  icer_CI = ci_icer
+)
+
+# ============================================================================
+# Cost-Effectiveness Plane Visualization
+# ============================================================================
+#| label: ce-plane
+#| fig-cap: "Cost-effectiveness (CE) plane: bootstrap distribution of incremental cost (ΔC) vs incremental effectiveness (ΔE)."
+#| fig-align: center
+#| out-width: 70%
+
+ggplot(boot, aes(x = mean_eff, y = mean_cost)) + 
+  # Plot bootstrap replicates as semi-transparent points
+  geom_point(alpha = 0.25, size = 0.7) + 
+  
+  # Add reference lines at zero
+  geom_vline(xintercept = 0, linetype = "dashed") +  # No effect line
+  geom_hline(yintercept = 0, linetype = "dashed") +  # No cost line
+  
+  # Labels
+  labs(
+    x = expression(Delta*E),           # Incremental effect
+    y = expression(Delta*C),           # Incremental cost
+    title = "Bootstrap Cost-Effectiveness Plane (REPOP vs No Care)"
+  )
+```
 
 ### Efficiency Analysis (Long-Term Cost Offsets)
 
@@ -232,6 +363,88 @@ with:
 -   (a_0): age at intervention start, (a_s): benefit start age, (a_e): benefit end age (age-based form).
 
 This calculation provides an estimate of the discounted long-term cost offsets achieved through the REPOP program, based on its short-term effectiveness in reducing pediatric obesity.
+
+```{r}
+#| label: efficiency-longterm
+#| eval: false
+#| code-fold: true
+#| code-summary: "efficiency-longterm"
+
+# ============================================================================
+# Calculate long-term cost offsets using present value (PV)
+# ============================================================================
+
+# Function to compute present value of avoided future costs
+# p: probability of avoiding obesity case
+# C: annual direct medical cost of obesity (EUR)
+# r: discount rate (annual)
+# a0: current age (baseline)
+# a_start: age when cost savings begin
+# a_end: age when cost savings end
+pv_avoided <- function(p, C, r, a0, a_start, a_end) {
+  # Create vector of years from start to end age
+  years <- a_start:(a_end - 1)
+  
+  # Sum discounted costs over all years
+  # Formula: PV = Σ [p × C / (1 + r)^(t - a0)]
+  # where t is each year from a_start to a_end
+  sum(p * C / ((1 + r)^(years - a0)))
+}
+
+# ============================================================================
+# Define parameters from study scenarios
+# ============================================================================
+p <- 0.16    # Probability: 16% of obesity cases avoided by intervention
+C <- 506     # Mean annual direct medical cost of obesity (EUR)
+a0 <- 8      # Baseline age (years)
+
+# ============================================================================
+# Calculate present value for multiple time horizons and discount rates
+# ============================================================================
+scenarios <- tribble(
+  ~window,      ~a_start, ~a_end, ~r,
+  "18–60 @2%",  18,       60,     0.02,   # Ages 18-60, 2% discount rate
+  "18–60 @4%",  18,       60,     0.04,   # Ages 18-60, 4% discount rate
+  "40–60 @2%",  40,       60,     0.02,   # Ages 40-60, 2% discount rate
+  "40–60 @4%",  40,       60,     0.04    # Ages 40-60, 4% discount rate
+) %>% 
+  rowwise() %>% 
+  # Calculate present value for each scenario
+  mutate(PV = pv_avoided(p, C, r, a0, a_start, a_end)) %>% 
+  ungroup()
+
+scenarios
+
+# ============================================================================
+# One-way sensitivity analysis on costs (±20%)
+# ============================================================================
+#| label: ows-sa
+
+# Test cost variations: 80%, 100%, and 120% of base case
+scale_vec <- c(0.8, 1.0, 1.2)
+
+# Perform sensitivity analysis for each cost scaling factor
+sa <- map_dfr(scale_vec, function(s) {
+  # Scale incremental costs by factor s
+  s_ce <- ce %>% 
+    mutate(incr_cost = incr_cost * s)
+  
+  # Recalculate mean incremental cost and effect
+  dC <- mean(s_ce$incr_cost, na.rm = TRUE)
+  dE <- mean(s_ce$incr_eff, na.rm = TRUE)
+  
+  # Return sensitivity analysis results
+  tibble(
+    scale = s,              # Scaling factor (0.8, 1.0, or 1.2)
+    incr_cost = dC,         # Scaled incremental cost
+    incr_eff = dE,          # Incremental effect (unchanged)
+    ICER = dC / dE          # Recalculated ICER
+  )
+})
+
+sa
+```
+
 
 ## Results
 
