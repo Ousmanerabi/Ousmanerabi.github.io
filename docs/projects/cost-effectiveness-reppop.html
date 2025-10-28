@@ -282,8 +282,10 @@ window.Quarto = {
 <p>In the Aquitaine region of France, as part of the Nutrition, Prevention, and Child Health Program—the regional extension of the National Nutrition and Health Program (PNNS) for children and adolescents—a harmonized screening and management approach for pediatric overweight and obesity was developed. This initiative led to the creation of the REPPOP network (Réseau de Prévention et de Prise en charge de l’Obésité Pédiatrique), an integrated and multidisciplinary care system operating in the Gironde area.</p>
 <p>The REPPOP network connects community physicians, hospital practitioners, and public health professionals (including school doctors, nurses, and maternal and child health services) with a central coordination team. Children enrolled in REPPOP receive a two-year multidisciplinary follow-up, including regular medical visits and, when appropriate, nutritional and psychological counseling.</p>
 <p>At admission, two inclusion consultations are conducted by the referring REPPOP physician:</p>
-<p>Inclusion visit 1: to exclude organic causes of obesity and detect complications.</p>
-<p>Inclusion visit 2: to establish an educational and behavioral management plan.</p>
+<ul>
+<li><p>Inclusion visit 1: to exclude organic causes of obesity and detect complications.</p></li>
+<li><p>Inclusion visit 2: to establish an educational and behavioral management plan.</p></li>
+</ul>
 <p>The attending physician and family then define personalized, realistic objectives for the child and determine the most suitable care pathway.</p>
 <p>Despite the broad implementation of this coordinated approach, no formal economic evaluation of the REPOP program had been performed. The objective of this study was therefore to assess the cost-effectiveness of the REPOP pediatric obesity management strategy compared with no intervention.</p>
 </section>
@@ -303,8 +305,12 @@ These variables were used to simulate counterfactual BMI trajectories and estima
 <h3 class="anchored" data-anchor-id="simulation-of-the-natural-history-of-the-disease">Simulation of the Natural History of the Disease</h3>
 <p>Because no untreated control group was available, a model-based simulation was built to estimate each child’s BMI <em>Z</em>-score trajectory without the REPPOP intervention.<br>
 Data were observed at two time points — <strong>T₀ (baseline)</strong> and <strong>T + 2 years</strong> — including age, gender, social difficulties, and BMI <em>Z</em>-scores.</p>
-<p>A <strong>two-step modeling process</strong> was applied: 1. The <strong>two-year growth rate (X)</strong> in BMI <em>Z</em>-score was computed for each child.<br>
-2. This growth rate was then modeled using a <strong>multiple linear regression</strong>, stratified by age group, with predictors: <em>age at onset of overweight</em>, <em>initial BMI Z-score</em>, <em>social difficulties</em>, and <em>gender</em>.</p>
+<p>A <strong>two-step modeling process</strong> was applied:</p>
+<ol type="1">
+<li>The <strong>two-year growth rate (X)</strong> in BMI <em>Z</em>-score was computed for each child.<br>
+</li>
+<li>This growth rate was then modeled using a <strong>multiple linear regression</strong>, stratified by age group, with predictors: <em>age at onset of overweight</em>, <em>initial BMI Z-score</em>, <em>social difficulties</em>, and <em>gender</em>.</li>
+</ol>
 <p>The model can be expressed as:</p>
 <p><span class="math display">
 X_i \;=\; \beta_0 \;+\; \beta_1\,\mathrm{AgeOnset}_i \;+\; \beta_2\,\mathrm{ZBMI}_{i0}
@@ -316,6 +322,79 @@ X_i \;=\; \beta_0 \;+\; \beta_1\,\mathrm{AgeOnset}_i \;+\; \beta_2\,\mathrm{ZBMI
 Z_{i,\mathrm{sim}} \;=\; Z_{i,\mathrm{init}} \;+\; X_{i,\mathrm{sim}}.
 </span></p>
 <p>This approach allowed comparing each child’s <em>observed</em> BMI Z-score trajectory (with REPOP) to their <em>simulated</em> trajectory (without REPPOP).</p>
+<section id="example-of-r-code" class="level4">
+<h4 class="anchored" data-anchor-id="example-of-r-code">Example of R code</h4>
+<div class="cell">
+<details class="code-fold">
+<summary>Model-simulate-counterfactual</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Stratified multiple linear regression of 2-year growth rate by age band</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>fits <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Group data by age band for stratified analysis</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(age_band) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create a list-column containing data for each group</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nest</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Fit a linear regression model for each age band</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Predictors: baseline BMI-Z, sex, age at onset, social factors</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Outcome: observed growth rate</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">model =</span> <span class="fu">map</span>(data, <span class="sc">~</span> <span class="fu">lm</span>(growth_rate_obs <span class="sc">~</span> zbmi_incl <span class="sc">+</span> sex <span class="sc">+</span> age_onset <span class="sc">+</span> social, </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>                           <span class="at">data =</span> .x)),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Extract residual standard error (sigma) from each model</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Used to simulate natural data variability</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">sigma =</span> <span class="fu">map_dbl</span>(model, <span class="sc">~</span> <span class="fu">summary</span>(.x)<span class="sc">$</span>sigma),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Predict mean value (mu) for each observation</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Based on the fitted model</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">pred_mu =</span> <span class="fu">map2</span>(model, data, <span class="sc">~</span> <span class="fu">predict</span>(.x, <span class="at">newdata =</span> .y)),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate random residuals following a normal distribution</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Mean = 0, standard deviation = model sigma</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">resid_rnd =</span> <span class="fu">map2</span>(pred_mu, sigma, <span class="sc">~</span> <span class="fu">rnorm</span>(<span class="fu">length</span>(.x), <span class="dv">0</span>, .y)),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create simulated growth by adding residual noise</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="co"># to predictions (mu + epsilon)</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">growth_sim =</span> <span class="fu">map2</span>(pred_mu, resid_rnd, <span class="sc">~</span> .x <span class="sc">+</span> .y)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Attach simulated growth and build counterfactual Z-score at 2 years</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>sim <span class="ot">&lt;-</span> fits <span class="sc">%&gt;%</span> </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Select only necessary columns</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age_band, data, growth_sim) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Unnest data to return to tabular format</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="fu">c</span>(data, growth_sim)) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Calculate counterfactual Z-score at 2 years (scenario WITHOUT REPOP intervention)</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Baseline Z + simulated growth</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="at">z_sim_2y =</span> zbmi_incl <span class="sc">+</span> growth_sim,</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Observed change in Z-score WITH REPOP intervention</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (difference between final Z and baseline Z)</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">delta_z_repop =</span> zbmi_last <span class="sc">-</span> zbmi_incl,</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Simulated change in Z-score WITHOUT intervention</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="co"># (difference between counterfactual Z and baseline Z)</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    <span class="at">delta_z_nocare =</span> z_sim_2y <span class="sc">-</span> zbmi_incl</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick check: display model coefficients for the first age band</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>fits<span class="sc">$</span>model[[<span class="dv">1</span>]] <span class="sc">%&gt;%</span> <span class="fu">tidy</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
 </section>
 <section id="cost-effectiveness-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="cost-effectiveness-analysis">Cost-Effectiveness Analysis</h3>
@@ -332,7 +411,7 @@ ICER \;=\; \frac{\Delta C}{\Delta E}
 </span></p>
 <p>where ΔC is the incremental cost and ΔE the incremental effectiveness (reduction in BMI Z-score).</p>
 <section id="uncertainty-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="uncertainty-analysis">Uncertainty Analysis</h4>
+<h4 class="anchored" data-anchor-id="uncertainty-analysis"><strong>Uncertainty Analysis</strong></h4>
 <p>To account for sampling uncertainty, a non-parametric bootstrap method was applied with 10,000 replications. In each bootstrap sample, mean costs and mean effects were recalculated, and the ICER was recomputed. The 95% confidence interval for the ICER was derived using the percentile method, by discarding the lowest and highest 2.5% of simulated ICER values.</p>
 <p>This approach is recommended when no strong assumptions can be made regarding the distribution of incremental costs and effects. The resulting bootstrap replications were plotted on the cost-effectiveness (CE) plane, illustrating the joint uncertainty around the incremental cost and incremental effectiveness estimates.</p>
 </section>
@@ -342,7 +421,7 @@ ICER \;=\; \frac{\Delta C}{\Delta E}
 <p>To estimate the long-term cost savings associated with the REPOP intervention, we used data from a French national study that assessed the medical costs attributable to obesity in France. This reference study combined data from the 2002 Health, Health-Care and Insurance Survey (ESPS) and the Permanent Sample of Health Insurance Beneficiaries (EPAS), covering the three main social security schemes. It provided national estimates of annual direct medical costs associated with obesity, used here to extrapolate the future costs avoided through the REPPOP program.</p>
 <p>Assumptions were made regarding the percentage of obesity cases prevented by the intervention and the discount rate applied to future costs. We assumed that 16% of obesity cases were avoided among REPPOP participants, and annual costs were discounted at 2% and 4%, consistent with French health-economic guidelines.</p>
 <section id="number-of-obesity-cases-prevented" class="level4">
-<h4 class="anchored" data-anchor-id="number-of-obesity-cases-prevented">Number of Obesity Cases Prevented</h4>
+<h4 class="anchored" data-anchor-id="number-of-obesity-cases-prevented"><strong>Number of Obesity Cases Prevented</strong></h4>
 <p>The proportion of obesity cases prevented after two years of REPOP care was calculated as:</p>
 <p><span class="math display">
 \text{Obesity Prevented (\%)} \;=\;
@@ -353,7 +432,7 @@ ICER \;=\; \frac{\Delta C}{\Delta E}
 <p>where (N_{}) is the number of children classified as obese at 2 years in the no-intervention (counterfactual) simulation, and (N_{}) is the number observed after REPOP care.</p>
 </section>
 <section id="discounted-cost-savings" class="level4">
-<h4 class="anchored" data-anchor-id="discounted-cost-savings">Discounted Cost Savings</h4>
+<h4 class="anchored" data-anchor-id="discounted-cost-savings"><strong>Discounted Cost Savings</strong></h4>
 <p>The present value (PV) of avoided obesity-related costs was computed as:</p>
 <p><strong>Simple (T-year horizon):</strong> <span class="math display">
 PV \;=\; \sum_{t=1}^{T} \frac{p \times C}{(1+r)^{t}}
@@ -527,8 +606,8 @@ PV \;=\; \sum_{a=a_s}^{a_e-1} \frac{p \times C}{(1+r)^{\,a - a_0}}
 <h2 class="anchored" data-anchor-id="cost-effectiveness-plane-bootstrap-distribution">Cost-Effectiveness Plane (Bootstrap Distribution)</h2>
 <div class="cell" data-layout-align="center">
 <details class="code-fold">
-<summary>Show code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"~/Documents/GitHub/Ousmanerabi.github.io/images/bootstrap.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>View code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">include_graphics</span>(<span class="st">"~/Documents/GitHub/Ousmanerabi.github.io/images/bootstrap.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div id="fig-bootstrap" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
