@@ -12,16 +12,23 @@ format:
     html-math-method: katex
     #code-fold: true
     #code-summary: "Show code"
-    #embed-resources: true
+    embed-resources: true
     css: ../assets/css/remove-keyword.css
-editor: 
-  markdown: 
-    wrap: sentence
 ---
+# Cost-Effectiveness of the REPPOP Pediatric Obesity Management Program
+
+::: {.author-info-simple}
+**AUTHOR**  
+Ousmane DIALLO, MPH-PhD
+
+**PUBLISHED**  
+August 30, 2025
+:::
 
 ## Overview
 
 In the Aquitaine region of France, as part of the Nutrition, Prevention, and Child Health Program—the regional extension of the National Nutrition and Health Program (PNNS) for children and adolescents—a harmonized screening and management approach for pediatric overweight and obesity was developed.
+
 This initiative led to the creation of the REPPOP network (Réseau de Prévention et de Prise en charge de l’Obésité Pédiatrique), an integrated and multidisciplinary care system operating in the Gironde area.
 
 The REPPOP network connects community physicians, hospital practitioners, and public health professionals (including school doctors, nurses, and maternal and child health services) with a central coordination team.
@@ -29,14 +36,16 @@ Children enrolled in REPPOP receive a two-year multidisciplinary follow-up, incl
 
 At admission, two inclusion consultations are conducted by the referring REPPOP physician:
 
--   Inclusion visit 1: to exclude organic causes of obesity and detect complications.
+-   **Inclusion visit 1: to exclude organic causes of obesity and detect complications.**
 
--   Inclusion visit 2: to establish an educational and behavioral management plan.
+-   **Inclusion visit 2: to establish an educational and behavioral management plan.**
 
 The attending physician and family then define personalized, realistic objectives for the child and determine the most suitable care pathway.
 
 Despite the broad implementation of this coordinated approach, no formal economic evaluation of the REPOP program had been performed.
 The objective of this study was therefore to assess the cost-effectiveness of the REPOP pediatric obesity management strategy compared with no intervention.
+
+---
 
 ## Methodology Framework
 
@@ -79,7 +88,7 @@ $$
 
 This approach allowed comparing each child’s *observed* BMI Z-score trajectory (with REPOP) to their *simulated* trajectory (without REPPOP).
 
-#### Example of R code
+#### **Example of R code**
 
 ```{r}
 #| label: model-simulate-counterfactual
@@ -176,7 +185,7 @@ $$
 
 where ΔC is the incremental cost and ΔE the incremental effectiveness (reduction in BMI Z-score).
 
-#### R code
+#### **R code**
 ```{r}
 #| label: costs-effects
 #| eval: false
@@ -368,7 +377,7 @@ This calculation provides an estimate of the discounted long-term cost offsets a
 #| label: efficiency-longterm
 #| eval: false
 #| code-fold: true
-#| code-summary: "efficiency-longterm"
+#| code-summary: "Efficiency-longterm"
 
 # ============================================================================
 # Calculate long-term cost offsets using present value (PV)
@@ -510,4 +519,4 @@ The proportion of obesity cases that would need to be prevented for the REPOP in
 -   The **mean cost per child** was **€440.5**, resulting in an **ICER of €275 per one-unit BMI Z-score reduction** — a moderate cost for meaningful clinical benefit.\
 -   REPOP falls in the **northeast quadrant** of the CE plane (more costly but more effective), consistent with preventive public health interventions.\
 -   Compared with published studies, REPOP demonstrated **stronger clinical effectiveness** and **competitive cost-efficiency**.\
--   Findings highlight the **economic value of multidisciplinary obesity management programs** in children and demonstrate your ability to apply **HEOR modeling, cost-effectiveness methods, and bootstrap-based uncertainty analysis**.
+-   Findings highlight the **economic value of multidisciplinary obesity management programs** in children
