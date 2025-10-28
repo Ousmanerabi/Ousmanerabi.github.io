@@ -35,8 +35,8 @@ Below is a curated selection of projects I led or contributed to between 2020 an
   <div class="project-meta">2023–2024</div>
 </div>
 
-<div class="project-card" data-tags="burkina guinea togo targeting stratification snt">
-  <a href="/projects/snt-stratification-targeting.html">Data Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)</a>
+<div class="project-card" data-tags="Cost-Effectiveness of the REPPOP Management Program">
+  <a href="/projects/cost-effectiveness-reppop.html">Cost-Effectiveness of the REPPOP Management Program</a>
   <div class="project-meta">2023</div>
 </div>
 

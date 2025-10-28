@@ -28,6 +28,13 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 
 [define.xml Generation & Validation Workflow](projects/sdtm-validation-project.html)
 
+## HEOR Projects
+
+
+[Cost-Effectiveness of the REPPOP Management Program](projects/cost-effectiveness-reppop.html)
+
+[Cost-Utility of Lung Transplantation](projects/cost-utility-lung.html)
+
 ## Statistical Modeling & Real-World Evidence
 *Advanced analytics and evidence generation for clinical decision-making*
 
@@ -45,14 +52,6 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 [Microstratification in Conakry](projects/microstratification-conakry.html)
 
 [Retrospective Analysis of Malaria Trend in Burkina Faso](projects/retrospective_analysis.html)
-
-## Data Management & Multi-country Studies
-
-*Complex data integration and cross-national research coordination*
-
-[Data Management, Stratification & Intervention Targeting (Togo, Guinea, Burkina Faso)](projects/snt-stratification-targeting.html)
-
-[Complex Survey Data Analysis with R](projects/complex-survey-analysis.html)
 
 ## Capacity Building & Training
 
