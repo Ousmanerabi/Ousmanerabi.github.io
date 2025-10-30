@@ -442,8 +442,8 @@ Table: Present value of avoided adult obesity-related medical costs per child
 ## Interpretation & Key Takeaways
 
 -   The REPPOP program reduced BMI Z-score by **1.6 SD** over two years compared with the simulated no-intervention scenario.\
--   Mean program cost per child (2-year REPPOP): €528.6\
--   The **mean cost per child** was **€528.6.5**, resulting in an **ICER of €330 per one-unit BMI Z-score reduction** — a moderate cost for meaningful clinical benefit.\
+-   Mean program cost per child (2-year REPPOP): **€528.6**\
+-   The **mean cost per child** was **€528.6.5**, resulting in an **ICER of €330 per one-unit BMI Z-score reduction**, a moderate cost for meaningful clinical benefit.\
 -   REPPOP falls in the **northeast quadrant** of the CE plane (more costly but more effective), consistent with preventive public health interventions.\
 -   Compared with published studies, REPPOP demonstrated **stronger clinical effectiveness** and **competitive cost-efficiency**.\
 -   Findings highlight the **economic value of multidisciplinary obesity management programs** in children, especially with updated costs showing enhanced long-term offsets.
