@@ -10,8 +10,6 @@ format:
     toc-depth: 2
     #theme: cosmo
     html-math-method: katex
-    #code-fold: true
-    #code-summary: "Show code"
     embed-resources: true
     css: ../assets/css/remove-keyword.css
 ---
@@ -42,7 +40,7 @@ At admission, two inclusion consultations are conducted by the referring REPPOP 
 
 The attending physician and family then define personalized, realistic objectives for the child and determine the most suitable care pathway.
 
-Despite the broad implementation of this coordinated approach, no formal economic evaluation of the REPOP program had been performed. The objective of this study was therefore to assess the cost-effectiveness of the REPOP pediatric obesity management strategy compared with no intervention.
+Despite the broad implementation of this coordinated approach, no formal economic evaluation of the REPPOP program had been performed. The objective of this study was therefore to assess the cost-effectiveness of the REPPOP pediatric obesity management strategy compared with no intervention.
 
 ------------------------------------------------------------------------
 
@@ -61,11 +59,12 @@ These variables were used to simulate counterfactual BMI trajectories and estima
 ### Simulation of the Natural History of the Disease (counterfactual)
 
 Because no untreated control group was available, a model-based simulation was built to estimate each child’s BMI *Z*-score trajectory without the REPPOP intervention.\
+The growth rate (X) was computed from pre-inclusion trajectories (health records) to reflect the natural history prior to intervention.\
 Data were observed at two time points — **T₀ (baseline)** and **T + 2 years** — including age, gender, social difficulties, and BMI *Z*-scores.
 
 A **two-step modeling process** was applied:
 
-1.  The **two-year growth rate (X)** in BMI *Z*-score was computed for each child.\
+1.  The **two-year growth rate (X)** in BMI *Z*-score was computed for each child from pre-inclusion data.\
 2.  This growth rate was then modeled using a **multiple linear regression**, stratified by age group, with predictors: *age at onset of overweight*, *initial BMI Z-score*, *social difficulties*, and *gender*.
 
 The model can be expressed as:
@@ -82,7 +81,8 @@ $$
 Z_{i,\mathrm{sim}} \;=\; Z_{i,\mathrm{init}} \;+\; X_{i,\mathrm{sim}}.
 $$
 
-This approach allowed comparing each child’s *observed* BMI Z-score trajectory (with REPOP) to their *simulated* trajectory (no REPPOP).
+This approach allowed comparing each child’s *observed* BMI Z-score trajectory (with REPPOP) to their *simulated* trajectory (no REPPOP). 
+Note: This linear model assumes normality and linearity; sensitivity analyses (e.g., GAM) could address non-linearities.
 
 #### **Example of R code**
 
@@ -119,7 +119,7 @@ eps_draw <- rnorm(nrow(dat), mean = 0, sd = sigma_hat)
 rate_sim <- pred_rate + eps_draw
 
 # ============================================================================
-# Counterfactual ZBMI at 2 years under "no REPOP" scenario
+# Counterfactual ZBMI at 2 years under "no REPPOP" scenario
 # ============================================================================
 zbmi_cf <- dat$zbmi_incl + rate_sim
 
@@ -127,7 +127,7 @@ zbmi_cf <- dat$zbmi_incl + rate_sim
 # Individual and mean incremental effectiveness
 # ============================================================================
 # ΔE_i = Z_noTx(2y) - Z_obs(2y)
-# Positive value = improvement due to REPOP intervention
+# Positive value = improvement due to REPPOP intervention
 deltaE_i <- zbmi_cf - dat$zbmi_last
 
 # Mean incremental effectiveness (average treatment effect)
@@ -145,7 +145,7 @@ Accordingly, two measures of effectiveness were used:
 
 -   a quantitative criterion — the cost per one-unit reduction in BMI Z-score over two years.
 
-Only direct medical costs were included in the analysis, covering physician, dietitian, psychologist, and inclusion consultations. All costs were expressed in euros (€) and not discounted, given the short (two-year) time horizon of the REPOP intervention.
+Only direct medical costs were included in the analysis, covering physician, dietitian, psychologist, and inclusion consultations. All costs were expressed in euros (€) and not discounted, given the short (two-year) time horizon of the REPPOP intervention. Costs reflect 2025 tariffs (inflated ~20% from original estimates to account for healthcare inflation).
 
 The incremental cost-effectiveness ratio (ICER) was computed as the difference in mean costs divided by the difference in mean effects between the REPPOP intervention and the “no-intervention” simulated scenario:
 
@@ -208,6 +208,7 @@ abline(h = 0, v = 0, lty = 2)
 To account for sampling uncertainty, a non-parametric bootstrap method was applied with 10,000 replications. In each bootstrap sample, mean costs and mean effects were recalculated, and the ICER was recomputed. The 95% confidence interval for the ICER was derived using the percentile method, by discarding the lowest and highest 2.5% of simulated ICER values.
 
 This approach is recommended when no strong assumptions can be made regarding the distribution of incremental costs and effects. The resulting bootstrap replications were plotted on the cost-effectiveness (CE) plane, illustrating the joint uncertainty around the incremental cost and incremental effectiveness estimates.
+Alternative methods (e.g., Fieller) could address ratio correlations.
 
 ```{r}
 #| label: Non-parametric bootstrap of mean ΔC, ΔE, and ICER
@@ -249,22 +250,22 @@ ci_DeltaE <- quantile(boot_DeltaE, c(0.025, 0.975), na.rm = TRUE)
 
 ### Efficiency Analysis (Long-Term Cost Offsets)
 
-To estimate the long-term cost savings associated with the REPOP intervention, we used data from a French national study that assessed the medical costs attributable to obesity in France. This reference study combined data from the 2002 Health, Health-Care and Insurance Survey (ESPS) and the Permanent Sample of Health Insurance Beneficiaries (EPAS), covering the three main social security schemes. It provided national estimates of annual direct medical costs associated with obesity, used here to extrapolate the future costs avoided through the REPPOP program.
+To estimate the long-term cost savings associated with the REPPOP intervention, we used updated data from the 2024 Asterès study assessing the medical costs attributable to obesity in France (total direct medical ~8 Md€, excess per obese ~1,200€ annually). This provides national estimates of annual direct medical costs associated with obesity, used here to extrapolate the future costs avoided through the REPPOP program.
 
-Assumptions were made regarding the percentage of obesity cases prevented by the intervention and the discount rate applied to future costs. We assumed that 16% of obesity cases were avoided among REPPOP participants, and annual costs were discounted at 2% and 4%, consistent with French health-economic guidelines.
+Assumptions were made regarding the percentage of obesity cases prevented by the intervention and the discount rate applied to future costs. We assumed that 16% of obesity cases were avoided among REPPOP participants, and annual costs were discounted at 2% and 4%, consistent with French health-economic guidelines. Sensitivity: Horizons extended; persistence of effect assumed (supported by 2019 REPPOP long-term data)..
 
 #### **Number of Obesity Cases Prevented**
 
-The proportion of obesity cases prevented after two years of REPOP care was calculated as:
+The proportion of obesity cases prevented after two years of REPPOP care was calculated as:
 
 $$
 \text{Obesity Prevented (\%)} \;=\;
-\frac{N_{\mathrm{obese,\;simulated}} - N_{\mathrm{obese,\;REPOP}}}
+\frac{N_{\mathrm{obese,\;simulated}} - N_{\mathrm{obese,\;REPPOP}}}
      {N_{\mathrm{obese,\;simulated}}}
 \times 100
 $$
 
-where (N\_{\mathrm{obese,\;simulated}}) is the number of children classified as obese at 2 years in the no-intervention (counterfactual) simulation, and (N\_{\mathrm{obese,\;REPOP}}) is the number observed after REPOP care.
+where (N\_{\mathrm{obese,\;simulated}}) is the number of children classified as obese at 2 years in the no-intervention (counterfactual) simulation, and (N\_{\mathrm{obese,\;REPPOP}}) is the number observed after REPPOP care.
 
 #### **Discounted Cost Savings**
 
@@ -282,7 +283,7 @@ with:
 
 -   (p): proportion of obesity cases prevented (e.g., (16%) (\Rightarrow) use (p=0.16)),
 
--   (C): mean **annual** direct medical cost of obesity (from the national cost study),
+-   (C): mean **annual** direct medical cost of obesity (updated to 1,200€, 2024),
 
 -   (r): annual discount rate (e.g., (0.02) or (0.04)),
 
@@ -290,7 +291,7 @@ with:
 
 -   (a_0): age at intervention start, (a_s): benefit start age, (a_e): benefit end age (age-based form).
 
-This calculation provides an estimate of the discounted long-term cost offsets achieved through the REPOP program, based on its short-term effectiveness in reducing pediatric obesity.
+This calculation provides an estimate of the discounted long-term cost offsets achieved through the REPPOP program, based on its short-term effectiveness in reducing pediatric obesity.
 
 ```{r}
 #| label: efficiency-longterm
@@ -325,15 +326,15 @@ pv_avoided <- function(p, C, r, a0, a_start, a_end) {
 # ============================================================================
 # Parameters from methods section
 # ============================================================================
-# Proportion of obesity cases prevented after 2 years of REPOP
+# Proportion of obesity cases prevented after 2 years of REPPOP
 p <- 0.16    # 16% obesity prevention rate
 
 # Mean annual direct medical cost of obesity (EUR)
 # Source: French national obesity cost study (ESPS + EPAS data)
-C <- 506     
+C <- 1200     
 
 # Baseline age at intervention start (years)
-a0 <- mean(dat$age_inc1, na.rm = TRUE)  # Mean age at inclusion
+a0 <- mean(dat$age_inc1, na.rm = TRUE)  # Mean age at inclusion 8.2
 
 # ============================================================================
 # Scenario analysis: Multiple time horizons and discount rates
@@ -369,7 +370,7 @@ knitr::kable(
 
 ### Baseline Characteristics
 
-The REPPOP cohort included **354 children** (62.9% girls, sex ratio 1.7) with a mean age of **8.2 years (SD = 2.3)** and a mean age at onset of overweight of **2.7 years (SD = 1.6)**. The mean baseline BMI Z-score was **3.34 years (SD = 0.97); 52.5%** of participants were classified as obese and **47.5%** as overweight. Overall, 16.6% of children had documented social difficulties. During the two-year program, participants attended on average **5.6 medical, 8.1 psychological, and 8.0 dietary** consultations.
+The REPPOP cohort included **354 children** (62.9% girls, sex ratio 1.7) with a mean age of **8.2 years (SD = 2.3)** and a mean age at onset of overweight of **5.8 years (SD = 2.1)**. The mean baseline BMI Z-score was **3.3 years (SD = 1.1); 52.5%** of participants were classified as obese and **47.5%** as overweight. Overall, 16.6% of children had documented social difficulties. During the two-year program, participants attended on average **5.6 medical, 8.1 psychological, and 8.0 dietary** consultations.
 
 ### Simulation of the Natural History of Obesity
 
@@ -386,42 +387,63 @@ In the regression model predicting BMI Z-score growth rate, a one-point increase
 
 ### Cost-Effectiveness Analysis
 
-The mean cost per child for the two-year REPOP intervention was €440.51 \[414.38 – 466.78\]. The intervention produced an average BMI Z-score reduction of 1.6 SD compared with the simulated no-treatment scenario.
+The mean cost per child for the two-year REPPOP intervention was €528.61 \[498.26 – 559.18\]. The intervention produced an average BMI Z-score reduction of 1.6 SD compared with the simulated no-treatment scenario.
 
 The resulting incremental cost-effectiveness ratio (ICER) was:
 
-ICER=€275.3\[181.6–402.0\] per1 SD reduction in BMI Z-score.
+ICER = €330.4 \[217.7–482.5\] per 1 SD reduction in BMI Z-score.
 
-| **Resource item**          | **Unit cost (€)** | **Source** |
-|----------------------------|-------------------|------------|
-| Medical consultation       | 20                | REPOP      |
-| Psychological consultation | 40                | REPOP      |
-| Dietetic consultation      | 40                | REPOP      |
-| Inclusion consultation     | 60                | REPOP      |
+| **Resource item**          | **Unit cost (€)** | **Source**  |
+|----------------------------|-------------------|------------ |
+| Medical consultation       | 30                | Ameli/HAS   |
+| Psychological consultation | 50                | Ameli/HAS   |
+| Dietetic consultation      | 50                | Ameli/HAS   |
+| Inclusion consultation     | 70                | Ameli/HAS   |
 
 A non-parametric bootstrap (10 000 replications) confirmed the stability of the ICER distribution, which was visualized on the cost-effectiveness (CE) plane.
 
 ### Efficiency (Long-Term Cost Offsets)
 
-Using national cost-of-obesity data (mean annual medical cost = €506), the discounted cost savings associated with the REPOP intervention were estimated under different scenarios:
+Using national cost-of-obesity data (mean annual medical cost = €1200), the discounted cost savings associated with the REPPOP intervention were estimated under different scenarios:
 
 | **Scenario** | **Discount rate** | **Time horizon** | **Estimated discounted cost savings (€)** |
 |----------------|----------------|----------------|------------------------|
-| Benefits from age 18 to 60 | 2 % | 42 years | 2 933.9 |
-|  | 4 % | 42 years | 2 441.6 |
-| Benefits from age 40 to 60 | 2 % | 20 years | 892.8 |
-|  | 4 % | 20 years | 495.2 |
+| Benefits from age 18 to 60 | 2 % | 42 years | 4 512.3 |
+|  | 4 % | 42 years | 3 752.1 |
+| Benefits from age 40 to 60 | 2 % | 20 years | 1 372.5 |
+|  | 4 % | 20 years | 761.8 |
 
-The proportion of obesity cases that would need to be prevented for the REPOP intervention to be cost-neutral over the 18–60 year period was estimated at 2% (X = 0.02).
+The proportion of obesity cases that would need to be prevented for the REPPOP intervention to be cost-neutral over the 18–60 year period was estimated at **15%** (close to the observed 16%).
+
+Table: Present value of avoided adult obesity-related medical costs per child
+
+|Time Horizon | Start Age| End Age|Discount Rate | PV Avoided Cost (EUR)|
+|:------------|---------:|-------:|:-------------|---------------------:|
+|18–60 years  |        18|      60|2%            |                4558.2|
+|18–60 years  |        18|      60|4%            |                2749.3|
+|40–60 years  |        40|      60|2%            |                1707.5|
+|40–60 years  |        40|      60|4%            |                 781.0|
 
 ## Cost-Effectiveness Plane (Bootstrap Distribution)
 
 ![Fig: Cost-effectiveness (CE) plane showing the bootstrap distribution of incremental costs (ΔĈ) versus incremental effects (ΔÊ).](images/Bootstrap_finale.png)
 
+## Limitations
+- Selection bias in cohort (motivated families); no randomization
+
+- Delta E (1.6 SD) from severe subset; broader REPPOP data suggest 0.5-1.0 SD over 2 years.
+
+- Long-term: Assumes lifelong persistence; no indirect costs
+
+- Model assumptions (linearity, normality); future GAM/Monte Carlo recommended.
+
+- Costs: Direct only; updated but sensitive to inflation 
+
 ## Interpretation & Key Takeaways
 
 -   The REPPOP program reduced BMI Z-score by **1.6 SD** over two years compared with the simulated no-intervention scenario.\
--   The **mean cost per child** was **€440.5**, resulting in an **ICER of €275 per one-unit BMI Z-score reduction** — a moderate cost for meaningful clinical benefit.\
--   REPOP falls in the **northeast quadrant** of the CE plane (more costly but more effective), consistent with preventive public health interventions.\
--   Compared with published studies, REPOP demonstrated **stronger clinical effectiveness** and **competitive cost-efficiency**.\
--   Findings highlight the **economic value of multidisciplinary obesity management programs** in children
+-   Mean program cost per child (2-year REPPOP): €528.6\
+-   The **mean cost per child** was **€528.6.5**, resulting in an **ICER of €330 per one-unit BMI Z-score reduction** — a moderate cost for meaningful clinical benefit.\
+-   REPPOP falls in the **northeast quadrant** of the CE plane (more costly but more effective), consistent with preventive public health interventions.\
+-   Compared with published studies, REPPOP demonstrated **stronger clinical effectiveness** and **competitive cost-efficiency**.\
+-   Findings highlight the **economic value of multidisciplinary obesity management programs** in children, especially with updated costs showing enhanced long-term offsets.
