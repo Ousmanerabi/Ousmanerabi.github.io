@@ -1,0 +1,30 @@
+---
+title: "Lung Transplantation: Parametric Weibull Survival Model and Cost-Utility Evaluation"
+author: "Ousmane O. Diallo"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+highlight-style: pygments
+page-layout: article
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    #theme: cosmo
+    html-math-method: katex
+    embed-resources: true
+    css: ../assets/css/remove-keyword.css
+---
+
+# Lung Transplantation: Parametric Weibull Survival Model and Cost-Utility Analysis
+
+
+
+## Overview
+
+Since the first heart–lung and lung transplants performed in France in the 1980s, over 3,700 procedures have been reported nationwide. The main indications for transplantation include cystic fibrosis, COPD, pulmonary fibrosis, and pulmonary arterial hypertension. Despite improved allocation systems and reduced waiting list mortality, long-term survival remains limited—approximately 70% at one year and below 50% at five years. While lung transplantation has proven effective in improving survival and quality of life, no cost-utility evaluation has been conducted in France.
+This projet therefore aims to assess the cost-effectiveness of lung and heart–lung transplantation compared with medical management.
+
+## Methodology Framework
+
+### Data sources
+
+### Data summary

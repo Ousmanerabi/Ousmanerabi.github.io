@@ -52,7 +52,7 @@ website:
     collapse: true  # Collapsible sur mobile
     toggle-position: right  # Bouton toggle à droite
   
-  body-footer: "Ousmane Diallo, MPH-PhD -- Biostatistician & Epidemiologist based in [votre localisation]. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."  # Ajoutez une bio courte pour le footer du body
+  body-footer: "Ousmane Diallo, MPH-PhD -- Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."  # Ajoutez une bio courte pour le footer du body
   
   page-footer:
     background: light  # Garde le fond clair
