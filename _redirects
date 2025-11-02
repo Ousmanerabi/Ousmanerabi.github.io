@@ -1,0 +1,2 @@
+# Force all HTTP requests to redirect to HTTPS
+http://* https://ousmanediallo.com/:splat 301!
