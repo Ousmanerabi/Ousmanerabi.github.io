@@ -8,7 +8,7 @@ project:
 website:
   title: "Ousmane Diallo, MPH-PhD"
   description: "Biostatistician & Epidemiologist specializing in health data analytics, statistical modeling, and clinical research."
-  site-url: "https://ousmanediallo.com/"
+  site-url: "https://ousmanediallo.com"
   repo-url: "https://github.com/ousmanerabi/ousmanerabi.github.io"
   favicon: "images/favicon.jpg"  # Ajoutez un favicon si vous en avez un ; sinon, supprimez cette ligne
   image: "images/bio-photo-2.jpg"  # Utilisez votre photo de bio comme image par défaut du site
@@ -76,8 +76,8 @@ author:  # Bloc auteur global pour le site (utilisé dans les métadonnées)
   affiliations:
     - name: "[Votre affiliation principale, ex. : Université ou Entreprise]"
     - name: "[Autre affiliation]"
-  email: "votre.email@example.com"  # Ajoutez votre email si vous voulez le rendre public
-  url: "https://ousmanediallo.com/"
+  email: "ousmanerabi12@gmail.com"  # Ajoutez votre email si vous voulez le rendre public
+  url: "https://ousmanediallo.com"
   image: "images/bio-photo-2.jpg"
 
 format:
