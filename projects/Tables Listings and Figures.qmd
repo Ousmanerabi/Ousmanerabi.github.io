@@ -42,7 +42,16 @@ Generate complete TLF package for regulatory submission using ADaM datasets from
 
 ### Technical Approach
 
-ADaM Datasets → SAS Programs → Statistical Analysis → Formatting → PDF/RTF Outputs
+
+```{mermaid}
+flowchart LR
+A[ADaM Datasets] --> B(SAS Programs)
+B --> C[Statistical Analysis]
+C --> D[Formatting]
+D --> E[RTF Outputs]
+
+```
+
 
 ### ADaM Data Sources
 
@@ -53,6 +62,8 @@ ADaM Datasets → SAS Programs → Statistical Analysis → Formatting → PDF/R
 | **ADSL** | Subject-level analysis data | USUBJID, TRT01PN, SAFFL, ITTFL, AGE, SEX |
 | **ADLB** | Laboratory results | PARAMCD, AVAL, BASE, CHG, ANRIND |
 | **ADAE** | Adverse events | AEDECOD, AESOC, AESEV, AEREL, TRTEMFL |
+
+: {.striped .hover}
 
 ## Tables Implementation
 

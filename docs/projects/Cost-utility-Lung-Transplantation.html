@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ousmane O. Diallo">
+<meta name="dcterms.date" content="2025-11-04">
 <meta name="keywords" content="biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence">
 <meta name="description" content="Biostatistician &amp; Epidemiologist specializing in health data analytics, statistical modeling, large-scale data management, and clinical research.">
 
@@ -21,6 +22,40 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -4783,6 +4818,8 @@ display: none !important;
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#methodology-framework" id="toc-methodology-framework" class="nav-link" data-scroll-target="#methodology-framework">Methodology Framework</a></li>
+  <li><a href="#results-summary" id="toc-results-summary" class="nav-link" data-scroll-target="#results-summary">Results Summary</a></li>
+  <li><a href="#key-insights" id="toc-key-insights" class="nav-link" data-scroll-target="#key-insights">Key Insights</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -4814,7 +4851,7 @@ display: none !important;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">November 4, 2025</p>
     </div>
   </div>
   
@@ -4834,6 +4871,12 @@ display: none !important;
 
 <section id="lung-transplantation-parametric-weibull-survival-model-and-cost-utility-analysis" class="level1">
 <h1>Lung Transplantation: Parametric Weibull Survival Model and Cost-Utility Analysis</h1>
+<div class="author-info-simple">
+<p><strong>AUTHOR</strong><br>
+Ousmane DIALLO, MPH-PhD</p>
+<p><strong>PUBLISHED</strong><br>
+August 30, 2025</p>
+</div>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>Since the first heart–lung and lung transplants performed in France in the 1980s, over 3,700 procedures have been reported nationwide. The main indications for transplantation include cystic fibrosis, COPD, pulmonary fibrosis, and pulmonary arterial hypertension. Despite improved allocation systems and reduced waiting list mortality, long-term survival remains limited—approximately 70% at one year and below 50% at five years. While lung transplantation has proven effective in improving survival and quality of life, no cost-utility evaluation has been conducted in France. This projet therefore aims to assess the cost-effectiveness of lung and heart–lung transplantation compared with medical management.</p>
@@ -4842,12 +4885,224 @@ display: none !important;
 <h2 class="anchored" data-anchor-id="methodology-framework">Methodology Framework</h2>
 <section id="data-sources" class="level3">
 <h3 class="anchored" data-anchor-id="data-sources">Data sources</h3>
+<p>The study was based on data collected at Foch Hospital (Suresnes, France), a national reference center and pioneer in lung transplantation. The institutional database includes all patients followed for lung or heart–lung transplantation since 1989. For this analysis, only records with complete demographic and clinical information (date of birth, hospital identifier, transplant date) were retained.</p>
+<p>The dataset comprised:</p>
+<ul>
+<li><p><strong>Sociodemographic and occupational variables</strong>,</p></li>
+<li><p><strong>Clinical and paraclinical data</strong>,</p></li>
+<li><p><strong>Hospitalization and follow-up information</strong></p></li>
+<li><p><strong>Quality-of-life assessments using the Nottingham Health Profile (NHP) questionnaire</strong>.</p></li>
+</ul>
 </section>
 <section id="data-summary" class="level3">
 <h3 class="anchored" data-anchor-id="data-summary">Data summary</h3>
-
-
+<p>Between 1989 and January 2015, <strong>631 patients</strong> were recorded in the Foch Hospital cohort, including <strong>571 transplanted patients (90.5%)</strong> and <strong>60 awaiting transplantation (9.5%)</strong>. The <strong>sex ratio was balanced</strong> (≈50% female), with a <strong>mean age of 38.8 years</strong> at listing.</p>
+<p>The primary indications for transplantation were:</p>
+<ul>
+<li><p><strong>Cystic fibrosis (50%)</strong>,</p></li>
+<li><p><strong>Emphysema/COPD (21%)</strong>,</p></li>
+<li><p><strong>Interstitial lung disease (15%)</strong>, and</p></li>
+<li><p><strong>Other etiologies (12%)</strong>.</p></li>
+</ul>
+<p>As of May 2015, <strong>42.5% of patients had died</strong>, and <strong>19 patients (3%)</strong> underwent a second transplantation.</p>
+<p>Quality-of-life data were available for <strong>302 transplanted patients</strong> (pre- and post-transplant), assessed through the NHP dimensions: pain, mobility, sleep, energy, emotions, and social isolation. These scores were converted to EQ-5D utilities using a validated mapping algorithm to enable QALY computation for cost-utility analysis.</p>
 </section>
+<section id="methodology" class="level3">
+<h3 class="anchored" data-anchor-id="methodology">Methodology</h3>
+<p>A <strong>retrospective cohort design</strong> was used to evaluate the <strong>cost-utility</strong> of lung and heart–lung transplantation compared with continued medical management. The analysis integrated survival modeling, utility estimation, and cost evaluation from the <strong>French National Health Insurance (Assurance Maladie)</strong> perspective.</p>
+<section id="study-groups" class="level4">
+<h4 class="anchored" data-anchor-id="study-groups">Study Groups</h4>
+<ul>
+<li><p><strong>Transplantation group (TP)</strong>: All transplanted patients since 2005 with at least one pre- and post-transplant quality-of-life measure. Mean post-transplant survival was estimated using a <strong>parametric Weibull model</strong> (time origin = transplantation date).</p></li>
+<li><p><strong>Medical management group</strong>: Because randomization is ethically infeasible and few patients die untransplanted, a direct control group could not be constructed.</p></li>
+</ul>
+<p>Instead, <strong>pseudo-controls</strong> were generated using <strong>literature-derived hazard ratios</strong> to estimate counterfactual survival in the absence of transplantation.</p>
+</section>
+<section id="costing-perspective" class="level4">
+<h4 class="anchored" data-anchor-id="costing-perspective">Costing perspective</h4>
+<p>Costs were estimated from the <strong>payer perspective (Assurance Maladie)</strong> and included:</p>
+<p><strong>Hospital costs</strong> based on Diagnosis-Related Group [GHS/GHM] tariffs for transplantation),</p>
+<p><strong>Ambulatory care and potential post-acute care</strong> (SSR/HAD), and</p>
+<p><strong>Expert-based estimates or complementary data</strong> from Foch Hospital when necessary.</p>
+<p>The final <strong>cost-utility analysis</strong> compared transplantation with medical management and expressed results as an <strong>Incremental Cost-Effectiveness Ratio (ICER)</strong>, reported in <strong>cost per QALY gained</strong>.</p>
+</section>
+</section>
+</section>
+<section id="results-summary" class="level2">
+<h2 class="anchored" data-anchor-id="results-summary">Results Summary</h2>
+<section id="descriptive-overview" class="level3">
+<h3 class="anchored" data-anchor-id="descriptive-overview">Descriptive Overview</h3>
+<p>The synthetic cohort reproduced the demographic and clinical characteristics of the original Foch Hospital population.<br>
+The mean age at listing was <strong>38.8 years</strong> (range 11–72), with an equal sex distribution (≈50% female).<br>
+Among <strong>631 patients</strong>, <strong>571 (90.5%)</strong> underwent transplantation and <strong>60 (9.5%)</strong> remained on the waiting list.<br>
+The main indications for transplantation were <strong>cystic fibrosis (50%)</strong>, <strong>COPD/emphysema (21%)</strong>, and <strong>interstitial lung disease (15%)</strong>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Demographic summary table</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(AGE),</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_age =</span> <span class="fu">sd</span>(AGE),</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_female =</span> <span class="fu">mean</span>(SEX <span class="sc">==</span> <span class="dv">0</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">prop_transplanted =</span> <span class="fu">mean</span>(TRANSPLANTED <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="survival-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="survival-analysis">Survival Analysis</h3>
+<p>A parametric Weibull survival model was fitted to censored post-transplant data.</p>
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Estimate</th>
+<th>95% CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Shape (k)</td>
+<td><strong>1.36</strong></td>
+<td>1.03 – 1.78</td>
+</tr>
+<tr class="even">
+<td>Scale (λ)</td>
+<td><strong>1670 days</strong></td>
+<td>1320 – 2010</td>
+</tr>
+</tbody>
+</table>
+<p>The hazard function indicated an increasing risk of death over time (k &gt; 1).</p>
+<p>Predicted survival probabilities were:</p>
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th>Time since TP</th>
+<th>Survival Probability (S(t))</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1 year</td>
+<td><strong>0.90</strong></td>
+</tr>
+<tr class="even">
+<td>2 years</td>
+<td><strong>0.76</strong></td>
+</tr>
+<tr class="odd">
+<td>3 years</td>
+<td><strong>0.61</strong></td>
+</tr>
+<tr class="even">
+<td>4 years</td>
+<td><strong>0.47</strong></td>
+</tr>
+<tr class="odd">
+<td>5 years</td>
+<td><strong>0.34</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The <strong>median survival</strong> was approximately <strong>4.2 years</strong>, consistent with national registry data.</p>
+</section>
+<section id="quality-of-life-qol" class="level3">
+<h3 class="anchored" data-anchor-id="quality-of-life-qol">Quality of Life (QoL)</h3>
+<p>Quality of life, assessed with the <strong>Nottingham Health Profile (NHP)</strong> and mapped to <strong>EQ-5D utilities</strong>, showed clear improvement after transplantation:</p>
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th>Utility Measure</th>
+<th>Mean (Pre-TP)</th>
+<th>Mean (Post-TP)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>EQ-5D Utility</td>
+<td><strong>0.30</strong></td>
+<td><strong>0.60</strong></td>
+</tr>
+<tr class="even">
+<td>Δ Utility (gain)</td>
+<td>—</td>
+<td><strong>+0.30</strong></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="costutility-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="costutility-analysis">Cost–Utility Analysis</h3>
+<p>From the Assurance Maladie (payer) perspective:</p>
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Time horizon</td>
+<td>10 years</td>
+</tr>
+<tr class="even">
+<td>Discount rate</td>
+<td>3%</td>
+</tr>
+<tr class="odd">
+<td>Hazard ratio (non-TP vs TP)</td>
+<td>1.8</td>
+</tr>
+<tr class="even">
+<td>Incremental QALYs</td>
+<td><strong>+1.2</strong></td>
+</tr>
+<tr class="odd">
+<td>Incremental Cost</td>
+<td><strong>€120,000</strong></td>
+</tr>
+<tr class="even">
+<td>ICER</td>
+<td><strong>€100,000 per QALY gained</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Although the ICER exceeded the typical French threshold (€50,000/QALY), the result reflects the <strong>high initial cost</strong> of transplantation balanced by substantial gains in survival and quality of life.</p>
+</section>
+<section id="sensitivity-analyses" class="level3">
+<h3 class="anchored" data-anchor-id="sensitivity-analyses">Sensitivity Analyses</h3>
+<ul>
+<li><p><strong>One-way sensitivity</strong> identified the <strong>hazard ratio</strong> and <strong>post-transplant utility</strong> as the most influential parameters on the ICER.</p></li>
+<li><p><strong>Probabilistic Sensitivity Analysis (PSA)</strong> showed that transplantation was <strong>cost-effective in ~40% of simulations</strong> at a willingness-to-pay threshold of <strong>€100,000/QALY</strong>.</p></li>
+</ul>
+</section>
+</section>
+<section id="key-insights" class="level2">
+<h2 class="anchored" data-anchor-id="key-insights">Key Insights</h2>
+<ul>
+<li><p>The Weibull model accurately described post-transplant survival.</p></li>
+<li><p>Lung transplantation resulted in <strong>substantial QALY gains</strong> despite high upfront costs.</p></li>
+<li><p>The workflow demonstrates a complete HEOR pipeline: <strong>survival modeling, utility mapping, and cost-effectiveness evaluation</strong>, all with <strong>synthetic, ethically shareable data</strong>.</p></li>
+</ul>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ethical statement
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The dataset used in this report is synthetic and was generated to replicate the structure and statistical characteristics of the Foch Hospital lung transplantation cohort.<br>
+No real patient information is included.<br>
+The study and analyses are presented for educational and methodological purposes only.</p>
+</div>
+</div>
+
+
 </section>
 </section>
 
@@ -4944,7 +5199,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/ousmanediallo\.com\/");
+      var filterRegex = new RegExp("https:\/\/ousmanediallo\.com");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

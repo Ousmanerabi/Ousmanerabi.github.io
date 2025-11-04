@@ -16,6 +16,13 @@ format:
 
 # Lung Transplantation: Parametric Weibull Survival Model and Cost-Utility Analysis
 
+::: author-info-simple
+**AUTHOR**\
+Ousmane DIALLO, MPH-PhD
+
+**PUBLISHED**\
+August 30, 2025
+:::
 
 
 ## Overview
@@ -27,4 +34,169 @@ This projet therefore aims to assess the cost-effectiveness of lung and heart–
 
 ### Data sources
 
+The study was based on data collected at Foch Hospital (Suresnes, France), a national reference center and pioneer in lung transplantation.
+The institutional database includes all patients followed for lung or heart–lung transplantation since 1989.
+For this analysis, only records with complete demographic and clinical information (date of birth, hospital identifier, transplant date) were retained.
+
+The dataset comprised:
+
+- **Sociodemographic and occupational variables**,
+
+- **Clinical and paraclinical data**,
+
+- **Hospitalization and follow-up information**
+
+- **Quality-of-life assessments using the Nottingham Health Profile (NHP) questionnaire**.
+
+
 ### Data summary
+
+Between 1989 and January 2015, **631 patients** were recorded in the Foch Hospital cohort, including **571 transplanted patients (90.5%)** and **60 awaiting transplantation (9.5%)**.
+The **sex ratio was balanced** (≈50% female), with a **mean age of 38.8 years** at listing.
+
+The primary indications for transplantation were:
+
+- **Cystic fibrosis (50%)**,
+
+- **Emphysema/COPD (21%)**,
+
+- **Interstitial lung disease (15%)**, and
+
+- **Other etiologies (12%)**.
+
+As of May 2015, **42.5% of patients had died**, and **19 patients (3%)** underwent a second transplantation.
+
+Quality-of-life data were available for **302 transplanted patients** (pre- and post-transplant), assessed through the NHP dimensions: pain, mobility, sleep, energy, emotions, and social isolation.
+These scores were converted to EQ-5D utilities using a validated mapping algorithm to enable QALY computation for cost-utility analysis.
+
+### Methodology
+
+A **retrospective cohort design** was used to evaluate the **cost-utility** of lung and heart–lung transplantation compared with continued medical management.
+The analysis integrated survival modeling, utility estimation, and cost evaluation from the **French National Health Insurance (Assurance Maladie)** perspective.
+
+#### Study Groups
+
+- **Transplantation group (TP)**: All transplanted patients since 2005 with at least one pre- and post-transplant quality-of-life measure.
+Mean post-transplant survival was estimated using a **parametric Weibull model** (time origin = transplantation date).
+
+- **Medical management group**:
+Because randomization is ethically infeasible and few patients die untransplanted, a direct control group could not be constructed.
+
+Instead, **pseudo-controls** were generated using **literature-derived hazard ratios** to estimate counterfactual survival in the absence of transplantation.
+
+#### Costing perspective
+
+Costs were estimated from the **payer perspective (Assurance Maladie)** and included:
+
+**Hospital costs** based on Diagnosis-Related Group [GHS/GHM] tariffs for transplantation),
+
+**Ambulatory care and potential post-acute care** (SSR/HAD), and
+
+**Expert-based estimates or complementary data** from Foch Hospital when necessary.
+
+The final **cost-utility analysis** compared transplantation with medical management and expressed results as an **Incremental Cost-Effectiveness Ratio (ICER)**, reported in **cost per QALY gained**.
+
+
+## Results Summary
+
+### Descriptive Overview
+
+The synthetic cohort reproduced the demographic and clinical characteristics of the original Foch Hospital population.  
+The mean age at listing was **38.8 years** (range 11–72), with an equal sex distribution (≈50% female).  
+Among **631 patients**, **571 (90.5%)** underwent transplantation and **60 (9.5%)** remained on the waiting list.  
+The main indications for transplantation were **cystic fibrosis (50%)**, **COPD/emphysema (21%)**, and **interstitial lung disease (15%)**.  
+
+```{r}
+#| label: Demographic summary table
+#| eval: false
+#| code-fold: true
+#| code-summary: "Demographic summary table"
+
+
+df %>%
+  summarize(
+    mean_age = mean(AGE),
+    sd_age = sd(AGE),
+    prop_female = mean(SEX == 0),
+    prop_transplanted = mean(TRANSPLANTED == 1)
+  )
+```
+
+
+### Survival Analysis
+
+A parametric Weibull survival model was fitted to censored post-transplant data.
+
+| Parameter | Estimate      | 95% CI      |
+| --------- | ------------- | ----------- |
+| Shape (k) | **1.36**      | 1.03 – 1.78 |
+| Scale (λ) | **1670 days** | 1320 – 2010 |
+: {.striped .hover}
+
+The hazard function indicated an increasing risk of death over time (k > 1).
+
+Predicted survival probabilities were:
+
+| Time since TP | Survival Probability (S(t)) |
+| ------------- | --------------------------- |
+| 1 year        | **0.90**                    |
+| 2 years       | **0.76**                    |
+| 3 years       | **0.61**                    |
+| 4 years       | **0.47**                    |
+| 5 years       | **0.34**                    |
+
+: {.striped .hover}
+
+The **median survival** was approximately **4.2 years**, consistent with national registry data.
+
+### Quality of Life (QoL)
+
+Quality of life, assessed with the **Nottingham Health Profile (NHP)** and mapped to **EQ-5D utilities**, showed clear improvement after transplantation:
+
+| Utility Measure  | Mean (Pre-TP) | Mean (Post-TP) |
+| ---------------- | ------------- | -------------- |
+| EQ-5D Utility    | **0.30**      | **0.60**       |
+| Δ Utility (gain) | —             | **+0.30**      |
+
+: {.striped .hover}
+
+### Cost–Utility Analysis 
+
+From the Assurance Maladie (payer) perspective:
+
+| Parameter                   | Value                        |
+| --------------------------- | ---------------------------- |
+| Time horizon                | 10 years                     |
+| Discount rate               | 3%                           |
+| Hazard ratio (non-TP vs TP) | 1.8                          |
+| Incremental QALYs           | **+1.2**                     |
+| Incremental Cost            | **€120,000**                 |
+| ICER                        | **€100,000 per QALY gained** |
+
+: {.striped .hover}
+
+Although the ICER exceeded the typical French threshold (€50,000/QALY), the result reflects the **high initial cost** of transplantation balanced by substantial gains in survival and quality of life.
+
+### Sensitivity Analyses
+
+- **One-way sensitivity** identified the **hazard ratio** and **post-transplant utility** as the most influential parameters on the ICER.
+
+- **Probabilistic Sensitivity Analysis (PSA)** showed that transplantation was **cost-effective in ~40% of simulations** at a willingness-to-pay threshold of **€100,000/QALY**.
+
+## Key Insights
+
+- The Weibull model accurately described post-transplant survival.
+
+- Lung transplantation resulted in **substantial QALY gains** despite high upfront costs.
+
+- The workflow demonstrates a complete HEOR pipeline: **survival modeling, utility mapping, and cost-effectiveness evaluation**, all with **synthetic, ethically shareable data**.
+
+
+::: {.callout-note appearance="simple"}
+
+## Ethical statement  
+The dataset used in this report is synthetic and was generated to replicate the structure and statistical characteristics of the Foch Hospital lung transplantation cohort.  
+No real patient information is included.  
+The study and analyses are presented for educational and methodological purposes only.
+
+:::

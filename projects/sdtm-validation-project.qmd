@@ -59,6 +59,7 @@ End-to-end SDTM mapping project demonstrating expertise in clinical data standar
 | **Domains Created** | DM, LB, AE, TS, EX, XP, TA, TE |
 | **Deliverables** | 8 SDTM datasets + Define.xml v2.0 |
 
+: {.striped .hover}
 ---
 
 ## Results
@@ -97,7 +98,7 @@ ggplot(data, aes(x = Status, y = Errors, fill = Status)) +
 | **DM** | 113 | 55 | 58 | 51% |
 | **AE** | 43 | 39 | 4 | 9% |
 | **Total** | **579** | **375** | **446** | **35%** |
-
+: {.striped .hover}
 ---
 
 ## Key Challenges Solved
@@ -222,6 +223,8 @@ Successfully mapped all controlled variables:
 | 50 subjects without LB data | 50 | Source data incomplete (escalated) |
 | TS/XP domain issues | 240 | New domains requiring specifications |
 | Minor quality issues | 85 | Non-critical, justifiable |
+
+: {.striped .hover}
 
 ::: {.callout-note}
 ## Professional Context
