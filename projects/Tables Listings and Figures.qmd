@@ -137,7 +137,9 @@ Purpose: Summarize treatment-emergent adverse events by system organ class, pref
 
 #### Sample Output:
 
+
 ![![Adverse Events By Body System, Preferred Term, and Greatest Severity](images/adverse_Page_2.png){width="850"}](images/adverse_Page_1.png){width="850"}
+
 
 ![](images/adverse_Page_3.png){width="850"}
 
