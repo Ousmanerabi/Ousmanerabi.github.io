@@ -416,6 +416,7 @@ Using national cost-of-obesity data (mean annual medical cost = €1200), the di
 |  | 4 % | 42 years | 3 752.1 |
 | Benefits from age 40 to 60 | 2 % | 20 years | 1 372.5 |
 |  | 4 % | 20 years | 761.8 |
+
 : {.striped .hover}
 
 The proportion of obesity cases that would need to be prevented for the REPPOP intervention to be cost-neutral over the 18–60 year period was estimated at **15%** (close to the observed 16%).
@@ -428,6 +429,7 @@ Table: Present value of avoided adult obesity-related medical costs per child
 |18–60 years  |        18|      60|4%            |                2749.3|
 |40–60 years  |        40|      60|2%            |                1707.5|
 |40–60 years  |        40|      60|4%            |                 781.0|
+
 
 : {.striped .hover}
 
