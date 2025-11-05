@@ -38,18 +38,18 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 ## Statistical Modeling & Real-World Evidence
 *Advanced analytics and evidence generation for clinical decision-making*
 
-[Survival Analysis for Clinical Endpoints](projects/survival-analysis-clinical.html)
+[Patient-level risk factors for clinical malaria among children aged 2–60 months ](projects/patient-level-risk-factors-analysis.html)
 
-[Real-World Evidence Study Design](projects/rwe-study-design.html)
+[Hospital mortality and positive blood culture with Difficult-to threat](projects/hospital-mortality-and-positive-blood-culture.html)
 
-[Geospatial Analysis for Health Surveillance](projects/geospatial-health-surveillance.html)
+[Major discrepancy between factual AR and consulption](projects/discrepancy-AR-consumption.html)
 
 ## Geospatial Analysis & Epidemiology
 *Spatial analysis and disease surveillance across West African populations*
 
 [Risk Factors – ITN Guinea DHS 2018](projects/risk_factors.html)
 
-[Microstratification in Conakry](projects/microstratification-conakry.html)
+[Analysis of Treatment-seeking behaviour in Burkina Faso](projects/treatment-seeking-bfa.html)
 
 [Retrospective Analysis of Malaria Trend in Burkina Faso](projects/retrospective_analysis.html)
 

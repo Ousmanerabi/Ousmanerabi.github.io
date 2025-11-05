@@ -85,9 +85,11 @@ D --> E[RTF Outputs]
 
 #### Code example
 
-``` sas
+```markdown
+```{.sas}
 
 /* Dynamic column headers with sample sizes */
+  
 data _null_;
     set adsl end=eof;
     if trtpn = 0 then n0 + 1;
@@ -99,6 +101,7 @@ data _null_;
 run;
 
 /* Statistical test integration - Wilcoxon for age */
+  
 proc npar1way data=adsl wilcoxon noprint;
     where trtpn in (0,1);
     class trtpn;
@@ -107,6 +110,7 @@ proc npar1way data=adsl wilcoxon noprint;
 run;
 
 /* PROC REPORT with p-values */
+  
 proc report data=combined_stats split="|";
     column label col0 col1 col2 pvalue;
     
@@ -147,8 +151,10 @@ Purpose: Summarize treatment-emergent adverse events by system organ class, pref
 
 #### Code Example:
 
-```{sas}        
+```markdown
+```{.sas}        
 /* First occurrence flags for accurate counts */
+  
 data adae;
     set adam.adae;
     by usubjid aedecod aesevn;
@@ -199,7 +205,8 @@ run;
 
 #### Code Example:
 
-```{sas}
+```markdown
+```{.sas}
 
 /* Continuation text for multi-page listings */
   
@@ -252,7 +259,9 @@ run;
 
 #### Code Example:
 
-```{sas}
+```markdown
+```{.sas}
+
 /* Calculate mean and 95% CI by visit and treatment */
 proc means data=adam.adlb noprint;
     where paramcd = 'GLUC' and ittfl = 'Y';

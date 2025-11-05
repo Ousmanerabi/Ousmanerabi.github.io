@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -330,35 +364,39 @@ D --&gt; E[RTF Outputs]
 </section>
 <section id="code-example" class="level4">
 <h4 class="anchored" data-anchor-id="code-example">Code example</h4>
-<pre class="sas"><code>
-/* Dynamic column headers with sample sizes */
-data _null_;
-    set adsl end=eof;
-    if trtpn = 0 then n0 + 1;
-    else if trtpn = 1 then n1 + 1;
-    if eof then do;
-        call symput("n0", compress('(N='||put(n0,4.)||')'));
-        call symput("n1", compress('(N='||put(n1,4.)||')'));
-    end;
-run;
-
-/* Statistical test integration - Wilcoxon for age */
-proc npar1way data=adsl wilcoxon noprint;
-    where trtpn in (0,1);
-    class trtpn;
-    var age;
-    output out=pvalue wilcoxon;
-run;
-
-/* PROC REPORT with p-values */
-proc report data=combined_stats split="|";
-    column label col0 col1 col2 pvalue;
-    
-    define col0 / display "Placebo &amp;n0";
-    define col1 / display "Active &amp;n1";
-    define pvalue / display "P-value" format=pvalue6.4;
-run;
-              </code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.sas}</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">/* Dynamic column headers with sample sizes */</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">data _null_;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in">    set adsl end=eof;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">    if trtpn = 0 then n0 + 1;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">    else if trtpn = 1 then n1 + 1;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">    if eof then do;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="in">        call symput("n0", compress('(N='||put(n0,4.)||')'));</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">        call symput("n1", compress('(N='||put(n1,4.)||')'));</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">    end;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="in">/* Statistical test integration - Wilcoxon for age */</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="in">proc npar1way data=adsl wilcoxon noprint;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="in">    where trtpn in (0,1);</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="in">    class trtpn;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="in">    var age;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="in">    output out=pvalue wilcoxon;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="in">/* PROC REPORT with p-values */</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="in">proc report data=combined_stats split="|";</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="in">    column label col0 col1 col2 pvalue;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="in">    define col0 / display "Placebo &amp;n0";</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="in">    define col1 / display "Active &amp;n1";</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="in">    define pvalue / display "P-value" format=pvalue6.4;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="in">              </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="technical-achievements" class="level4">
 <h4 class="anchored" data-anchor-id="technical-achievements">Technical Achievements</h4>
@@ -393,7 +431,8 @@ run;
 </section>
 <section id="code-example-1" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-1">Code Example:</h4>
-<pre class="{sas}"><code>/* First occurrence flags for accurate counts */
+<pre class="sas"><code>/* First occurrence flags for accurate counts */
+  
 data adae;
     set adam.adae;
     by usubjid aedecod aesevn;
@@ -445,7 +484,7 @@ run;</code></pre>
 </section>
 <section id="code-example-2" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-2">Code Example:</h4>
-<pre class="{sas}"><code>
+<pre class="sas"><code>
 /* Continuation text for multi-page listings */
   
 data adsl;
@@ -492,7 +531,8 @@ run;</code></pre>
 </section>
 <section id="code-example-3" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-3">Code Example:</h4>
-<pre class="{sas}"><code>/* Calculate mean and 95% CI by visit and treatment */
+<pre class="sas"><code>
+/* Calculate mean and 95% CI by visit and treatment */
 proc means data=adam.adlb noprint;
     where paramcd = 'GLUC' and ittfl = 'Y';
     class trt01pn avisitn;

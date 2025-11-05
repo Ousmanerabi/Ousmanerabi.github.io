@@ -87,6 +87,7 @@ format:
     toc: true  # Active la table des matières par défaut (comme chez Anderson ; peut être surchargé par page)
     code-fold: true  # Plie le code par défaut
     code-summary: "View code"  # Texte pour déplier le code
+    highlight-style: tango
     # include-in-header: _includes/schema.html  # Ajoutez si vous avez un fichier schema pour SEO
     page-layout: article  # Garde le layout article
     grid:
