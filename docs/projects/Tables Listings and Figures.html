@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ousmane DIALLO">
-<meta name="keywords" content="TLFs clinical tables, ADaM, SAS, regulatory submissions, biostatistics">
+<meta name="keywords" content="biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence">
 <meta name="description" content="Automated generation of regulatory-compliant TLF outputs from ADaM datasets for FDA/EMA submission">
 
 <title>Tables, Listings, and Figures (TLF) for Clinical Study Reports – Ousmane Diallo, MPH-PhD</title>
@@ -217,7 +217,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Tables, Listings, and Figures (TLF) for Clinical Study Reports</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">TLFs clinical tables</div>
+    <div class="quarto-category">ADaM</div>
+    <div class="quarto-category">SAS</div>
+    <div class="quarto-category">regulatory submissions</div>
+    <div class="quarto-category">biostatistics</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
@@ -249,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>TLFs clinical tables, ADaM, SAS, regulatory submissions, biostatistics</p>
+    <p>biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence</p>
   </div>
 </div>
 
@@ -431,30 +438,31 @@ D --&gt; E[RTF Outputs]
 </section>
 <section id="code-example-1" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-1">Code Example:</h4>
-<pre class="sas"><code>/* First occurrence flags for accurate counts */
-  
-data adae;
-    set adam.adae;
-    by usubjid aedecod aesevn;
-    
-    if last.aedecod then aoccpifl = 'Y';  /* First max severity per PT */
-    label aoccpifl = "1st Max Sev. Occur Within PT Flag";
-run;
-
-/* Frequency counts by hierarchy */
-proc sql;
-    create table AllPT as
-    select trtan, aebodsys, aedecod,               
-           sum(aoccpifl='Y') as frequency 
-    from adae
-    group by trtan, aebodsys, aedecod;
-quit;
-
-/* Format as N(%) */
-data formatted;
-    set counts;
-    col0 = put(count0,3.) || " (" || put(count0/&amp;n0*100,5.1) || "%)";
-run;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.sas}        </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* First occurrence flags for accurate counts */</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">data adae;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">    set adam.adae;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in">    by usubjid aedecod aesevn;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">    if last.aedecod then aoccpifl = 'Y';  /* First max severity per PT */</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">    label aoccpifl = "1st Max Sev. Occur Within PT Flag";</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">/* Frequency counts by hierarchy */</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="in">    create table AllPT as</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="in">    select trtan, aebodsys, aedecod,               </span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="in">           sum(aoccpifl='Y') as frequency </span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">    from adae</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="in">    group by trtan, aebodsys, aedecod;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="in">/* Format as N(%) */</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="in">data formatted;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">    set counts;</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="in">    col0 = put(count0,3.) || " (" || put(count0/&amp;n0*100,5.1) || "%)";</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="technical-features" class="level4">
 <h4 class="anchored" data-anchor-id="technical-features">Technical Features</h4>
@@ -484,27 +492,28 @@ run;</code></pre>
 </section>
 <section id="code-example-2" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-2">Code Example:</h4>
-<pre class="sas"><code>
-/* Continuation text for multi-page listings */
-  
-data adsl;
-    set adsl end=eof;
-    if eof then lastrec = 1;  /* Flag last record */
-run;
-
-proc report data=adsl split="|" spacing=3 headline;
-    columns (lastrec trtpn usubjid sexn racen age);
-    
-    define trtpn / order "Treatment" f=trtpn.;
-    define usubjid / order "Subject|ID";
-    
-    /* Add continuation text at page breaks */
-    compute after _page_ / left;
-        if not lastrec then contline="(Continued)";
-        else contline="-----------";
-        line @9 "--------------------" contline $11.;
-    endcomp;
-run;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.sas}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in">/* Continuation text for multi-page listings */</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">  </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="in">data adsl;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="in">    set adsl end=eof;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="in">    if eof then lastrec = 1;  /* Flag last record */</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="in">proc report data=adsl split="|" spacing=3 headline;</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="in">    columns (lastrec trtpn usubjid sexn racen age);</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="in">    define trtpn / order "Treatment" f=trtpn.;</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="in">    define usubjid / order "Subject|ID";</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Add continuation text at page breaks */</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="in">    compute after _page_ / left;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="in">        if not lastrec then contline="(Continued)";</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">        else contline="-----------";</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="in">        line @9 "--------------------" contline $11.;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="in">    endcomp;</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="features" class="level4">
 <h4 class="anchored" data-anchor-id="features">Features:</h4>
@@ -531,32 +540,33 @@ run;</code></pre>
 </section>
 <section id="code-example-3" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-3">Code Example:</h4>
-<pre class="sas"><code>
-/* Calculate mean and 95% CI by visit and treatment */
-proc means data=adam.adlb noprint;
-    where paramcd = 'GLUC' and ittfl = 'Y';
-    class trt01pn avisitn;
-    var chg;
-    output out=stats n=n mean=mean stderr=stderr;
-run;
-
-data plot_data;
-    set stats;
-    lcl = mean - 1.96*stderr;
-    ucl = mean + 1.96*stderr;
-run;
-
-/* Professional figure with error bars */
-proc sgplot data=plot_data;
-    series x=avisitn y=mean / group=trt01pn 
-           lineattrs=(thickness=2) markers;
-    scatter x=avisitn y=mean / group=trt01pn 
-            yerrorupper=ucl yerrorlower=lcl;
-    
-    xaxis label="Study Visit (Week)";
-    yaxis label="Mean Change from Baseline (mg/dL)";
-    refline 0 / axis=y lineattrs=(pattern=dash);
-run;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{.sas}</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">/* Calculate mean and 95% CI by visit and treatment */</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">proc means data=adam.adlb noprint;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">    where paramcd = 'GLUC' and ittfl = 'Y';</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="in">    class trt01pn avisitn;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="in">    var chg;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="in">    output out=stats n=n mean=mean stderr=stderr;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="in">data plot_data;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="in">    set stats;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="in">    lcl = mean - 1.96*stderr;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="in">    ucl = mean + 1.96*stderr;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="in">/* Professional figure with error bars */</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="in">proc sgplot data=plot_data;</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="in">    series x=avisitn y=mean / group=trt01pn </span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="in">           lineattrs=(thickness=2) markers;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="in">    scatter x=avisitn y=mean / group=trt01pn </span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="in">            yerrorupper=ucl yerrorlower=lcl;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="in">    xaxis label="Study Visit (Week)";</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">    yaxis label="Mean Change from Baseline (mg/dL)";</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="in">    refline 0 / axis=y lineattrs=(pattern=dash);</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="features-1" class="level4">
 <h4 class="anchored" data-anchor-id="features-1">Features:</h4>

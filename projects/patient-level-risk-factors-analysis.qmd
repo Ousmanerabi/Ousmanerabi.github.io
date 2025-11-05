@@ -1,0 +1,28 @@
+---
+title: "Risk Factors for Clinical Malaria in Children Under Five — Burkina Faso (2017–2020)"
+description: "Identify individual-level risk factors for clinical malaria among children aged 2–60 months using IeDA consultation data and Generalized Estimating Equations (GEE)"
+image: /assets/projects/child-malaria/forest_plot.png
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+categories: [R, Epidemiology, Malaria, Child Health, GEE, IeDA]
+highlight-style: pygments
+page-layout: article
+format:
+  html:
+    toc: true
+    code-fold: true
+    toc-depth: 2
+    fig-width: 8
+    fig-height: 5
+    html-math-method: katex
+    theme: cosmo
+    css: ../assets/css/remove-keyword.css
+---
+
+# Patient-level risk factors for clinical malaria among children aged 2–60 months
+
+
+## Overview
+
+This study assessed the patient-level factors associated with clinical malaria among children under five using real-world IeDA consultation data from Burkina Faso (2017–2020). Using a longitudinal framework and GEE modeling, we quantified how nutritional status, vaccination completeness, HIV status, and prior malaria episodes influence the odds of clinical malaria.
+
+   

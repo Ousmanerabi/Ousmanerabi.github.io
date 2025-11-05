@@ -40,9 +40,9 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 
 [Patient-level risk factors for clinical malaria among children aged 2–60 months ](projects/patient-level-risk-factors-analysis.html)
 
-[Hospital mortality and positive blood culture with Difficult-to threat](projects/hospital-mortality-and-positive-blood-culture.html)
+[Hospital mortality and positive blood culture with Difficult-to threat, Marseille, France](projects/hospital-mortality-and-positive-blood-culture.html)
 
-[Major discrepancy between factual AR and consulption](projects/discrepancy-AR-consumption.html)
+[Major discrepancy between factual AR and consumption in south of France](projects/discrepancy-AR-consumption.html)
 
 ## Geospatial Analysis & Epidemiology
 *Spatial analysis and disease surveillance across West African populations*
@@ -53,12 +53,17 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 
 [Retrospective Analysis of Malaria Trend in Burkina Faso](projects/retrospective_analysis.html)
 
-## Capacity Building & Training
+## Machine learning & multidimensional analysis
 
-*Graduate student mentorship and institutional capacity development*
+*Machine learning methods*
 
-[Training & Mentorship (Graduate Students – Benin & Guinea)](projects/training-mentorship-2020-2024.html)
+[Create seasonality archetypes using machine learning](projects/seasonality-archetypes.html)
+
+[Predictors of Insecticide treated bed nets in Guinea](projects/predictors-itn-guinea.html)
+
 
 ---
 
-*Interested in collaborating on biostatistics, epidemiology, or clinical programming projects?* **[Contact me](contact.qmd)** *to discuss opportunities.*
+*Interested in collaborating on biostatistics, epidemiology, or clinical programming projects?*
+
+**[Contact me](contact.qmd)** *to discuss opportunities.*

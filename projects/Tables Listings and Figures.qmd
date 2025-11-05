@@ -3,7 +3,7 @@ title: "Tables, Listings, and Figures (TLF) for Clinical Study Reports"
 description: "Automated generation of regulatory-compliant TLF outputs from ADaM datasets for FDA/EMA submission"
 author: "Ousmane DIALLO"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
-keywords: "TLFs clinical tables, ADaM, SAS, regulatory submissions, biostatistics"
+categories: [TLFs clinical tables, ADaM, SAS, regulatory submissions, biostatistics]
 format:
   html:
     toc: true

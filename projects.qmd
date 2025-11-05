@@ -4,7 +4,7 @@ description: "Selected projects in epidemiology, analytics, modeling, and traini
 image: "images/Photo-bio2"
 format:
   html:
-    theme: [cosmo, default]
+    theme: cosmo
     css: assets/css/main.css
     toc: true
     code-fold: true
@@ -45,13 +45,13 @@ Below is a curated selection of projects I led or contributed to between 2020 an
   <div class="project-meta">2023</div>
 </div>
 
-<div class="project-card" data-tags="microstrat conakry mapping">
-  <a href="/projects/microstratification-conakry.html">Microstratification in Conakry</a>
+<div class="project-card" data-tags="Analysis of Treatment-seeking behaviour in Burkina Faso mapping">
+  <a href="/projects/treatment-seeking-bfa.html">Analysis of Treatment-seeking behaviour in Burkina Faso</a>
   <div class="project-meta">2023–2024</div>
 </div>
 
-<div class="project-card" data-tags="mentorship training supervision">
-  <a href="/projects/training-mentorship-2020-2024.html">Training & Mentorship (Graduate Students – Benin & Guinea)</a>
+<div class="project-card" data-tags="Machine Learning">
+  <a href="/projects/seasonality-archetypes.html">Machine learning</a>
   <div class="project-meta">2020–2024</div>
 </div>
 
