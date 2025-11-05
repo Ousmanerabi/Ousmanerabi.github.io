@@ -147,7 +147,7 @@ Purpose: Summarize treatment-emergent adverse events by system organ class, pref
 
 #### Code Example:
 
-```         
+```{sas}        
 /* First occurrence flags for accurate counts */
 data adae;
     set adam.adae;
@@ -199,8 +199,10 @@ run;
 
 #### Code Example:
 
-```         
+```{sas}
+
 /* Continuation text for multi-page listings */
+  
 data adsl;
     set adsl end=eof;
     if eof then lastrec = 1;  /* Flag last record */
@@ -220,6 +222,7 @@ proc report data=adsl split="|" spacing=3 headline;
     endcomp;
 run;
 ```
+
 
 #### Features:
 
@@ -249,7 +252,7 @@ run;
 
 #### Code Example:
 
-``` sas
+```{sas}
 /* Calculate mean and 95% CI by visit and treatment */
 proc means data=adam.adlb noprint;
     where paramcd = 'GLUC' and ittfl = 'Y';

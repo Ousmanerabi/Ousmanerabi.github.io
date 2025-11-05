@@ -33,7 +33,7 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 
 [Cost-Effectiveness of the REPPOP Management Program](projects/cost-effectiveness-reppop.html)
 
-[Cost-Utility of Lung Transplantation](projects/cost-utility-lung.html)
+[Cost-Utility of Lung Transplantation](projects/Cost-utility-Lung-Transplantation.html)
 
 ## Statistical Modeling & Real-World Evidence
 *Advanced analytics and evidence generation for clinical decision-making*

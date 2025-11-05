@@ -393,7 +393,7 @@ run;
 </section>
 <section id="code-example-1" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-1">Code Example:</h4>
-<pre><code>/* First occurrence flags for accurate counts */
+<pre class="{sas}"><code>/* First occurrence flags for accurate counts */
 data adae;
     set adam.adae;
     by usubjid aedecod aesevn;
@@ -445,7 +445,9 @@ run;</code></pre>
 </section>
 <section id="code-example-2" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-2">Code Example:</h4>
-<pre><code>/* Continuation text for multi-page listings */
+<pre class="{sas}"><code>
+/* Continuation text for multi-page listings */
+  
 data adsl;
     set adsl end=eof;
     if eof then lastrec = 1;  /* Flag last record */
@@ -490,7 +492,7 @@ run;</code></pre>
 </section>
 <section id="code-example-3" class="level4">
 <h4 class="anchored" data-anchor-id="code-example-3">Code Example:</h4>
-<pre class="sas"><code>/* Calculate mean and 95% CI by visit and treatment */
+<pre class="{sas}"><code>/* Calculate mean and 95% CI by visit and treatment */
 proc means data=adam.adlb noprint;
     where paramcd = 'GLUC' and ittfl = 'Y';
     class trt01pn avisitn;

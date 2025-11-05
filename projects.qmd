@@ -40,6 +40,11 @@ Below is a curated selection of projects I led or contributed to between 2020 an
   <div class="project-meta">2023</div>
 </div>
 
+<div class="project-card" data-tags="Cost-Utility of Lung Transplantation">
+  <a href="/projects/Cost-Utility of Lung Transplantation.html">Cost-Utility of Lung Transplantation</a>
+  <div class="project-meta">2023</div>
+</div>
+
 <div class="project-card" data-tags="microstrat conakry mapping">
   <a href="/projects/microstratification-conakry.html">Microstratification in Conakry</a>
   <div class="project-meta">2023–2024</div>
