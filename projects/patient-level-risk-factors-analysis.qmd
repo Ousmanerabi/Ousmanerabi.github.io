@@ -23,6 +23,9 @@ format:
 
 ## Overview
 
-This study assessed the patient-level factors associated with clinical malaria among children under five using real-world IeDA consultation data from Burkina Faso (2017–2020). Using a longitudinal framework and GEE modeling, we quantified how nutritional status, vaccination completeness, HIV status, and prior malaria episodes influence the odds of clinical malaria.
+This study assessed the patient-level factors associated with clinical malaria among children under five using real-world Integrated Electronic Diagnosis Approach (IeDA) consultation data from Burkina Faso (2017–2020). Using a longitudinal framework and Generalized Estimating Equation (GEE) modeling, we assessed how nutritional status, vaccination completeness, HIV status, and prior malaria episodes influence the odds of clinical malaria.
+
+## Data sources
+
 
    
