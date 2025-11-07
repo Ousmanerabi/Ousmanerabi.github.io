@@ -4,13 +4,13 @@ description: "Automated generation of regulatory-compliant TLF outputs from ADaM
 author: "Ousmane DIALLO"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 categories: [TLFs clinical tables, ADaM, SAS, regulatory submissions, biostatistics]
+page-layout: article
+#title-block-banner: true
 format:
-  html:
-    toc: true
-    code-fold: true
+ html:
+  css: ../assets/css/remove-keyword.css
 ---
 
-# Tables, Listings, and Figures (TLF) for Clinical Study Reports
 
 ------------------------------------------------------------------------
 

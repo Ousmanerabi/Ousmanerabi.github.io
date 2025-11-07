@@ -4,15 +4,11 @@ description: "Quantify the trend in malaria incidence at health district level a
 image: /assets/projects/retrospective/adm1_adm2.png 
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 categories: [R, Epidemiology, Malaria, DHS, climate, Time series]
+page-layout: article
+#title-block-banner: true
 format:
-  html:
-    toc: true
-    code-fold: true
-    fig-width: 8
-    fig-height: 4
-    theme: cosmo
-    html-math-method: katex
-permalink: /projects/retrospective_analysis/
+ html:
+  css: ../assets/css/remove-keyword.css
 ---
 
 **Project Role**: Research Associate & Lead Author
@@ -32,13 +28,15 @@ The aim of this study was to assess the malaria trends in Burkina Faso at the he
 ### Data sources & Integration
 
 | Variable | Definition | Source | Temporal | Period |
-|----|----|----|----|----|
+|---------------|---------------|---------------|---------------|---------------|
 | Suspected cases | Clinical malaria suspicion (fever) | HMIS | Monthly | 2016–2023 (excl. 2019) |
 | Tested cases | Received RDT or microscopy | HMIS | Monthly | 2016–2023 |
 | Confirmed cases | Positive RDT or microscopy | HMIS | Monthly | 2016–2023 |
 | Presumed cases | Treated without positive test | HMIS | Monthly | 2016–2023 |
 | Population | District population | HMIS | Annual (Monthy est) | 2016–2023 |
 | Treatment-seeking (U5) | Public/private/no care | DHS/MIS | Every 3 years | 2014, 2017–18, 2021 |
+
+: {.striped .hover}
 
 ### Data management
 
@@ -162,7 +160,6 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 ### Data Quality Insights
 
-### 
 
 ![Fig. Monthly reporting rates per health district](images/weighted.png){fig-align="center" width="422"}
 

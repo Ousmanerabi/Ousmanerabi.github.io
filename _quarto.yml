@@ -83,7 +83,7 @@ author:  # Bloc auteur global pour le site (utilisé dans les métadonnées)
 format:
   html:
     theme: cosmo  # Garde le thème
-    css: styles.css  # Ou assets/css/styles.css si vous l'avez déplacé
+    css: assets/css/styles.css  # Ou assets/css/styles.css si vous l'avez déplacé
     toc: true  # Active la table des matières par défaut (comme chez Anderson ; peut être surchargé par page)
     code-fold: true  # Plie le code par défaut
     code-summary: "View code"  # Texte pour déplier le code

@@ -2,24 +2,14 @@
 title: "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)"
 description: "Identify individual-level risk factors for clinical malaria among children aged 2–60 months using IeDA consultation data and Generalized Estimating Equations (GEE)"
 author: "Ousmane DIALLO"
-date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+date: "2025-08-30"
 categories: [R, Epidemiology, Malaria, Child Health, GEE, IeDA, Outcome]
 highlight-style: pygments
 page-layout: article
 format:
-  html:
-    toc: true
-    toc-depth: 2
-    #theme: cosmo
-    html-math-method: katex
-    #code-fold: true
-    code-summary: "Show code"
-    #embed-resources: true
-    css: ../assets/css/remove-keyword.css
+ html:
+  css: ../assets/css/remove-keyword.css
 ---
-
-# Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)
-
 
 ## Real-World Evidence Summary 
 ::: {.callout-note appearance="simple"}

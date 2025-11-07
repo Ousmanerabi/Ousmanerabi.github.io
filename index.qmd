@@ -1,15 +1,17 @@
 ---
 title: "Ousmane Diallo, MPH-PhD"
-description: "Biostatistician | Epidemiologist | CDISC Expert"
+description: "Biostatistician |Data Scientist | Epidemiologist | CDISC Expert"
 draft: false
+#image: "images/bio-photo-2.jpg"   # si tu veux une image de partage
 format:
   html:
-    css: assets/css/styles.css
-    page-layout: article
+    css:
+      - assets/css/remove-author-keyword.css
     toc: false
+class: home-page
 ---
 
-#### **Biostatistics & Epidemiology Solutions for Clinical Research**
+#### **Biostatistics, Data science & Epidemiology Solutions for Clinical Research**
 
 I'm **Ousmane Diallo**. I develop statistical models, regulatory-compliant workflows, and data analytics solutions to accelerate discovery in **pharmaceutical and clinical research**. My work integrates biostatistics, epidemiology, and CDISC standards to deliver insights for clinical trials and regulatory submissions.
 
@@ -25,7 +27,7 @@ With a background in **epidemiology**, **biostatistics**, and **SAS clinical pro
 Ousmane Diallo is a **rigorous biostatistician and epidemiologist** specializing in **health data analytics, statistical modeling, CDISC standards, and real-world evidence (RWE)**. With over 9 years of experience, he collaborates with **academic researchers, pharmaceutical teams, and international health organizations** to design regulatory-compliant analyses, reproducible workflows, and evidence-based solutions. His work connects biostatistics with **clinical research and regulatory science**, supporting discovery in both academia and industry.
 :::
 
-## Core Competencies
+## Expertise and Services
 
 <div class="services-grid">
 
@@ -77,10 +79,9 @@ Ousmane Diallo is a **rigorous biostatistician and epidemiologist** specializing
 
 ## Professional Credentials
 
-- 🎓 **Certified SAS Base Programming & Clinical Trials Programming**
-- ⚙️ **9+ Years Experience** in Health Data Analytics & Statistical Modeling
-- 🧬 **CDISC Implementation Expert** with proven regulatory submission experience
-- 🌍 **International Collaboration** across Guinea, Burkina Faso, Togo, Benin
+- 🎓 **PhD in Infectious disease, Aix Marseille University**
+- ⚙️ **Research Assistant Professor** in Health Data Analytics & Statistical Modeling, Northwestern University
+- 🧬 **Postdoctoral Researcher in  **  in Health Data Analytics & Statistical Modeling, Northwestern University
 
 ## Key Projects & Achievements
 
@@ -92,37 +93,6 @@ Ousmane Diallo is a **rigorous biostatistician and epidemiologist** specializing
 **Ready to accelerate your clinical research with regulatory-compliant insights?**
 
 👉 [Contact Me](contact.qmd) to discuss collaborations or consulting opportunities.
-
-## Featured Portfolio Projects
-
-Explore selected projects showcasing my expertise in **clinical programming**, **health economics**, and **real-world evidence analytics**.  
-
-### 🧬 Clinical Trials Programming
-Deliverables following CDISC standards, including **SDTM**, **ADaM**, **TLFs**, and **Define.xml**, using SAS for regulatory submissions.  
-[View Clinical Projects →](projects/cdisc-sdtm)
-
-### 💰 Health Economics & Outcomes Research (HEOR)
-Cost-effectiveness and budget impact analysis using R and health economic modeling.  
-Example: *Cost-Effectiveness of the REPPOP Pediatric Obesity Management Program.*  
-[View HEOR Projects →](projects/heor-reppop)
-
-### 📊 Real-World Evidence (RWE)
-**Coming soon** — Observational data analyses and real-world data pipelines using EMR and survey data (DHS, HMIS).  
-Includes cohort definition, confounding adjustment, and outcome modeling.  
-[View RWE Projects →](projects/rwe)
-
-### 🤖 Machine Learning & Predictive Analytics
-**Coming soon** — Predictive modeling and classification of health outcomes using Random Forests and ARIMA time-series forecasting.  
-[View ML Projects →](projects/ml)
-
----
-
-## Current Focus
-
-I am currently expanding my portfolio with new **Real-World Evidence (RWE)** and **Machine Learning (ML)** projects.  
-These projects apply advanced analytics and observational research methods to bridge **real-world data**, **regulatory science**, and **clinical insights**.
-
-My goal is to demonstrate an integrated approach linking **clinical trial analytics**, **HEOR**, and **RWE**—showcasing how data-driven evidence supports decision-making across the product lifecycle.
 
 
 ## My Transition to Pharma/Industry

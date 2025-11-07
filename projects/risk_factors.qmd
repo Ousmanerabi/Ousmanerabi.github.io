@@ -4,18 +4,16 @@ description: "Factors associated with the ownership and use of insecticide-treat
 author: "Ousmane DIALLO"
 date: "2025-08-30"
 categories: [R, Epidemiology, Malaria, DHS]
+page-layout: article
+#title-block-banner: true
 format:
-  html:
-    toc: true
-    code-fold: true
-    #code-tools: true
+ html:
+  css: ../assets/css/remove-keyword.css
 ---
 
 **Project Role**: Research Assistant Professor & Lead Author
 
-**Timeline**: 2021-2022
-
-**Status**: Published in peer-reviewed journal
+**Status**: Published in **malaria journal**
 
 ## Overview
 

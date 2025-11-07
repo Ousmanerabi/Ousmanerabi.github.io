@@ -2,6 +2,7 @@
 title: "Portfolio"
 description: "Ousmane Diallo - Portfolio | Clinical Programming, HEOR, RWE & Machine Learning Projects"
 author: "Ousmane DIALLO"
+date: "2025-08-30"
 format:
   html:
     toc: true
@@ -10,12 +11,11 @@ highlight-style: pygments
 class: portfolio-page
 ---
 
-# Portfolio
+:::{.callout-important}
 
 > A showcase of clinical research, RWE, and health analytics projects developed using **SAS**, **R**, and **Python** — bridging statistical rigor and regulatory science.
 
-**Author:**  
-Ousmane Diallo, MPH-PhD  
+:::
 
 Welcome to my professional portfolio.  
 Here you’ll find a curated selection of projects illustrating my experience across:

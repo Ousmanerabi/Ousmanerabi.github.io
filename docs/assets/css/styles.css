@@ -1,400 +1,387 @@
-/* CSS complet pour la page d'accueil - Ousmane Rabi */
+/* css styles */
 
-/* Variables CSS */
 :root {
-    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --primary-color: #667eea;
-    --secondary-color: #764ba2;
-    --text-dark: #2c3e50;
-    --text-medium: #555;
-    --text-light: #666;
-    --bg-light: #fafafa;
-    --bg-white: #ffffff;
-    --bg-card: #f8f9fa;
-    --border-light: #eee;
-    --shadow-light: 0 4px 6px rgba(0,0,0,0.1);
-    --shadow-medium: 0 10px 30px rgba(0,0,0,0.1);
-    --shadow-hover: 0 8px 25px rgba(0,0,0,0.15);
+    --blue: #0454a4; 
+    --light-blue: #248cfa;
+    --light-blue-hover: #a3cbf6;
+    --light-bg: #e4e8ed;
+    --dark-bg: #585757;
 }
 
-/* Layout général */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--text-dark);
-    background-color: var(--bg-light);
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Hide default Quarto title */
-.quarto-title-block {
-    display: none !important;
+.small-link {
+  font-size: 10px;
+  color: grey;
 }
 
-/* Main content container */
-#quarto-content main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 20px;
-    background: var(--bg-white);
-    border-radius: 10px;
-    box-shadow: var(--shadow-light);
-}
-
-/* Header styling pour h4 */
-h4:first-of-type {
-    font-size: 1.8em;
-    color: var(--text-dark);
-    margin: 0 0 20px 0;
-    font-weight: 400;
-    line-height: 1.4;
-    text-align: left;
-}
-
-/* Projects buttons */
+/* Projects button container for even spacing */
 .projects-button-container {
-    text-align: center;
-    margin: 30px 0;
-    clear: both;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
 }
 
-.btn.projects-button {
-    display: inline-block;
-    background: var(--primary-gradient);
-    color: white;
-    padding: 12px 25px;
-    margin: 0 10px 10px 0;
-    border-radius: 25px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+.projects-button {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--light-blue) 100%);
+  border: 1px solid var(--light-blue);
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+  color: white;
+  flex: 1;
+  margin-inline: 1rem;
+  text-align: center;
+  min-width: 200px; /* Prevents buttons from getting too small on mobile */
+  max-width: 300px; /* Prevents buttons from getting too wide */
 }
 
-.btn.projects-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-    color: white;
-    text-decoration: none;
+.projects-button:hover {
+  background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-blue-hover) 100%);
+  border-color: var(--light-blue-hover);
+  color: black;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(36, 140, 250, 0.3);
 }
 
-/* About section */
-.about-geo {
-    background: var(--bg-card);
-    padding: 25px;
-    border-radius: 10px;
-    border-left: 5px solid var(--primary-color);
-    margin: 25px 0;
-    font-size: 1.05em;
-    line-height: 1.7;
-    clear: both;
-}
-
-.about-geo strong {
-    color: var(--primary-color);
-}
-
-/* Section headers */
-#quarto-content h2 {
-    color: var(--text-dark);
-    font-size: 2em;
-    margin: 50px 0 25px 0;
-    position: relative;
-    font-weight: 400;
-    clear: both;
-}
-
-#quarto-content h2:after {
-    content: '';
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 60px;
-    height: 3px;
-    background: var(--primary-gradient);
-    border-radius: 2px;
-}
-
-/* First section spacing */
-#quarto-content h2:first-of-type {
-    margin-top: 30px;
-}
-
-/* Competency Grid */
-.competency-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
-    clear: both;
-}
-
-.competency-card {
-    background: var(--bg-card);
-    padding: 30px;
-    border-radius: 15px;
-    border-left: 5px solid var(--primary-color);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.competency-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-hover);
-    background: var(--bg-white);
-}
-
-.competency-card h3 {
-    font-size: 1.4em;
-    margin-bottom: 20px;
-    color: var(--text-dark);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.competency-card ul {
-    list-style: none;
-    padding: 0;
-}
-
-.competency-card li {
-    margin-bottom: 10px;
-    padding-left: 25px;
-    position: relative;
-    color: var(--text-medium);
-    line-height: 1.6;
-}
-
-.competency-card li:before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-weight: bold;
-    font-size: 1.2em;
-}
-
-/* Transition Section */
-.transition-section {
-    background: var(--primary-gradient);
-    color: white;
-    padding: 60px 50px;
-    text-align: center;
-    margin: 50px 0;
-    border-radius: 15px;
-    position: relative;
-    overflow: hidden;
-    clear: both;
-}
-
-.transition-section * {
-    position: relative;
-    z-index: 1;
-}
-
-.transition-section strong {
-    color: rgba(255,255,255,0.95);
-}
-
-/* FAQs */
-.faqs-container {
-    margin: 30px 0;
-    clear: both;
-}
-
-.faq {
-    border: 1px solid var(--border-light);
-    border-radius: 8px;
-    margin-bottom: 15px;
-    overflow: hidden;
-}
-
-.faq summary {
-    background: var(--bg-card);
-    padding: 20px;
-    cursor: pointer;
-    font-weight: 500;
-    color: var(--text-dark);
-    transition: background 0.3s ease;
-    list-style: none;
-}
-
-.faq summary:hover {
-    background: var(--bg-white);
-}
-
-.faq summary::-webkit-details-marker {
-    display: none;
-}
-
-.faq-answer {
-    padding: 20px;
-    background: var(--bg-white);
-    line-height: 1.7;
-    border-top: 1px solid var(--border-light);
-}
-
-.faq-answer strong {
-    color: var(--primary-color);
-}
-
-/* Quick facts table */
-.quick-facts {
-    margin: 20px 0;
-    clear: both;
-}
-
-.quick-facts table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--bg-white);
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-
-.quick-facts th,
-.quick-facts td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid var(--border-light);
-}
-
-.quick-facts th {
-    background: var(--bg-card);
-    font-weight: 600;
-    color: var(--text-dark);
-}
-
-.quick-facts td strong {
-    color: var(--primary-color);
-}
-
-/* Links */
-a {
-    color: var(--primary-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-a:hover {
-    color: var(--secondary-color);
-    text-decoration: underline;
-}
-
-/* Prevent any floating issues */
-.clearfix::after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-/* Responsive design */
+/* Mobile responsiveness for button container */
 @media (max-width: 768px) {
-    #quarto-content main {
-        padding: 20px 15px;
-        margin: 10px;
-    }
-    
-    .competency-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    h4:first-of-type {
-        font-size: 1.5em;
-    }
-    
-    .projects-button-container {
-        text-align: center;
-    }
-    
-    .btn.projects-button {
-        display: block;
-        margin: 10px auto;
-        max-width: 200px;
-    }
-    
-    .transition-section {
-        padding: 25px 20px;
-    }
-    
-    .about-geo {
-        padding: 20px;
-    }
+  .projects-button-container {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .projects-button {
+    min-width: unset;
+    max-width: unset;
+  }
 }
 
-@media (max-width: 480px) {
-    #quarto-content h2 {
-        font-size: 1.6em;
-    }
-    
-    .competency-card {
-        padding: 25px;
-    }
-    
-    .faq summary {
-        padding: 15px;
-    }
-    
-    .faq-answer {
-        padding: 15px;
-    }
-}
-
-/* Styles pour vos classes actuelles */
 .services-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    margin: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 1rem 0;
 }
 
 .service-card {
-    background: var(--bg-card);
-    padding: 30px;
-    border-radius: 15px;
-    border-left: 5px solid var(--primary-color);
-    transition: all 0.3s ease;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--light-blue) 100%);
+  border: 1px solid var(--light-blue);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  color: white;
 }
 
 .service-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-hover);
-    background: var(--bg-white);
+  background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-blue-hover) 100%);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  border-color: var(--light-blue-hover);
+  color: black;
+}
+
+.service-card:hover h3 {
+  color: black;
+}
+
+.service-card:hover p {
+  color: black;
+}
+
+.service-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--light-blue-hover) 0%, var(--blue) 100%);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.service-card:hover::before {
+  transform: scaleX(1);
 }
 
 .service-icon {
-    font-size: 2.5em;
-    margin-bottom: 15px;
-    display: block;
-    line-height: 1;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+  transform: scale(3); /* Adjust the scale value as needed */
+  transform-origin: center;
 }
 
 .service-card h3 {
-    font-size: 1.4em;
-    margin-bottom: 20px;
-    color: var(--text-dark);
+  color: white;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
 }
 
-.service-card ul {
-    list-style: none;
-    padding: 0;
+.service-card p {
+  color: white;
+  line-height: 1.6;
+  margin-bottom: 0;
+  font-size: 0.95rem;
 }
 
-.service-card li {
-    margin-bottom: 10px;
-    padding-left: 25px;
-    position: relative;
-    color: var(--text-medium);
-    line-height: 1.6;
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+  
+  .service-card {
+    padding: 1.5rem;
+  }
+  
+  .service-icon {
+    font-size: 2.5rem;
+  }
 }
 
-.service-card li:before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-weight: bold;
-    font-size: 1.2em;
+/* FAQ Section Styling */
+details.faq {
+  background: var(--blue);
+  border: 1px solid var(--light-blue);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+details.faq:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+details.faq[open] {
+  border-color: var(--light-blue);
+  box-shadow: 0 6px 20px rgba(36, 140, 250, 0.15);
+}
+
+details.faq summary {
+  padding: 1.5rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--blue) 0%, var(--light-blue) 100%);
+  border: none;
+  outline: none;
+  position: relative;
+  transition: all 0.3s ease;
+  user-select: none;
+  color: #e2e8f0;
+}
+
+details.faq summary:hover {
+  background: linear-gradient(135deg, var(--light-blue) 0%, var(--light-blue-hover) 100%);
+}
+
+details.faq[open] summary {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--light-blue) 100%);
+  color: white;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Custom arrow styling */
+details.faq summary::-webkit-details-marker {
+  display: none;
+}
+
+details.faq summary::after {
+  content: '+';
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  color: var(--blue);
+}
+
+details.faq summary:hover::after {
+  color: white;
+}
+
+details.faq[open] summary::after {
+  content: '−';
+  transform: translateY(-50%) rotate(180deg);
+  color: white;
+}
+
+details.faq .faq-question {
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.4;
+  margin: 0;
+  padding-right: 3rem;
+  color: #e2e8f0;
+}
+
+details.faq[open] .faq-question {
+  color: white;
+}
+
+details.faq .faq-answer {
+  padding: 1.5rem;
+  margin: 0;
+  background: var(--light-bg);
+  color: black;
+  line-height: 1.6;
+  border-top: 1px solid var(--light-blue);
+  animation: fadeInDown 0.3s ease;
+}
+
+/* Focus states for accessibility */
+details.faq summary:focus {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for better UX */
+details {
+  transition: margin 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+/* Add some spacing around the FAQ section */
+h2:has(+ details.faq), 
+h2 + details.faq:first-of-type {
+  margin-top: 1.5rem;
+}
+
+.home-page-footer {
+  font-size: 0.85rem;
+  color: #adb5bd;
+  text-align: center;
+  margin: 2rem 0 1rem 0;
+  padding: 1rem;
+  line-height: 1.4;
+  font-weight: 300;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .home-page-footer {
+    font-size: 0.8rem;
+    margin: 1.5rem 0 0.5rem 0;
+    padding: 0.75rem;
+  }
+}
+
+/* About page */
+.gallery-item {
+  text-align: center;
+}
+
+.gallery-item em {
+  display: block;
+  margin-top: 0.5rem;
+  font-style: italic;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.photo-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2rem 0;
+  justify-content: center;
+}
+
+.gallery-img {
+  width: 300px;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.gallery-img:hover {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .gallery-img {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Publications page */
+/* Remove numbering from citations */
+div.csl-entry {
+  margin-left: 0 !important;
+  text-indent: 0 !important;
+}
+
+div.csl-left-margin {
+  display: none !important;
+}
+
+div.csl-right-inline {
+  margin-left: 0 !important;
+}
+
+/* Add some spacing between entries */
+div.csl-entry {
+  margin-bottom: 1.5em;
+}
+
+/* Optional: Style the publication buttons */
+.pub-buttons {
+  margin-top: 0.5em;
+}
+
+.pub-buttons a {
+  display: inline-block;
+  margin-right: 0.5em;
+  padding: 0.25em 0.5em;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-size: 0.875em;
+  color: var(--blue)
+}
+
+.pub-buttons a:hover {
+  background-color: #e9ecef;
+}
+
+.pub-buttons button {
+  display: inline-block;
+  margin-right: 0.5em;
+  padding: 0.25em 0.5em;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  text-decoration: none;
+  font-size: 0.875em;
+  cursor: pointer;
+  color: var(--blue);
+}
+
+.pub-buttons button:hover {
+  background-color: #e9ecef;
 }
