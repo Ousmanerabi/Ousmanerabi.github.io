@@ -93,6 +93,38 @@ Ousmane Diallo is a **rigorous biostatistician and epidemiologist** specializing
 
 👉 [Contact Me](contact.qmd) to discuss collaborations or consulting opportunities.
 
+## Featured Portfolio Projects
+
+Explore selected projects showcasing my expertise in **clinical programming**, **health economics**, and **real-world evidence analytics**.  
+
+### 🧬 Clinical Trials Programming
+Deliverables following CDISC standards, including **SDTM**, **ADaM**, **TLFs**, and **Define.xml**, using SAS for regulatory submissions.  
+[View Clinical Projects →](projects/cdisc-sdtm)
+
+### 💰 Health Economics & Outcomes Research (HEOR)
+Cost-effectiveness and budget impact analysis using R and health economic modeling.  
+Example: *Cost-Effectiveness of the REPPOP Pediatric Obesity Management Program.*  
+[View HEOR Projects →](projects/heor-reppop)
+
+### 📊 Real-World Evidence (RWE)
+**Coming soon** — Observational data analyses and real-world data pipelines using EMR and survey data (DHS, HMIS).  
+Includes cohort definition, confounding adjustment, and outcome modeling.  
+[View RWE Projects →](projects/rwe)
+
+### 🤖 Machine Learning & Predictive Analytics
+**Coming soon** — Predictive modeling and classification of health outcomes using Random Forests and ARIMA time-series forecasting.  
+[View ML Projects →](projects/ml)
+
+---
+
+## Current Focus
+
+I am currently expanding my portfolio with new **Real-World Evidence (RWE)** and **Machine Learning (ML)** projects.  
+These projects apply advanced analytics and observational research methods to bridge **real-world data**, **regulatory science**, and **clinical insights**.
+
+My goal is to demonstrate an integrated approach linking **clinical trial analytics**, **HEOR**, and **RWE**—showcasing how data-driven evidence supports decision-making across the product lifecycle.
+
+
 ## My Transition to Pharma/Industry
 
 ::::::: transition-highlight

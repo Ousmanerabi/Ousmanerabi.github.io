@@ -21,10 +21,8 @@ format:
 # Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)
 
 
+## Real-World Evidence Summary 
 ::: {.callout-note appearance="simple"}
-
-# Real-World Evidence Summary 
-
 
 - **Study Type:** Retrospective longitudinal observational study 
 
@@ -65,8 +63,8 @@ The analysis reframes academic results into an **RWE-compliant framework** align
 | **Perspective** | Population-averaged effects at patient-encounter level |
 
 
-:::{.callout-tip}
 ## Endpoint
+:::{.callout-tip}
 
 - **Primary outcome:** presence of a confirmed malaria episode at each consultation  
 - **Covariates:** age (+ age²), sex, malnutrition status, HIV status, vaccination completeness (BCG, pentavalent, pneumococcal, polio, rotavirus), prior malaria episode, month of visit (seasonality), distance to facility, district.

@@ -1,69 +1,143 @@
 ---
-title: "Projects"
-description: "Ousmane Diallo - Projects | Learn about my recent research projects and clinical programming work here."
+title: "Portfolio"
+description: "Ousmane Diallo - Portfolio | Clinical Programming, HEOR, RWE & Machine Learning Projects"
 author: "Ousmane DIALLO"
 format:
   html:
     toc: true
     code-fold: true
 highlight-style: pygments
+class: portfolio-page
 ---
 
-# Projects
+# Portfolio
 
-**Author**  
-Ousmane Diallo, MPH-PhD
+> A showcase of clinical research, RWE, and health analytics projects developed using **SAS**, **R**, and **Python** — bridging statistical rigor and regulatory science.
 
-**Keywords**  
-biostatistics, epidemiology, CDISC standards, clinical trials programming, real-world evidence, statistical modeling, regulatory compliance, SAS & R programming
+**Author:**  
+Ousmane Diallo, MPH-PhD  
 
-## CDISC & Regulatory Programming
-*Industry-standard clinical programming and regulatory-compliant datasets for pharmaceutical submissions*
+Welcome to my professional portfolio.  
+Here you’ll find a curated selection of projects illustrating my experience across:
 
-[End-to-end Study Data Tabulation Model](projects/cdisc-sdtm.html)
+- **Clinical Trials Programming (CDISC, SAS)**  
+- **Health Economics & Outcomes Research (HEOR)**  
+- **Real-World Evidence (RWE) Analytics**  
+- **Machine Learning & Advanced Statistical Modeling**  
+- **Geospatial Epidemiology**
 
-[ADaM BDS Derivations for Efficacy & Safety](projects/ADaM BDS Derivations for Efficacy & Safety.html)
+Each section links to detailed pages containing methodology, R/SAS code, and interpretation of results.  
 
-[Tables Listings and Figures](projects/Tables Listings and Figures.html)
+<hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
 
-[define.xml Generation & Validation Workflow](projects/sdtm-validation-project.html)
+## 🧬 Clinical Trials Programming (CDISC / SAS)
 
-## HEOR Projects
+*Regulatory-compliant workflows for clinical data analysis and submission-ready deliverables.*
 
+My clinical programming work focuses on **end-to-end pipelines** for clinical trial data using SAS and CDISC standards.  
+These projects replicate **real-world regulatory workflows**, from raw data cleaning to **submission-ready outputs**.
 
-[Cost-Effectiveness of the REPPOP Management Program](projects/cost-effectiveness-reppop.html)
+### Highlighted Capabilities
 
-[Cost-Utility of Lung Transplantation](projects/Cost-utility-Lung-Transplantation.html)
+- SDTM and ADaM dataset derivation  
+- Tables, Listings, and Figures (TLFs) programming  
+- Define-XML and annotated CRF support  
+- QC checks and validation workflows  
 
-## Statistical Modeling & Real-World Evidence
-*Advanced analytics and evidence generation for clinical decision-making*
+### Featured Projects
 
-[Patient-level risk factors for clinical malaria among children aged 2–60 months ](projects/patient-level-risk-factors-analysis.html)
+🔹 [End-to-End Study Data Tabulation Model (SDTM)](projects/cdisc-sdtm.html)  
+🔹 [ADaM BDS Derivations for Efficacy & Safety](projects/ADaM BDS Derivations for Efficacy & Safety.html)  
+🔹 [Tables, Listings, and Figures (TLFs)](projects/Tables Listings and Figures.html)  
+🔹 [define.xml Generation & Validation Workflow](projects/sdtm-validation-project.html)  
 
-[Hospital mortality and positive blood culture with Difficult-to threat, Marseille, France](projects/hospital-mortality-and-positive-blood-culture.html)
+<hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
 
-[Major discrepancy between factual AR and consumption in south of France](projects/discrepancy-AR-consumption.html)
+## 💰 Health Economics & Outcomes Research (HEOR)
 
-## Geospatial Analysis & Epidemiology
-*Spatial analysis and disease surveillance across West African populations*
+*Cost-effectiveness and cost-utility analyses supporting value-based healthcare decisions.*
 
-[Risk Factors – ITN Guinea DHS 2018](projects/risk_factors.html)
+These projects apply **economic evaluation and outcomes research** methods to clinical and public health programs, highlighting the impact of interventions on cost and health outcomes.
 
-[Spatio-temporal Modeling of Treatment-Seeking Coverage Using Demographic Health Surveys (DHS) Data and INLA](projects/treatment-seeking-bfa.html)
+### Featured Projects
 
-[Retrospective Analysis of Malaria Trend in Burkina Faso](projects/retrospective_analysis.html)
+🔹 [Cost-Effectiveness of the REPPOP Pediatric Obesity Management Program](projects/cost-effectiveness-reppop.html)  
+🔹 [Cost-Utility of Lung Transplantation](projects/Cost-utility-Lung-Transplantation.html)  
 
-## Machine learning & multidimensional analysis
+They demonstrate experience with:
 
-*Machine learning methods*
+- Cost-effectiveness and cost-utility models  
+- Decision-analytic frameworks and sensitivity analyses  
+- Communication of results for policymakers and healthcare stakeholders  
 
-[Create seasonality archetypes using machine learning](projects/seasonality-archetypes.html)
+<hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
 
-[Predictors of Insecticide treated bed nets in Guinea](projects/predictors-itn-guinea.html)
+## 📊 Real-World Evidence (RWE) & Statistical Modeling
 
+*Observational analytics and evidence generation for clinical and public health impact.*
 
----
+This section covers **observational research** and **real-world data analyses** that inform clinical and policy decisions.  
+The projects integrate data from surveys, hospitals, and surveillance systems.
 
-*Interested in collaborating on biostatistics, epidemiology, or clinical programming projects?*
+### Featured Projects
 
-**[Contact me](contact.qmd)** *to discuss opportunities.*
+🔹 [Patient-level Risk Factors for Clinical Malaria in Children (2–60 months)](projects/patient-level-risk-factors-analysis.html)  
+🔹 [Hospital Mortality and Positive Blood Culture with Difficult-to-Treat Resistance – Marseille, France](projects/hospital-mortality-and-positive-blood-culture.html)  
+🔹 [Major Discrepancy Between Factual Antibiotic Resistance and Consumption in Southern France](projects/discrepancy-AR-consumption.html)  
+
+These projects highlight:
+
+- Study design for observational data  
+- Regression modeling and risk factor analysis  
+- Translation of findings into actionable recommendations  
+
+<hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
+
+## 🗺️ Geospatial Analysis & Epidemiology
+
+*Spatial and spatio-temporal modeling for malaria surveillance and intervention planning.*
+
+Here, I use **geospatial methods and epidemiological modeling** to understand how disease risk and intervention coverage vary across space and time.
+
+### Featured Projects
+
+🔹 [Risk Factors – ITN Use in Guinea (DHS 2018)](projects/risk_factors.html)  
+🔹 [Spatio-temporal Modeling of Treatment-Seeking Coverage Using DHS Data and INLA](projects/treatment-seeking-bfa.html)  
+🔹 [Retrospective Analysis of Malaria Trends in Burkina Faso](projects/retrospective_analysis.html)  
+
+Key themes include:
+
+- Spatial risk mapping and cluster detection  
+- Linking survey, facility, and environmental data  
+- Supporting targeted intervention strategies  
+
+<hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
+
+## 🤖 Machine Learning & Predictive Analytics
+
+*Advanced modeling and classification for outcome prediction and health system performance.*
+
+These projects apply **machine learning and multivariate methods** to extract patterns and build predictive models from complex health data.
+
+### Featured Projects
+
+🔹 [Seasonality Archetypes Using Machine Learning](projects/seasonality-archetypes.html)  
+🔹 [Predictors of Insecticide-Treated Net Ownership and Use in Guinea](projects/predictors-itn-guinea.html)  
+
+Methods used include:
+
+- Clustering and dimensionality reduction  
+- Supervised learning for classification and prediction  
+- Interpretation of models in a public health context  
+
+<hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
+
+## 📞 Let’s Collaborate
+
+If you’re seeking expertise in **data science**, **biostatistics**, **epidemiology**, or **clinical data programming**, I’m open to:
+
+- Collaboration on research projects  
+- Consulting on clinical trials programming and CDISC workflows  
+- RWE and HEOR analytics in partnership with clinical or industry teams  
+
+👉 [Contact Me](contact.qmd) to discuss your project or proposal.
