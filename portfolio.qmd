@@ -49,7 +49,7 @@ biostatistics, epidemiology, CDISC standards, clinical trials programming, real-
 
 [Risk Factors – ITN Guinea DHS 2018](projects/risk_factors.html)
 
-[Analysis of Treatment-seeking behaviour in Burkina Faso](projects/treatment-seeking-bfa.html)
+[Spatio-temporal Modeling of Treatment-Seeking Coverage Using Demographic Health Surveys (DHS) Data and INLA](projects/treatment-seeking-bfa.html)
 
 [Retrospective Analysis of Malaria Trend in Burkina Faso](projects/retrospective_analysis.html)
 

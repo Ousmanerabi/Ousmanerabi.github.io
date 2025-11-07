@@ -6,11 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ousmane Diallo, MPH-PhD">
+<meta name="author" content="Ousmane DIALLO">
 <meta name="keywords" content="biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence">
 <meta name="description" content="Identify individual-level risk factors for clinical malaria among children aged 2–60 months using IeDA consultation data and Generalized Estimating Equations (GEE)">
 
-<title>Risk Factors for Clinical Malaria in Children Under Five — Burkina Faso (2017–2020) – Ousmane Diallo, MPH-PhD</title>
+<title>Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020) – Ousmane Diallo, MPH-PhD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -73,13 +73,13 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="../styles.css">
 <link rel="stylesheet" href="../assets/css/remove-keyword.css">
-<meta property="og:title" content="Risk Factors for Clinical Malaria in Children Under Five — Burkina Faso (2017–2020) – Ousmane Diallo, MPH-PhD">
+<meta property="og:title" content="Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020) – Ousmane Diallo, MPH-PhD">
 <meta property="og:description" content="Identify individual-level risk factors for clinical malaria among children aged 2–60 months using IeDA consultation data and Generalized Estimating Equations (GEE)">
-<meta property="og:image" content="https://ousmanediallo.com/assets/projects/child-malaria/forest_plot.png">
+<meta property="og:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
 <meta property="og:site_name" content="Ousmane Diallo, MPH-PhD">
-<meta name="twitter:title" content="Risk Factors for Clinical Malaria in Children Under Five — Burkina Faso (2017–2020) – Ousmane Diallo, MPH-PhD">
+<meta name="twitter:title" content="Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020) – Ousmane Diallo, MPH-PhD">
 <meta name="twitter:description" content="Identify individual-level risk factors for clinical malaria among children aged 2–60 months using IeDA consultation data and Generalized Estimating Equations (GEE)">
-<meta name="twitter:image" content="https://ousmanediallo.com/assets/projects/child-malaria/forest_plot.png">
+<meta name="twitter:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -146,9 +146,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#patient-level-risk-factors-for-clinical-malaria-among-children-aged-260-months" id="toc-patient-level-risk-factors-for-clinical-malaria-among-children-aged-260-months" class="nav-link active" data-scroll-target="#patient-level-risk-factors-for-clinical-malaria-among-children-aged-260-months">Patient-level risk factors for clinical malaria among children aged 2–60 months</a>
+  <li><a href="#real-world-evidence-on-malaria-risk-factors-in-children-under-five-burkina-faso-ieda-20172020" id="toc-real-world-evidence-on-malaria-risk-factors-in-children-under-five-burkina-faso-ieda-20172020" class="nav-link active" data-scroll-target="#real-world-evidence-on-malaria-risk-factors-in-children-under-five-burkina-faso-ieda-20172020">Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)</a>
   <ul class="collapse">
   <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#real-world-data-study-design" id="toc-real-world-data-study-design" class="nav-link" data-scroll-target="#real-world-data-study-design">Real-World Data &amp; Study Design</a></li>
+  <li><a href="#analytical-framework" id="toc-analytical-framework" class="nav-link" data-scroll-target="#analytical-framework">Analytical Framework</a></li>
+  <li><a href="#insights" id="toc-insights" class="nav-link" data-scroll-target="#insights">Insights</a></li>
+  <li><a href="#rwe-interpretation-and-impact" id="toc-rwe-interpretation-and-impact" class="nav-link" data-scroll-target="#rwe-interpretation-and-impact">RWE Interpretation and Impact</a></li>
+  <li><a href="#technical-skills-demonstrated" id="toc-technical-skills-demonstrated" class="nav-link" data-scroll-target="#technical-skills-demonstrated">Technical Skills Demonstrated</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -158,7 +163,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Risk Factors for Clinical Malaria in Children Under Five — Burkina Faso (2017–2020)</h1>
+<h1 class="title">Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)</h1>
   <div class="quarto-categories">
     <div class="quarto-category">R</div>
     <div class="quarto-category">Epidemiology</div>
@@ -166,6 +171,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="quarto-category">Child Health</div>
     <div class="quarto-category">GEE</div>
     <div class="quarto-category">IeDA</div>
+    <div class="quarto-category">Outcome</div>
   </div>
   </div>
 
@@ -181,7 +187,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Ousmane Diallo, MPH-PhD </p>
+             <p>Ousmane DIALLO </p>
           </div>
   </div>
     
@@ -206,11 +212,181 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="patient-level-risk-factors-for-clinical-malaria-among-children-aged-260-months" class="level1">
-<h1>Patient-level risk factors for clinical malaria among children aged 2–60 months</h1>
+<section id="real-world-evidence-on-malaria-risk-factors-in-children-under-five-burkina-faso-ieda-20172020" class="level1">
+<h1>Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)</h1>
+<div class="callout callout-style-simple callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Real-World Evidence Summary
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Study Type:</strong> Retrospective longitudinal observational study</p></li>
+<li><p><strong>RWD source:</strong> IeDA electronic consultation data from primary health centers (CSPS)</p></li>
+<li><p><strong>Population:</strong> Children 2–60 months in IeDA districts (Burkina Faso, 2017, 2018, 2020)</p></li>
+<li><p><strong>Outcome:</strong> Clinical malaria episode at consultation (yes/no)</p></li>
+<li><p><strong>Method:</strong> Generalized Estimating Equations (GEE, logit link, exchangeable correlation)</p></li>
+<li><p><strong>Objective:</strong> Quantify the real-world association between demographic, nutritional, immunization, and infection-related factors and malaria risk under routine care conditions</p></li>
+<li><p><strong>Key insight:</strong> Age, HIV status, distance to facility, prior malaria episodes and seasonality strongly shape malaria risk; vaccination and malnutrition show age-dependent effects.</p></li>
+</ul>
+</div>
+</div>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This study evaluated the patient-level factors associated with clinical malaria among children under five using real-world IeDA consultation data from Burkina Faso (2017–2020). Using a longitudinal framework and GEE modeling, we quantified how nutritional status, vaccination completeness, HIV status, and prior malaria episodes influence the odds of clinical malaria.</p>
+<p>Real-world data (RWD) from electronic decision-support systems can capture disease burden and risk factors under everyday programmatic conditions that randomized trials cannot represent.<br>
+This study leveraged the <strong>IeDA</strong> platform — a digital clinical tool used in Burkina Faso’s primary-care system — to generate <strong>real-world evidence (RWE)</strong> on malaria risk factors among children under five.</p>
+<p>The analysis reframes academic results into an <strong>RWE-compliant framework</strong> aligned with ISPOR/EMA real-world study design principles.</p>
+<hr>
+</section>
+<section id="real-world-data-study-design" class="level2">
+<h2 class="anchored" data-anchor-id="real-world-data-study-design">Real-World Data &amp; Study Design</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 63%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Aspect</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Data Source</strong></td>
+<td>IeDA electronic consultations (CSPS facilities)</td>
+</tr>
+<tr class="even">
+<td><strong>Geographic Scope</strong></td>
+<td>Multiple districts implementing IeDA</td>
+</tr>
+<tr class="odd">
+<td><strong>Study Period</strong></td>
+<td>2017, 2018, 2020 (2019 excluded)</td>
+</tr>
+<tr class="even">
+<td><strong>Study Population</strong></td>
+<td>Children aged 2–60 months with ≥ 1 consultation</td>
+</tr>
+<tr class="odd">
+<td><strong>Design</strong></td>
+<td>Retrospective longitudinal cohort (repeated visits per child)</td>
+</tr>
+<tr class="even">
+<td><strong>Unit of Analysis</strong></td>
+<td>Consultation record</td>
+</tr>
+<tr class="odd">
+<td><strong>Perspective</strong></td>
+<td>Population-averaged effects at patient-encounter level</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Endpoint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Primary outcome:</strong> presence of a confirmed malaria episode at each consultation<br>
+</li>
+<li><strong>Covariates:</strong> age (+ age²), sex, malnutrition status, HIV status, vaccination completeness (BCG, pentavalent, pneumococcal, polio, rotavirus), prior malaria episode, month of visit (seasonality), distance to facility, district.</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="analytical-framework" class="level2">
+<h2 class="anchored" data-anchor-id="analytical-framework">Analytical Framework</h2>
+<p>The analysis used <strong>Generalized Estimating Equations (GEE)</strong> to model repeated malaria outcomes per child.</p>
+<section id="rwe-methodology-highlights" class="level3">
+<h3 class="anchored" data-anchor-id="rwe-methodology-highlights">RWE Methodology Highlights</h3>
+<ul>
+<li><p>RWD Quality Controls: duplicate removal, harmonized identifiers, imputation of missing facility data, age-window validation.</p></li>
+<li><p>Confounding Mitigation: multivariable adjustment; sensitivity cohorts (4–60 mo and 6–60 mo)</p></li>
+<li><p>Effect Modification: age interactions tested for sex, nutrition, HIV, and vaccines.</p></li>
+<li><p>Outcome Reporting: adjusted odds ratios (aORs) with 95 % CIs; p &lt; 0.05 as significance threshold.</p></li>
+</ul>
+</section>
+</section>
+<section id="insights" class="level2">
+<h2 class="anchored" data-anchor-id="insights">Insights</h2>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 14%">
+<col style="width: 51%">
+<col style="width: 34%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Domain</th>
+<th>Real-World Finding</th>
+<th>Interpretation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Age</strong></td>
+<td>Malaria risk rises non-linearly with age (2 → 60 mo).</td>
+<td>Likely reflects increased exposure and partial immunity.</td>
+</tr>
+<tr class="even">
+<td><strong>Sex</strong></td>
+<td>Girls show slightly higher odds of malaria than boys.</td>
+<td>Possible behavioural and biological differences.</td>
+</tr>
+<tr class="odd">
+<td><strong>Nutrition</strong></td>
+<td>Moderate/global malnutrition linked with lower observed odds.</td>
+<td>May reflect health-seeking or survivor bias in RWD.</td>
+</tr>
+<tr class="even">
+<td><strong>HIV Status</strong></td>
+<td>HIV-positive children have 1.7–2.0× higher adjusted odds.</td>
+<td>Aligns with prior longitudinal evidence.</td>
+</tr>
+<tr class="odd">
+<td><strong>Distance to Facility</strong></td>
+<td>Risk increases with travel distance (&gt; 10 km &gt; 4–10 km &gt; &lt; 4 km).</td>
+<td>Indicates access barriers in real-world settings.</td>
+</tr>
+<tr class="even">
+<td><strong>Seasonality</strong></td>
+<td>From July–October, malaria probability ≈ 3× higher than in May.</td>
+<td>Confirms expected transmission peaks.</td>
+</tr>
+<tr class="odd">
+<td><strong>Vaccination</strong></td>
+<td>BCG and other vaccines show protective trends but non-significant in adjusted model.</td>
+<td>Reflects indirect benefits and data heterogeneity.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rwe-interpretation-and-impact" class="level2">
+<h2 class="anchored" data-anchor-id="rwe-interpretation-and-impact">RWE Interpretation and Impact</h2>
+<p>Clinical relevance: The study demonstrates how longitudinal RWD can uncover real-world risk gradients across demographic and programmatic factors in pediatric malaria.</p>
+<p>Programmatic insight: Results support integrated malaria–nutrition–immunization strategies and highlight access inequities (distance to facility, HIV coinfection).</p>
+<p>Methodological contribution: Establishes a reproducible RWE pipeline using routine digital health data, showing that IeDA can serve as a valid RWD source for health-system performance and disease-risk monitoring.</p>
+</section>
+<section id="technical-skills-demonstrated" class="level2">
+<h2 class="anchored" data-anchor-id="technical-skills-demonstrated">Technical Skills Demonstrated</h2>
+<ul>
+<li><p><strong>Real-World Data Management</strong>: large-scale data cleaning, QC, and cohort curation.</p></li>
+<li><p><strong>Statistical Programming</strong>: longitudinal modelling with geepack, broom, gtsummary.</p></li>
+<li><p><strong>Epidemiological Methods</strong>: GEE for correlated binary outcomes; effect-modification assessment.</p></li>
+<li><p><strong>RWE Reporting</strong>: alignment with ISPOR/EMA/ICH E3 guidelines; real-world endpoint definition.</p></li>
+<li><p><strong>Reproducibility</strong>: fully scripted Quarto workflow and transparent code base.</p></li>
+</ul>
 
 
 </section>
