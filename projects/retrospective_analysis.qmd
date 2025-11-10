@@ -5,7 +5,6 @@ image: /assets/projects/retrospective/adm1_adm2.png
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 categories: [R, Epidemiology, Malaria, DHS, climate, Time series]
 page-layout: article
-#title-block-banner: true
 format:
  html:
   css: ../assets/css/remove-keyword.css
