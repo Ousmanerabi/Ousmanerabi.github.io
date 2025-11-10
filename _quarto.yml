@@ -13,7 +13,9 @@ website:
   favicon: "images/favicon.jpg"  # Ajoutez un favicon si vous en avez un ; sinon, supprimez cette ligne
   image: "images/bio-photo-2.jpg"  # Utilisez votre photo de bio comme image par défaut du site
   image-alt: "Ousmane Diallo, MPH-PhD - Biostatistician & Epidemiologist"
-  twitter-card: true  # Active les cartes Twitter pour les partages
+  twitter-card:
+    site: "@ousmanediallo"
+    creator: "@ousmanediallo"  # Active les cartes Twitter pour les partages
   open-graph: true  # Active Open Graph pour les partages sociaux
   search: true  # Active la barre de recherche dans la navbar
   back-to-top-navigation: true  # Bouton "Retour en haut" 

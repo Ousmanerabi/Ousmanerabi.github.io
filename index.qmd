@@ -1,8 +1,8 @@
 ---
-title: "Ousmane Diallo, MPH-PhD"
+title: "Ousmane Diallo – Portfolio"
 description: "Biostatistician |Data Scientist | Epidemiologist | CDISC Expert"
 draft: false
-#image: "images/bio-photo-2.jpg"   # si tu veux une image de partage
+image: "images/bio-photo-2.jpg"   # si tu veux une image de partage
 format:
   html:
     css:
