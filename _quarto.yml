@@ -25,6 +25,9 @@ website:
         href: index.qmd
         text: Home
         aria-label: Home
+      - icon: file-earmark-text-fill
+        href: publications.qmd
+        text: Publications
       - icon: person-lines-fill  # Icône personne pour About
         href: about.qmd
         text: About
