@@ -52,7 +52,7 @@ A standard data quality workflow before analysis was applied:
 
 -   Managed missingness; validated reporting rates.
 
-##### Quality Control Workflow
+##### **Quality Control Workflow**
 
 ```{r}
 
