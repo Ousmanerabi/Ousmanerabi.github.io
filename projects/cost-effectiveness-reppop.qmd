@@ -408,15 +408,15 @@ The proportion of obesity cases that would need to be prevented for the REPPOP i
 
 Table: Present value of avoided adult obesity-related medical costs per child
 
-|Time Horizon | Start Age| End Age|Discount Rate | PV Avoided Cost (EUR)|
-|:------------|---------:|-------:|:-------------|---------------------:|
-|18–60 years  |        18|      60|2%            |                4558.2|
-|18–60 years  |        18|      60|4%            |                2749.3|
-|40–60 years  |        40|      60|2%            |                1707.5|
-|40–60 years  |        40|      60|4%            |                 781.0|
+::: {.striped .hover}
+| Time Horizon | Start Age | End Age | Discount Rate | PV Avoided Cost (EUR) |
+|:-------------|----------:|--------:|:--------------|----------------------:|
+| 18–60 years  |        18 |      60 | 2%            |                4558.2 |
+| 18–60 years  |        18 |      60 | 4%            |                2749.3 |
+| 40–60 years  |        40 |      60 | 2%            |                1707.5 |
+| 40–60 years  |        40 |      60 | 4%            |                 781.0 |
+:::
 
-
-: {.striped .hover}
 
 ## Cost-Effectiveness Plane (Bootstrap Distribution)
 
