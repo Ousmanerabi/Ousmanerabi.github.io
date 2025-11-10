@@ -1,0 +1,54 @@
+---
+title: "Real-World Impact of Antibacterial Resistance on Mortality in Marseille"
+subtitle: "Retrospective Multi-Hospital Real-World Evidence Study (2014–2018)"
+author: "Ousmane Diallo, MPH, PhD"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+highlight-style: pygments
+page-layout: article
+format:
+  html:
+    css: ../assets/css/remove-keyword.css
+---
+
+::: {.callout-warning}
+
+## Disclaimer – Educational Reimplementation Only
+
+This document presents a **methodological reimplementation** of a published study on the burden of antibacterial resistance on mortality in Marseille (AP-HM, 2014–2018).
+
+-   No original **patient-level** or **confidential hospital data** are used here.
+
+-   All analyses are based on **simulated** or **anonymized / reconstructed datasets** that replicate the patterns and methodology described in the original publication.
+
+-   The aim is to demonstrate **Real-World Evidence (RWE) methods**, data engineering, and statistical modeling for my professional portfolio.
+
+The results presented here **must not** be interpreted as official AP-HM results.
+
+:::
+
+# Overview
+This project reproduces, using simulated or reconstructed data, the analytical pipeline of a real-world evidence (RWE) study that quantified the impact of antibacterial resistance on in-hospital mortality among patients with blood cultures in the four University Hospitals of Marseille (AP-HM) between February 2014 and February 2018
+
+:::{.callout-note}
+## Real-world Evidence (RWE) Framing
+
+- **Study type**: Retrospective, multi-center, observational real-world evidence study
+
+- **Data source (conceptual)**: Routine blood culture results (MARSS surveillance system) linked with hospital mortality
+
+- **Population**: All patients with at least one blood culture performed in AP-HM during the study period
+
+- **Primary outcome**: In-hospital mortality
+
+- **Key exposures**
+  - Resistance to key antibiotics for top bacterial species
+  - Difficult-to-treat resistance (DTR) phenotype
+  - Hospital-acquired infection, ICU admission, and other clinical factors
+  
+:::
+
+## Research Question
+
+What is the real-world burden of antibacterial resistance on in-hospital mortality among patients with blood cultures in a large French university hospital system?
+
+

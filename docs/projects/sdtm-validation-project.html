@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ousmane DIALLO">
-<meta name="dcterms.date" content="2025-11-05">
+<meta name="dcterms.date" content="2025-11-07">
 <meta name="keywords" content="SDTM, CDISC, Pinnacle 21, Define.xml, clinical trials, data standards">
 <meta name="description" content="Clinical Data Standards Implementation">
 
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../assets/css/styles.css">
 <link rel="stylesheet" href="../assets/css/remove-keyword.css">
 <meta property="og:title" content="Study Data Tabulation Model (SDTM) Mapping &amp; Validation Project – Ousmane Diallo, MPH-PhD">
 <meta property="og:description" content="Clinical Data Standards Implementation">
@@ -146,20 +146,30 @@ ul.task-list li input[type="checkbox"] {
         <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
-  <ul class="collapse">
-  <li><a href="#study-data-tabulation-model-sdtm-mapping-validation-project" id="toc-study-data-tabulation-model-sdtm-mapping-validation-project" class="nav-link active" data-scroll-target="#study-data-tabulation-model-sdtm-mapping-validation-project">Study Data Tabulation Model (SDTM) Mapping &amp; Validation Project</a>
-  <ul class="collapse">
-  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link" data-scroll-target="#executive-summary">Executive Summary</a></li>
+  <ul>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive Summary</a></li>
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a></li>
-  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  <li><a href="#key-challenges-solved" id="toc-key-challenges-solved" class="nav-link" data-scroll-target="#key-challenges-solved">Key Challenges Solved</a></li>
-  <li><a href="#technical-highlights" id="toc-technical-highlights" class="nav-link" data-scroll-target="#technical-highlights">Technical Highlights</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#validation-metrics" id="toc-validation-metrics" class="nav-link" data-scroll-target="#validation-metrics">Validation Metrics</a></li>
+  <li><a href="#error-resolution-by-domain" id="toc-error-resolution-by-domain" class="nav-link" data-scroll-target="#error-resolution-by-domain">Error Resolution by Domain</a></li>
+  </ul></li>
+  <li><a href="#key-challenges-solved" id="toc-key-challenges-solved" class="nav-link" data-scroll-target="#key-challenges-solved">Key Challenges Solved</a>
+  <ul class="collapse">
+  <li><a href="#duplicate-records-error-sd1152" id="toc-duplicate-records-error-sd1152" class="nav-link" data-scroll-target="#duplicate-records-error-sd1152">1. Duplicate Records Error (SD1152)</a></li>
+  <li><a href="#controlled-terminology-violations-360-errors" id="toc-controlled-terminology-violations-360-errors" class="nav-link" data-scroll-target="#controlled-terminology-violations-360-errors">2. Controlled Terminology Violations (360 errors)</a></li>
+  <li><a href="#cross-domain-data-completeness" id="toc-cross-domain-data-completeness" class="nav-link" data-scroll-target="#cross-domain-data-completeness">3. Cross-Domain Data Completeness</a></li>
+  </ul></li>
+  <li><a href="#technical-highlights" id="toc-technical-highlights" class="nav-link" data-scroll-target="#technical-highlights">Technical Highlights</a>
+  <ul class="collapse">
+  <li><a href="#sdtmig-v3.4-key-variables" id="toc-sdtmig-v3.4-key-variables" class="nav-link" data-scroll-target="#sdtmig-v3.4-key-variables">SDTMIG v3.4 Key Variables</a></li>
+  <li><a href="#cdisc-controlled-terminology" id="toc-cdisc-controlled-terminology" class="nav-link" data-scroll-target="#cdisc-controlled-terminology">CDISC Controlled Terminology</a></li>
+  </ul></li>
   <li><a href="#skills-demonstrated" id="toc-skills-demonstrated" class="nav-link" data-scroll-target="#skills-demonstrated">Skills Demonstrated</a></li>
   <li><a href="#deliverables" id="toc-deliverables" class="nav-link" data-scroll-target="#deliverables">Deliverables</a></li>
   <li><a href="#key-takeaways" id="toc-key-takeaways" class="nav-link" data-scroll-target="#key-takeaways">Key Takeaways</a></li>
   <li><a href="#remaining-issues" id="toc-remaining-issues" class="nav-link" data-scroll-target="#remaining-issues">Remaining Issues</a></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -199,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 5, 2025</p>
+      <p class="date">November 7, 2025</p>
     </div>
   </div>
   
@@ -217,14 +227,6 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="study-data-tabulation-model-sdtm-mapping-validation-project" class="level1">
-<h1>Study Data Tabulation Model (SDTM) Mapping &amp; Validation Project</h1>
-<div class="author-info-simple">
-<p><strong>AUTHOR</strong><br>
-Ousmane DIALLO, MPH-PhD</p>
-<p><strong>PUBLISHED</strong><br>
-August 30, 2025</p>
-</div>
 <p>End-to-end SDTM mapping project demonstrating expertise in clinical data standards. <strong>Resolved 446 validation errors (78% reduction)</strong> while creating 8 CDISC-compliant domains following SDTMIG v3.4 specifications.</p>
 <hr>
 <section id="executive-summary" class="level2">
@@ -483,7 +485,6 @@ Professional Context
 <hr>
 
 
-</section>
 </section>
 
 <p>Ousmane Diallo, MPH-PhD – Biostatistician &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->

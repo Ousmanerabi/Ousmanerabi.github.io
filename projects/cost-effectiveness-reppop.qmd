@@ -6,23 +6,8 @@ highlight-style: pygments
 page-layout: article
 format:
   html:
-    toc: true
-    toc-depth: 2
-    #theme: cosmo
-    html-math-method: katex
-    embed-resources: true
     css: ../assets/css/remove-keyword.css
 ---
-
-# Cost-Effectiveness of the REPPOP Pediatric Obesity Management Program
-
-::: author-info-simple
-**AUTHOR**\
-Ousmane DIALLO, MPH-PhD
-
-**PUBLISHED**\
-August 30, 2025
-:::
 
 ## Overview
 

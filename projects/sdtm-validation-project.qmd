@@ -17,25 +17,8 @@ highlight-style: pygments
 page-layout: article
 format:
   html:
-    toc: true
-    toc-depth: 2
-    #theme: cosmo
-    html-math-method: katex
-    code-fold: true
-    code-summary: "Show code"
-    #embed-resources: true
     css: ../assets/css/remove-keyword.css
 ---
-
-# Study Data Tabulation Model (SDTM) Mapping & Validation Project
-
-::: {.author-info-simple}
-**AUTHOR**  
-Ousmane DIALLO, MPH-PhD
-
-**PUBLISHED**  
-August 30, 2025
-:::
 
 End-to-end SDTM mapping project demonstrating expertise in clinical data standards. **Resolved 446 validation errors (78% reduction)** while creating 8 CDISC-compliant domains following SDTMIG v3.4 specifications.
 
