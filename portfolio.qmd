@@ -2,7 +2,7 @@
 title: "Portfolio"
 description: "Ousmane Diallo - Portfolio | Clinical Programming, HEOR, RWE & Machine Learning Projects"
 author: "Ousmane DIALLO"
-date: "2025-08-30"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 format:
   html:
     toc: true
