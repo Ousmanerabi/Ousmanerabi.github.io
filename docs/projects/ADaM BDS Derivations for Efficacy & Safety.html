@@ -7,8 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ousmane DIALLO">
-<meta name="dcterms.date" content="2025-08-30">
-<meta name="keywords" content="ADaM, ADSL, CDISC, SAS, clinical trials, biostatistics, regulatory">
+<meta name="keywords" content="biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence">
 <meta name="description" content="Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration">
 
 <title>Analysis Data Subject Level (ADSL) Generation with SAS – Ousmane Diallo, MPH-PhD</title>
@@ -23,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -72,7 +105,8 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/remove-keyword.css">
 <meta property="og:title" content="Analysis Data Subject Level (ADSL) Generation with SAS – Ousmane Diallo, MPH-PhD">
 <meta property="og:description" content="Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration">
 <meta property="og:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
@@ -104,6 +138,11 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../index.html"> <i class="bi bi-house-door-fill" role="img" aria-label="Home">
 </i> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> <i class="bi bi-file-earmark-text-fill" role="img">
+</i> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> <i class="bi bi-person-lines-fill" role="img" aria-label="About">
@@ -146,9 +185,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#analysis-data-subject-level-adsl-generation-with-sas" id="toc-analysis-data-subject-level-adsl-generation-with-sas" class="nav-link active" data-scroll-target="#analysis-data-subject-level-adsl-generation-with-sas">Analysis Data Subject Level (ADSL) Generation with SAS</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#what-is-adsl" id="toc-what-is-adsl" class="nav-link" data-scroll-target="#what-is-adsl">What is ADSL?</a></li>
   <li><a href="#regulatory-importance" id="toc-regulatory-importance" class="nav-link" data-scroll-target="#regulatory-importance">Regulatory Importance</a></li>
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a>
@@ -172,14 +209,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#combine-all-adsl-dataset" id="toc-combine-all-adsl-dataset" class="nav-link" data-scroll-target="#combine-all-adsl-dataset">6. Combine All ADSL Dataset</a></li>
   <li><a href="#quality-control-validation" id="toc-quality-control-validation" class="nav-link" data-scroll-target="#quality-control-validation">Quality Control &amp; Validation</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
-  </ul></li>
-  <li><a href="#business-impact" id="toc-business-impact" class="nav-link" data-scroll-target="#business-impact">Business Impact</a>
-  <ul class="collapse">
   <li><a href="#analytical-foundation" id="toc-analytical-foundation" class="nav-link" data-scroll-target="#analytical-foundation">Analytical Foundation</a></li>
   <li><a href="#technical-achievements" id="toc-technical-achievements" class="nav-link" data-scroll-target="#technical-achievements">Technical Achievements</a></li>
   </ul></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -189,7 +222,16 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Analysis Data Subject Level (ADSL) Generation with SAS</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">ADaM</div>
+    <div class="quarto-category">ADSL</div>
+    <div class="quarto-category">CDISC</div>
+    <div class="quarto-category">SAS</div>
+    <div class="quarto-category">clinical trials</div>
+    <div class="quarto-category">biostatistics</div>
+    <div class="quarto-category">regulatory</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
@@ -210,7 +252,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 30, 2025</p>
+      <p class="date">Invalid Date</p>
     </div>
   </div>
   
@@ -221,15 +263,13 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>ADaM, ADSL, CDISC, SAS, clinical trials, biostatistics, regulatory</p>
+    <p>biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence</p>
   </div>
 </div>
 
 </header>
 
 
-<section id="analysis-data-subject-level-adsl-generation-with-sas" class="level1">
-<h1>Analysis Data Subject Level (ADSL) Generation with SAS</h1>
 <p><em>Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration.</em></p>
 <p><a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/03_ADAM">View Code on Github</a></p>
 <section id="introduction" class="level2">
@@ -284,7 +324,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="data-integration-strategy">Data Integration Strategy</h2>
 <section id="sdtm-source-domains" class="level3">
 <h3 class="anchored" data-anchor-id="sdtm-source-domains">SDTM Source Domains</h3>
-<table class="caption-top table">
+<table class="table-striped table-hover caption-top table">
 <thead>
 <tr class="header">
 <th><strong>Domain</strong></th>
@@ -323,7 +363,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="adam-variables-to-derive" class="level3">
 <h3 class="anchored" data-anchor-id="adam-variables-to-derive">ADaM Variables to Derive</h3>
-<table class="caption-top table">
+<table class="table-striped table-hover caption-top table">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
@@ -370,305 +410,315 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="technical-implementation">Technical Implementation</h2>
 <section id="library-setup" class="level3">
 <h3 class="anchored" data-anchor-id="library-setup">1. Library Setup</h3>
-<pre><code>/* Library and macro setup */
-%include "/home/u64197545/ADaM/programs/setup.sas";
-
-/* Expected libraries:
-   - SDTM: Source SDTM datasets
-   - ADAM: Output ADaM datasets  
-   - LIBRARY: Formats and macros
-*/
-
-libname sdtm "/home/u64197545/data/sdtm";
-libname adam "/home/u64197545/data/adam";
-libname library "/home/u64197545/data/library";
-
-/* Load standard ADaM formats */
-%include library(adamfmt);</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Library and macro setup */</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">%include "/home/u64197545/ADaM/programs/setup.sas";</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in">/* Expected libraries:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in">   - SDTM: Source SDTM datasets</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in">   - ADAM: Output ADaM datasets  </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">   - LIBRARY: Formats and macros</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="in">*/</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="in">libname sdtm "/home/u64197545/data/sdtm";</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="in">libname adam "/home/u64197545/data/adam";</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="in">libname library "/home/u64197545/data/library";</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="in">/* Load standard ADaM formats */</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="in">%include library(adamfmt);</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="population-definition-logic" class="level3">
 <h3 class="anchored" data-anchor-id="population-definition-logic">2. Population Definition Logic</h3>
-<pre><code>/* Define analysis populations based on business rules */
-%macro define_populations();
-    
-    /* Safety Population: Any exposure to study drug */
-    proc sql;
-        create table safety_pop as
-        select distinct usubjid, 'Y' as saffl
-        from sdtm.ex
-        where exdose &gt; 0 and exstdtc ne '';
-    quit;
-    
-    /* ITT Population: Randomized subjects */
-    proc sql;
-        create table itt_pop as
-        select distinct usubjid, 'Y' as ittfl
-        from sdtm.dm
-        where arm ne '' and upcase(arm) not in ('SCREEN FAILURE', 'NOT TREATED');
-    quit;
-    
-    /* Completed Population: Finished study per protocol */
-    proc sql;
-        create table completed_pop as
-        select distinct usubjid, 'Y' as complfl
-        from sdtm.ds
-        where upcase(dsdecod) in ('COMPLETED', 'STUDY COMPLETED')
-          and dscat = 'DISPOSITION EVENT';
-    quit;
-
-%mend define_populations;
-
-%define_populations();</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Define analysis populations based on business rules */</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">%macro define_populations();</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Safety Population: Any exposure to study drug */</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in">    proc sql;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">        create table safety_pop as</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">        select distinct usubjid, 'Y' as saffl</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">        from sdtm.ex</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="in">        where exdose &gt; 0 and exstdtc ne '';</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">    quit;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">    /* ITT Population: Randomized subjects */</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="in">    proc sql;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="in">        create table itt_pop as</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="in">        select distinct usubjid, 'Y' as ittfl</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">        from sdtm.dm</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="in">        where arm ne '' and upcase(arm) not in ('SCREEN FAILURE', 'NOT TREATED');</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="in">    quit;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Completed Population: Finished study per protocol */</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="in">    proc sql;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">        create table completed_pop as</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="in">        select distinct usubjid, 'Y' as complfl</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="in">        from sdtm.ds</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="in">        where upcase(dsdecod) in ('COMPLETED', 'STUDY COMPLETED')</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="in">          and dscat = 'DISPOSITION EVENT';</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="in">    quit;</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="in">%mend define_populations;</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="in">%define_populations();</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="treatment-period-derivation" class="level3">
 <h3 class="anchored" data-anchor-id="treatment-period-derivation">3. Treatment Period Derivation</h3>
-<pre class="sas"><code>/* Calculate treatment start and end dates */
-proc sql;
-    create table treatment_period as
-    select usubjid,
-           min(exstdtc) as first_dose_dt format=yymmdd10.,
-           max(case when exendtc ne '' then exendtc else exstdtc end) as last_dose_dt format=yymmdd10.,
-           sum(case when exdose &gt; 0 then 1 else 0 end) as exposure_days
-    from sdtm.ex
-    where exstdtc ne ''
-    group by usubjid;
-quit;
-
-/* Derive analysis treatment dates */
-data treatment_analysis;
-    set treatment_period;
-    
-    /* Treatment start/end dates for analysis */
-    trtsdt = first_dose_dt;
-    trtedt = last_dose_dt;
-    
-    /* Treatment duration */
-    if trtsdt ne . and trtedt ne . then
-        trtdurd = trtedt - trtsdt + 1;
-    
-    format trtsdt trtedt yymmdd10.;
-run;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">``` {sas}</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Calculate treatment start and end dates */</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">    create table treatment_period as</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="in">    select usubjid,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="in">           min(exstdtc) as first_dose_dt format=yymmdd10.,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="in">           max(case when exendtc ne '' then exendtc else exstdtc end) as last_dose_dt format=yymmdd10.,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">           sum(case when exdose &gt; 0 then 1 else 0 end) as exposure_days</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="in">    from sdtm.ex</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="in">    where exstdtc ne ''</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="in">    group by usubjid;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="in">/* Derive analysis treatment dates */</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="in">data treatment_analysis;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="in">    set treatment_period;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Treatment start/end dates for analysis */</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="in">    trtsdt = first_dose_dt;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="in">    trtedt = last_dose_dt;</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Treatment duration */</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="in">    if trtsdt ne . and trtedt ne . then</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="in">        trtdurd = trtedt - trtsdt + 1;</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="in">    format trtsdt trtedt yymmdd10.;</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="study-disposition-integration" class="level3">
 <h3 class="anchored" data-anchor-id="study-disposition-integration">4. Study Disposition Integration</h3>
-<pre><code>/* Get key disposition dates and reasons */
-proc sql;
-    create table disposition as
-    select usubjid,
-           case 
-               when upcase(dsdecod) = 'INFORMED CONSENT' then dsstdtc
-           end as rficdt format=yymmdd10.,
-           case 
-               when upcase(dsdecod) in ('COMPLETED', 'DISCONTINUED') then dsstdtc
-           end as rfendt format=yymmdd10.,
-           case 
-               when upcase(dsdecod) = 'DISCONTINUED' then dsterm
-           end as dcsreas
-    from sdtm.ds
-    where dscat = 'DISPOSITION EVENT' and dsstdtc ne '';
-quit;
-
-/* Consolidate to one record per subject */
-proc sql;
-    create table disposition_final as
-    select usubjid,
-           max(rficdt) as rficdt format=yymmdd10.,
-           max(rfendt) as rfendt format=yymmdd10.,
-           max(dcsreas) as dcsreas
-    from disposition
-    group by usubjid;
-quit;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Get key disposition dates and reasons */</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">    create table disposition as</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">    select usubjid,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="in">           case </span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="in">               when upcase(dsdecod) = 'INFORMED CONSENT' then dsstdtc</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="in">           end as rficdt format=yymmdd10.,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="in">           case </span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="in">               when upcase(dsdecod) in ('COMPLETED', 'DISCONTINUED') then dsstdtc</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="in">           end as rfendt format=yymmdd10.,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="in">           case </span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="in">               when upcase(dsdecod) = 'DISCONTINUED' then dsterm</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="in">           end as dcsreas</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="in">    from sdtm.ds</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="in">    where dscat = 'DISPOSITION EVENT' and dsstdtc ne '';</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="in">/* Consolidate to one record per subject */</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="in">    create table disposition_final as</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="in">    select usubjid,</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="in">           max(rficdt) as rficdt format=yymmdd10.,</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="in">           max(rfendt) as rfendt format=yymmdd10.,</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">           max(dcsreas) as dcsreas</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="in">    from disposition</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="in">    group by usubjid;</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="last-alive-date-calculation" class="level3">
 <h3 class="anchored" data-anchor-id="last-alive-date-calculation">5. Last Alive Date Calculation</h3>
-<pre><code>/* Calculate last known alive date from multiple sources */
-proc sql;
-    create table last_alive as
-    select usubjid,
-           max(aestdtc) as last_ae_dt format=yymmdd10.
-    from sdtm.ae
-    where aestdtc ne ''
-    group by usubjid;
-quit;
-
-data last_alive_calc;
-    merge treatment_analysis
-          disposition_final  
-          last_alive;
-    by usubjid;
-    
-    /* Last alive date = latest of multiple sources */
-    lstalvdt = max(trtedt, rfendt, last_ae_dt);
-    format lstalvdt yymmdd10.;
-run;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Calculate last known alive date from multiple sources */</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">    create table last_alive as</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">    select usubjid,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="in">           max(aestdtc) as last_ae_dt format=yymmdd10.</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="in">    from sdtm.ae</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="in">    where aestdtc ne ''</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="in">    group by usubjid;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="in">data last_alive_calc;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="in">    merge treatment_analysis</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="in">          disposition_final  </span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="in">          last_alive;</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="in">    by usubjid;</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Last alive date = latest of multiple sources */</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="in">    lstalvdt = max(trtedt, rfendt, last_ae_dt);</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="in">    format lstalvdt yymmdd10.;</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="combine-all-adsl-dataset" class="level3">
 <h3 class="anchored" data-anchor-id="combine-all-adsl-dataset">6. Combine All ADSL Dataset</h3>
-<pre><code>/* Merge all components to create ADSL */
-proc sql;
-    create table pre_adsl as
-    select dm.*,
-           sp.saffl,
-           itt.ittfl, 
-           cp.complfl,
-           ta.trtsdt,
-           ta.trtedt,
-           ta.trtdurd,
-           lac.lstalvdt,
-           disp.rficdt,
-           disp.rfendt,
-           disp.dcsreas
-    from sdtm.dm as dm
-    left join safety_pop as sp on dm.usubjid = sp.usubjid
-    left join itt_pop as itt on dm.usubjid = itt.usubjid  
-    left join completed_pop as cp on dm.usubjid = cp.usubjid
-    left join treatment_analysis as ta on dm.usubjid = ta.usubjid
-    left join last_alive_calc as lac on dm.usubjid = lac.usubjid
-    left join disposition_final as disp on dm.usubjid = disp.usubjid;
-quit;
-
-/* Apply ADaM standards and derive final variables */
-data adam.adsl;
-    set pre_adsl;
-    
-    /* Required ADaM variables */
-    studyid = upcase(studyid);
-    
-    /* Population flags - default to 'N' if missing */
-    if saffl = '' then saffl = 'N';
-    if ittfl = '' then ittfl = 'N'; 
-    if complfl = '' then complfl = 'N';
-    
-    /* Treatment variables */
-    trt01p = strip(arm);        /* Planned treatment */
-    trt01pn = input(armcd, best.); /* Planned treatment (N) */
-    trt01a = strip(actarm);     /* Actual treatment */
-    trt01an = input(actarmcd, best.); /* Actual treatment (N) */
-    
-    /* Age groupings for analysis */
-    if age ne . then do;
-        if age &lt; 65 then agegr1 = '&lt;65';
-        else if age &gt;= 65 then agegr1 = '&gt;=65';
-        
-        if age &lt; 18 then agegr1n = 1;
-        else if 18 &lt;= age &lt; 65 then agegr1n = 2;
-        else if age &gt;= 65 then agegr1n = 3;
-    end;
-    
-    /* Race groupings */
-    if upcase(race) = 'WHITE' then racen = 1;
-    else if upcase(race) = 'BLACK OR AFRICAN AMERICAN' then racen = 2;
-    else if upcase(race) = 'ASIAN' then racen = 3;
-    else racen = 4;
-    
-    /* Sex numeric */
-    if upcase(sex) = 'M' then sexn = 1;
-    else if upcase(sex) = 'F' then sexn = 2;
-    
-    /* Study day calculations */
-    if trtsdt ne . and rfstdtc ne '' then
-        trtsdt = input(rfstdtc, yymmdd10.);
-    
-    if trtedt ne . and rfendtc ne '' then
-        trtedt = input(rfendtc, yymmdd10.);
-    
-    /* Format assignments */
-    format trtsdt trtedt lstalvdt rficdt rfendt yymmdd10.;
-    
-    /* Variable labels */
-    label studyid = 'Study Identifier'
-          usubjid = 'Unique Subject Identifier'
-          subjid = 'Subject Identifier for the Study'
-          siteid = 'Study Site Identifier'
-          age = 'Age'
-          agegr1 = 'Pooled Age Group 1'
-          agegr1n = 'Pooled Age Group 1 (N)'
-          sex = 'Sex'
-          sexn = 'Sex (N)'
-          race = 'Race'
-          racen = 'Race (N)'
-          saffl = 'Safety Population Flag'
-          ittfl = 'Intent-To-Treat Population Flag'
-          complfl = 'Completers Population Flag'
-          trt01p = 'Planned Treatment for Period 01'
-          trt01pn = 'Planned Treatment for Period 01 (N)'
-          trt01a = 'Actual Treatment for Period 01'
-          trt01an = 'Actual Treatment for Period 01 (N)'
-          trtsdt = 'Date of First Exposure to Treatment'
-          trtedt = 'Date of Last Exposure to Treatment'
-          trtdurd = 'Total Treatment Duration (Days)'
-          lstalvdt = 'Last Known Alive Date'
-          dcsreas = 'Reason for Discontinuation from Study';
-run;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Merge all components to create ADSL */</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">    create table pre_adsl as</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">    select dm.*,</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="in">           sp.saffl,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="in">           itt.ittfl, </span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="in">           cp.complfl,</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="in">           ta.trtsdt,</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="in">           ta.trtedt,</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="in">           ta.trtdurd,</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="in">           lac.lstalvdt,</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="in">           disp.rficdt,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="in">           disp.rfendt,</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="in">           disp.dcsreas</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="in">    from sdtm.dm as dm</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="in">    left join safety_pop as sp on dm.usubjid = sp.usubjid</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">    left join itt_pop as itt on dm.usubjid = itt.usubjid  </span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="in">    left join completed_pop as cp on dm.usubjid = cp.usubjid</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="in">    left join treatment_analysis as ta on dm.usubjid = ta.usubjid</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="in">    left join last_alive_calc as lac on dm.usubjid = lac.usubjid</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="in">    left join disposition_final as disp on dm.usubjid = disp.usubjid;</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">/* Apply ADaM standards and derive final variables */</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="in">data adam.adsl;</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">    set pre_adsl;</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Required ADaM variables */</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="in">    studyid = upcase(studyid);</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Population flags - default to 'N' if missing */</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="in">    if saffl = '' then saffl = 'N';</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">    if ittfl = '' then ittfl = 'N'; </span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="in">    if complfl = '' then complfl = 'N';</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Treatment variables */</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="in">    trt01p = strip(arm);        /* Planned treatment */</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="in">    trt01pn = input(armcd, best.); /* Planned treatment (N) */</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="in">    trt01a = strip(actarm);     /* Actual treatment */</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="in">    trt01an = input(actarmcd, best.); /* Actual treatment (N) */</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Age groupings for analysis */</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="in">    if age ne . then do;</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a><span class="in">        if age &lt; 65 then agegr1 = '&lt;65';</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="in">        else if age &gt;= 65 then agegr1 = '&gt;=65';</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="in">        </span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="in">        if age &lt; 18 then agegr1n = 1;</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="in">        else if 18 &lt;= age &lt; 65 then agegr1n = 2;</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="in">        else if age &gt;= 65 then agegr1n = 3;</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a><span class="in">    end;</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Race groupings */</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="in">    if upcase(race) = 'WHITE' then racen = 1;</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="in">    else if upcase(race) = 'BLACK OR AFRICAN AMERICAN' then racen = 2;</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a><span class="in">    else if upcase(race) = 'ASIAN' then racen = 3;</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in">    else racen = 4;</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Sex numeric */</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="in">    if upcase(sex) = 'M' then sexn = 1;</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a><span class="in">    else if upcase(sex) = 'F' then sexn = 2;</span></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Study day calculations */</span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="in">    if trtsdt ne . and rfstdtc ne '' then</span></span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a><span class="in">        trtsdt = input(rfstdtc, yymmdd10.);</span></span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="in">    if trtedt ne . and rfendtc ne '' then</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a><span class="in">        trtedt = input(rfendtc, yymmdd10.);</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Format assignments */</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a><span class="in">    format trtsdt trtedt lstalvdt rficdt rfendt yymmdd10.;</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Variable labels */</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a><span class="in">    label studyid = 'Study Identifier'</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a><span class="in">          usubjid = 'Unique Subject Identifier'</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a><span class="in">          subjid = 'Subject Identifier for the Study'</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a><span class="in">          siteid = 'Study Site Identifier'</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a><span class="in">          age = 'Age'</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a><span class="in">          agegr1 = 'Pooled Age Group 1'</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a><span class="in">          agegr1n = 'Pooled Age Group 1 (N)'</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a><span class="in">          sex = 'Sex'</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a><span class="in">          sexn = 'Sex (N)'</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a><span class="in">          race = 'Race'</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a><span class="in">          racen = 'Race (N)'</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a><span class="in">          saffl = 'Safety Population Flag'</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a><span class="in">          ittfl = 'Intent-To-Treat Population Flag'</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a><span class="in">          complfl = 'Completers Population Flag'</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a><span class="in">          trt01p = 'Planned Treatment for Period 01'</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a><span class="in">          trt01pn = 'Planned Treatment for Period 01 (N)'</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a><span class="in">          trt01a = 'Actual Treatment for Period 01'</span></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a><span class="in">          trt01an = 'Actual Treatment for Period 01 (N)'</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a><span class="in">          trtsdt = 'Date of First Exposure to Treatment'</span></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a><span class="in">          trtedt = 'Date of Last Exposure to Treatment'</span></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a><span class="in">          trtdurd = 'Total Treatment Duration (Days)'</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a><span class="in">          lstalvdt = 'Last Known Alive Date'</span></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a><span class="in">          dcsreas = 'Reason for Discontinuation from Study';</span></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="quality-control-validation" class="level3">
 <h3 class="anchored" data-anchor-id="quality-control-validation">Quality Control &amp; Validation</h3>
 <section id="population-reconciliation" class="level4">
 <h4 class="anchored" data-anchor-id="population-reconciliation">1. Population Reconciliation</h4>
-<pre><code>/* Verify population counts */
-proc freq data=adam.adsl;
-    title "Analysis Population Counts";
-    tables saffl ittfl complfl / missing;
-run;
-
-/* Cross-tabulation of populations */
-proc freq data=adam.adsl;
-    title "Population Overlap Analysis";
-    tables saffl*ittfl*complfl / missing list;
-run;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Verify population counts */</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc freq data=adam.adsl;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="in">    title "Analysis Population Counts";</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">    tables saffl ittfl complfl / missing;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="in">/* Cross-tabulation of populations */</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="in">proc freq data=adam.adsl;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="in">    title "Population Overlap Analysis";</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="in">    tables saffl*ittfl*complfl / missing list;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="treatment-assigment-validation" class="level4">
 <h4 class="anchored" data-anchor-id="treatment-assigment-validation">2. Treatment Assigment Validation</h4>
-<pre class="sas"><code>/* Planned vs Actual treatment comparison */
-proc freq data=adam.adsl;
-    title "Planned vs Actual Treatment";
-    tables trt01p*trt01a / missing list;
-run;
-
-/* Treatment duration summary */
-proc means data=adam.adsl n mean std min max;
-    title "Treatment Duration Summary";
-    var trtdurd;
-    class trt01p;
-run;</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">``` {sas}</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Planned vs Actual treatment comparison */</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc freq data=adam.adsl;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="in">    title "Planned vs Actual Treatment";</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="in">    tables trt01p*trt01a / missing list;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="in">/* Treatment duration summary */</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="in">proc means data=adam.adsl n mean std min max;</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="in">    title "Treatment Duration Summary";</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="in">    var trtdurd;</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="in">    class trt01p;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="data-integrity-checks" class="level4">
 <h4 class="anchored" data-anchor-id="data-integrity-checks">3. Data Integrity Checks</h4>
-<pre class="sas"><code>/* Check for missing key variables */
-proc sql;
-    title "Missing Key Variables Check";
-    select 
-        sum(case when usubjid = '' then 1 else 0 end) as missing_usubjid,
-        sum(case when studyid = '' then 1 else 0 end) as missing_studyid,
-        sum(case when saffl = '' then 1 else 0 end) as missing_saffl,
-        sum(case when ittfl = '' then 1 else 0 end) as missing_ittfl
-    from adam.adsl;
-quit;
-
-/* Validate date logic */
-proc sql;
-    title "Date Logic Validation";
-    select usubjid, trtsdt, trtedt, trtdurd
-    from adam.adsl
-    where trtsdt &gt; trtedt or (trtsdt ne . and trtedt ne . and trtdurd ne (trtedt-trtsdt+1));
-quit;</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Check for missing key variables */</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="in">    title "Missing Key Variables Check";</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="in">    select </span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="in">        sum(case when usubjid = '' then 1 else 0 end) as missing_usubjid,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="in">        sum(case when studyid = '' then 1 else 0 end) as missing_studyid,</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="in">        sum(case when saffl = '' then 1 else 0 end) as missing_saffl,</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="in">        sum(case when ittfl = '' then 1 else 0 end) as missing_ittfl</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="in">    from adam.adsl;</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="in">/* Validate date logic */</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a><span class="in">    title "Date Logic Validation";</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="in">    select usubjid, trtsdt, trtedt, trtdurd</span></span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a><span class="in">    from adam.adsl</span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="in">    where trtsdt &gt; trtedt or (trtsdt ne . and trtedt ne . and trtdurd ne (trtedt-trtsdt+1));</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="cross-domain-consistency" class="level4">
 <h4 class="anchored" data-anchor-id="cross-domain-consistency">4. Cross-Domain Consistency</h4>
-<pre class="sas"><code>/* Compare ADSL counts with SDTM DM */
-proc sql;
-    title "Subject Count Reconciliation";
-    select 'SDTM.DM' as dataset, count(*) as n_subjects from sdtm.dm
-    union
-    select 'ADAM.ADSL' as dataset, count(*) as n_subjects from adam.adsl;
-quit;</code></pre>
+<div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Compare ADSL counts with SDTM DM */</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="in">    title "Subject Count Reconciliation";</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="in">    select 'SDTM.DM' as dataset, count(*) as n_subjects from sdtm.dm</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="in">    union</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="in">    select 'ADAM.ADSL' as dataset, count(*) as n_subjects from adam.adsl;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="results" class="level3">
 <h3 class="anchored" data-anchor-id="results">Results</h3>
 <section id="sample-output" class="level4">
 <h4 class="anchored" data-anchor-id="sample-output"><strong>Sample output</strong>:</h4>
-<table class="caption-top table">
+<table class="table-striped table-hover caption-top table">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 12%">
@@ -722,6 +772,7 @@ quit;</code></pre>
 <section id="dataset-specifications" class="level4">
 <h4 class="anchored" data-anchor-id="dataset-specifications">Dataset Specifications</h4>
 <table class="caption-top table">
+<caption>{.striped .hover} ## Business Impact</caption>
 <thead>
 <tr class="header">
 <th><strong>Aspect</strong></th>
@@ -757,9 +808,6 @@ quit;</code></pre>
 </table>
 </section>
 </section>
-</section>
-<section id="business-impact" class="level2">
-<h2 class="anchored" data-anchor-id="business-impact">Business Impact</h2>
 <section id="analytical-foundation" class="level3">
 <h3 class="anchored" data-anchor-id="analytical-foundation">Analytical Foundation</h3>
 <ul>
@@ -786,9 +834,8 @@ quit;</code></pre>
 
 
 </section>
-</section>
 
-<p>Ousmane Diallo, MPH-PhD – Biostatistician &amp; Epidemiologist based in [votre localisation]. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<p>Ousmane Diallo, MPH-PhD – Biostatistician &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -881,7 +928,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/ousmanediallo\.com\/");
+      var filterRegex = new RegExp("https:\/\/ousmanediallo\.com");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

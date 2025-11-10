@@ -2,15 +2,12 @@
 title: "Analysis Data Subject Level (ADSL) Generation with SAS"
 description: "Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration"
 author: "Ousmane DIALLO"
-date: "2025-08-30"
-keywords: "ADaM, ADSL, CDISC, SAS, clinical trials, biostatistics, regulatory"
+date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+categories: [ADaM, ADSL, CDISC, SAS, clinical trials, biostatistics, regulatory]
 format:
   html:
-    toc: true
-    code-fold: true
+    css: ../assets/css/remove-keyword.css
 ---
-
-# Analysis Data Subject Level (ADSL) Generation with SAS
 
 *Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration.*
 
@@ -84,21 +81,26 @@ SDTM (DM+DS+EX+AE) → Business Logic → Population Flags → Treatment Periods
 | **AE**     | Adverse events          | AESTDTC, AETERM, AESEV       |
 | **VS**     | Vital signs (if needed) | VSSTDTC, VSTEST, VSORRES     |
 
+: {.striped .hover}
+
 ### ADaM Variables to Derive
 
 | **Variable Class** | **Examples** | **Source Logic** |
-|----|----|----|
+|------------------------|------------------------|------------------------|
 | **Required ADaM** | STUDYID, USUBJID, SUBJID | Direct from DM |
 | **Population Flags** | SAFFL, ITTFL, COMPLFL | Business rules from DS/EX |
 | **Treatment** | TRT01P, TRT01A, TRT01PN | From DM.ARM + actual exposure |
 | **Timing** | TRTSDT, TRTEDT, LSTALVDT | From EX + DS disposition |
 | **Demographics** | AGE, AGEGR1, SEX, RACE | Enhanced from DM |
 
+: {.striped .hover}
+
 ## Technical Implementation
 
 ### 1. Library Setup
 
-```         
+```markdown
+```{sas}         
 /* Library and macro setup */
 %include "/home/u64197545/ADaM/programs/setup.sas";
 
@@ -118,7 +120,8 @@ libname library "/home/u64197545/data/library";
 
 ### 2. Population Definition Logic
 
-```         
+```markdown
+```{sas}         
 /* Define analysis populations based on business rules */
 %macro define_populations();
     
@@ -154,7 +157,8 @@ libname library "/home/u64197545/data/library";
 
 ### 3. Treatment Period Derivation
 
-``` sas
+```markdown
+``` {sas}
 /* Calculate treatment start and end dates */
 proc sql;
     create table treatment_period as
@@ -185,7 +189,8 @@ run;
 
 ### 4. Study Disposition Integration
 
-```         
+```markdown
+```{sas}         
 /* Get key disposition dates and reasons */
 proc sql;
     create table disposition as
@@ -217,7 +222,8 @@ quit;
 
 ### 5. Last Alive Date Calculation
 
-```         
+```markdown
+```{sas}         
 /* Calculate last known alive date from multiple sources */
 proc sql;
     create table last_alive as
@@ -242,7 +248,8 @@ run;
 
 ### 6. Combine All ADSL Dataset
 
-```         
+```markdown
+```{sas}         
 /* Merge all components to create ADSL */
 proc sql;
     create table pre_adsl as
@@ -345,7 +352,8 @@ run;
 
 #### 1. Population Reconciliation
 
-```         
+```markdown
+```{sas}         
 /* Verify population counts */
 proc freq data=adam.adsl;
     title "Analysis Population Counts";
@@ -361,7 +369,8 @@ run;
 
 #### 2. Treatment Assigment Validation
 
-``` sas
+```markdown
+``` {sas}
 /* Planned vs Actual treatment comparison */
 proc freq data=adam.adsl;
     title "Planned vs Actual Treatment";
@@ -378,7 +387,8 @@ run;
 
 #### 3. Data Integrity Checks
 
-``` sas
+```markdown
+```{sas}
 /* Check for missing key variables */
 proc sql;
     title "Missing Key Variables Check";
@@ -401,7 +411,8 @@ quit;
 
 #### 4. Cross-Domain Consistency
 
-``` sas
+```markdown
+```{sas}
 /* Compare ADSL counts with SDTM DM */
 proc sql;
     title "Subject Count Reconciliation";
@@ -420,6 +431,8 @@ quit;
 | 001-001 | XYZ123  | Placebo | Y     | Y     | 2023-01-15 | 2023-03-15 | 45  | M   |
 | 001-002 | XYZ123  | Active  | Y     | Y     | 2023-01-16 | 2023-03-14 | 52  | F   |
 
+: {.striped .hover}
+
 #### Dataset Specifications
 
 | **Aspect**       | **Specification**               |
@@ -431,6 +444,7 @@ quit;
 | **Populations**  | Safety, ITT, Completers defined |
 | **Standards**    | ADaM IG v1.3 compliant          |
 
+: {.striped .hover}
 ## Business Impact
 
 ### Analytical Foundation

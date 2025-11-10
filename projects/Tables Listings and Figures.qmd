@@ -5,12 +5,10 @@ author: "Ousmane DIALLO"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 categories: [TLFs clinical tables, ADaM, SAS, regulatory submissions, biostatistics]
 page-layout: article
-#title-block-banner: true
 format:
  html:
   css: ../assets/css/remove-keyword.css
 ---
-
 
 ------------------------------------------------------------------------
 

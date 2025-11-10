@@ -7,8 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ousmane DIALLO">
-<meta name="dcterms.date" content="2025-08-30">
-<meta name="keywords" content="SDTM, CDISC, SAS, clinical data, biostatistics, portfolio">
+<meta name="keywords" content="biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence">
 <meta name="description" content="Automation of SDTM-Demographics (DM)/SUPP creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.">
 
 <title>Study Data Tabulation Model (SDTM) Automation with SAS – Ousmane Diallo, MPH-PhD</title>
@@ -23,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,6 +106,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/remove-keyword.css">
 <meta property="og:title" content="Study Data Tabulation Model (SDTM) Automation with SAS – Ousmane Diallo, MPH-PhD">
 <meta property="og:description" content="Automation of SDTM-Demographics (DM)/SUPP creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.">
 <meta property="og:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
@@ -104,6 +138,11 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../index.html"> <i class="bi bi-house-door-fill" role="img" aria-label="Home">
 </i> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> <i class="bi bi-file-earmark-text-fill" role="img">
+</i> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> <i class="bi bi-person-lines-fill" role="img" aria-label="About">
@@ -146,9 +185,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sdtm-demographics-dm-automation-with-sas" id="toc-sdtm-demographics-dm-automation-with-sas" class="nav-link active" data-scroll-target="#sdtm-demographics-dm-automation-with-sas">SDTM-Demographics (DM) Automation with SAS</a>
-  <ul class="collapse">
-  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#what-is-sdtm" id="toc-what-is-sdtm" class="nav-link" data-scroll-target="#what-is-sdtm">What is SDTM?</a></li>
   <li><a href="#project-overview" id="toc-project-overview" class="nav-link" data-scroll-target="#project-overview">Project Overview</a>
   <ul class="collapse">
@@ -171,7 +208,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#technical-impact" id="toc-technical-impact" class="nav-link" data-scroll-target="#technical-impact">Technical Impact</a></li>
   </ul></li>
   <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -181,7 +217,15 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">Study Data Tabulation Model (SDTM) Automation with SAS</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">SDTM</div>
+    <div class="quarto-category">CDISC</div>
+    <div class="quarto-category">SAS</div>
+    <div class="quarto-category">clinical data</div>
+    <div class="quarto-category">biostatistics</div>
+    <div class="quarto-category">portfolio</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
@@ -202,7 +246,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 30, 2025</p>
+      <p class="date">Invalid Date</p>
     </div>
   </div>
   
@@ -213,15 +257,13 @@ ul.task-list li input[type="checkbox"] {
 <div>
   <div class="keywords">
     <div class="block-title">Keywords</div>
-    <p>SDTM, CDISC, SAS, clinical data, biostatistics, portfolio</p>
+    <p>biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence</p>
   </div>
 </div>
 
 </header>
 
 
-<section id="sdtm-demographics-dm-automation-with-sas" class="level1">
-<h1>SDTM-Demographics (DM) Automation with SAS</h1>
 <p><em>Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.</em></p>
 <p><a href="https://github.com/Ousmanerabi/clinical-trials-programming-portfolio/tree/main/02_SDTM">View Code on Github</a></p>
 <section id="introduction" class="level2">
@@ -290,81 +332,83 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="technical-implementation">Technical Implementation</h2>
 <section id="library-setup" class="level3">
 <h3 class="anchored" data-anchor-id="library-setup">1. Library Setup</h3>
-<pre><code>/* Common paths &amp; librefs */
-%include "/home/u64197545/CDISC/appendix/common.sas";
-/* expects:
- libname source "/home/u64197545/CDISC/data";
- libname library "/home/u64197545/CDISC/formats";
- libname target "/home/u64197545/CDISC/sdtm";
-*/</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Common paths &amp; librefs */</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="in">%include "/home/u64197545/CDISC/appendix/common.sas";</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="in">/* expects:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="in"> libname source "/home/u64197545/CDISC/data";</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="in"> libname library "/home/u64197545/CDISC/formats";</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="in"> libname target "/home/u64197545/CDISC/sdtm";</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="in">*/</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="create-empty-dm-from-metadata" class="level3">
 <h3 class="anchored" data-anchor-id="create-empty-dm-from-metadata">2. Create EMPTY DM from Metadata</h3>
 <p>The <code>make_empty_dataset</code> macro creates dataset templates with proper CDISC attributes:</p>
-<pre><code>/* Create empty based on metadata CSV */
-%macro make_empty_dataset(metadatafile=, dataset=);
-/* Import csv file and rename it _temp */
-    proc import datafile="&amp;metadatafile" out=_temp dbms=csv replace;
-        guessingrows=max;
-        delimiter=";";
-        encoding='utf-8';
-    run;
-
-    /* Sort the dataset by expected specified variable order (varnum) */
-    proc sort data=_temp;
-        where domain="&amp;dataset";
-        by varnum;
-    run;
-
-    /* Create keepstring macro variable and load metadata information into macro variables */
-    %global &amp;dataset.KEEPSTRING;
-
-    data _null_;
-        set _temp nobs=nobs end=eof;
-        if _n_=1 then
-            call symput("vars", compress(put(nobs, 3.)));
-        call symputx('var'    || compress(put(_n_, 3.)), variable);
-        call symputx('label'  || compress(put(_n_, 3.)), label);
-        call symputx('length' || compress(put(_n_, 3.)), put(length, 3.));
-        /* Valid ODM types include TEXT, INTEGER, FLOAT, DATETIME, DATE, TIME and map to SAS numeric or character */
-        if upcase(type) in ("INTEGER", "FLOAT") then
-            call symputx('type' || compress(put(_n_, 3.)), "");
-        else if upcase(type) in ("TEXT", "DATE", "DATETIME", "TIME") then
-            call symputx('type' || compress(put(_n_, 3.)), "$");
-        else
-            put "ERR" "OR: not using a valid ODM type.  " type=;
-        /* Create KEEPSTRING macro variable */
-        length keepstring $ 32767;
-        retain keepstring;
-        keepstring=compress(keepstring) || "|" || left(variable);
-        if eof then
-            call symputx(upcase(compress("&amp;dataset" || 'KEEPSTRING')), 
-                left(trim(translate(keepstring, " ", "|"))));
-    run;
-
-    /* Create a 0-observation template data set used for assigning variable attributes */
-    data EMPTY_&amp;dataset;
-        %do i=1 %to &amp;vars;
-            attrib &amp;&amp;var&amp;i label="&amp;&amp;label&amp;i" 
-            %if "&amp;&amp;length&amp;i" ne "" %then
-                length=&amp;&amp;type&amp;i.&amp;&amp;length&amp;i...;
-            ;
-            %if &amp;&amp;type&amp;i=$ %then
-                retain &amp;&amp;var&amp;i '';
-            %else
-                retain &amp;&amp;var&amp;i .;
-            ;
-        %end;
-        if 0;
-    run;
-%mend make_empty_dataset;
-
-/* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Create empty based on metadata CSV */</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="in">%macro make_empty_dataset(metadatafile=, dataset=);</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="in">/* Import csv file and rename it _temp */</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="in">    proc import datafile="&amp;metadatafile" out=_temp dbms=csv replace;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="in">        guessingrows=max;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="in">        delimiter=";";</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="in">        encoding='utf-8';</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="in">    run;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Sort the dataset by expected specified variable order (varnum) */</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="in">    proc sort data=_temp;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="in">        where domain="&amp;dataset";</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="in">        by varnum;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="in">    run;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Create keepstring macro variable and load metadata information into macro variables */</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="in">    %global &amp;dataset.KEEPSTRING;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="in">    data _null_;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="in">        set _temp nobs=nobs end=eof;</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="in">        if _n_=1 then</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="in">            call symput("vars", compress(put(nobs, 3.)));</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="in">        call symputx('var'    || compress(put(_n_, 3.)), variable);</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="in">        call symputx('label'  || compress(put(_n_, 3.)), label);</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="in">        call symputx('length' || compress(put(_n_, 3.)), put(length, 3.));</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a><span class="in">        /* Valid ODM types include TEXT, INTEGER, FLOAT, DATETIME, DATE, TIME and map to SAS numeric or character */</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="in">        if upcase(type) in ("INTEGER", "FLOAT") then</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a><span class="in">            call symputx('type' || compress(put(_n_, 3.)), "");</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="in">        else if upcase(type) in ("TEXT", "DATE", "DATETIME", "TIME") then</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a><span class="in">            call symputx('type' || compress(put(_n_, 3.)), "$");</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a><span class="in">        else</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="in">            put "ERR" "OR: not using a valid ODM type.  " type=;</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a><span class="in">        /* Create KEEPSTRING macro variable */</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a><span class="in">        length keepstring $ 32767;</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a><span class="in">        retain keepstring;</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="in">        keepstring=compress(keepstring) || "|" || left(variable);</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a><span class="in">        if eof then</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a><span class="in">            call symputx(upcase(compress("&amp;dataset" || 'KEEPSTRING')), </span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a><span class="in">                left(trim(translate(keepstring, " ", "|"))));</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a><span class="in">    run;</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a><span class="in">    /* Create a 0-observation template data set used for assigning variable attributes */</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a><span class="in">    data EMPTY_&amp;dataset;</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a><span class="in">        %do i=1 %to &amp;vars;</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a><span class="in">            attrib &amp;&amp;var&amp;i label="&amp;&amp;label&amp;i" </span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a><span class="in">            %if "&amp;&amp;length&amp;i" ne "" %then</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a><span class="in">                length=&amp;&amp;type&amp;i.&amp;&amp;length&amp;i...;</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a><span class="in">            ;</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a><span class="in">            %if &amp;&amp;type&amp;i=$ %then</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="in">                retain &amp;&amp;var&amp;i '';</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a><span class="in">            %else</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a><span class="in">                retain &amp;&amp;var&amp;i .;</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a><span class="in">            ;</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a><span class="in">        %end;</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="in">        if 0;</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="in">    run;</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="in">%mend make_empty_dataset;</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="in">/* Result: WORK.EMPTY_DM with 0 obs, all expected variables/attributes */</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="stdm-variable-mapping" class="level3">
 <h3 class="anchored" data-anchor-id="stdm-variable-mapping">3. STDM Variable Mapping</h3>
 <p>SDTM DM variables are classified according to CDISC standards (SDTMIG v3.4):</p>
-<table class="caption-top table">
+<table class="table-striped table-hover caption-top table">
 <colgroup>
 <col style="width: 33%">
 <col style="width: 33%">
@@ -403,138 +447,143 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="controlled-terminology" class="level3">
 <h3 class="anchored" data-anchor-id="controlled-terminology">4. Controlled Terminology</h3>
-<pre><code>/* Creating custom format for the variables sex, race, arm, and armcd */
-
-proc format;
-    value sex 1='M' 2='F' .='U';
-    value race 1='White' 2='Black or African American' 3='Asian';
-    value armcd 0='PLACEBO' 1='ALG123';
-    value arm 0='Placebo' 1='Analgezia HCL 30mg';
-run;</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Creating custom format for the variables sex, race, arm, and armcd */</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">proc format;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="in">    value sex 1='M' 2='F' .='U';</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="in">    value race 1='White' 2='Black or African American' 3='Asian';</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="in">    value armcd 0='PLACEBO' 1='ALG123';</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="in">    value arm 0='Placebo' 1='Analgezia HCL 30mg';</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="reference-date-derivation" class="level3">
 <h3 class="anchored" data-anchor-id="reference-date-derivation">5. Reference Date Derivation</h3>
 <p>Calculate first and last dosing dates for study reference timing:</p>
-<pre><code>/* Derive first/last dose per subject (RFSTDTC/RFENDTC) */
-proc sort 
-  data=source.dosing(keep=subject startdt enddt) 
-  out=dosing;
-   by subject startdt;
-run;
-
-data dosing;
-  set dosing; 
-    by subject;
-    retain firstdose lastdose;
-  if first.subject then 
-    do; 
-       firstdose=.; 
-       lastdose=.; 
-    end;
-  firstdose = min(firstdose, startdt, enddt);
-  lastdose  = max(lastdose , startdt, enddt);
-  if last.subject;
-run;</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Derive first/last dose per subject (RFSTDTC/RFENDTC) */</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sort </span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="in">  data=source.dosing(keep=subject startdt enddt) </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">  out=dosing;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="in">   by subject startdt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="in">data dosing;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="in">  set dosing; </span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="in">    by subject;</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="in">    retain firstdose lastdose;</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="in">  if first.subject then </span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="in">    do; </span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="in">       firstdose=.; </span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="in">       lastdose=.; </span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="in">    end;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="in">  firstdose = min(firstdose, startdt, enddt);</span></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="in">  lastdose  = max(lastdose , startdt, enddt);</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="in">  if last.subject;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="combine-all-data" class="level3">
 <h3 class="anchored" data-anchor-id="combine-all-data">6. Combine All Data</h3>
-<pre><code>/* Get demographics data */
-proc sort
-  data=source.demographic
-  out=demographic;
-    by subject;
-run;
-
-/* Merge demographics and first dose date */
-data demog_dose;
-  merge demographic
-        dosing;
-    by subject;
-run;
-
-/* Derive the majority of SDTM DM variables */
-options missing = ' ';
-data dm;
-  set EMPTY_DM
-    demog_dose(rename=(race=_race));
-    studyid = 'XYZ123';
-    domain = 'DM';
-    usubjid = left(uniqueid);
-    subjid = put(subject,3.); 
-    rfstdtc = put(firstdose,yymmdd10.);  
-    rfendtc = put(lastdose,yymmdd10.); 
-    rfxstdtc = put(firstdose,yymmdd10.);  
-    rfxendtc = put(lastdose,yymmdd10.);
-    rficdtc = put(icdate,yymmdd10.);
-    rfpendtc = put(lastdoc,yymmdd10.);
-    dthfl = 'N';
-    siteid = substr(subjid,1,1) || "00";
-    brthdtc = put(dob,yymmdd10.);
-    age = floor ((intck('month',dob,firstdose) - 
-          (day(firstdose) &lt; day(dob))) / 12);
-    if age ne . then
-      ageu = 'YEARS';
-    sex = put(gender,sex.);
-    race = put(_race,race.);
-    armcd = put(trt,armcd.);
-    arm = put(trt,arm.);
-    actarmcd = put(trt,armcd.);
-    actarm = put(trt,arm.);
-    country = "USA"; 
-run;</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Get demographics data */</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sort</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="in">  data=source.demographic</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="in">  out=demographic;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="in">    by subject;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="in">/* Merge demographics and first dose date */</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="in">data demog_dose;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="in">  merge demographic</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="in">        dosing;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="in">    by subject;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="in">/* Derive the majority of SDTM DM variables */</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="in">options missing = ' ';</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="in">data dm;</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="in">  set EMPTY_DM</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="in">    demog_dose(rename=(race=_race));</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="in">    studyid = 'XYZ123';</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="in">    domain = 'DM';</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="in">    usubjid = left(uniqueid);</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="in">    subjid = put(subject,3.); </span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a><span class="in">    rfstdtc = put(firstdose,yymmdd10.);  </span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="in">    rfendtc = put(lastdose,yymmdd10.); </span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a><span class="in">    rfxstdtc = put(firstdose,yymmdd10.);  </span></span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a><span class="in">    rfxendtc = put(lastdose,yymmdd10.);</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a><span class="in">    rficdtc = put(icdate,yymmdd10.);</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="in">    rfpendtc = put(lastdoc,yymmdd10.);</span></span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a><span class="in">    dthfl = 'N';</span></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="in">    siteid = substr(subjid,1,1) || "00";</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="in">    brthdtc = put(dob,yymmdd10.);</span></span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a><span class="in">    age = floor ((intck('month',dob,firstdose) - </span></span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="in">          (day(firstdose) &lt; day(dob))) / 12);</span></span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a><span class="in">    if age ne . then</span></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="in">      ageu = 'YEARS';</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="in">    sex = put(gender,sex.);</span></span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="in">    race = put(_race,race.);</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a><span class="in">    armcd = put(trt,armcd.);</span></span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="in">    arm = put(trt,arm.);</span></span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a><span class="in">    actarmcd = put(trt,armcd.);</span></span>
+<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a><span class="in">    actarm = put(trt,arm.);</span></span>
+<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a><span class="in">    country = "USA"; </span></span>
+<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="dataset-finalization" class="level3">
 <h3 class="anchored" data-anchor-id="dataset-finalization">7. Dataset Finalization</h3>
-<pre><code>/* Create sorting specification from metadata */
-
-%macro make_sort_order(metadatafile=, dataset=);
-    proc import datafile="&amp;metadatafile" out=_temp dbms=csv replace;
-        guessingrows=max;
-        delimiter=";";
-        encoding='utf-8';
-    run;
-
-    proc sort data=_temp;
-        where keysequence ne . and domain="&amp;dataset";
-        by keysequence;
-    run;
-
-    %global &amp;dataset.SORTSTRING;
-    data _null_;
-        set _temp end=eof;
-        length domainkeys $ 200;
-        retain domainkeys '';
-        domainkeys=trim(domainkeys) || ' ' || trim(put(variable, 8.));
-        if eof then
-            call symputx(compress("&amp;dataset" || "SORTSTRING"), domainkeys);
-    run;
-%mend make_sort_order;
-
-/* Apply metadata-driven sorting and create final dataset */
-
-%make_sort_order(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);
-proc sort
-  data=dm(keep = &amp;DMKEEPSTRING)
-  out=target.dm;
-    by &amp;DMSORTSTRING;
-run;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* Create sorting specification from metadata */</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">%macro make_sort_order(metadatafile=, dataset=);</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="in">    proc import datafile="&amp;metadatafile" out=_temp dbms=csv replace;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="in">        guessingrows=max;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="in">        delimiter=";";</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="in">        encoding='utf-8';</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="in">    run;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="in">    proc sort data=_temp;</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="in">        where keysequence ne . and domain="&amp;dataset";</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="in">        by keysequence;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="in">    run;</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="in">    %global &amp;dataset.SORTSTRING;</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="in">    data _null_;</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">        set _temp end=eof;</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="in">        length domainkeys $ 200;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="in">        retain domainkeys '';</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="in">        domainkeys=trim(domainkeys) || ' ' || trim(put(variable, 8.));</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="in">        if eof then</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="in">            call symputx(compress("&amp;dataset" || "SORTSTRING"), domainkeys);</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="in">    run;</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="in">%mend make_sort_order;</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="in">/* Apply metadata-driven sorting and create final dataset */</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="in">%make_sort_order(metadatafile=/home/u64197545/CDISC/Chap2/SDTM_METADATA1.csv,dataset=DM);</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="in">proc sort</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="in">  data=dm(keep = &amp;DMKEEPSTRING)</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="in">  out=target.dm;</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="in">    by &amp;DMSORTSTRING;</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="quality-control-validation" class="level3">
 <h3 class="anchored" data-anchor-id="quality-control-validation">Quality Control &amp; Validation</h3>
 <section id="automated-qc-checks" class="level4">
 <h4 class="anchored" data-anchor-id="automated-qc-checks">Automated QC Checks</h4>
-<pre><code>/* 1 record per USUBJID? */
-proc sql;
-  select usubjid, count(*) as n
-  from target.dm
-  group by usubjid
-  having calculated n &gt; 1;
-quit;
-
-/* Required fields not missing? */
-proc freq data=target.dm;
-  tables studyid*usubjid*domain / missing list;
-run;</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{sas}         </span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="in">/* 1 record per USUBJID? */</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="in">proc sql;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="in">  select usubjid, count(*) as n</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="in">  from target.dm</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="in">  group by usubjid</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="in">  having calculated n &gt; 1;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="in">quit;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="in">/* Required fields not missing? */</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="in">proc freq data=target.dm;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="in">  tables studyid*usubjid*domain / missing list;</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="in">run;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="validation-framework" class="level4">
 <h4 class="anchored" data-anchor-id="validation-framework">Validation Framework</h4>
@@ -551,7 +600,7 @@ run;</code></pre>
 <h3 class="anchored" data-anchor-id="results">Results</h3>
 <section id="sample-output" class="level4">
 <h4 class="anchored" data-anchor-id="sample-output"><strong>Sample output</strong>:</h4>
-<table class="caption-top table">
+<table class="table-striped table-hover caption-top table">
 <thead>
 <tr class="header">
 <th>USUBJID</th>
@@ -612,7 +661,6 @@ run;</code></pre>
 <p><a href="ousmanerabi12@gmail.com"><strong>Send an Email</strong></a> | <a href="www.linkedin.com/in/ousmane-diallo8"><strong>LinkedIn</strong></a></p>
 
 
-</section>
 </section>
 
 <p>Ousmane Diallo, MPH-PhD – Biostatistician &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
