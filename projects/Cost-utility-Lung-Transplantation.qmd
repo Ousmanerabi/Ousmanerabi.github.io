@@ -1,5 +1,6 @@
 ---
 title: "Lung Transplantation: Parametric Weibull Survival Model and Cost-Utility Evaluation"
+description: "HEOR case study using a Weibull survival model and cost-utility framework based on a synthetic lung transplant cohort."
 author: "Ousmane O. Diallo"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 highlight-style: pygments

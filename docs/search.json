@@ -95,7 +95,7 @@
     "href": "projects/cdisc-sdtm.html",
     "title": "Study Data Tabulation Model (SDTM) Automation with SAS",
     "section": "",
-    "text": "Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.\nView Code on Github\nOusmane Diallo, MPH-PhD – Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "Automation of SDTM-Demographics (DM) creation in SAS for CDISC-compliant clinical data using a metadata-driven approach.\nView Code on Github\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/cdisc-sdtm.html#overview",
@@ -284,7 +284,7 @@
     "href": "portfolio.html",
     "title": "Portfolio",
     "section": "",
-    "text": "Important\n\n\n\n\nA showcase of clinical research, RWE, and health analytics projects developed using SAS, R, and Python — bridging statistical rigor and regulatory science.\nWelcome to my professional portfolio.\nHere you’ll find a curated selection of projects illustrating my experience across:\nEach section links to detailed pages containing methodology, R/SAS code, and interpretation of results.\nOusmane Diallo, MPH-PhD – Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "A curated showcase of clinical research, real-world evidence (RWE), and health analytics projects developed using\nSAS, R, and Python — bridging statistical rigor, reproducibility, and regulatory science.\n\n\n\n\nClinical Trials Programming (CDISC, SAS)\nHealth Economics & Outcomes Research (HEOR)\nReal-World Evidence (RWE) Analytics\nMachine Learning & Advanced Statistical Modeling\nGeospatial Epidemiology\n\nExplore each section for methodology, R/SAS code, and key results.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "portfolio.html#thematic-areas",
@@ -823,7 +823,7 @@
     "href": "projects/ADaM BDS Derivations for Efficacy & Safety.html",
     "title": "Analysis Data Subject Level (ADSL) Generation with SAS",
     "section": "",
-    "text": "Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration.\nView Code on Github\nOusmane Diallo, MPH-PhD – Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "Automated creation of ADSL dataset for clinical trials analysis using ADaM standards and multi-domain SDTM integration.\nView Code on Github\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/ADaM BDS Derivations for Efficacy & Safety.html#introduction",
@@ -991,7 +991,7 @@
     "href": "projects/Tables Listings and Figures.html",
     "title": "Tables, Listings, and Figures (TLF) for Clinical Study Reports",
     "section": "",
-    "text": "Automated generation of FDA/EMA-compliant tables, listings, and figures from ADaM datasets using SAS for regulatory submissions.\nView Code on Github\nOusmane Diallo, MPH-PhD – Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "Automated generation of FDA/EMA-compliant tables, listings, and figures from ADaM datasets using SAS for regulatory submissions.\nView Code on Github\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/Tables Listings and Figures.html#introduction",
@@ -1187,7 +1187,7 @@
     "href": "projects/sdtm-validation-project.html",
     "title": "Study Data Tabulation Model (SDTM) Mapping & Validation Project",
     "section": "",
-    "text": "End-to-end SDTM mapping project demonstrating expertise in clinical data standards. Resolved 446 validation errors (78% reduction) while creating 8 CDISC-compliant domains following SDTMIG v3.4 specifications.\nOusmane Diallo, MPH-PhD – Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "End-to-end SDTM mapping project demonstrating expertise in clinical data standards. Resolved 446 validation errors (78% reduction) while creating 8 CDISC-compliant domains following SDTMIG v3.4 specifications.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/sdtm-validation-project.html#executive-summary",
@@ -1313,7 +1313,7 @@
     "href": "projects/cost-effectiveness-reppop.html",
     "title": "Cost-Effectiveness of the REPPOP Pediatric Obesity Management Program",
     "section": "",
-    "text": "In the Aquitaine region of France, as part of the Nutrition, Prevention, and Child Health Program—the regional extension of the National Nutrition and Health Program (PNNS) for children and adolescents—a harmonized screening and management approach for pediatric overweight and obesity was developed.\nThis initiative led to the creation of the REPPOP network (Réseau de Prévention et de Prise en charge de l’Obésité Pédiatrique), an integrated and multidisciplinary care system operating in the Gironde area.\nThe REPPOP network connects community physicians, hospital practitioners, and public health professionals (including school doctors, nurses, and maternal and child health services) with a central coordination team. Children enrolled in REPPOP receive a two-year multidisciplinary follow-up, including regular medical visits and, when appropriate, nutritional and psychological counseling.\nAt admission, two inclusion consultations are conducted by the referring REPPOP physician:\n\nInclusion visit 1: to exclude organic causes of obesity and detect complications.\nInclusion visit 2: to establish an educational and behavioral management plan.\n\nThe attending physician and family then define personalized, realistic objectives for the child and determine the most suitable care pathway.\nDespite the broad implementation of this coordinated approach, no formal economic evaluation of the REPPOP program had been performed. The objective of this study was therefore to assess the cost-effectiveness of the REPPOP pediatric obesity management strategy compared with no intervention.\nOusmane Diallo, MPH-PhD – Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "In the Aquitaine region of France, as part of the Nutrition, Prevention, and Child Health Program—the regional extension of the National Nutrition and Health Program (PNNS) for children and adolescents—a harmonized screening and management approach for pediatric overweight and obesity was developed.\nThis initiative led to the creation of the REPPOP network (Réseau de Prévention et de Prise en charge de l’Obésité Pédiatrique), an integrated and multidisciplinary care system operating in the Gironde area.\nThe REPPOP network connects community physicians, hospital practitioners, and public health professionals (including school doctors, nurses, and maternal and child health services) with a central coordination team. Children enrolled in REPPOP receive a two-year multidisciplinary follow-up, including regular medical visits and, when appropriate, nutritional and psychological counseling.\nAt admission, two inclusion consultations are conducted by the referring REPPOP physician:\n\nInclusion visit 1: to exclude organic causes of obesity and detect complications.\nInclusion visit 2: to establish an educational and behavioral management plan.\n\nThe attending physician and family then define personalized, realistic objectives for the child and determine the most suitable care pathway.\nDespite the broad implementation of this coordinated approach, no formal economic evaluation of the REPPOP program had been performed. The objective of this study was therefore to assess the cost-effectiveness of the REPPOP pediatric obesity management strategy compared with no intervention.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/cost-effectiveness-reppop.html#overview",
@@ -1362,7 +1362,7 @@
     "href": "projects/Cost-utility-Lung-Transplantation.html",
     "title": "Lung Transplantation: Parametric Weibull Survival Model and Cost-Utility Evaluation",
     "section": "",
-    "text": "Since the first heart–lung and lung transplants performed in France in the 1980s, over 3,700 procedures have been reported nationwide. The main indications for transplantation include cystic fibrosis, COPD, pulmonary fibrosis, and pulmonary arterial hypertension. Despite improved allocation systems and reduced waiting list mortality, long-term survival remains limited—approximately 70% at one year and below 50% at five years. While lung transplantation has proven effective in improving survival and quality of life, no cost-utility evaluation has been conducted in France. This projet therefore aims to assess the cost-effectiveness of lung and heart–lung transplantation compared with medical management.\nOusmane Diallo, MPH-PhD – Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "Since the first heart–lung and lung transplants performed in France in the 1980s, over 3,700 procedures have been reported nationwide. The main indications for transplantation include cystic fibrosis, COPD, pulmonary fibrosis, and pulmonary arterial hypertension. Despite improved allocation systems and reduced waiting list mortality, long-term survival remains limited—approximately 70% at one year and below 50% at five years. While lung transplantation has proven effective in improving survival and quality of life, no cost-utility evaluation has been conducted in France. This projet therefore aims to assess the cost-effectiveness of lung and heart–lung transplantation compared with medical management.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/Cost-utility-Lung-Transplantation.html#overview",
@@ -1423,9 +1423,9 @@
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html",
     "href": "projects/patient-level-risk-factors-analysis.html",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "",
-    "text": "Study Type: Retrospective longitudinal observational study\nRWD source: IeDA electronic consultation data from primary health centers (CSPS)\nPopulation: Children 2–60 months in IeDA districts (Burkina Faso, 2017, 2018, 2020)\nOutcome: Clinical malaria episode at consultation (yes/no)\nMethod: Generalized Estimating Equations (GEE, logit link, exchangeable correlation)\nObjective: Quantify the real-world association between demographic, nutritional, immunization, and infection-related factors and malaria risk under routine care conditions\nKey insight: Age, HIV status, distance to facility, prior malaria episodes and seasonality strongly shape malaria risk; vaccination and malnutrition show age-dependent effects.\nOusmane Diallo, MPH-PhD – Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "Study Type: Retrospective longitudinal observational study\nRWD source: IeDA electronic consultation data from primary health centers (CSPS)\nPopulation: Children 2–60 months in IeDA districts (Burkina Faso, 2017, 2018, 2020)\nOutcome: Clinical malaria episode at consultation (yes/no)\nMethod: Generalized Estimating Equations (GEE, logit link, exchangeable correlation)\nObjective: Quantify the real-world association between demographic, nutritional, immunization, and infection-related factors and malaria risk under routine care conditions\nKey insight: Age, HIV status, distance to facility, prior malaria episodes and seasonality strongly shape malaria risk; vaccination and malnutrition show age-dependent effects.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#quarto",
@@ -1444,56 +1444,56 @@
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#overview",
     "href": "projects/patient-level-risk-factors-analysis.html#overview",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "Overview",
     "text": "Overview\nReal-world data (RWD) from electronic decision-support systems can capture disease burden and risk factors under everyday programmatic conditions that randomized trials cannot represent.\nThis study leveraged the IeDA platform — a digital clinical tool used in Burkina Faso’s primary-care system — to generate real-world evidence (RWE) on malaria risk factors among children under five.\nThe analysis reframes academic results into an RWE-compliant framework aligned with ISPOR/EMA real-world study design principles."
   },
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#real-world-data-study-design",
     "href": "projects/patient-level-risk-factors-analysis.html#real-world-data-study-design",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "Real-World Data & Study Design",
     "text": "Real-World Data & Study Design\n\n\n\n\n\n\n\nAspect\nDescription\n\n\n\n\nData Source\nIeDA electronic consultations (CSPS facilities)\n\n\nGeographic Scope\nMultiple districts implementing IeDA\n\n\nStudy Period\n2017, 2018, 2020 (2019 excluded)\n\n\nStudy Population\nChildren aged 2–60 months with ≥ 1 consultation\n\n\nDesign\nRetrospective longitudinal cohort (repeated visits per child)\n\n\nUnit of Analysis\nConsultation record\n\n\nPerspective\nPopulation-averaged effects at patient-encounter level"
   },
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#analytical-framework",
     "href": "projects/patient-level-risk-factors-analysis.html#analytical-framework",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "Analytical Framework",
     "text": "Analytical Framework\nThe analysis used Generalized Estimating Equations (GEE) to model repeated malaria outcomes per child.\n\nRWE Methodology Highlights\n\nRWD Quality Controls: duplicate removal, harmonized identifiers, imputation of missing facility data, age-window validation.\nConfounding Mitigation: multivariable adjustment; sensitivity cohorts (4–60 mo and 6–60 mo)\nEffect Modification: age interactions tested for sex, nutrition, HIV, and vaccines.\nOutcome Reporting: adjusted odds ratios (aORs) with 95 % CIs; p &lt; 0.05 as significance threshold."
   },
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#insights",
     "href": "projects/patient-level-risk-factors-analysis.html#insights",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "Insights",
-    "text": "Insights\n\n\n\n\n\n\n\n\nDomain\nReal-World Finding\nInterpretation\n\n\n\n\nAge\nMalaria risk rises non-linearly with age (2 → 60 mo).\nLikely reflects increased exposure and partial immunity.\n\n\nSex\nGirls show slightly higher odds of malaria than boys.\nPossible behavioural and biological differences.\n\n\nNutrition\nModerate/global malnutrition linked with lower observed odds.\nMay reflect health-seeking or survivor bias in RWD.\n\n\nHIV Status\nHIV-positive children have 1.7–2.0× higher adjusted odds.\nAligns with prior longitudinal evidence.\n\n\nDistance to Facility\nRisk increases with travel distance (&gt; 10 km &gt; 4–10 km &gt; &lt; 4 km).\nIndicates access barriers in real-world settings.\n\n\nSeasonality\nFrom July–October, malaria probability ≈ 3× higher than in May.\nConfirms expected transmission peaks.\n\n\nVaccination\nBCG and other vaccines show protective trends but non-significant in adjusted model.\nReflects indirect benefits and data heterogeneity."
+    "text": "Insights\n\n\n\n\n\n\n\n\nDomain\nReal-World Finding\nInterpretation\n\n\n\n\nAge\nMalaria risk rises non-linearly with age (2 → 60 mo).\nLikely reflects increased exposure and partial immunity.\n\n\nSex\nGirls show slightly higher odds of malaria than boys.\nPossible behavioural and biological differences.\n\n\nNutrition\nModerate/global malnutrition linked with lower observed odds.\nMay reflect health-seeking or survivor bias in RWD.\n\n\nHIV Status\nHIV-positive children have 1.7–2.0× higher adjusted odds.\nAligns with prior longitudinal evidence.\n\n\nDistance to Facility\nRisk increases with travel distance (&gt; 10 km &gt; 4–10 km &gt; &lt; 4 km).\nIndicates access barriers in real-world settings.\n\n\nSeasonality\nFrom July–October, malaria probability ≈ 3× higher than in May.\nConfirms expected transmission peaks.\n\n\nVaccination\nBCG and other vaccines show protective trends but non-significant in adjusted model.\nReflects indirect benefits and data heterogeneity.\n\n\n\n\nForest plots (single multivariable GEE model)\nAll three forest plots below are derived from the same multivariable GEE model (population-averaged effects with an exchangeable correlation structure).\nFor visualization purposes, covariates are grouped into three panels:\n\nDemographic and clinical factors (age, sex, prior malaria, HIV, malnutrition)\n\nAccess and seasonality factors (distance to facility, month of visit, district)\n\nVaccination status (BCG, pentavalent, pneumococcal, rotavirus, polio)\n\n\n\n\n\n\n\n\n\nFig. A—Adjusted odds ratios for demographic and clinical factors (multivariable GEE, population-averaged).\n\n\n\n\n\n\n\nFig B—Adjusted odds ratios for distance to facility, month of visit, and district (multivariable GEE, population-averaged).\n\n\n\n\n\n\n\n\n\nFig C— Adjusted odds ratios for vaccination status (BCG, pentavalent, pneumococcal, rotavirus, polio) from the same multivariable GEE model.\n\n\n\n\n\n\nFigure 1\n\n\n\n\n\nAge-modified effects (interaction plots)\nTo reflect effect modification by age, we extended the main GEE model with interaction terms between age and selected risk factors (e.g. sex, malnutrition, HIV status, distance, and vaccination).\nThe plots below show predicted probabilities of a malaria episode across age for key subgroups, based on the fitted interaction model:\n\nAge × sex\n\nAge × malnutrition status\n\nAge × distance to nearest health facility\n\nAge × HIV status\n\nAge × BCG / pentavalent / pneumococcal / polio / rotavirus vaccination\n\n\n\n\n\n\n\n\n\nPredicted probability of clinical malaria by age and nutritional status.\n\n\n\n\n\n\n\nPredicted probability of clinical malaria by age and distance to facility.\n\n\n\n\n\n\n\n\n\nPredicted probability of clinical malaria by age and HIV status.\n\n\n\n\n\n\n\nPredicted probability of clinical malaria by age and vaccination status.\n\n\n\n\n\n\n\n\n\nPredicted probability of clinical malaria by age and sex .\n\n\n\n\n\n\nFigure 2"
   },
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#rwe-interpretation-and-impact",
     "href": "projects/patient-level-risk-factors-analysis.html#rwe-interpretation-and-impact",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "RWE Interpretation and Impact",
     "text": "RWE Interpretation and Impact\nClinical relevance: The study demonstrates how longitudinal RWD can uncover real-world risk gradients across demographic and programmatic factors in pediatric malaria.\nProgrammatic insight: Results support integrated malaria–nutrition–immunization strategies and highlight access inequities (distance to facility, HIV coinfection).\nMethodological contribution: Establishes a reproducible RWE pipeline using routine digital health data, showing that IeDA can serve as a valid RWD source for health-system performance and disease-risk monitoring."
   },
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#technical-skills-demonstrated",
     "href": "projects/patient-level-risk-factors-analysis.html#technical-skills-demonstrated",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "Technical Skills Demonstrated",
-    "text": "Technical Skills Demonstrated\n\nReal-World Data Management: large-scale data cleaning, QC, and cohort curation.\nStatistical Programming: longitudinal modelling with geepack, broom, gtsummary.\nEpidemiological Methods: GEE for correlated binary outcomes; effect-modification assessment.\nRWE Reporting: alignment with ISPOR/EMA/ICH E3 guidelines; real-world endpoint definition.\nReproducibility: fully scripted Quarto workflow and transparent code base."
+    "text": "Technical Skills Demonstrated\n\nReal-World Data Management: large-scale data cleaning, QC, and cohort curation.\nStatistical Programming: longitudinal modelling with geepack, broom, gtsummary.\nEpidemiological Methods: GEE for correlated binary outcomes; effect-modification assessment.\nRWE Reporting: alignment with ISPOR/EMA/ICH E3 guidelines; real-world endpoint definition.\nReproducibility: fully scripted Quarto workflow and transparent code base. :::"
   },
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#real-world-evidence-summary",
     "href": "projects/patient-level-risk-factors-analysis.html#real-world-evidence-summary",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "",
     "text": "Study Type: Retrospective longitudinal observational study\nRWD source: IeDA electronic consultation data from primary health centers (CSPS)\nPopulation: Children 2–60 months in IeDA districts (Burkina Faso, 2017, 2018, 2020)\nOutcome: Clinical malaria episode at consultation (yes/no)\nMethod: Generalized Estimating Equations (GEE, logit link, exchangeable correlation)\nObjective: Quantify the real-world association between demographic, nutritional, immunization, and infection-related factors and malaria risk under routine care conditions\nKey insight: Age, HIV status, distance to facility, prior malaria episodes and seasonality strongly shape malaria risk; vaccination and malnutrition show age-dependent effects."
   },
   {
     "objectID": "projects/patient-level-risk-factors-analysis.html#endpoint",
     "href": "projects/patient-level-risk-factors-analysis.html#endpoint",
-    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)",
+    "title": "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020).",
     "section": "Endpoint",
     "text": "Endpoint\n\n\n\n\n\n\nTip\n\n\n\n\nPrimary outcome: presence of a confirmed malaria episode at each consultation\n\nCovariates: age (+ age²), sex, malnutrition status, HIV status, vaccination completeness (BCG, pentavalent, pneumococcal, polio, rotavirus), prior malaria episode, month of visit (seasonality), distance to facility, district."
   },

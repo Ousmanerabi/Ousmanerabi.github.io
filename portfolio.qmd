@@ -3,6 +3,7 @@ title: "Portfolio"
 description: "Ousmane Diallo - Portfolio | Clinical Programming, HEOR, RWE & Machine Learning Projects"
 author: "Ousmane DIALLO"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+categories: [Real-world evidence, cost-utility, cost-effectiveness, health data science, cdisc,sdtm, adam, define.xml,R, SAS, machine learning]
 format:
   html:
     toc: true
@@ -11,22 +12,25 @@ highlight-style: pygments
 class: portfolio-page
 ---
 
-:::{.callout-important}
 
-> A showcase of clinical research, RWE, and health analytics projects developed using **SAS**, **R**, and **Python** — bridging statistical rigor and regulatory science.
+::: {.hero style="background:linear-gradient(90deg,#e9f2fb,#ffffff);padding:2rem 2rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.05);"}
+# Welcome to my professional portfolio
 
-:::
+A curated showcase of **clinical research**, **real-world evidence (RWE)**, and **health analytics** projects developed using  
+**SAS**, **R**, and **Python** — bridging *statistical rigor*, *reproducibility*, and *regulatory science*.
 
-Welcome to my professional portfolio.  
-Here you’ll find a curated selection of projects illustrating my experience across:
 
-- **Clinical Trials Programming (CDISC, SAS)**  
-- **Health Economics & Outcomes Research (HEOR)**  
-- **Real-World Evidence (RWE) Analytics**  
-- **Machine Learning & Advanced Statistical Modeling**  
+---
+
+### Areas of focus
+- **Clinical Trials Programming (CDISC, SAS)**
+- **Health Economics & Outcomes Research (HEOR)**
+- **Real-World Evidence (RWE) Analytics**
+- **Machine Learning & Advanced Statistical Modeling**
 - **Geospatial Epidemiology**
 
-Each section links to detailed pages containing methodology, R/SAS code, and interpretation of results.  
+Explore each section for methodology, R/SAS code, and key results.
+:::  
 
 <hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
 

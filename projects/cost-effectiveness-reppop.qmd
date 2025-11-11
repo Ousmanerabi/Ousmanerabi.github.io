@@ -1,7 +1,10 @@
 ---
 title: "Cost-Effectiveness of the REPPOP Pediatric Obesity Management Program"
+description: "Economic evaluation of a multidisciplinary pediatric obesity program in France using simulation modeling, cost-effectiveness analysis (ICER), and long-term efficiency estimation with discounted cost offsets."
 author: "Ousmane Diallo"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
+categories: [cost-effectiveness, ICER, linear regression, uncertainty analysis,
+efficiency, HEOR]
 highlight-style: pygments
 page-layout: article
 format:

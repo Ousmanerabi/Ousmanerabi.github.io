@@ -7,7 +7,7 @@ project:
 
 website:
   title: "Ousmane Diallo, MPH-PhD"
-  description: "Biostatistician & Epidemiologist specializing in health data analytics, statistical modeling, and clinical research."
+  description: "Biostatistician Data Scientist & Epidemiologist specializing in health data analytics, statistical modeling, and clinical research."
   site-url: "https://ousmanediallo.com"
   repo-url: "https://github.com/ousmanerabi/ousmanerabi.github.io"
   favicon: "images/favicon.jpg"  # Ajoutez un favicon si vous en avez un ; sinon, supprimez cette ligne
@@ -57,7 +57,7 @@ website:
     collapse: true  # Collapsible sur mobile
     toggle-position: right  # Bouton toggle à droite
   
-  body-footer: "Ousmane Diallo, MPH-PhD -- Biostatistician & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."  # Ajoutez une bio courte pour le footer du body
+  body-footer: "Ousmane Diallo, MPH-PhD -- Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."  # Ajoutez une bio courte pour le footer du body
   
   page-footer:
     background: light  # Garde le fond clair
@@ -104,9 +104,9 @@ execute:
   freeze: auto  # Évite de re-exécuter le code inchangé
 
 metadata:  # Métadonnées globales pour SEO
-  keywords: ["biostatistics", "epidemiology", "health data science", "SAS programming", "CDISC standards", "clinical trials", "real-world evidence"]
+  #keywords: ["biostatistics", "epidemiology", "health data science", "SAS programming", "CDISC standards", "clinical trials", "real-world evidence"]
   author: "Ousmane Diallo, MPH-PhD"
-  description: "Biostatistician & Epidemiologist specializing in health data analytics, statistical modeling, large-scale data management, and clinical research."
+  description: "Biostatistician, Data Scientist & Epidemiologist specializing in health data analytics, statistical modeling, large-scale data management, and clinical research."
   image: "images/bio-photo-2.jpg"
   lang: "en"  # Ou "fr" si le site est en français
   robots: "index, follow"  # Autorise l'indexation

@@ -6,4 +6,13 @@
   display: none !important;
 }
 
-
+<style>
+.callout-large p, 
+.callout-large li {
+  font-size: 1.1rem;   /* augmente la taille du texte */
+  line-height: 1.6;    /* améliore la lisibilité */
+}
+.callout.callout-note.callout-large {
+  padding: 1.2em 1.5em;  /* plus d’espace intérieur */
+}
+</style>

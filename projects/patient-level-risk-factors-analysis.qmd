@@ -1,6 +1,6 @@
 ---
-title: "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)"
-description: "Identify individual-level risk factors for clinical malaria among children aged 2–60 months using IeDA consultation data and Generalized Estimating Equations (GEE)"
+title: "Real-World Evidence on Malaria Risk Factors in Children Under Five — Burkina Faso (IeDA 2017–2020)."
+description: "Identify individual-level risk factors for clinical malaria among children aged 2–60 months using IeDA consultation data and Generalized Estimating Equations (GEE)."
 author: "Ousmane DIALLO"
 date: "`r format(Sys.Date(), '%Y-%m-%d')`"
 categories: [R, Epidemiology, Malaria, Child Health, GEE, IeDA, Outcome]
@@ -11,39 +11,37 @@ format:
   css: ../assets/css/remove-keyword.css
 ---
 
-## Real-World Evidence Summary 
+## Real-World Evidence Summary
+
 ::: {.callout-note appearance="simple"}
+-   **Study Type:** Retrospective longitudinal observational study
 
-- **Study Type:** Retrospective longitudinal observational study 
+-   **RWD source:** IeDA electronic consultation data from primary health centers (CSPS)
 
-- **RWD source:** IeDA electronic consultation data from primary health centers (CSPS) 
+-   **Population:** Children 2–60 months in IeDA districts (Burkina Faso, 2017, 2018, 2020)
 
-- **Population:** Children 2–60 months in IeDA districts (Burkina Faso, 2017, 2018, 2020)  
+-   **Outcome:** Clinical malaria episode at consultation (yes/no)
 
-- **Outcome:** Clinical malaria episode at consultation (yes/no)  
+-   **Method:** Generalized Estimating Equations (GEE, logit link, exchangeable correlation)
 
-- **Method:** Generalized Estimating Equations (GEE, logit link, exchangeable correlation)
+-   **Objective:** Quantify the real-world association between demographic, nutritional, immunization, and infection-related factors and malaria risk under routine care conditions
 
-- **Objective:** Quantify the real-world association between demographic, nutritional, immunization, and infection-related factors and malaria risk under routine care conditions
-
-- **Key insight:** Age, HIV status, distance to facility, prior malaria episodes and seasonality strongly shape malaria risk; vaccination and malnutrition show age-dependent effects.
-
+-   **Key insight:** Age, HIV status, distance to facility, prior malaria episodes and seasonality strongly shape malaria risk; vaccination and malnutrition show age-dependent effects.
 :::
-
 
 ## Overview
 
-Real-world data (RWD) from electronic decision-support systems can capture disease burden and risk factors under everyday programmatic conditions that randomized trials cannot represent.  
-This study leveraged the **IeDA** platform — a digital clinical tool used in Burkina Faso’s primary-care system — to generate **real-world evidence (RWE)** on malaria risk factors among children under five.  
+Real-world data (RWD) from electronic decision-support systems can capture disease burden and risk factors under everyday programmatic conditions that randomized trials cannot represent.\
+This study leveraged the **IeDA** platform — a digital clinical tool used in Burkina Faso’s primary-care system — to generate **real-world evidence (RWE)** on malaria risk factors among children under five.
 
 The analysis reframes academic results into an **RWE-compliant framework** aligned with ISPOR/EMA real-world study design principles.
 
----
+------------------------------------------------------------------------
 
 ## Real-World Data & Study Design
 
- Aspect | Description |
-|--------|--------------|
+| Aspect | Description |
+|---------------------------|---------------------------------------------|
 | **Data Source** | IeDA electronic consultations (CSPS facilities) |
 | **Geographic Scope** | Multiple districts implementing IeDA |
 | **Study Period** | 2017, 2018, 2020 (2019 excluded) |
@@ -52,15 +50,16 @@ The analysis reframes academic results into an **RWE-compliant framework** align
 | **Unit of Analysis** | Consultation record |
 | **Perspective** | Population-averaged effects at patient-encounter level |
 
+: {.striped .hover}
 
 ## Endpoint
-:::{.callout-tip}
 
-- **Primary outcome:** presence of a confirmed malaria episode at each consultation  
-- **Covariates:** age (+ age²), sex, malnutrition status, HIV status, vaccination completeness (BCG, pentavalent, pneumococcal, polio, rotavirus), prior malaria episode, month of visit (seasonality), distance to facility, district.
+::: callout-tip
+-   **Primary outcome:** presence of a confirmed malaria episode at each consultation\
+-   **Covariates:** age (+ age²), sex, malnutrition status, HIV status, vaccination completeness (BCG, pentavalent, pneumococcal, polio, rotavirus), prior malaria episode, month of visit (seasonality), distance to facility, district.
 :::
 
----
+------------------------------------------------------------------------
 
 ## Analytical Framework
 
@@ -68,50 +67,85 @@ The analysis used **Generalized Estimating Equations (GEE)** to model repeated m
 
 ### RWE Methodology Highlights
 
-- RWD Quality Controls: duplicate removal, harmonized identifiers, imputation of missing facility data, age-window validation.
+-   RWD Quality Controls: duplicate removal, harmonized identifiers, imputation of missing facility data, age-window validation.
 
-- Confounding Mitigation: multivariable adjustment; sensitivity cohorts (4–60 mo and 6–60 mo)
+-   Confounding Mitigation: multivariable adjustment; sensitivity cohorts (4–60 mo and 6–60 mo)
 
-- Effect Modification: age interactions tested for sex, nutrition, HIV, and vaccines.
+-   Effect Modification: age interactions tested for sex, nutrition, HIV, and vaccines.
 
-- Outcome Reporting: adjusted odds ratios (aORs) with 95 % CIs; p < 0.05 as significance threshold.
+-   Outcome Reporting: adjusted odds ratios (aORs) with 95 % CIs; p \< 0.05 as significance threshold.
 
 ## Insights
 
-| Domain                   | Real-World Finding                                                                   | Interpretation                                           |
-| ------------------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------- |
-| **Age**                  | Malaria risk rises non-linearly with age (2 → 60 mo).                                | Likely reflects increased exposure and partial immunity. |
-| **Sex**                  | Girls show slightly higher odds of malaria than boys.                                | Possible behavioural and biological differences.         |
-| **Nutrition**            | Moderate/global malnutrition linked with lower observed odds.                        | May reflect health-seeking or survivor bias in RWD.      |
-| **HIV Status**           | HIV-positive children have 1.7–2.0× higher adjusted odds.                            | Aligns with prior longitudinal evidence.                 |
-| **Distance to Facility** | Risk increases with travel distance (> 10 km > 4–10 km > < 4 km).                    | Indicates access barriers in real-world settings.        |
-| **Seasonality**          | From July–October, malaria probability ≈ 3× higher than in May.                      | Confirms expected transmission peaks.                    |
-| **Vaccination**          | BCG and other vaccines show protective trends but non-significant in adjusted model. | Reflects indirect benefits and data heterogeneity.       |
+| Domain | Real-World Finding | Interpretation |
+|-------------------|-------------------------------|----------------------|
+| **Age** | Malaria risk rises non-linearly with age (2 → 60 mo). | Likely reflects increased exposure and partial immunity. |
+| **Sex** | Girls show slightly higher odds of malaria than boys. | Possible behavioural and biological differences. |
+| **Nutrition** | Moderate/global malnutrition linked with lower observed odds. | May reflect health-seeking or survivor bias in RWD. |
+| **HIV Status** | HIV-positive children have 1.7–2.0× higher adjusted odds. | Aligns with prior longitudinal evidence. |
+| **Distance to Facility** | Risk increases with travel distance (\> 10 km \> 4–10 km \> \< 4 km). | Indicates access barriers in real-world settings. |
+| **Seasonality** | From July–October, malaria probability ≈ 3× higher than in May. | Confirms expected transmission peaks. |
+| **Vaccination** | BCG and other vaccines show protective trends but non-significant in adjusted model. | Reflects indirect benefits and data heterogeneity. |
 
 : {.striped .hover}
 
+### Forest plots (single multivariable GEE model)
+
+All three forest plots below are derived from the **same multivariable GEE model** (population-averaged effects with an exchangeable correlation structure).\
+For visualization purposes, covariates are grouped into three panels:
+
+1.  **Demographic and clinical factors** (age, sex, prior malaria, HIV, malnutrition)\
+2.  **Access and seasonality factors** (distance to facility, month of visit, district)\
+3.  **Vaccination status** (BCG, pentavalent, pneumococcal, rotavirus, polio)
+
+::: {#fig-odds-ratio layout-ncol="2"}
+![Fig. A—Adjusted odds ratios for demographic and clinical factors (multivariable GEE, population-averaged).](images/odds_multi_sex_prev.png){fig-align="left" width="90%"}
+
+![Fig B—Adjusted odds ratios for distance to facility, month of visit, and district (multivariable GEE, population-averaged).](images/odds_mult_distance_month.png){fig-align="center" width="90%"}
+
+![Fig C— Adjusted odds ratios for vaccination status (BCG, pentavalent, pneumococcal, rotavirus, polio) from the same multivariable GEE model.](images/vaccines.png){fig-align="right"}
+:::
+
+### Age-modified effects (interaction plots)
+
+To reflect **effect modification by age**, we extended the main GEE model with interaction terms between age and selected risk factors (e.g. sex, malnutrition, HIV status, distance, and vaccination).\
+The plots below show **predicted probabilities of a malaria episode across age** for key subgroups, based on the fitted interaction model:
+
+-   Age × sex\
+-   Age × malnutrition status\
+-   Age × distance to nearest health facility\
+-   Age × HIV status\
+-   Age × BCG / pentavalent / pneumococcal / polio / rotavirus vaccination
+
+::: {#fig-age-interactions layout-ncol="2"}
+
+![Predicted probability of clinical malaria by age and nutritional status.](images/interac_age_maln_anglais.png){fig-align="center" width="95%" height="350px"} 
+
+![Predicted probability of clinical malaria by age and distance to facility.](images/interaction_age_distance_anglais.png){fig-align="center" width="95%" height="350px"} 
+
+![Predicted probability of clinical malaria by age and HIV status.](images/intera_age_hiv_angl.png){fig-align="center" width="95%" height="350px"} 
+
+![Predicted probability of clinical malaria by age and vaccination status.](images/interac_age_vacc_anglais.png){fig-align="center" width="95%" height="350px"}
+
+![Predicted probability of clinical malaria by age and sex .](images/inter_age_sex_anglais.png){fig-align="center"} 
+:::
+
 ## RWE Interpretation and Impact
 
-Clinical relevance:
-The study demonstrates how longitudinal RWD can uncover real-world risk gradients across demographic and programmatic factors in pediatric malaria.
+**Clinical relevance**: The study demonstrates how longitudinal RWD can uncover real-world risk gradients across demographic and programmatic factors in pediatric malaria.
 
-Programmatic insight:
-Results support integrated malaria–nutrition–immunization strategies and highlight access inequities (distance to facility, HIV coinfection).
+**Programmatic insight**: Results support integrated malaria–nutrition–immunization strategies and highlight access inequities (distance to facility, HIV coinfection).
 
-Methodological contribution:
-Establishes a reproducible RWE pipeline using routine digital health data, showing that IeDA can serve as a valid RWD source for health-system performance and disease-risk monitoring.
-
+**Methodological contribution**: Establishes a reproducible RWE pipeline using routine digital health data, showing that IeDA can serve as a valid RWD source for health-system performance and disease-risk monitoring.
 
 ## Technical Skills Demonstrated
 
-- **Real-World Data Management**: large-scale data cleaning, QC, and cohort curation.
+-   **Real-World Data Management**: large-scale data cleaning, QC, and cohort curation.
 
-- **Statistical Programming**: longitudinal modelling with geepack, broom, gtsummary.
+-   **Statistical Programming**: longitudinal modelling with geepack, broom, gtsummary.
 
-- **Epidemiological Methods**: GEE for correlated binary outcomes; effect-modification assessment.
+-   **Epidemiological Methods**: GEE for correlated binary outcomes; effect-modification assessment.
 
-- **RWE Reporting**: alignment with ISPOR/EMA/ICH E3 guidelines; real-world endpoint definition.
+-   **RWE Reporting**: alignment with ISPOR/EMA/ICH E3 guidelines; real-world endpoint definition.
 
-- **Reproducibility**: fully scripted Quarto workflow and transparent code base.
-
-   
+-   **Reproducibility**: fully scripted Quarto workflow and transparent code base. :::
