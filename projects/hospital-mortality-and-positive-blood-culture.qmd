@@ -253,7 +253,7 @@ All analytical steps comply with the FAIR (Findable, Accessible, Interoperable, 
 
 **Analytical skills illustrated in this project:** 
 
--   Real-world data curation and cleaning (R, tidyverse).
+-   Real-world data curation and cleaning (R, tidyverse, dplyr, lubridate).
 
 -   Epidemiological study design and variable definition.
 

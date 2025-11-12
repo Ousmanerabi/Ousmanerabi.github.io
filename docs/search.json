@@ -1635,7 +1635,7 @@
     "href": "projects/hospital-mortality-and-positive-blood-culture.html#reproducibility-and-skills-demonstrated",
     "title": "Real-World Evidence Analysis: Impact of Antibacterial Resistance on In-Hospital Mortality",
     "section": "Reproducibility and Skills Demonstrated",
-    "text": "Reproducibility and Skills Demonstrated\nAnalytical skills illustrated in this project:\n\nReal-world data curation and cleaning (R, tidyverse).\nEpidemiological study design and variable definition.\nLogistic regression modeling of clinical outcomes.\nData visualization (R/ggplot2) and RWE storytelling.\nEthical and regulatory awareness in secondary data use."
+    "text": "Reproducibility and Skills Demonstrated\nAnalytical skills illustrated in this project:\n\nReal-world data curation and cleaning (R, tidyverse, dplyr, lubridate).\nEpidemiological study design and variable definition.\nLogistic regression modeling of clinical outcomes.\nData visualization (R/ggplot2) and RWE storytelling.\nEthical and regulatory awareness in secondary data use."
   },
   {
     "objectID": "projects/hospital-mortality-and-positive-blood-culture.html#section",
