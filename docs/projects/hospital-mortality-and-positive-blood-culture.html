@@ -6,11 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ousmane O. Diallo">
-<meta name="keywords" content="biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence">
-<meta name="description" content="Biostatistician &amp; Epidemiologist specializing in health data analytics, statistical modeling, large-scale data management, and clinical research.">
+<meta name="author" content="Ousmane Diallo, MPH, PhD">
+<meta name="description" content="Retrospective Multi-Hospital Study (AP-HM, Marseille, 2014–2018) — Educational Reimplementation">
 
-<title>Real-World Impact of Antibacterial Resistance on Mortality in Marseille – Ousmane Diallo, MPH-PhD</title>
+<title>Real-World Evidence Analysis: Impact of Antibacterial Resistance on In-Hospital Mortality – Ousmane Diallo, MPH-PhD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -73,12 +72,12 @@ ul.task-list li input[type="checkbox"] {
 
 <link rel="stylesheet" href="../assets/css/styles.css">
 <link rel="stylesheet" href="../assets/css/remove-keyword.css">
-<meta property="og:title" content="Real-World Impact of Antibacterial Resistance on Mortality in Marseille – Ousmane Diallo, MPH-PhD">
-<meta property="og:description" content="Biostatistician &amp; Epidemiologist specializing in health data analytics, statistical modeling, large-scale data management, and clinical research.">
+<meta property="og:title" content="Real-World Evidence Analysis: Impact of Antibacterial Resistance on In-Hospital Mortality – Ousmane Diallo, MPH-PhD">
+<meta property="og:description" content="Retrospective Multi-Hospital Study (AP-HM, Marseille, 2014–2018) — Educational Reimplementation">
 <meta property="og:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
 <meta property="og:site_name" content="Ousmane Diallo, MPH-PhD">
-<meta name="twitter:title" content="Real-World Impact of Antibacterial Resistance on Mortality in Marseille – Ousmane Diallo, MPH-PhD">
-<meta name="twitter:description" content="Biostatistician &amp; Epidemiologist specializing in health data analytics, statistical modeling, large-scale data management, and clinical research.">
+<meta name="twitter:title" content="Real-World Evidence Analysis: Impact of Antibacterial Resistance on In-Hospital Mortality – Ousmane Diallo, MPH-PhD">
+<meta name="twitter:description" content="Retrospective Multi-Hospital Study (AP-HM, Marseille, 2014–2018) — Educational Reimplementation">
 <meta name="twitter:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -104,6 +103,11 @@ ul.task-list li input[type="checkbox"] {
     <a class="nav-link" href="../index.html"> <i class="bi bi-house-door-fill" role="img" aria-label="Home">
 </i> 
 <span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> <i class="bi bi-file-earmark-text-fill" role="img">
+</i> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../about.html"> <i class="bi bi-person-lines-fill" role="img" aria-label="About">
@@ -141,21 +145,44 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#research-question" id="toc-research-question" class="nav-link" data-scroll-target="#research-question">Research Question</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study Design</a></li>
+  <li><a href="#setting" id="toc-setting" class="nav-link" data-scroll-target="#setting">Setting</a></li>
+  <li><a href="#population-variables" id="toc-population-variables" class="nav-link" data-scroll-target="#population-variables">Population &amp; Variables</a></li>
+  <li><a href="#statistical-approach" id="toc-statistical-approach" class="nav-link" data-scroll-target="#statistical-approach">Statistical Approach</a></li>
+  <li><a href="#abbreviations" id="toc-abbreviations" class="nav-link" data-scroll-target="#abbreviations">Abbreviations</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
+  <ul class="collapse">
+  <li><a href="#rwe-value" id="toc-rwe-value" class="nav-link" data-scroll-target="#rwe-value">RWE Value</a></li>
+  <li><a href="#perspective" id="toc-perspective" class="nav-link" data-scroll-target="#perspective">Perspective</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  </ul></li>
+  <li><a href="#ethics-and-data-governance" id="toc-ethics-and-data-governance" class="nav-link" data-scroll-target="#ethics-and-data-governance">Ethics and Data Governance</a></li>
+  <li><a href="#reproducibility-and-skills-demonstrated" id="toc-reproducibility-and-skills-demonstrated" class="nav-link" data-scroll-target="#reproducibility-and-skills-demonstrated">Reproducibility and Skills Demonstrated</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Real-World Impact of Antibacterial Resistance on Mortality in Marseille</h1>
-<p class="subtitle lead">Retrospective Multi-Hospital Real-World Evidence Study (2014–2018)</p>
+<h1 class="title">Real-World Evidence Analysis: Impact of Antibacterial Resistance on In-Hospital Mortality</h1>
 </div>
 
 <div>
   <div class="description">
-    Biostatistician &amp; Epidemiologist specializing in health data analytics, statistical modeling, large-scale data management, and clinical research.
+    Retrospective Multi-Hospital Study (AP-HM, Marseille, 2014–2018) — Educational Reimplementation
   </div>
 </div>
 
@@ -165,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Ousmane O. Diallo </p>
+             <p>Ousmane Diallo, MPH, PhD </p>
           </div>
   </div>
     
@@ -180,12 +207,6 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
-<div>
-  <div class="keywords">
-    <div class="block-title">Keywords</div>
-    <p>biostatistics, epidemiology, health data science, SAS programming, CDISC standards, clinical trials, real-world evidence</p>
-  </div>
-</div>
 
 </header>
 
@@ -209,10 +230,539 @@ Disclaimer – Educational Reimplementation Only
 <p>The results presented here <strong>must not</strong> be interpreted as official AP-HM results.</p>
 </div>
 </div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>Antimicrobial resistance (AMR) is a major challenge in clinical practice, and real-world data provide valuable insights into its true clinical burden beyond controlled trials.</p>
+<p>This project reimplements, using simulated data, the analytical framework of a real-world evidence (RWE) study that assessed the impact of antibacterial resistance on hospital mortality across four university hospitals in Marseille, France</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Real-world Evidence (RWE) Framing
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Study type</strong>: Retrospective, multi-center, observational real-world evidence study</p></li>
+<li><p><strong>Data source (conceptual)</strong>: Routine blood culture results (MARSS surveillance system) linked with hospital mortality</p></li>
+<li><p><strong>Population</strong>: All patients with at least one blood culture performed in AP-HM during the study period</p></li>
+<li><p><strong>Primary outcome</strong>: In-hospital mortality</p></li>
+<li><p><strong>Key exposures</strong></p>
+<ul>
+<li>Resistance to key antibiotics for top bacterial species</li>
+<li>Difficult-to-treat resistance (DTR) phenotype</li>
+<li>Hospital-acquired infection, <strong>ICU</strong> admission, and other clinical factors</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question">Research Question</h2>
+<p>What is the real-world burden of antibacterial resistance on in-hospital mortality among patients with blood cultures in a large French university hospital system?</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="study-design" class="level3">
+<h3 class="anchored" data-anchor-id="study-design">Study Design</h3>
+<p>Retrospective observational study based on routine laboratory and hospital data.<br>
+Patients with at least one blood culture were followed until hospital discharge or death.</p>
+</section>
+<section id="setting" class="level3">
+<h3 class="anchored" data-anchor-id="setting">Setting</h3>
+<ul>
+<li>Four University Hospitals of Marseille (AP-HM), France<br>
+</li>
+<li>Study period: February 2014 – February 2018.</li>
+</ul>
+</section>
+<section id="population-variables" class="level3">
+<h3 class="anchored" data-anchor-id="population-variables">Population &amp; Variables</h3>
+<p>All patients with ≥1 blood culture (positive or negative).</p>
+<p>Analyses focused on <strong>positive cultures</strong> involving the <strong>10 most frequent bacterial species</strong> in the deceased group, plus <em>Acinetobacter baumannii</em>.</p>
+<p><strong>Variables</strong>:</p>
+<ul>
+<li><strong>Outcome:</strong> In-hospital death (yes/no)</li>
+<li><strong>Key exposures:</strong>
+<ul>
+<li><p>Resistance to key antibiotics (e.g., ceftriaxone, ciprofloxacin, imipenem, amikacin)</p></li>
+<li><p><strong>DTR phenotype</strong>: resistant to all first-line agents (Kadri et al.&nbsp;definition)</p></li>
+</ul></li>
+<li><strong>Covariates:</strong> Age (&gt;60 vs ≤60), sex, hospital-acquired infection (&gt;48h after admission), <strong>ICU</strong> admission, length of stay (&gt;14 days), bacterial species.</li>
+</ul>
+</section>
+<section id="statistical-approach" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-approach">Statistical Approach</h3>
+<p>Descriptive analyses summarized bacterial species distributions and resistance rates. Logistic regression was used to estimate adjusted odds ratios (aORs) for in-hospital mortality associated with key exposures, including hospital-acquired infections, <strong>ICU</strong> admission, bacterial species, and DTR phenotype.</p>
+<p>All results are based on <strong>synthetic / simulated data</strong> emulating published patterns.</p>
+</section>
+<section id="abbreviations" class="level3">
+<h3 class="anchored" data-anchor-id="abbreviations">Abbreviations</h3>
+<p><strong>AMR</strong>: antimicrobial resistance;<br>
+<strong>RWD</strong>: real-world data;<br>
+<strong>RWE</strong>: real-world evidence;<br>
+<strong>DTR</strong>: difficult-to-treat resistance;<br>
+<strong>ICU</strong>: intensive care unit;<br>
+<strong>AST</strong>: antibiotic susceptibility testing.</p>
+<hr>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<ul>
+<li><p>Among all patients with blood cultures, those with <strong>positive results</strong> had nearly twice the mortality of those with negative cultures.</p></li>
+<li><p>The most common bacteria in both groups were <em>Escherichia coli</em>, <em>Staphylococcus aureus</em>, <em>Klebsiella pneumoniae</em>, and <em>Pseudomonas aeruginosa</em>.</p></li>
+<li><p>Resistance to <strong>ceftriaxone</strong>, <strong>ciprofloxacin</strong>, and <strong>imipenem</strong> was more prevalent among deceased patients (<a href="#tbl-res-ecoli" class="quarto-xref">Table&nbsp;1</a> <a href="#tbl-res-fluo" class="quarto-xref">Table&nbsp;3</a> <a href="#tbl-res-C3G" class="quarto-xref">Table&nbsp;2</a>).</p></li>
+<li><p>Polymicrobial bloodstream infections were more frequent among deceased patients (9.4%) than survivors (6.8%; p = 0.004). Excluding coagulase-negative staphylococci, <em>E. coli</em> and <em>K. pneumoniae</em> predominated among the deceased, while <em>E. coli</em> and <em>S. aureus</em> were most frequent among survivors. Gram-negative bacteria accounted for a larger share of co-infections in the death group (72.2%) than in controls (48.6%) (<a href="#fig-chord" class="quarto-xref">Figure&nbsp;1</a>).</p></li>
+<li><p><strong>Hospital-acquired infection</strong> (OR≈1.5), <strong>ICU</strong> admission (OR≈2.9), and <em>P. aeruginosa</em> or <em>E. faecium</em> infection (OR≈1.6–1.9) were independent mortality risk factors (<a href="#tbl-mlogit" class="quarto-xref">Table&nbsp;4</a>).</p></li>
+<li><p>The <strong>DTR phenotype</strong> was rare (≈0.3%) but significantly more frequent among deceased patients (<a href="#fig-dtr" class="quarto-xref">Figure&nbsp;2</a>).</p></li>
+</ul>
+<div id="fig-chord" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Chord diagrams of top co-infections among deceased vs survivors.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-chord-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/chord_diagram.png" class="img-fluid figure-img" alt="Chord diagrams of top co-infections among deceased vs survivors.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-chord-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Chord diagrams (A) deceased patients for (top 20 co-infections); (B) survivors (for top 20 co-infections).
+</figcaption>
+</figure>
+</div>
+<div id="fig-dtr" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Bar panels of susceptibility among DTR isolates.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dtr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="images/Therapeutic_alternatives_on_DTR_ggplot.png" class="img-fluid figure-img" alt="Bar panels of susceptibility among DTR isolates.">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dtr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Therapeutic alternatives on DTR isolates (susceptibility rate of other antibiotics on tested isolates).
+</figcaption>
+</figure>
+</div>
+<div id="tbl-res-ecoli" class="striped hover quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-res-ecoli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Resistance rates to β-lactam antibiotics in <em>E. coli</em> isolates
+</figcaption>
+<div aria-describedby="tbl-res-ecoli-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 22%">
+<col style="width: 14%">
+<col style="width: 22%">
+<col style="width: 16%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Antibiotic</th>
+<th style="text-align: left;">Resistance</th>
+<th style="text-align: right;">Deaths</th>
+<th style="text-align: right;">Survivors</th>
+<th style="text-align: left;">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Amoxicillin</td>
+<td style="text-align: left;"><strong>R</strong></td>
+<td style="text-align: right;">172</td>
+<td style="text-align: right;">1,175</td>
+<td style="text-align: left;">0.20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>S</strong></td>
+<td style="text-align: right;">93</td>
+<td style="text-align: right;">742</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>AST</strong></td>
+<td style="text-align: right;">265</td>
+<td style="text-align: right;">1,917</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Number of patients</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,930</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Amoxicillin–Clavulanic acid</td>
+<td style="text-align: left;"><strong>R</strong></td>
+<td style="text-align: right;">156</td>
+<td style="text-align: right;">1,008</td>
+<td style="text-align: left;">0.08</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>S</strong></td>
+<td style="text-align: right;">112</td>
+<td style="text-align: right;">916</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>AST</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,924</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Number of patients</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,930</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<div id="tbl-res-C3G" class="striped hover quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-res-C3G-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Resistance rates to cephalosporin and carbapenem antibiotics in <em>E. coli</em> isolates
+</figcaption>
+<div aria-describedby="tbl-res-C3G-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Antibiotic</th>
+<th style="text-align: left;">Resistance</th>
+<th style="text-align: right;">Deaths</th>
+<th style="text-align: right;">Survivors</th>
+<th style="text-align: left;">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ceftriaxone</td>
+<td style="text-align: left;"><strong>R</strong></td>
+<td style="text-align: right;">64</td>
+<td style="text-align: right;">274</td>
+<td style="text-align: left;">&lt;0.0001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>S</strong></td>
+<td style="text-align: right;">203</td>
+<td style="text-align: right;">1,654</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>AST</strong></td>
+<td style="text-align: right;">267</td>
+<td style="text-align: right;">1,928</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Number of patients</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,930</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Imipenem</td>
+<td style="text-align: left;"><strong>R</strong></td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">0.40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>S</strong></td>
+<td style="text-align: right;">267</td>
+<td style="text-align: right;">1,911</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>AST</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,929</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Number of patients</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,930</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<hr>
+<div id="tbl-res-fluo" class="striped hover quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-res-fluo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Resistance rates to fluoroquinolone and aminoglycoside antibiotics in <em>E. coli</em> isolates
+</figcaption>
+<div aria-describedby="tbl-res-fluo-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Antibiotic</th>
+<th style="text-align: left;">Resistance</th>
+<th style="text-align: right;">Deaths</th>
+<th style="text-align: right;">Survivors</th>
+<th style="text-align: left;">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Ciprofloxacin</td>
+<td style="text-align: left;"><strong>R</strong></td>
+<td style="text-align: right;">84</td>
+<td style="text-align: right;">421</td>
+<td style="text-align: left;">0.007</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>S</strong></td>
+<td style="text-align: right;">184</td>
+<td style="text-align: right;">1,506</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>AST</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,927</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Number of patients</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,930</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Amikacin</td>
+<td style="text-align: left;"><strong>R</strong></td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">45</td>
+<td style="text-align: left;">0.44</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>S</strong></td>
+<td style="text-align: right;">259</td>
+<td style="text-align: right;">1,878</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>AST</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,924</td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><strong>Number of patients</strong></td>
+<td style="text-align: right;">268</td>
+<td style="text-align: right;">1,930</td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<hr>
+<div id="tbl-mlogit" class="striped hover quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-mlogit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: <strong>Table 2. Multivariate analysis of risk factors associated with in-hospital mortality</strong>
+</figcaption>
+<div aria-describedby="tbl-mlogit-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 54%">
+<col style="width: 29%">
+<col style="width: 15%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Risk factors</th>
+<th style="text-align: left;">aOR (95% CI)</th>
+<th style="text-align: left;">P-value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><em>Patient &amp; care factors</em></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Age (&gt;60 years)</td>
+<td style="text-align: left;">2.2 (1.9<strong>–</strong>2.5)</td>
+<td style="text-align: left;">&lt; 0.0001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Gender (Male)</td>
+<td style="text-align: left;">1.13 (0.97<strong>–</strong>1.6)</td>
+<td style="text-align: left;">0.08</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Long hospital stay (&gt;14 days)</td>
+<td style="text-align: left;">0.9 (0.7<strong>–</strong>1.0)</td>
+<td style="text-align: left;">0.05</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hospital-acquired infections</td>
+<td style="text-align: left;">1.5 (1.2<strong>–</strong>1.8)</td>
+<td style="text-align: left;">&lt; 0.0001</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>Hospitalization Unit</em></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Emergency Unit</td>
+<td style="text-align: left;">1 (reference)</td>
+<td style="text-align: left;">—</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Surgery Unit</td>
+<td style="text-align: left;">0.35 (0.26<strong>–</strong>0.46)</td>
+<td style="text-align: left;">&lt; 0.0001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Medical Unit</td>
+<td style="text-align: left;">0.73 (0.59<strong>–</strong>1.3)</td>
+<td style="text-align: left;">0.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Intensive Care Unit</td>
+<td style="text-align: left;">2.9 (2.4<strong>–</strong>3.6)</td>
+<td style="text-align: left;">&lt; 0.0001</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>Bacterial species</em></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>S. epidermidis</em></td>
+<td style="text-align: left;">0.8 (0.7<strong>–</strong>0.96)</td>
+<td style="text-align: left;">0.02</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>K. pneumoniae</em></td>
+<td style="text-align: left;">1.2 (0.97<strong>–</strong>1.6)</td>
+<td style="text-align: left;">0.07</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>P. aeruginosa</em></td>
+<td style="text-align: left;">1.6 (1.2<strong>–</strong>2.1)</td>
+<td style="text-align: left;">0.01</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>S. hominis</em></td>
+<td style="text-align: left;">0.8 (0.6<strong>–</strong>1.1)</td>
+<td style="text-align: left;">0.15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><em>E. faecalis</em></td>
+<td style="text-align: left;">1.1 (0.8<strong>–</strong>1.5)</td>
+<td style="text-align: left;">0.4</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><em>E. faecium</em></td>
+<td style="text-align: left;">1.9 (1.3<strong>–</strong>2.9)</td>
+<td style="text-align: left;">0.001</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+<hr>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key Messages (RWE)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>Positive blood cultures nearly doubled in-hospital mortality.</p></li>
+<li><p>ICU admission, hospital-acquired infection, and infections by <em>P. aeruginosa</em> / <em>E. faecium</em> remained independently associated with death.</p></li>
+<li><p>DTR phenotypes were rare but enriched among deceased patients.</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<p>This analysis highlights the value of real-world data in quantifying the clinical burden of antimicrobial resistance and identifying high-risk patient groups. Integrating such insights into antimicrobial stewardship and hospital surveillance systems can guide targeted interventions and resource allocation.</p>
+<section id="rwe-value" class="level3">
+<h3 class="anchored" data-anchor-id="rwe-value">RWE Value</h3>
+<ul>
+<li><p>Demonstrates secondary use of hospital RWD for public health.</p></li>
+<li><p>Replicates real-world associations outside clinical trial settings.</p></li>
+<li><p>Highlights integration potential with HEOR studies (e.g., cost of AMR-related deaths).</p></li>
+</ul>
+</section>
+<section id="perspective" class="level3">
+<h3 class="anchored" data-anchor-id="perspective">Perspective</h3>
+<p>Future applications of this analytical framework could include cost-effectiveness modeling, regional comparisons, and integration with national AMR surveillance systems.</p>
+</section>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
+<ul>
+<li><p>Retrospective observational design.</p></li>
+<li><p>Possible misclassification of infection source.</p></li>
+<li><p>Analyses conducted on <strong>synthetic / anonymized data</strong>, not actual hospital data.</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="ethics-and-data-governance" class="level2">
+<h2 class="anchored" data-anchor-id="ethics-and-data-governance">Ethics and Data Governance</h2>
+<p>This portfolio project complies with ethical standards for the use of health data:</p>
+<ul>
+<li><p>No identifiable or proprietary hospital data were accessed.</p></li>
+<li><p>All datasets were <strong>synthetic, simulated, or anonymized</strong>.</p></li>
+<li><p>The work is for <strong>educational and methodological purposes only</strong>.</p></li>
+<li><p>No institutional review board (IRB) approval was required for this reimplementation.</p></li>
+</ul>
+<p>All analytical steps comply with the FAIR (Findable, Accessible, Interoperable, Reusable) principles for responsible secondary use of health data.</p>
+<hr>
+</section>
+<section id="reproducibility-and-skills-demonstrated" class="level2">
+<h2 class="anchored" data-anchor-id="reproducibility-and-skills-demonstrated">Reproducibility and Skills Demonstrated</h2>
+<p><strong>Analytical skills illustrated in this project:</strong></p>
+<ul>
+<li><p>Real-world data curation and cleaning (R, tidyverse).</p></li>
+<li><p>Epidemiological study design and variable definition.</p></li>
+<li><p>Logistic regression modeling of clinical outcomes.</p></li>
+<li><p>Data visualization (R/ggplot2) and RWE storytelling.</p></li>
+<li><p>Ethical and regulatory awareness in secondary data use.</p></li>
+</ul>
 
 
+</section>
 
-<p>Ousmane Diallo, MPH-PhD – Biostatistician &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<p>Ousmane Diallo, MPH-PhD – Biostatistician, Data Scientist &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

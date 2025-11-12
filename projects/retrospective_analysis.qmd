@@ -194,6 +194,10 @@ monthly_DS_incidence <- monthly_DS_incide %>%
 
 -   **Spatial clustering**: Northern border regions showed persistent high transmission
 
+
+### GAM mixed models analysis
+
+
 ------------------------------------------------------------------------
 
 ## Technical Innovation & Skills Demonstrated
