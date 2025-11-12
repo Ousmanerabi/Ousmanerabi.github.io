@@ -105,7 +105,7 @@ All results are based on **synthetic / simulated data** emulating published patt
 
 -   The most common bacteria in both groups were *Escherichia coli*, *Staphylococcus aureus*, *Klebsiella pneumoniae*, and *Pseudomonas aeruginosa*.
 
--   Resistance to **ceftriaxone**, **ciprofloxacin**, and **imipenem** was more prevalent among deceased patients (@tbl-res-ecoli @tbl-res-fluo @tbl-res-C3G).
+-   Resistance to **ceftriaxone**, **ciprofloxacin**, and **imipenem** was more prevalent among deceased patients (@tbl-res-ecoli @tbl-res-C3G @tbl-res-fluo).
 
 -   Polymicrobial bloodstream infections were more frequent among deceased patients (9.4%) than survivors (6.8%; p = 0.004). Excluding coagulase-negative staphylococci, *E. coli* and *K. pneumoniae* predominated among the deceased, while *E. coli* and *S. aureus* were most frequent among survivors. Gram-negative bacteria accounted for a larger share of co-infections in the death group (72.2%) than in controls (48.6%) (@fig-chord).
 
