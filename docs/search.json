@@ -1657,5 +1657,40 @@
     "title": "Real-World Evidence Analysis: Impact of Antibacterial Resistance on In-Hospital Mortality",
     "section": "Overview",
     "text": "Overview\nAntimicrobial resistance (AMR) is a major challenge in clinical practice, and real-world data provide valuable insights into its true clinical burden beyond controlled trials.\nThis project reimplements, using simulated data, the analytical framework of a real-world evidence (RWE) study that assessed the impact of antibacterial resistance on hospital mortality across four university hospitals in Marseille, France\n\n\n\n\n\n\nReal-world Evidence (RWE) Framing\n\n\n\n\nStudy type: Retrospective, multi-center, observational real-world evidence study\nData source (conceptual): Routine blood culture results (MARSS surveillance system) linked with hospital mortality\nPopulation: All patients with at least one blood culture performed in AP-HM during the study period\nPrimary outcome: In-hospital mortality\nKey exposures\n\nResistance to key antibiotics for top bacterial species\nDifficult-to-treat resistance (DTR) phenotype\nHospital-acquired infection, ICU admission, and other clinical factors"
+  },
+  {
+    "objectID": "projects/major_consumption.html",
+    "href": "projects/major_consumption.html",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "",
+    "text": "Important\n\n\n\nNote: All plots labeled “Original published figure” are taken from\nDiallo et al., Scientific Reports (2020).\nAll analytical steps in this portfolio project (data structure design,\ndata cleaning, harmonization of AST results, resistance calculations,\nDTR classification, and statistical workflow) are reproduced using\nfully simulated datasets to ensure GDPR and data protection compliance.\nNo original isolate-level or patient-level data were reused.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+  },
+  {
+    "objectID": "projects/major_consumption.html#resistance-trends-remained-globally-stable-20142018",
+    "href": "projects/major_consumption.html#resistance-trends-remained-globally-stable-20142018",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "1. Resistance trends remained globally stable (2014–2018)",
+    "text": "1. Resistance trends remained globally stable (2014–2018)\n\nOxacillin resistance in S. aureus: stable\n\nCarbapenem resistance in Enterobacterales: stable\n\n3GC resistance in E. coli and K. pneumoniae: stable"
+  },
+  {
+    "objectID": "projects/major_consumption.html#confirmed-significant-decreases",
+    "href": "projects/major_consumption.html#confirmed-significant-decreases",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "2. Confirmed significant decreases",
+    "text": "2. Confirmed significant decreases\n\nAmikacin resistance declined across most Enterobacterales\n\nImipenem resistance in A. baumannii decreased significantly\n\n\n\n\nFigure 1: Trend in resistance to key antibiotics for E. coli (simulated RWE)"
+  },
+  {
+    "objectID": "projects/major_consumption.html#confirmed-increases-in-specific-pathogens",
+    "href": "projects/major_consumption.html#confirmed-increases-in-specific-pathogens",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "3. Confirmed increases in specific pathogens",
+    "text": "3. Confirmed increases in specific pathogens\n\nCeftriaxone resistance in:\n\nE. cloacae\n\nK. aerogenes\n\nK. oxytoca\n\n\n\n\n\nFigure 1: Most frequently isolated bacterial soecies"
+  },
+  {
+    "objectID": "projects/major_consumption.html#dtr-phenotypes-remain-extremely-rare",
+    "href": "projects/major_consumption.html#dtr-phenotypes-remain-extremely-rare",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "4. DTR Phenotypes remain extremely rare",
+    "text": "4. DTR Phenotypes remain extremely rare\n\n0.3% of isolates\n\nMostly Gram-negative\n\nLower than rates reported in U.S. hospital networks\n\nNo upward trend observed\n\nTable 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region\n(January 2014 – February 2019)\n\n\n\n\n\n\n\n\nBacterial species\nDTR strains (n / total)\nPercentage (%)\n\n\n\n\nEscherichia coli\n85 / 246,353\n0.03\n\n\nKlebsiella pneumoniae\n372 / 49,733\n0.74\n\n\nKlebsiella oxytoca\n11 / 7,887\n0.13\n\n\nProteus mirabilis\n1 / 18,064\n0.006\n\n\nSerratia marcescens\n3 / 4,437\n0.07\n\n\nMorganella morganii\n5 / 4,935\n0.10\n\n\nEnterobacter cloacae\n33 / 14,620\n0.20\n\n\nEnterobacter aerogenes\n6 / 6,982\n0.09\n\n\nPseudomonas aeruginosa\n902 / 34,966\n2.60\n\n\nAcinetobacter baumannii\n175 / 1,098\n15.90\n\n\nEnterococcus faecalis\n3 / 36,857\n0.008\n\n\nEnterococcus faecium\n5 / 4,871\n0.10\n\n\nStaphylococcus aureus\n0 / 65,023\n0.00\n\n\nStaphylococcus epidermidis\n3 / 28,527\n0.01\n\n\nStreptococcus agalactiae\n0 / 14,684\n0.00\n\n\nTotal\n1,604 / 539,037\n0.30\n\n\n\nTable 5b. Comparison of DTR prevalence between PACA region and 173 U.S. hospitals (Kadri et al., 2018)\n\n\n\n\n\n\n\n\n\nBacterial species\nDTR strains (n / total)\nPercentage (%)\nU.S. hospitals (Kadri 2018)\n\n\n\n\nEscherichia coli\n85 / 246,353\n0.03\n0.04\n\n\nKlebsiella pneumoniae\n372 / 49,733\n0.74\n1.70\n\n\nEnterobacter cloacae\n33 / 14,620\n0.20\n0.60\n\n\nEnterobacter aerogenes\n6 / 6,982\n0.09\n0.60\n\n\nPseudomonas aeruginosa\n902 / 34,966\n2.60\n2.30\n\n\nAcinetobacter baumannii\n175 / 1,098\n15.90\n18.30\n\n\nTotal\n1,573 / 353,752\n0.44\n1.01 (471/46,521)"
   }
 ]

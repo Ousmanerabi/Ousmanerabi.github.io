@@ -87,7 +87,7 @@ The projects integrate data from surveys, hospitals, and surveillance systems.
 
 🔹 [Patient-level Risk Factors for Clinical Malaria in Children (2–60 months)](projects/patient-level-risk-factors-analysis.html)  
 🔹 [Hospital Mortality and Positive Blood Culture with Difficult-to-Treat Resistance – Marseille, France](projects/hospital-mortality-and-positive-blood-culture.html)  
-🔹 [Major Discrepancy Between Factual Antibiotic Resistance and Consumption in Southern France](projects/discrepancy-AR-consumption.html)  
+🔹 [Major Discrepancy Between Factual Antibiotic Resistance and Consumption in Southern France](projects/major_consumption.html)  
 
 These projects highlight:
 

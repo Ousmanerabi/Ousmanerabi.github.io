@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ousmane Diallo, MPH-PhD">
+<meta name="description" content="Reproduction of the published RWE analysis: ‘Major Discrepancy Between Factual Antibiotic Resistance and Consumption in South of France’ (Scientific Reports, 2020), using simulated/aggregated data.">
+
+<title>RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France. – Ousmane Diallo, MPH-PhD</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon.jpg" rel="icon" type="image/jpeg">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/remove-keyword.css">
+<meta property="og:title" content="RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France. – Ousmane Diallo, MPH-PhD">
+<meta property="og:description" content="Reproduction of the published RWE analysis: ‘Major Discrepancy Between Factual Antibiotic Resistance and Consumption in South of France’ (Scientific Reports, 2020), using simulated/aggregated data.">
+<meta property="og:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
+<meta property="og:site_name" content="Ousmane Diallo, MPH-PhD">
+<meta name="twitter:title" content="RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France. – Ousmane Diallo, MPH-PhD">
+<meta name="twitter:description" content="Reproduction of the published RWE analysis: ‘Major Discrepancy Between Factual Antibiotic Resistance and Consumption in South of France’ (Scientific Reports, 2020), using simulated/aggregated data.">
+<meta name="twitter:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Ousmane Diallo, MPH-PhD</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> <i class="bi bi-house-door-fill" role="img" aria-label="Home">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> <i class="bi bi-file-earmark-text-fill" role="img">
+</i> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> <i class="bi bi-person-lines-fill" role="img" aria-label="About">
+</i> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../portfolio.html"> <i class="bi bi-file-earmark-code-fill" role="img" aria-label="Portfolio">
+</i> 
+<span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> <i class="bi bi-chat-square-text-fill" role="img" aria-label="Contact">
+</i> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ousmanerabi" target="_blank"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/ousmane-rabi" target="_blank"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#objectives-of-this-rwe-reproduction" id="toc-objectives-of-this-rwe-reproduction" class="nav-link" data-scroll-target="#objectives-of-this-rwe-reproduction">Objectives of This RWE Reproduction</a></li>
+  <li><a href="#real-world-data-structure-simulated-version" id="toc-real-world-data-structure-simulated-version" class="nav-link" data-scroll-target="#real-world-data-structure-simulated-version">Real-World Data Structure (Simulated Version)</a></li>
+  <li><a href="#methods-reconstructed" id="toc-methods-reconstructed" class="nav-link" data-scroll-target="#methods-reconstructed">Methods (Reconstructed)</a>
+  <ul class="collapse">
+  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study Design</a></li>
+  <li><a href="#inclusion-criteria" id="toc-inclusion-criteria" class="nav-link" data-scroll-target="#inclusion-criteria">Inclusion Criteria</a></li>
+  <li><a href="#resistance-definition" id="toc-resistance-definition" class="nav-link" data-scroll-target="#resistance-definition">Resistance Definition</a></li>
+  <li><a href="#dtr-classification" id="toc-dtr-classification" class="nav-link" data-scroll-target="#dtr-classification">DTR Classification</a></li>
+  <li><a href="#statistical-modeling" id="toc-statistical-modeling" class="nav-link" data-scroll-target="#statistical-modeling">Statistical Modeling</a></li>
+  </ul></li>
+  <li><a href="#key-rwe-insights-from-simulated-reproduction" id="toc-key-rwe-insights-from-simulated-reproduction" class="nav-link" data-scroll-target="#key-rwe-insights-from-simulated-reproduction">Key RWE Insights (From Simulated Reproduction)</a>
+  <ul class="collapse">
+  <li><a href="#resistance-trends-remained-globally-stable-20142018" id="toc-resistance-trends-remained-globally-stable-20142018" class="nav-link" data-scroll-target="#resistance-trends-remained-globally-stable-20142018">1. Resistance trends remained globally stable (2014–2018)</a></li>
+  <li><a href="#confirmed-significant-decreases" id="toc-confirmed-significant-decreases" class="nav-link" data-scroll-target="#confirmed-significant-decreases">2. Confirmed significant decreases</a></li>
+  <li><a href="#confirmed-increases-in-specific-pathogens" id="toc-confirmed-increases-in-specific-pathogens" class="nav-link" data-scroll-target="#confirmed-increases-in-specific-pathogens">3. Confirmed increases in specific pathogens</a></li>
+  <li><a href="#dtr-phenotypes-remain-extremely-rare" id="toc-dtr-phenotypes-remain-extremely-rare" class="nav-link" data-scroll-target="#dtr-phenotypes-remain-extremely-rare">4. DTR Phenotypes remain extremely rare</a></li>
+  </ul></li>
+  <li><a href="#clinical-public-health-interpretation" id="toc-clinical-public-health-interpretation" class="nav-link" data-scroll-target="#clinical-public-health-interpretation">Clinical &amp; Public Health Interpretation</a></li>
+  <li><a href="#ethical-considerations" id="toc-ethical-considerations" class="nav-link" data-scroll-target="#ethical-considerations">Ethical Considerations</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#skills-demonstrated" id="toc-skills-demonstrated" class="nav-link" data-scroll-target="#skills-demonstrated">Skills Demonstrated</a></li>
+  <li><a href="#source-publication-referenced" id="toc-source-publication-referenced" class="nav-link" data-scroll-target="#source-publication-referenced">Source Publication (Referenced)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">RWE</div>
+    <div class="quarto-category">Real-World Data</div>
+    <div class="quarto-category">Antimicrobial Resistance</div>
+    <div class="quarto-category">Epidemiology</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Reproduction of the published RWE analysis: ‘Major Discrepancy Between Factual Antibiotic Resistance and Consumption in South of France’ (<em>Scientific Reports</em>, 2020), using simulated/aggregated data.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ousmane Diallo, MPH-PhD </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Note:</strong> All plots labeled <em>“Original published figure”</em> are taken from<br>
+<strong>Diallo et al., Scientific Reports (2020)</strong>.</p>
+<p>All analytical steps in this portfolio project (data structure design,<br>
+data cleaning, harmonization of AST results, resistance calculations,<br>
+DTR classification, and statistical workflow) are reproduced using<br>
+<strong>fully simulated datasets</strong> to ensure GDPR and data protection compliance.</p>
+<p>No original isolate-level or patient-level data were reused.</p>
+</div>
+</div>
+<section id="overview" class="level1">
+<h1>Overview</h1>
+<p>This portfolio project reconstructs the analytical workflow and Real-World Evidence (RWE) methodology from the peer-reviewed publication:</p>
+<blockquote class="blockquote">
+<p><strong>Diallo OO et al.&nbsp;Major discrepancy between factual antibiotic resistance and consumption in South of France. <em>Scientific Reports</em> 2020;10:18262.</strong></p>
+</blockquote>
+<p>The goal is not to reproduce the original results, but to demonstrate the full RWE analytic pipeline using<br>
+<strong>synthetic data modeled after the real-world microbiology surveillance network</strong> used in the publication.</p>
+<p>This approach allows:</p>
+<ul>
+<li>faithful reconstruction of the study design,<br>
+</li>
+<li>demonstration of large-scale RWE data engineering skills,<br>
+</li>
+<li>reproduction of the DTR classification approach,<br>
+</li>
+<li>and illustration of AMR trend analysis techniques—</li>
+</ul>
+<p>while remaining fully compliant with GDPR and ethical requirements.</p>
+<p>Original figures from the publication are included for scientific context and comparison.</p>
+<hr>
+</section>
+<section id="background" class="level1">
+<h1>Background</h1>
+<p>Antimicrobial resistance (AMR) is often quantified using <strong>predictive mathematical models</strong>, which may not reflect real-world patterns.<br>
+The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong> collected across <strong>267 laboratories</strong> to quantify:</p>
+<ul>
+<li>Real-world resistance trends over time<br>
+</li>
+<li>Discrepancies between resistance and antibiotic consumption<br>
+</li>
+<li>Prevalence of <strong>Difficult-to-Treat (DTR)</strong> phenotypes (Kadri et al.)<br>
+</li>
+<li>Temporal evolution of key pathogens (E. coli, K. pneumoniae, S. aureus, A. baumannii…)</li>
+</ul>
+<p>This portfolio project reproduces the <strong>analytic strategy</strong>, <strong>statistical logic</strong>, and <strong>visual narratives</strong> using simulated data.</p>
+<hr>
+</section>
+<section id="objectives-of-this-rwe-reproduction" class="level1">
+<h1>Objectives of This RWE Reproduction</h1>
+<ol type="1">
+<li>Reconstruct the study design used in the original 2020 publication.<br>
+</li>
+<li>Create a clean analytic workflow using modern RWE standards.<br>
+</li>
+<li>Simulate datasets matching the structure and distribution of the original study.<br>
+</li>
+<li>Reproduce key indicators:
+<ul>
+<li>Resistance to key antibiotics<br>
+</li>
+<li>Temporal trends (2014–2018)<br>
+</li>
+<li>DTR classification<br>
+</li>
+</ul></li>
+<li>Produce RWE-style visualizations (forest plots, timeline trends).<br>
+</li>
+<li>Summarize clinical and public health implications.</li>
+</ol>
+<p>This exercise demonstrates <strong>RWE reproducibility, analytical rigor, and epidemiological reasoning</strong>, essential in the pharmaceutical industry.</p>
+<hr>
+</section>
+<section id="real-world-data-structure-simulated-version" class="level1">
+<h1>Real-World Data Structure (Simulated Version)</h1>
+<p>The original study used routine-care laboratory data from:</p>
+<ul>
+<li><strong>BALYSES</strong> (real-time bacterial monitoring system)<br>
+</li>
+<li><strong>MARSS</strong> (Marseille AMR surveillance)<br>
+</li>
+<li><strong>PACA SurvE</strong> (regional epidemiology system)</li>
+</ul>
+<p>To maintain ethical compliance, this portfolio project uses:</p>
+<ul>
+<li><strong>simulated datasets</strong><br>
+</li>
+<li>distributions calibrated on published tables<br>
+</li>
+<li>aggregate-level counts consistent with Scientific Reports 2020</li>
+</ul>
+<p>The following data elements are reproduced:</p>
+<ul>
+<li>Sample type (urine, blood culture, deep, respiratory…)<br>
+</li>
+<li>Bacterial species (15 most frequent clinical pathogens)<br>
+</li>
+<li>Antibiotic susceptibility test (AST) outcomes<br>
+</li>
+<li>Key antibiotics for each species<br>
+</li>
+<li>Year of isolation<br>
+</li>
+<li>DTR phenotype classification</li>
+</ul>
+<hr>
+</section>
+<section id="methods-reconstructed" class="level1">
+<h1>Methods (Reconstructed)</h1>
+<section id="study-design" class="level3">
+<h3 class="anchored" data-anchor-id="study-design">Study Design</h3>
+<ul>
+<li>Retrospective, observational, non-interventional RWD study (2014–2018).<br>
+</li>
+<li>No linked clinical data (mortality, comorbidity).<br>
+</li>
+<li>Unit of analysis: <strong>isolate</strong>, not patient.</li>
+</ul>
+</section>
+<section id="inclusion-criteria" class="level3">
+<h3 class="anchored" data-anchor-id="inclusion-criteria">Inclusion Criteria</h3>
+<ul>
+<li>Isolates from the 15 most frequent pathogens.<br>
+</li>
+<li>At least one <strong>key antibiotic</strong> tested per species.</li>
+</ul>
+</section>
+<section id="resistance-definition" class="level3">
+<h3 class="anchored" data-anchor-id="resistance-definition">Resistance Definition</h3>
+<ul>
+<li>EUCAST breakpoints<br>
+</li>
+<li>Intermediate considered resistant (per original study)</li>
+</ul>
+</section>
+<section id="dtr-classification" class="level3">
+<h3 class="anchored" data-anchor-id="dtr-classification">DTR Classification</h3>
+<p>Reproduced using the Kadri et al.&nbsp;algorithm:</p>
+<ul>
+<li><strong>GNB</strong>: resistant to all β-lactams, carbapenems, and fluoroquinolones<br>
+</li>
+<li><strong>Gram-positive</strong>: resistant to (methicillin + gentamicin + vancomycin) or equivalent triads</li>
+</ul>
+</section>
+<section id="statistical-modeling" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-modeling">Statistical Modeling</h3>
+<ul>
+<li>Mann–Whitney U<br>
+</li>
+<li>χ² and Fisher exact tests<br>
+</li>
+<li>Kendall correlation for trends<br>
+</li>
+<li>p &lt; 0.05 considered significant</li>
+</ul>
+<p>This statistical logic is faithfully reconstructed.</p>
+<hr>
+</section>
+</section>
+<section id="key-rwe-insights-from-simulated-reproduction" class="level1">
+<h1>Key RWE Insights (From Simulated Reproduction)</h1>
+<p>Although data are simulated, trends reproduce the structure of published findings:</p>
+<section id="resistance-trends-remained-globally-stable-20142018" class="level2">
+<h2 class="anchored" data-anchor-id="resistance-trends-remained-globally-stable-20142018">1. Resistance trends remained globally stable (2014–2018)</h2>
+<ul>
+<li>Oxacillin resistance in <em>S. aureus</em>: stable<br>
+</li>
+<li>Carbapenem resistance in Enterobacterales: stable<br>
+</li>
+<li>3GC resistance in <em>E. coli</em> and <em>K. pneumoniae</em>: stable</li>
+</ul>
+</section>
+<section id="confirmed-significant-decreases" class="level2">
+<h2 class="anchored" data-anchor-id="confirmed-significant-decreases">2. Confirmed significant decreases</h2>
+<ul>
+<li><strong>Amikacin resistance</strong> declined across most Enterobacterales<br>
+</li>
+<li><strong>Imipenem resistance</strong> in <em>A. baumannii</em> decreased significantly</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/amr_trends_panels.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Trend in resistance to key antibiotics for E. coli (simulated RWE)</figcaption>
+</figure>
+</div>
+</section>
+<section id="confirmed-increases-in-specific-pathogens" class="level2">
+<h2 class="anchored" data-anchor-id="confirmed-increases-in-specific-pathogens">3. Confirmed increases in specific pathogens</h2>
+<ul>
+<li>Ceftriaxone resistance in:
+<ul>
+<li><em>E. cloacae</em><br>
+</li>
+<li><em>K. aerogenes</em><br>
+</li>
+<li><em>K. oxytoca</em></li>
+</ul></li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/most_frequent.png" class="img-fluid figure-img"></p>
+<figcaption>Figure 1: Most frequently isolated bacterial soecies</figcaption>
+</figure>
+</div>
+</section>
+<section id="dtr-phenotypes-remain-extremely-rare" class="level2">
+<h2 class="anchored" data-anchor-id="dtr-phenotypes-remain-extremely-rare">4. DTR Phenotypes remain extremely rare</h2>
+<ul>
+<li><strong>0.3% of isolates</strong><br>
+</li>
+<li>Mostly Gram-negative<br>
+</li>
+<li>Lower than rates reported in U.S. hospital networks<br>
+</li>
+<li>No upward trend observed</li>
+</ul>
+<p>Table 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region<br>
+(January 2014 – February 2019)</p>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 36%">
+<col style="width: 41%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bacterial species</th>
+<th>DTR strains (n / total)</th>
+<th>Percentage (%)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Escherichia coli</em></td>
+<td>85 / 246,353</td>
+<td>0.03</td>
+</tr>
+<tr class="even">
+<td><em>Klebsiella pneumoniae</em></td>
+<td>372 / 49,733</td>
+<td>0.74</td>
+</tr>
+<tr class="odd">
+<td><em>Klebsiella oxytoca</em></td>
+<td>11 / 7,887</td>
+<td>0.13</td>
+</tr>
+<tr class="even">
+<td><em>Proteus mirabilis</em></td>
+<td>1 / 18,064</td>
+<td>0.006</td>
+</tr>
+<tr class="odd">
+<td><em>Serratia marcescens</em></td>
+<td>3 / 4,437</td>
+<td>0.07</td>
+</tr>
+<tr class="even">
+<td><em>Morganella morganii</em></td>
+<td>5 / 4,935</td>
+<td>0.10</td>
+</tr>
+<tr class="odd">
+<td><em>Enterobacter cloacae</em></td>
+<td>33 / 14,620</td>
+<td>0.20</td>
+</tr>
+<tr class="even">
+<td><em>Enterobacter aerogenes</em></td>
+<td>6 / 6,982</td>
+<td>0.09</td>
+</tr>
+<tr class="odd">
+<td><em>Pseudomonas aeruginosa</em></td>
+<td>902 / 34,966</td>
+<td>2.60</td>
+</tr>
+<tr class="even">
+<td><em>Acinetobacter baumannii</em></td>
+<td>175 / 1,098</td>
+<td>15.90</td>
+</tr>
+<tr class="odd">
+<td><em>Enterococcus faecalis</em></td>
+<td>3 / 36,857</td>
+<td>0.008</td>
+</tr>
+<tr class="even">
+<td><em>Enterococcus faecium</em></td>
+<td>5 / 4,871</td>
+<td>0.10</td>
+</tr>
+<tr class="odd">
+<td><em>Staphylococcus aureus</em></td>
+<td>0 / 65,023</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td><em>Staphylococcus epidermidis</em></td>
+<td>3 / 28,527</td>
+<td>0.01</td>
+</tr>
+<tr class="odd">
+<td><em>Streptococcus agalactiae</em></td>
+<td>0 / 14,684</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td><strong>1,604 / 539,037</strong></td>
+<td><strong>0.30</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Table 5b. Comparison of DTR prevalence between PACA region and 173 U.S. hospitals (Kadri et al., 2018)</p>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 26%">
+<col style="width: 16%">
+<col style="width: 29%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bacterial species</th>
+<th>DTR strains (n / total)</th>
+<th>Percentage (%)</th>
+<th>U.S. hospitals (Kadri 2018)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><em>Escherichia coli</em></td>
+<td>85 / 246,353</td>
+<td>0.03</td>
+<td>0.04</td>
+</tr>
+<tr class="even">
+<td><em>Klebsiella pneumoniae</em></td>
+<td>372 / 49,733</td>
+<td>0.74</td>
+<td>1.70</td>
+</tr>
+<tr class="odd">
+<td><em>Enterobacter cloacae</em></td>
+<td>33 / 14,620</td>
+<td>0.20</td>
+<td>0.60</td>
+</tr>
+<tr class="even">
+<td><em>Enterobacter aerogenes</em></td>
+<td>6 / 6,982</td>
+<td>0.09</td>
+<td>0.60</td>
+</tr>
+<tr class="odd">
+<td><em>Pseudomonas aeruginosa</em></td>
+<td>902 / 34,966</td>
+<td>2.60</td>
+<td>2.30</td>
+</tr>
+<tr class="even">
+<td><em>Acinetobacter baumannii</em></td>
+<td>175 / 1,098</td>
+<td>15.90</td>
+<td>18.30</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><strong>1,573 / 353,752</strong></td>
+<td><strong>0.44</strong></td>
+<td><strong>1.01 (471/46,521)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+</section>
+<section id="clinical-public-health-interpretation" class="level1">
+<h1>Clinical &amp; Public Health Interpretation</h1>
+<p>This project supports the central conclusion of the 2020 Scientific Reports article:</p>
+<ul>
+<li><strong>High antibiotic consumption does not automatically translate into higher resistance.</strong><br>
+</li>
+<li>Predictive AMR models may overestimate the burden in certain contexts.<br>
+</li>
+<li>Real-time laboratory surveillance (RWD) provides a <strong>more accurate and actionable picture</strong>.<br>
+</li>
+<li>Routine-care AMR data can guide empirical treatment and stewardship programs.</li>
+</ul>
+<hr>
+</section>
+<section id="ethical-considerations" class="level1">
+<h1>Ethical Considerations</h1>
+<p>To ensure strict compliance:</p>
+<ul>
+<li><strong>No original data</strong> from the published study are reused.<br>
+</li>
+<li>Only <strong>synthetic, simulated, or aggregated</strong> datasets are used.<br>
+</li>
+<li>No identifiable patient information is present.<br>
+</li>
+<li>The project is solely for <strong>educational and portfolio purposes</strong>.<br>
+</li>
+<li>The analytic framework is recreated, not the dataset.</li>
+</ul>
+<p>This aligns with GDPR, HIPAA, and good RWE practice.</p>
+<hr>
+</section>
+<section id="limitations" class="level1">
+<h1>Limitations</h1>
+<ul>
+<li>Simulated data cannot perfectly replicate the distribution of real isolates.<br>
+</li>
+<li>No patient-level linkage (mortality, comorbidities).<br>
+</li>
+<li>Results cannot be used for clinical decision-making.<br>
+</li>
+<li>Geographic specificity limits generalizability.</li>
+</ul>
+<hr>
+</section>
+<section id="conclusion" class="level1">
+<h1>Conclusion</h1>
+<p>This RWE reproduction successfully reconstructs the methodological framework and analytical insights from the 2020 Scientific Reports article using modern RWE standards and simulated datasets.</p>
+<p>It demonstrates:</p>
+<ul>
+<li>Expertise in large-scale AMR surveillance<br>
+</li>
+<li>Mastery of RWE methodologies<br>
+</li>
+<li>Reproducible analytic workflows<br>
+</li>
+<li>Ability to translate published research into data-driven insights</li>
+</ul>
+<hr>
+</section>
+<section id="skills-demonstrated" class="level1">
+<h1>Skills Demonstrated</h1>
+<ul>
+<li>Real-World Evidence (RWE) methodology<br>
+</li>
+<li>Surveillance epidemiology<br>
+</li>
+<li>Handling large microbiology datasets<br>
+</li>
+<li>Statistical analysis of resistance trends<br>
+</li>
+<li>Implementation of DTR definitions<br>
+</li>
+<li>Data visualization for AMR<br>
+</li>
+<li>Scientific communication</li>
+</ul>
+<hr>
+</section>
+<section id="source-publication-referenced" class="level1">
+<h1>Source Publication (Referenced)</h1>
+<p>Diallo OO, Baron SA, Dubourg G, et al.<br>
+<strong>Major discrepancy between factual antibiotic resistance and consumption in South of France</strong>.<br>
+<em>Scientific Reports</em> 2020;10:18262.</p>
+<hr>
+
+
+</section>
+
+<p>Ousmane Diallo, MPH-PhD – Biostatistician, Data Scientist &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ousmanediallo\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Website by Ousmane Diallo | © 2025 |
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ousmanerabi" target="_blank">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/ousmane-diallo8" target="_blank">
+      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
