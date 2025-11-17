@@ -1663,14 +1663,14 @@
     "href": "projects/major_consumption.html",
     "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
     "section": "",
-    "text": "Important\n\n\n\nNote: All plots labeled “Original published figure” are taken from Diallo et al., Scientific Reports (2020).\nAll analytical steps in this portfolio project (data structure design, data cleaning, harmonization of AST results, resistance calculations, DTR classification, and statistical workflow) are reproduced using fully simulated datasets to ensure GDPR and data protection compliance.\nNo original isolate-level or patient-level data were reused.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "Important\n\n\n\nNote: All plots labeled “Original published figure” are taken from\nDiallo et al., Scientific Reports (2020).\nAll analytical steps in this portfolio project (data structure design,\ndata cleaning, harmonization of AST results, resistance calculations,\nDTR classification, and statistical workflow) are reproduced using\nfully simulated datasets to ensure GDPR and data protection compliance.\nNo original isolate-level or patient-level data were reused.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/major_consumption.html#resistance-trends-remained-globally-stable-20142018",
     "href": "projects/major_consumption.html#resistance-trends-remained-globally-stable-20142018",
     "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
     "section": "1. Resistance trends remained globally stable (2014–2018)",
-    "text": "1. Resistance trends remained globally stable (2014–2018)\n\nGlobal stability across most pathogen–antibiotic pairs\nNo major shifts in S. aureus, Enterobacterales, or P. aeruginosa\nClear exceptions highlighted below\n\n\n\n\nFigure 1: Trend in resistance to key antibiotics for E. coli (simulated RWE)"
+    "text": "1. Resistance trends remained globally stable (2014–2018)\n\nOxacillin resistance in S. aureus: stable\n\nCarbapenem resistance in Enterobacterales: stable\n\n3GC resistance in E. coli and K. pneumoniae: stable"
   },
   {
     "objectID": "projects/major_consumption.html#confirmed-significant-decreases",

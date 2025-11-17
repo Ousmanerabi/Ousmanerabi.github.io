@@ -2,6 +2,7 @@
 title: "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France."
 description: "Reproduction of the published RWE analysis: 'Major Discrepancy Between Factual Antibiotic Resistance and Consumption in South of France' (*Scientific Reports*, 2020), using simulated/aggregated data."
 author: "Ousmane Diallo, MPH-PhD"
+date: "11/16/2025"
 categories: ["RWE", "Real-World Data", "Antimicrobial Resistance", "Epidemiology"]
 highlight-style: pygments
 page-layout: article
