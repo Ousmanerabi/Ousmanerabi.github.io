@@ -1663,14 +1663,14 @@
     "href": "projects/major_consumption.html",
     "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
     "section": "",
-    "text": "Important\n\n\n\nNote: All plots labeled “Original published figure” are taken from\nDiallo et al., Scientific Reports (2020).\nAll analytical steps in this portfolio project (data structure design,\ndata cleaning, harmonization of AST results, resistance calculations,\nDTR classification, and statistical workflow) are reproduced using\nfully simulated datasets to ensure GDPR and data protection compliance.\nNo original isolate-level or patient-level data were reused.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "Important\n\n\n\nNote: All plots labeled “Original published figure” are taken from Diallo et al., Scientific Reports (2020).\nAll analytical steps in this portfolio project (data structure design, data cleaning, harmonization of AST results, resistance calculations, DTR classification, and statistical workflow) are reproduced using fully simulated datasets to ensure GDPR and data protection compliance.\nNo original isolate-level or patient-level data were reused.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/major_consumption.html#resistance-trends-remained-globally-stable-20142018",
     "href": "projects/major_consumption.html#resistance-trends-remained-globally-stable-20142018",
     "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
     "section": "1. Resistance trends remained globally stable (2014–2018)",
-    "text": "1. Resistance trends remained globally stable (2014–2018)\n\nOxacillin resistance in S. aureus: stable\n\nCarbapenem resistance in Enterobacterales: stable\n\n3GC resistance in E. coli and K. pneumoniae: stable"
+    "text": "1. Resistance trends remained globally stable (2014–2018)\n\nGlobal stability across most pathogen–antibiotic pairs\nNo major shifts in S. aureus, Enterobacterales, or P. aeruginosa\nClear exceptions highlighted below\n\n\n\n\nFigure 1: Trend in resistance to key antibiotics for E. coli (simulated RWE)"
   },
   {
     "objectID": "projects/major_consumption.html#confirmed-significant-decreases",
@@ -1692,5 +1692,40 @@
     "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
     "section": "4. DTR Phenotypes remain extremely rare",
     "text": "4. DTR Phenotypes remain extremely rare\n\n0.3% of isolates\n\nMostly Gram-negative\n\nLower than rates reported in U.S. hospital networks\n\nNo upward trend observed\n\nTable 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region\n(January 2014 – February 2019)\n\n\n\n\n\n\n\n\nBacterial species\nDTR strains (n / total)\nPercentage (%)\n\n\n\n\nEscherichia coli\n85 / 246,353\n0.03\n\n\nKlebsiella pneumoniae\n372 / 49,733\n0.74\n\n\nKlebsiella oxytoca\n11 / 7,887\n0.13\n\n\nProteus mirabilis\n1 / 18,064\n0.006\n\n\nSerratia marcescens\n3 / 4,437\n0.07\n\n\nMorganella morganii\n5 / 4,935\n0.10\n\n\nEnterobacter cloacae\n33 / 14,620\n0.20\n\n\nEnterobacter aerogenes\n6 / 6,982\n0.09\n\n\nPseudomonas aeruginosa\n902 / 34,966\n2.60\n\n\nAcinetobacter baumannii\n175 / 1,098\n15.90\n\n\nEnterococcus faecalis\n3 / 36,857\n0.008\n\n\nEnterococcus faecium\n5 / 4,871\n0.10\n\n\nStaphylococcus aureus\n0 / 65,023\n0.00\n\n\nStaphylococcus epidermidis\n3 / 28,527\n0.01\n\n\nStreptococcus agalactiae\n0 / 14,684\n0.00\n\n\nTotal\n1,604 / 539,037\n0.30\n\n\n\nTable 5b. Comparison of DTR prevalence between PACA region and 173 U.S. hospitals (Kadri et al., 2018)\n\n\n\n\n\n\n\n\n\nBacterial species\nDTR strains (n / total)\nPercentage (%)\nU.S. hospitals (Kadri 2018)\n\n\n\n\nEscherichia coli\n85 / 246,353\n0.03\n0.04\n\n\nKlebsiella pneumoniae\n372 / 49,733\n0.74\n1.70\n\n\nEnterobacter cloacae\n33 / 14,620\n0.20\n0.60\n\n\nEnterobacter aerogenes\n6 / 6,982\n0.09\n0.60\n\n\nPseudomonas aeruginosa\n902 / 34,966\n2.60\n2.30\n\n\nAcinetobacter baumannii\n175 / 1,098\n15.90\n18.30\n\n\nTotal\n1,573 / 353,752\n0.44\n1.01 (471/46,521)"
+  },
+  {
+    "objectID": "projects/major_consumption.html#significant-reductions-in-resistance",
+    "href": "projects/major_consumption.html#significant-reductions-in-resistance",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "2. Significant reductions in resistance",
+    "text": "2. Significant reductions in resistance\n\nAmikacin resistance decreased in E. coli, K. pneumoniae, P. mirabilis, K. oxytoca.\nImipenem resistance declined in A. baumannii."
+  },
+  {
+    "objectID": "projects/major_consumption.html#significant-increases-in-resistance",
+    "href": "projects/major_consumption.html#significant-increases-in-resistance",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "3. Significant increases in resistance",
+    "text": "3. Significant increases in resistance\n\nCeftriaxone resistance in:\n\nE. cloacae\nK. aerogenes\nK. oxytoca"
+  },
+  {
+    "objectID": "projects/major_consumption.html#species-distribution-simulated-rwd",
+    "href": "projects/major_consumption.html#species-distribution-simulated-rwd",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "Species distribution (simulated RWD)",
+    "text": "Species distribution (simulated RWD)\n\n\n\nFigure 2: Most frequently isolated bacterial soecies"
+  },
+  {
+    "objectID": "projects/major_consumption.html#resistance-profiles-across-pathogens",
+    "href": "projects/major_consumption.html#resistance-profiles-across-pathogens",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "4. Resistance profiles across pathogens",
+    "text": "4. Resistance profiles across pathogens\nThis heatmap summarizes the resistance phenotypes by pathogen and antibiotic class, highlighting strong resistance clusters (e.g., E. faecium, A. baumannii) and preserved susceptibilities in Gram-positive organisms.\n\n\n\nFig 3: Heatmap resistance profiles"
+  },
+  {
+    "objectID": "projects/major_consumption.html#prevalence-of-dtr-phenotypes",
+    "href": "projects/major_consumption.html#prevalence-of-dtr-phenotypes",
+    "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
+    "section": "5. Prevalence of DTR Phenotypes",
+    "text": "5. Prevalence of DTR Phenotypes\n\n0.3% of isolates\nMostly Gram-negative\nLower than rates reported in U.S. hospital networks\nNo upward trend observed\n\nTable 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region (January 2014 – February 2019)\n\n\n\n\n\n\n\n\nBacterial species\nDTR strains (n / total)\nPercentage (%)\n\n\n\n\nEscherichia coli\n85 / 246,353\n0.03\n\n\nKlebsiella pneumoniae\n372 / 49,733\n0.74\n\n\nKlebsiella oxytoca\n11 / 7,887\n0.13\n\n\nProteus mirabilis\n1 / 18,064\n0.006\n\n\nSerratia marcescens\n3 / 4,437\n0.07\n\n\nMorganella morganii\n5 / 4,935\n0.10\n\n\nEnterobacter cloacae\n33 / 14,620\n0.20\n\n\nEnterobacter aerogenes\n6 / 6,982\n0.09\n\n\nPseudomonas aeruginosa\n902 / 34,966\n2.60\n\n\nAcinetobacter baumannii\n175 / 1,098\n15.90\n\n\nEnterococcus faecalis\n3 / 36,857\n0.008\n\n\nEnterococcus faecium\n5 / 4,871\n0.10\n\n\nStaphylococcus aureus\n0 / 65,023\n0.00\n\n\nStaphylococcus epidermidis\n3 / 28,527\n0.01\n\n\nStreptococcus agalactiae\n0 / 14,684\n0.00\n\n\nTotal\n1,604 / 539,037\n0.30\n\n\n\nTable 5b. Comparison of DTR prevalence between PACA region and 173 U.S. hospitals (Kadri et al., 2018)\n\n\n\n\n\n\n\n\n\nBacterial species\nDTR strains (n / total)\nPercentage (%)\nU.S. hospitals (Kadri 2018)\n\n\n\n\nEscherichia coli\n85 / 246,353\n0.03\n0.04\n\n\nKlebsiella pneumoniae\n372 / 49,733\n0.74\n1.70\n\n\nEnterobacter cloacae\n33 / 14,620\n0.20\n0.60\n\n\nEnterobacter aerogenes\n6 / 6,982\n0.09\n0.60\n\n\nPseudomonas aeruginosa\n902 / 34,966\n2.60\n2.30\n\n\nAcinetobacter baumannii\n175 / 1,098\n15.90\n18.30\n\n\nTotal\n1,573 / 353,752\n0.44\n1.01 (471/46,521)"
   }
 ]

@@ -11,13 +11,9 @@ format:
 ---
 
 ::: callout-important
-**Note:** All plots labeled *“Original published figure”* are taken from\
-**Diallo et al., Scientific Reports (2020)**.
+**Note:** All plots labeled *“Original published figure”* are taken from **Diallo et al., Scientific Reports (2020)**.
 
-All analytical steps in this portfolio project (data structure design,\
-data cleaning, harmonization of AST results, resistance calculations,\
-DTR classification, and statistical workflow) are reproduced using\
-**fully simulated datasets** to ensure GDPR and data protection compliance.
+All analytical steps in this portfolio project (data structure design, data cleaning, harmonization of AST results, resistance calculations, DTR classification, and statistical workflow) are reproduced using **fully simulated datasets** to ensure GDPR and data protection compliance.
 
 No original isolate-level or patient-level data were reused.
 :::
@@ -28,14 +24,13 @@ This portfolio project reconstructs the analytical workflow and Real-World Evide
 
 > **Diallo OO et al. Major discrepancy between factual antibiotic resistance and consumption in South of France. *Scientific Reports* 2020;10:18262.**
 
-The goal is not to reproduce the original results, but to demonstrate the full RWE analytic pipeline using\
-**synthetic data modeled after the real-world microbiology surveillance network** used in the publication.
+The goal is not to reproduce the original results, but to demonstrate the full RWE analytic pipeline using **synthetic data modeled after the real-world microbiology surveillance network** used in the publication.
 
 This approach allows:
 
--   faithful reconstruction of the study design,\
--   demonstration of large-scale RWE data engineering skills,\
--   reproduction of the DTR classification approach,\
+-   faithful reconstruction of the study design,
+-   demonstration of large-scale RWE data engineering skills,
+-   reproduction of the DTR classification approach,
 -   and illustration of AMR trend analysis techniques—
 
 while remaining fully compliant with GDPR and ethical requirements.
@@ -46,12 +41,16 @@ Original figures from the publication are included for scientific context and co
 
 # Background
 
-Antimicrobial resistance (AMR) is often quantified using **predictive mathematical models**, which may not reflect real-world patterns.\
+Antimicrobial resistance (AMR) is often quantified using **predictive mathematical models**, which may not reflect real-world patterns.
+
 The Scientific Reports study analyzed **539,037 bacterial isolates** collected across **267 laboratories** to quantify:
 
--   Real-world resistance trends over time\
--   Discrepancies between resistance and antibiotic consumption\
--   Prevalence of **Difficult-to-Treat (DTR)** phenotypes (Kadri et al.)\
+-   Real-world resistance trends over time
+
+-   Discrepancies between resistance and antibiotic consumption
+
+-   Prevalence of **Difficult-to-Treat (DTR)** phenotypes (Kadri et al.)
+
 -   Temporal evolution of key pathogens (E. coli, K. pneumoniae, S. aureus, A. baumannii…)
 
 This portfolio project reproduces the **analytic strategy**, **statistical logic**, and **visual narratives** using simulated data.
@@ -62,16 +61,18 @@ This portfolio project reproduces the **analytic strategy**, **statistical logic
 
 1.  Reconstruct the study design used in the original 2020 publication.
 
-2.  Create a clean analytic workflow using modern RWE standards.\
+2.  Create a clean analytic workflow using modern RWE standards.
+
 3.  Simulate datasets matching the structure and distribution of the original study.
 
 4.  Reproduce key indicators:
+
     -   Resistance to key antibiotics
-    
+
     -   Temporal trends (2014–2018)
-    
+
     -   DTR classification
-    
+
 5.  Produce RWE-style visualizations (forest plots, timeline trends).
 
 6.  Summarize clinical and public health implications.
@@ -164,34 +165,40 @@ Although data are simulated, trends reproduce the structure of published finding
 
 ## 1. Resistance trends remained globally stable (2014–2018)
 
--   Oxacillin resistance in *S. aureus*: stable
+-   Global stability across most pathogen–antibiotic pairs
 
--   Carbapenem resistance in Enterobacterales: stable
+-   No major shifts in *S. aureus*, *Enterobacterales*, or *P. aeruginosa*
 
--   3GC resistance in *E. coli* and *K. pneumoniae*: stable
-
-## 2. Confirmed significant decreases
-
--   **Amikacin resistance** declined across most Enterobacterales
-
--   **Imipenem resistance** in *A. baumannii* decreased significantly
+-   Clear exceptions highlighted below
 
 ![Figure 1: Trend in resistance to key antibiotics for E. coli (simulated RWE)](images/amr_trends_panels.png)
 
+## 2. Significant reductions in resistance
 
-## 3. Confirmed increases in specific pathogens
+-   **Amikacin resistance** decreased in *E. coli*, *K. pneumoniae*, *P. mirabilis*, *K. oxytoca*.
+
+-   **Imipenem resistance** declined in *A. baumannii*.
+
+## 3. Significant increases in resistance
 
 -   Ceftriaxone resistance in:
     -   *E. cloacae*
-    
+
     -   *K. aerogenes*
-    
+
     -   *K. oxytoca*
 
-![Figure 1: Most frequently isolated bacterial soecies](images/most_frequent.png)
+## Species distribution (simulated RWD)
 
+![Figure 2: Most frequently isolated bacterial soecies](images/most_frequent.png)
 
-## 4. DTR Phenotypes remain extremely rare
+## 4. Resistance profiles across pathogens
+
+This heatmap summarizes the resistance phenotypes by pathogen and antibiotic class, highlighting strong resistance clusters (e.g., *E. faecium*, *A. baumannii*) and preserved susceptibilities in Gram-positive organisms.
+
+![Fig 3: Heatmap resistance profiles](images/heatmap_atb_spec.png)
+
+## 5. Prevalence of DTR Phenotypes
 
 -   **0.3% of isolates**
 
@@ -201,46 +208,42 @@ Although data are simulated, trends reproduce the structure of published finding
 
 -   No upward trend observed
 
-Table 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region  
-(January 2014 – February 2019)
+Table 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region (January 2014 – February 2019)
 
-| Bacterial species         | DTR strains (n / total)      | Percentage (%) |
-|--------------------------|------------------------------|----------------|
-| *Escherichia coli*       | 85 / 246,353                 | 0.03           |
-| *Klebsiella pneumoniae*  | 372 / 49,733                 | 0.74           |
-| *Klebsiella oxytoca*     | 11 / 7,887                   | 0.13           |
-| *Proteus mirabilis*      | 1 / 18,064                   | 0.006          |
-| *Serratia marcescens*    | 3 / 4,437                    | 0.07           |
-| *Morganella morganii*    | 5 / 4,935                    | 0.10           |
-| *Enterobacter cloacae*   | 33 / 14,620                  | 0.20           |
-| *Enterobacter aerogenes* | 6 / 6,982                    | 0.09           |
-| *Pseudomonas aeruginosa* | 902 / 34,966                 | 2.60           |
-| *Acinetobacter baumannii*| 175 / 1,098                  | 15.90          |
-| *Enterococcus faecalis*  | 3 / 36,857                   | 0.008          |
-| *Enterococcus faecium*   | 5 / 4,871                    | 0.10           |
-| *Staphylococcus aureus*  | 0 / 65,023                   | 0.00           |
+| Bacterial species            | DTR strains (n / total) | Percentage (%) |
+|------------------------------|-------------------------|----------------|
+| *Escherichia coli*           | 85 / 246,353            | 0.03           |
+| *Klebsiella pneumoniae*      | 372 / 49,733            | 0.74           |
+| *Klebsiella oxytoca*         | 11 / 7,887              | 0.13           |
+| *Proteus mirabilis*          | 1 / 18,064              | 0.006          |
+| *Serratia marcescens*        | 3 / 4,437               | 0.07           |
+| *Morganella morganii*        | 5 / 4,935               | 0.10           |
+| *Enterobacter cloacae*       | 33 / 14,620             | 0.20           |
+| *Enterobacter aerogenes*     | 6 / 6,982               | 0.09           |
+| *Pseudomonas aeruginosa*     | 902 / 34,966            | 2.60           |
+| *Acinetobacter baumannii*    | 175 / 1,098             | 15.90          |
+| *Enterococcus faecalis*      | 3 / 36,857              | 0.008          |
+| *Enterococcus faecium*       | 5 / 4,871               | 0.10           |
+| *Staphylococcus aureus*      | 0 / 65,023              | 0.00           |
 | *Staphylococcus epidermidis* | 3 / 28,527              | 0.01           |
-| *Streptococcus agalactiae*  | 0 / 14,684                | 0.00           |
-| **Total**                | **1,604 / 539,037**          | **0.30**       |
+| *Streptococcus agalactiae*   | 0 / 14,684              | 0.00           |
+| **Total**                    | **1,604 / 539,037**     | **0.30**       |
 
 : {.striped .hover}
-
 
 Table 5b. Comparison of DTR prevalence between PACA region and 173 U.S. hospitals (Kadri et al., 2018)
 
-| Bacterial species         | DTR strains (n / total) | Percentage (%) | U.S. hospitals (Kadri 2018) |
-|--------------------------|--------------------------|----------------|-----------------------------|
-| *Escherichia coli*       | 85 / 246,353             | 0.03           | 0.04                        |
-| *Klebsiella pneumoniae*  | 372 / 49,733             | 0.74           | 1.70                        |
-| *Enterobacter cloacae*   | 33 / 14,620              | 0.20           | 0.60                        |
-| *Enterobacter aerogenes* | 6 / 6,982                | 0.09           | 0.60                        |
-| *Pseudomonas aeruginosa* | 902 / 34,966             | 2.60           | 2.30                        |
-| *Acinetobacter baumannii*| 175 / 1,098              | 15.90          | 18.30                       |
-| **Total**                | **1,573 / 353,752**      | **0.44**       | **1.01 (471/46,521)**       |
+| Bacterial species | DTR strains (n / total) | Percentage (%) | U.S. hospitals (Kadri 2018) |
+|------------------|------------------|-----------------|--------------------|
+| *Escherichia coli* | 85 / 246,353 | 0.03 | 0.04 |
+| *Klebsiella pneumoniae* | 372 / 49,733 | 0.74 | 1.70 |
+| *Enterobacter cloacae* | 33 / 14,620 | 0.20 | 0.60 |
+| *Enterobacter aerogenes* | 6 / 6,982 | 0.09 | 0.60 |
+| *Pseudomonas aeruginosa* | 902 / 34,966 | 2.60 | 2.30 |
+| *Acinetobacter baumannii* | 175 / 1,098 | 15.90 | 18.30 |
+| **Total** | **1,573 / 353,752** | **0.44** | **1.01 (471/46,521)** |
 
 : {.striped .hover}
-
-
 
 ------------------------------------------------------------------------
 
@@ -322,10 +325,8 @@ It demonstrates:
 
 ------------------------------------------------------------------------
 
-# Source Publication (Referenced)
+# Publication (Referenced)
 
-Diallo OO, Baron SA, Dubourg G, et al.
-**Major discrepancy between factual antibiotic resistance and consumption in South of France**.
-*Scientific Reports* 2020;10:18262.
+Diallo OO, Baron SA, Dubourg G, et al. **Major discrepancy between factual antibiotic resistance and consumption in South of France**. *Scientific Reports* 2020;10:18262.
 
 ------------------------------------------------------------------------
