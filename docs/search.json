@@ -1663,14 +1663,14 @@
     "href": "projects/major_consumption.html",
     "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
     "section": "",
-    "text": "Important\n\n\n\nNote: All plots labeled “Original published figure” are taken from\nDiallo et al., Scientific Reports (2020).\nAll analytical steps in this portfolio project (data structure design,\ndata cleaning, harmonization of AST results, resistance calculations,\nDTR classification, and statistical workflow) are reproduced using\nfully simulated datasets to ensure GDPR and data protection compliance.\nNo original isolate-level or patient-level data were reused.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+    "text": "Important\n\n\n\nNote: All plots labeled “Original published figure” are taken from Diallo et al., Scientific Reports (2020).\nAll analytical steps in this portfolio project (data structure design, data cleaning, harmonization of AST results, resistance calculations, DTR classification, and statistical workflow) are reproduced using fully simulated datasets to ensure GDPR and data protection compliance.\nNo original isolate-level or patient-level data were reused.\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
   },
   {
     "objectID": "projects/major_consumption.html#resistance-trends-remained-globally-stable-20142018",
     "href": "projects/major_consumption.html#resistance-trends-remained-globally-stable-20142018",
     "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
     "section": "1. Resistance trends remained globally stable (2014–2018)",
-    "text": "1. Resistance trends remained globally stable (2014–2018)\n\nOxacillin resistance in S. aureus: stable\n\nCarbapenem resistance in Enterobacterales: stable\n\n3GC resistance in E. coli and K. pneumoniae: stable"
+    "text": "1. Resistance trends remained globally stable (2014–2018)\n\nGlobal stability across most pathogen–antibiotic pairs\nNo major shifts in S. aureus, Enterobacterales, or P. aeruginosa\nClear exceptions highlighted below\n\n\n\n\nFigure 1: Trend in resistance to key antibiotics for E. coli (simulated RWE)"
   },
   {
     "objectID": "projects/major_consumption.html#confirmed-significant-decreases",
@@ -1727,5 +1727,82 @@
     "title": "RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France.",
     "section": "5. Prevalence of DTR Phenotypes",
     "text": "5. Prevalence of DTR Phenotypes\n\n0.3% of isolates\nMostly Gram-negative\nLower than rates reported in U.S. hospital networks\nNo upward trend observed\n\nTable 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region (January 2014 – February 2019)\n\n\n\n\n\n\n\n\nBacterial species\nDTR strains (n / total)\nPercentage (%)\n\n\n\n\nEscherichia coli\n85 / 246,353\n0.03\n\n\nKlebsiella pneumoniae\n372 / 49,733\n0.74\n\n\nKlebsiella oxytoca\n11 / 7,887\n0.13\n\n\nProteus mirabilis\n1 / 18,064\n0.006\n\n\nSerratia marcescens\n3 / 4,437\n0.07\n\n\nMorganella morganii\n5 / 4,935\n0.10\n\n\nEnterobacter cloacae\n33 / 14,620\n0.20\n\n\nEnterobacter aerogenes\n6 / 6,982\n0.09\n\n\nPseudomonas aeruginosa\n902 / 34,966\n2.60\n\n\nAcinetobacter baumannii\n175 / 1,098\n15.90\n\n\nEnterococcus faecalis\n3 / 36,857\n0.008\n\n\nEnterococcus faecium\n5 / 4,871\n0.10\n\n\nStaphylococcus aureus\n0 / 65,023\n0.00\n\n\nStaphylococcus epidermidis\n3 / 28,527\n0.01\n\n\nStreptococcus agalactiae\n0 / 14,684\n0.00\n\n\nTotal\n1,604 / 539,037\n0.30\n\n\n\nTable 5b. Comparison of DTR prevalence between PACA region and 173 U.S. hospitals (Kadri et al., 2018)\n\n\n\n\n\n\n\n\n\nBacterial species\nDTR strains (n / total)\nPercentage (%)\nU.S. hospitals (Kadri 2018)\n\n\n\n\nEscherichia coli\n85 / 246,353\n0.03\n0.04\n\n\nKlebsiella pneumoniae\n372 / 49,733\n0.74\n1.70\n\n\nEnterobacter cloacae\n33 / 14,620\n0.20\n0.60\n\n\nEnterobacter aerogenes\n6 / 6,982\n0.09\n0.60\n\n\nPseudomonas aeruginosa\n902 / 34,966\n2.60\n2.30\n\n\nAcinetobacter baumannii\n175 / 1,098\n15.90\n18.30\n\n\nTotal\n1,573 / 353,752\n0.44\n1.01 (471/46,521)"
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html",
+    "href": "projects/AMR_Surveillance_SQL _Project.html",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "",
+    "text": "This project demonstrates how I used SQL to extract, clean, and transform routine microbiology laboratory surveillance data into an analysis-ready dataset suitable for epidemiological and real-world evidence (RWE) analytics.\nThe dataset contained:\n\nBacterial isolates\n\nSusceptibility results across multiple antibiotics (S/I/R)\n\nPatient identifiers\n\nCollection dates\n\nECDC resistance classifications\n\nThese scripts were originally developed during my PhD work on antimicrobial resistance (AMR) surveillance.\nThe goal of the pipeline is to:\n\nExtract pathogen-specific susceptibility profiles\n\nBuild time series of resistance phenotypes\n\nApply data quality checks\n\nCompute statistical control limits (mean ± 2 SD)\n\nIdentify pathogens with unusual activity (“early-warning signals”)\nOusmane Diallo, MPH-PhD – Biostatistician, Data Scientist & Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research."
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#extracting-susceptibility-profiles-for-escherichia-coli",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#extracting-susceptibility-profiles-for-escherichia-coli",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "Extracting Susceptibility Profiles for Escherichia coli",
+    "text": "Extracting Susceptibility Profiles for Escherichia coli\nThe first query extracts the full panel of antibiotic susceptibility results for E. coli isolates with non-missing phenotype classification.\nSELECT agent, AMX, AMC, TZP, CF, CRO, FEP, ETP, IPM, CS, AN, GEN, CIP, FOS, FT, DOX, SXT FROM tous WHERE agent = 'Escherichia coli' AND k_pheno"
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#monthly-time-series-of-difficult-to-treat-resistance-dtr",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#monthly-time-series-of-difficult-to-treat-resistance-dtr",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "Monthly Time Series of Difficult-to-Treat Resistance (DTR)",
+    "text": "Monthly Time Series of Difficult-to-Treat Resistance (DTR)\nThis query identifies E. coli isolates with reduced susceptibility to both ceftriaxone (CRO) and imipenem (IPM) — a proxy for difficult-to-treat (DTR) phenotypes — and aggregates them monthly.\nSELECT\n    YEAR(datdem)              AS year,\n    MONTH(datdem)             AS month,\n    DATE_FORMAT(datdem,'%Y%m') AS ym,\n    COUNT(*)                  AS n_isolates\nFROM (\n    SELECT *\n    FROM tous\n    WHERE CRO IN ('R', 'I')\n      AND IPM IN ('R', 'I')\n      AND agent = 'Escherichia coli'\n) AS z\nGROUP BY ym\nORDER BY ym ASC;"
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#stratified-extraction-by-ecdc-class-for-staphylococcus-aureus",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#stratified-extraction-by-ecdc-class-for-staphylococcus-aureus",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "Stratified Extraction by ECDC Class for Staphylococcus aureus",
+    "text": "Stratified Extraction by ECDC Class for Staphylococcus aureus\nThis query extracts susceptibility data for S. aureus, stratified by ECDC resistance class (useful for MRSA surveillance).\nSELECT\n    ecdcClass,\n    P,\n    OX,\n    FOX,\n    VA,\n    TEC,\n    E,\n    PT,\n    GEN,\n    CIP,\n    LNZ,\n    FOS,\n    DOX,\n    FA,\n    SXT,\n    RA\nFROM tous\nWHERE agent = 'Staphylococcus aureus'\n  AND ecdcClass IS NOT NULL;"
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#advanced-surveillance-weekly-counts-and-control-limits-mean-2-sd",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#advanced-surveillance-weekly-counts-and-control-limits-mean-2-sd",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "Advanced Surveillance: Weekly Counts and Control Limits (Mean ± 2 SD)",
+    "text": "Advanced Surveillance: Weekly Counts and Control Limits (Mean ± 2 SD)\nThis more complex SQL pipeline:\n\nBuilds a complete agent × week time grid\nComputes weekly counts of isolates\nCalculates global statistics (cumulative count, mean, SD)\nRetrieves the count for the latest surveillance week\nCompares it to expected behavior using control limits (mean ± 2 SD)\n\n\nWITH weekly_counts AS (\n    SELECT\n        agent,\n        DATE_FORMAT(datdem, '%x%v') AS w,\n        COUNT(DISTINCT patuuid)     AS n\n    FROM tous\n    WHERE bacteria = 1\n      AND patuuid IS NOT NULL\n    GROUP BY agent, DATE_FORMAT(datdem, '%x%v')\n),\nall_weeks AS (\n    SELECT DISTINCT DATE_FORMAT(datdem, '%x%v') AS w\n    FROM tous\n    WHERE agent = 'Escherichia coli'\n),\nall_agents AS (\n    SELECT DISTINCT agent\n    FROM tous\n    WHERE bacteria = 1\n),\ngrid AS (\n    SELECT a.agent, b.w\n    FROM all_agents a\n    CROSS JOIN all_weeks b\n),\nfull_ts AS (\n    SELECT\n        g.agent,\n        g.w,\n        COALESCE(wc.n, 0) AS n\n    FROM grid g\n    LEFT JOIN weekly_counts wc\n      ON g.agent = wc.agent\n     AND g.w     = wc.w\n),\nsummary_stats AS (\n    SELECT\n        agent,\n        SUM(n)              AS cuml,\n        AVG(n)              AS m,\n        AVG(n) - 2*STD(n)   AS inf,\n        AVG(n) + 2*STD(n)   AS sup\n    FROM full_ts\n    GROUP BY agent\n),\nlatest_week AS (\n    SELECT MAX(DATE_FORMAT(datdem, '%x%v')) AS w\n    FROM tous\n    WHERE agent = 'Escherichia coli'\n),\nlatest_counts AS (\n    SELECT\n        f.agent,\n        f.w,\n        f.n\n    FROM full_ts f\n    JOIN latest_week lw\n      ON f.w = lw.w\n)\nSELECT\n    s.agent,\n    s.cuml,\n    s.m,\n    s.inf,\n    s.sup,\n    l.n AS latest_n\nFROM summary_stats s\nLEFT JOIN latest_counts l\n  ON s.agent = l.agent\nORDER BY s.cuml DESC;"
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#introduction",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#introduction",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "",
+    "text": "This project demonstrates how I used SQL to extract, clean, and transform routine microbiology laboratory surveillance data into an analysis-ready dataset suitable for epidemiological and real-world evidence (RWE) analytics.\nThe dataset contained:\n\nBacterial isolates\n\nSusceptibility results across multiple antibiotics (S/I/R)\n\nPatient identifiers\n\nCollection dates\n\nECDC resistance classifications\n\nThese scripts were originally developed during my PhD work on antimicrobial resistance (AMR) surveillance.\nThe goal of the pipeline is to:\n\nExtract pathogen-specific susceptibility profiles\n\nBuild time series of resistance phenotypes\n\nApply data quality checks\n\nCompute statistical control limits (mean ± 2 SD)\n\nIdentify pathogens with unusual activity (“early-warning signals”)"
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#data-model-overview",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#data-model-overview",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "Data Model Overview",
+    "text": "Data Model Overview\nFor demonstration purposes, I use a simplified representation of the underlying microbiology database.\nThe main table is assumed to be tous, containing:\n\nagent – bacterial species\n\ndatdem – specimen collection date\n\npatuuid – patient identifier\n\nbacteria – indicator for bacterial isolates\n\nk_pheno – phenotype classification\n\necdcClass – ECDC resistance class\n\nColumns for antibiotics coded as S / I / R (e.g., AMX, AMC, TZP, CF, CRO, FEP, IPM, GEN, CIP, etc.)"
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#focus-on-priority-pathogens",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#focus-on-priority-pathogens",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "Focus on Priority Pathogens",
+    "text": "Focus on Priority Pathogens\nThis final query filters the dataset to common priority pathogens relevant to clinical and epidemiological monitoring.\nSELECT *\nFROM tous\nWHERE agent IN (\n    'Escherichia coli',\n    'Staphylococcus aureus',\n    'Pseudomonas aeruginosa',\n    'Klebsiella pneumoniae',\n    'Staphylococcus epidermidis',\n    'Proteus mirabilis',\n    'Enterococcus faecalis',\n    'Streptococcus pneumoniae',\n    'Enterobacter cloacae',\n    'Streptococcus agalactiae',\n    'Enterococcus faecium',\n    'Morganella morganii',\n    'Enterobacter aerogenes',\n    'Streptococcus pyogenes',\n    'Neisseria meningitidis'\n);"
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#outcomes-impact",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#outcomes-impact",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "Outcomes & Impact",
+    "text": "Outcomes & Impact\n\nBuilt an analysis-ready AMR dataset for multiple pathogens and antibiotics.\nEnabled routine weekly and monthly AMR surveillance.\nImplemented data quality checks, including missingness, impossible values, and duplicate detection.\nConstructed statistical early-warning indicators using control limits.\nProvided clean inputs for downstream epidemiological models and dashboards."
+  },
+  {
+    "objectID": "projects/AMR_Surveillance_SQL _Project.html#key-skills-demonstrated",
+    "href": "projects/AMR_Surveillance_SQL _Project.html#key-skills-demonstrated",
+    "title": "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL",
+    "section": "Key Skills Demonstrated",
+    "text": "Key Skills Demonstrated\n\nSQL data extraction & joins\nTime-series aggregation & surveillance logic\nControl-limit / anomaly detection\nHealth data quality pipeline\nAntimicrobial resistance epidemiology\nReal-world evidence workflows"
+  },
+  {
+    "objectID": "portfolio.html#health-data-engineering-sql-analytics",
+    "href": "portfolio.html#health-data-engineering-sql-analytics",
+    "title": "Portfolio",
+    "section": "🧩 Health Data Engineering & SQL Analytics",
+    "text": "🧩 Health Data Engineering & SQL Analytics\nData extraction, cleaning, transformation, and automation for clinical and public health datasets.\nThis section highlights my work in SQL-based data engineering, including dataset structuring, time-series extraction, anomaly detection, and building analysis-ready pipelines for real-world evidence (RWE) and AMR surveillance.\n\nFeatured Projects\n🔹 Antimicrobial Resistance Surveillance: Analysis-Ready Dataset Using SQL\nThe project demonstrates:\n\nSQL data extraction across large microbiology datasets\nDataset cleaning and missingness handling\nWeekly/monthly time-series construction\nControl-limit–based anomaly detection (mean ± 2 SD)\nSurveillance logic for early-warning signals"
   }
 ]

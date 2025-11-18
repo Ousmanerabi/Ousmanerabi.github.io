@@ -117,6 +117,30 @@ Key themes include:
 
 <hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
 
+## 🧩 Health Data Engineering & SQL Analytics
+*Data extraction, cleaning, transformation, and automation for clinical and public health datasets.*
+
+This section highlights my work in SQL-based data engineering, including dataset structuring, time-series extraction, anomaly detection, and building analysis-ready pipelines for real-world evidence (RWE) and AMR surveillance.
+
+### Featured Projects
+
+🔹 [Antimicrobial Resistance Surveillance: Analysis-Ready Dataset Using SQL](projects/AMR_Surveillance_SQL _Project.html)
+
+The project demonstrates:
+
+-  SQL data extraction across large microbiology datasets
+
+-  Dataset cleaning and missingness handling
+
+-  Weekly/monthly time-series construction
+
+-  Control-limit–based anomaly detection (mean ± 2 SD)
+
+-  Surveillance logic for early-warning signals
+
+<hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
+
+
 ## 🤖 Machine Learning & Predictive Analytics
 
 *Advanced modeling and classification for outcome prediction and health system performance.*

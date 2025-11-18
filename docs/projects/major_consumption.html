@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ousmane Diallo, MPH-PhD">
+<meta name="dcterms.date" content="2025-11-16">
 <meta name="description" content="Reproduction of the published RWE analysis: ‘Major Discrepancy Between Factual Antibiotic Resistance and Consumption in South of France’ (Scientific Reports, 2020), using simulated/aggregated data.">
 
 <title>RWE Reproduction Project: Antibiotic Resistance Surveillance in Southeast France. – Ousmane Diallo, MPH-PhD</title>
@@ -165,16 +166,18 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#key-rwe-insights-from-simulated-reproduction" id="toc-key-rwe-insights-from-simulated-reproduction" class="nav-link" data-scroll-target="#key-rwe-insights-from-simulated-reproduction">Key RWE Insights (From Simulated Reproduction)</a>
   <ul class="collapse">
   <li><a href="#resistance-trends-remained-globally-stable-20142018" id="toc-resistance-trends-remained-globally-stable-20142018" class="nav-link" data-scroll-target="#resistance-trends-remained-globally-stable-20142018">1. Resistance trends remained globally stable (2014–2018)</a></li>
-  <li><a href="#confirmed-significant-decreases" id="toc-confirmed-significant-decreases" class="nav-link" data-scroll-target="#confirmed-significant-decreases">2. Confirmed significant decreases</a></li>
-  <li><a href="#confirmed-increases-in-specific-pathogens" id="toc-confirmed-increases-in-specific-pathogens" class="nav-link" data-scroll-target="#confirmed-increases-in-specific-pathogens">3. Confirmed increases in specific pathogens</a></li>
-  <li><a href="#dtr-phenotypes-remain-extremely-rare" id="toc-dtr-phenotypes-remain-extremely-rare" class="nav-link" data-scroll-target="#dtr-phenotypes-remain-extremely-rare">4. DTR Phenotypes remain extremely rare</a></li>
+  <li><a href="#significant-reductions-in-resistance" id="toc-significant-reductions-in-resistance" class="nav-link" data-scroll-target="#significant-reductions-in-resistance">2. Significant reductions in resistance</a></li>
+  <li><a href="#significant-increases-in-resistance" id="toc-significant-increases-in-resistance" class="nav-link" data-scroll-target="#significant-increases-in-resistance">3. Significant increases in resistance</a></li>
+  <li><a href="#species-distribution-simulated-rwd" id="toc-species-distribution-simulated-rwd" class="nav-link" data-scroll-target="#species-distribution-simulated-rwd">Species distribution (simulated RWD)</a></li>
+  <li><a href="#resistance-profiles-across-pathogens" id="toc-resistance-profiles-across-pathogens" class="nav-link" data-scroll-target="#resistance-profiles-across-pathogens">4. Resistance profiles across pathogens</a></li>
+  <li><a href="#prevalence-of-dtr-phenotypes" id="toc-prevalence-of-dtr-phenotypes" class="nav-link" data-scroll-target="#prevalence-of-dtr-phenotypes">5. Prevalence of DTR Phenotypes</a></li>
   </ul></li>
   <li><a href="#clinical-public-health-interpretation" id="toc-clinical-public-health-interpretation" class="nav-link" data-scroll-target="#clinical-public-health-interpretation">Clinical &amp; Public Health Interpretation</a></li>
   <li><a href="#ethical-considerations" id="toc-ethical-considerations" class="nav-link" data-scroll-target="#ethical-considerations">Ethical Considerations</a></li>
   <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   <li><a href="#skills-demonstrated" id="toc-skills-demonstrated" class="nav-link" data-scroll-target="#skills-demonstrated">Skills Demonstrated</a></li>
-  <li><a href="#source-publication-referenced" id="toc-source-publication-referenced" class="nav-link" data-scroll-target="#source-publication-referenced">Source Publication (Referenced)</a></li>
+  <li><a href="#publication-referenced" id="toc-publication-referenced" class="nav-link" data-scroll-target="#publication-referenced">Publication (Referenced)</a></li>
   </ul>
 </nav>
     </div>
@@ -189,6 +192,7 @@ ul.task-list li input[type="checkbox"] {
     <div class="quarto-category">Real-World Data</div>
     <div class="quarto-category">Antimicrobial Resistance</div>
     <div class="quarto-category">Epidemiology</div>
+    <div class="quarto-category">Trend Analysis</div>
   </div>
   </div>
 
@@ -208,6 +212,12 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 16, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -227,12 +237,8 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Note:</strong> All plots labeled <em>“Original published figure”</em> are taken from<br>
-<strong>Diallo et al., Scientific Reports (2020)</strong>.</p>
-<p>All analytical steps in this portfolio project (data structure design,<br>
-data cleaning, harmonization of AST results, resistance calculations,<br>
-DTR classification, and statistical workflow) are reproduced using<br>
-<strong>fully simulated datasets</strong> to ensure GDPR and data protection compliance.</p>
+<p><strong>Note:</strong> All plots labeled <em>“Original published figure”</em> are taken from <strong>Diallo et al., Scientific Reports (2020)</strong>.</p>
+<p>All analytical steps in this portfolio project (data structure design, data cleaning, harmonization of AST results, resistance calculations, DTR classification, and statistical workflow) are reproduced using <strong>fully simulated datasets</strong> to ensure GDPR and data protection compliance.</p>
 <p>No original isolate-level or patient-level data were reused.</p>
 </div>
 </div>
@@ -242,16 +248,12 @@ DTR classification, and statistical workflow) are reproduced using<br>
 <blockquote class="blockquote">
 <p><strong>Diallo OO et al.&nbsp;Major discrepancy between factual antibiotic resistance and consumption in South of France. <em>Scientific Reports</em> 2020;10:18262.</strong></p>
 </blockquote>
-<p>The goal is not to reproduce the original results, but to demonstrate the full RWE analytic pipeline using<br>
-<strong>synthetic data modeled after the real-world microbiology surveillance network</strong> used in the publication.</p>
+<p>The goal is not to reproduce the original results, but to demonstrate the full RWE analytic pipeline using <strong>synthetic data modeled after the real-world microbiology surveillance network</strong> used in the publication.</p>
 <p>This approach allows:</p>
 <ul>
-<li>faithful reconstruction of the study design,<br>
-</li>
-<li>demonstration of large-scale RWE data engineering skills,<br>
-</li>
-<li>reproduction of the DTR classification approach,<br>
-</li>
+<li>faithful reconstruction of the study design,</li>
+<li>demonstration of large-scale RWE data engineering skills,</li>
+<li>reproduction of the DTR classification approach,</li>
 <li>and illustration of AMR trend analysis techniques—</li>
 </ul>
 <p>while remaining fully compliant with GDPR and ethical requirements.</p>
@@ -260,16 +262,13 @@ DTR classification, and statistical workflow) are reproduced using<br>
 </section>
 <section id="background" class="level1">
 <h1>Background</h1>
-<p>Antimicrobial resistance (AMR) is often quantified using <strong>predictive mathematical models</strong>, which may not reflect real-world patterns.<br>
-The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong> collected across <strong>267 laboratories</strong> to quantify:</p>
+<p>Antimicrobial resistance (AMR) is often quantified using <strong>predictive mathematical models</strong>, which may not reflect real-world patterns.</p>
+<p>The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong> collected across <strong>267 laboratories</strong> to quantify:</p>
 <ul>
-<li>Real-world resistance trends over time<br>
-</li>
-<li>Discrepancies between resistance and antibiotic consumption<br>
-</li>
-<li>Prevalence of <strong>Difficult-to-Treat (DTR)</strong> phenotypes (Kadri et al.)<br>
-</li>
-<li>Temporal evolution of key pathogens (E. coli, K. pneumoniae, S. aureus, A. baumannii…)</li>
+<li><p>Real-world resistance trends over time</p></li>
+<li><p>Discrepancies between resistance and antibiotic consumption</p></li>
+<li><p>Prevalence of <strong>Difficult-to-Treat (DTR)</strong> phenotypes (Kadri et al.)</p></li>
+<li><p>Temporal evolution of key pathogens (E. coli, K. pneumoniae, S. aureus, A. baumannii…)</p></li>
 </ul>
 <p>This portfolio project reproduces the <strong>analytic strategy</strong>, <strong>statistical logic</strong>, and <strong>visual narratives</strong> using simulated data.</p>
 <hr>
@@ -277,24 +276,17 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <section id="objectives-of-this-rwe-reproduction" class="level1">
 <h1>Objectives of This RWE Reproduction</h1>
 <ol type="1">
-<li>Reconstruct the study design used in the original 2020 publication.<br>
-</li>
-<li>Create a clean analytic workflow using modern RWE standards.<br>
-</li>
-<li>Simulate datasets matching the structure and distribution of the original study.<br>
-</li>
-<li>Reproduce key indicators:
+<li><p>Reconstruct the study design used in the original 2020 publication.</p></li>
+<li><p>Create a clean analytic workflow using modern RWE standards.</p></li>
+<li><p>Simulate datasets matching the structure and distribution of the original study.</p></li>
+<li><p>Reproduce key indicators:</p>
 <ul>
-<li>Resistance to key antibiotics<br>
-</li>
-<li>Temporal trends (2014–2018)<br>
-</li>
-<li>DTR classification<br>
-</li>
+<li><p>Resistance to key antibiotics</p></li>
+<li><p>Temporal trends (2014–2018)</p></li>
+<li><p>DTR classification</p></li>
 </ul></li>
-<li>Produce RWE-style visualizations (forest plots, timeline trends).<br>
-</li>
-<li>Summarize clinical and public health implications.</li>
+<li><p>Produce RWE-style visualizations (forest plots, timeline trends).</p></li>
+<li><p>Summarize clinical and public health implications.</p></li>
 </ol>
 <p>This exercise demonstrates <strong>RWE reproducibility, analytical rigor, and epidemiological reasoning</strong>, essential in the pharmaceutical industry.</p>
 <hr>
@@ -303,33 +295,24 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <h1>Real-World Data Structure (Simulated Version)</h1>
 <p>The original study used routine-care laboratory data from:</p>
 <ul>
-<li><strong>BALYSES</strong> (real-time bacterial monitoring system)<br>
-</li>
-<li><strong>MARSS</strong> (Marseille AMR surveillance)<br>
-</li>
-<li><strong>PACA SurvE</strong> (regional epidemiology system)</li>
+<li><p><strong>BALYSES</strong> (real-time bacterial monitoring system)</p></li>
+<li><p><strong>MARSS</strong> (Marseille AMR surveillance)</p></li>
+<li><p><strong>PACA SurvE</strong> (regional epidemiology system)</p></li>
 </ul>
 <p>To maintain ethical compliance, this portfolio project uses:</p>
 <ul>
-<li><strong>simulated datasets</strong><br>
-</li>
-<li>distributions calibrated on published tables<br>
-</li>
-<li>aggregate-level counts consistent with Scientific Reports 2020</li>
+<li><p><strong>simulated datasets</strong></p></li>
+<li><p>distributions calibrated on published tables</p></li>
+<li><p>aggregate-level counts consistent with Scientific Reports 2020</p></li>
 </ul>
 <p>The following data elements are reproduced:</p>
 <ul>
-<li>Sample type (urine, blood culture, deep, respiratory…)<br>
-</li>
-<li>Bacterial species (15 most frequent clinical pathogens)<br>
-</li>
-<li>Antibiotic susceptibility test (AST) outcomes<br>
-</li>
-<li>Key antibiotics for each species<br>
-</li>
-<li>Year of isolation<br>
-</li>
-<li>DTR phenotype classification</li>
+<li><p>Sample type (urine, blood culture, deep, respiratory)</p></li>
+<li><p>Bacterial species (15 most frequent clinical pathogens)</p></li>
+<li><p>Antibiotic susceptibility test (AST) outcomes</p></li>
+<li><p>Key antibiotics for each species</p></li>
+<li><p>Year of isolation</p></li>
+<li><p>DTR phenotype classification</p></li>
 </ul>
 <hr>
 </section>
@@ -338,48 +321,40 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <section id="study-design" class="level3">
 <h3 class="anchored" data-anchor-id="study-design">Study Design</h3>
 <ul>
-<li>Retrospective, observational, non-interventional RWD study (2014–2018).<br>
-</li>
-<li>No linked clinical data (mortality, comorbidity).<br>
-</li>
-<li>Unit of analysis: <strong>isolate</strong>, not patient.</li>
+<li><p>Retrospective, observational, non-interventional RWD study (2014–2018).</p></li>
+<li><p>No linked clinical data (mortality, comorbidity).</p></li>
+<li><p>Unit of analysis: <strong>isolate</strong>, not patient.</p></li>
 </ul>
 </section>
 <section id="inclusion-criteria" class="level3">
 <h3 class="anchored" data-anchor-id="inclusion-criteria">Inclusion Criteria</h3>
 <ul>
-<li>Isolates from the 15 most frequent pathogens.<br>
-</li>
-<li>At least one <strong>key antibiotic</strong> tested per species.</li>
+<li><p>Isolates from the 15 most frequent pathogens.</p></li>
+<li><p>At least one <strong>key antibiotic</strong> tested per species.</p></li>
 </ul>
 </section>
 <section id="resistance-definition" class="level3">
 <h3 class="anchored" data-anchor-id="resistance-definition">Resistance Definition</h3>
 <ul>
-<li>EUCAST breakpoints<br>
-</li>
-<li>Intermediate considered resistant (per original study)</li>
+<li><p>EUCAST breakpoints</p></li>
+<li><p>Intermediate considered resistant (per original study)</p></li>
 </ul>
 </section>
 <section id="dtr-classification" class="level3">
 <h3 class="anchored" data-anchor-id="dtr-classification">DTR Classification</h3>
 <p>Reproduced using the Kadri et al.&nbsp;algorithm:</p>
 <ul>
-<li><strong>GNB</strong>: resistant to all β-lactams, carbapenems, and fluoroquinolones<br>
-</li>
-<li><strong>Gram-positive</strong>: resistant to (methicillin + gentamicin + vancomycin) or equivalent triads</li>
+<li><p><strong>GNB</strong>: resistant to all β-lactams, carbapenems, and fluoroquinolones</p></li>
+<li><p><strong>Gram-positive</strong>: resistant to (methicillin + gentamicin + vancomycin) or equivalent triads</p></li>
 </ul>
 </section>
 <section id="statistical-modeling" class="level3">
 <h3 class="anchored" data-anchor-id="statistical-modeling">Statistical Modeling</h3>
 <ul>
-<li>Mann–Whitney U<br>
-</li>
-<li>χ² and Fisher exact tests<br>
-</li>
-<li>Kendall correlation for trends<br>
-</li>
-<li>p &lt; 0.05 considered significant</li>
+<li><p>Mann–Whitney U</p></li>
+<li><p>χ² and Fisher exact tests</p></li>
+<li><p>Kendall correlation for trends</p></li>
+<li><p>p &lt; 0.05 considered significant</p></li>
 </ul>
 <p>This statistical logic is faithfully reconstructed.</p>
 <hr>
@@ -391,19 +366,9 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <section id="resistance-trends-remained-globally-stable-20142018" class="level2">
 <h2 class="anchored" data-anchor-id="resistance-trends-remained-globally-stable-20142018">1. Resistance trends remained globally stable (2014–2018)</h2>
 <ul>
-<li>Oxacillin resistance in <em>S. aureus</em>: stable<br>
-</li>
-<li>Carbapenem resistance in Enterobacterales: stable<br>
-</li>
-<li>3GC resistance in <em>E. coli</em> and <em>K. pneumoniae</em>: stable</li>
-</ul>
-</section>
-<section id="confirmed-significant-decreases" class="level2">
-<h2 class="anchored" data-anchor-id="confirmed-significant-decreases">2. Confirmed significant decreases</h2>
-<ul>
-<li><strong>Amikacin resistance</strong> declined across most Enterobacterales<br>
-</li>
-<li><strong>Imipenem resistance</strong> in <em>A. baumannii</em> decreased significantly</li>
+<li><p>Global stability across most pathogen–antibiotic pairs</p></li>
+<li><p>No major shifts in <em>S. aureus</em>, <em>Enterobacterales</em>, or <em>P. aeruginosa</em></p></li>
+<li><p>Clear exceptions highlighted below</p></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -412,42 +377,56 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 </figure>
 </div>
 </section>
-<section id="confirmed-increases-in-specific-pathogens" class="level2">
-<h2 class="anchored" data-anchor-id="confirmed-increases-in-specific-pathogens">3. Confirmed increases in specific pathogens</h2>
+<section id="significant-reductions-in-resistance" class="level2">
+<h2 class="anchored" data-anchor-id="significant-reductions-in-resistance">2. Significant reductions in resistance</h2>
+<ul>
+<li><p><strong>Amikacin resistance</strong> decreased in <em>E. coli</em>, <em>K. pneumoniae</em>, <em>P. mirabilis</em>, <em>K. oxytoca</em>.</p></li>
+<li><p><strong>Imipenem resistance</strong> declined in <em>A. baumannii</em>.</p></li>
+</ul>
+</section>
+<section id="significant-increases-in-resistance" class="level2">
+<h2 class="anchored" data-anchor-id="significant-increases-in-resistance">3. Significant increases in resistance</h2>
 <ul>
 <li>Ceftriaxone resistance in:
 <ul>
-<li><em>E. cloacae</em><br>
-</li>
-<li><em>K. aerogenes</em><br>
-</li>
-<li><em>K. oxytoca</em></li>
+<li><p><em>E. cloacae</em></p></li>
+<li><p><em>K. aerogenes</em></p></li>
+<li><p><em>K. oxytoca</em></p></li>
 </ul></li>
 </ul>
+</section>
+<section id="species-distribution-simulated-rwd" class="level2">
+<h2 class="anchored" data-anchor-id="species-distribution-simulated-rwd">Species distribution (simulated RWD)</h2>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/most_frequent.png" class="img-fluid figure-img"></p>
-<figcaption>Figure 1: Most frequently isolated bacterial soecies</figcaption>
+<figcaption>Figure 2: Most frequently isolated bacterial soecies</figcaption>
 </figure>
 </div>
 </section>
-<section id="dtr-phenotypes-remain-extremely-rare" class="level2">
-<h2 class="anchored" data-anchor-id="dtr-phenotypes-remain-extremely-rare">4. DTR Phenotypes remain extremely rare</h2>
+<section id="resistance-profiles-across-pathogens" class="level2">
+<h2 class="anchored" data-anchor-id="resistance-profiles-across-pathogens">4. Resistance profiles across pathogens</h2>
+<p>This heatmap summarizes the resistance phenotypes by pathogen and antibiotic class, highlighting strong resistance clusters (e.g., <em>E. faecium</em>, <em>A. baumannii</em>) and preserved susceptibilities in Gram-positive organisms.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/heatmap_atb_spec.png" class="img-fluid figure-img"></p>
+<figcaption>Fig 3: Heatmap resistance profiles</figcaption>
+</figure>
+</div>
+</section>
+<section id="prevalence-of-dtr-phenotypes" class="level2">
+<h2 class="anchored" data-anchor-id="prevalence-of-dtr-phenotypes">5. Prevalence of DTR Phenotypes</h2>
 <ul>
-<li><strong>0.3% of isolates</strong><br>
-</li>
-<li>Mostly Gram-negative<br>
-</li>
-<li>Lower than rates reported in U.S. hospital networks<br>
-</li>
-<li>No upward trend observed</li>
+<li><p><strong>0.3% of isolates</strong></p></li>
+<li><p>Mostly Gram-negative</p></li>
+<li><p>Lower than rates reported in U.S. hospital networks</p></li>
+<li><p>No upward trend observed</p></li>
 </ul>
-<p>Table 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region<br>
-(January 2014 – February 2019)</p>
+<p>Table 5a. Prevalence of Difficult-to-Treat Resistance (DTR) phenotypes in the PACA region (January 2014 – February 2019)</p>
 <table class="table-striped table-hover caption-top table">
 <colgroup>
-<col style="width: 36%">
-<col style="width: 41%">
+<col style="width: 42%">
+<col style="width: 35%">
 <col style="width: 22%">
 </colgroup>
 <thead>
@@ -543,10 +522,10 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <p>Table 5b. Comparison of DTR prevalence between PACA region and 173 U.S. hospitals (Kadri et al., 2018)</p>
 <table class="table-striped table-hover caption-top table">
 <colgroup>
-<col style="width: 26%">
-<col style="width: 26%">
-<col style="width: 16%">
-<col style="width: 29%">
+<col style="width: 24%">
+<col style="width: 24%">
+<col style="width: 23%">
+<col style="width: 27%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -608,13 +587,10 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <h1>Clinical &amp; Public Health Interpretation</h1>
 <p>This project supports the central conclusion of the 2020 Scientific Reports article:</p>
 <ul>
-<li><strong>High antibiotic consumption does not automatically translate into higher resistance.</strong><br>
-</li>
-<li>Predictive AMR models may overestimate the burden in certain contexts.<br>
-</li>
-<li>Real-time laboratory surveillance (RWD) provides a <strong>more accurate and actionable picture</strong>.<br>
-</li>
-<li>Routine-care AMR data can guide empirical treatment and stewardship programs.</li>
+<li><p><strong>High antibiotic consumption does not automatically translate into higher resistance.</strong></p></li>
+<li><p>Predictive AMR models may overestimate the burden in certain contexts.</p></li>
+<li><p>Real-time laboratory surveillance (RWD) provides a <strong>more accurate and actionable picture</strong>.</p></li>
+<li><p>Routine-care AMR data can guide empirical treatment and stewardship programs.</p></li>
 </ul>
 <hr>
 </section>
@@ -622,15 +598,11 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <h1>Ethical Considerations</h1>
 <p>To ensure strict compliance:</p>
 <ul>
-<li><strong>No original data</strong> from the published study are reused.<br>
-</li>
-<li>Only <strong>synthetic, simulated, or aggregated</strong> datasets are used.<br>
-</li>
-<li>No identifiable patient information is present.<br>
-</li>
-<li>The project is solely for <strong>educational and portfolio purposes</strong>.<br>
-</li>
-<li>The analytic framework is recreated, not the dataset.</li>
+<li><p><strong>No original data</strong> from the published study are reused.</p></li>
+<li><p>Only <strong>synthetic, simulated, or aggregated</strong> datasets are used.</p></li>
+<li><p>No identifiable patient information is present.</p></li>
+<li><p>The project is solely for <strong>educational and portfolio purposes</strong>.</p></li>
+<li><p>The analytic framework is recreated, not the dataset.</p></li>
 </ul>
 <p>This aligns with GDPR, HIPAA, and good RWE practice.</p>
 <hr>
@@ -638,13 +610,10 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <section id="limitations" class="level1">
 <h1>Limitations</h1>
 <ul>
-<li>Simulated data cannot perfectly replicate the distribution of real isolates.<br>
-</li>
-<li>No patient-level linkage (mortality, comorbidities).<br>
-</li>
-<li>Results cannot be used for clinical decision-making.<br>
-</li>
-<li>Geographic specificity limits generalizability.</li>
+<li><p>Simulated data cannot perfectly replicate the distribution of real isolates.</p></li>
+<li><p>No patient-level linkage (mortality, comorbidities).</p></li>
+<li><p>Results cannot be used for clinical decision-making.</p></li>
+<li><p>Geographic specificity limits generalizability.</p></li>
 </ul>
 <hr>
 </section>
@@ -653,40 +622,29 @@ The Scientific Reports study analyzed <strong>539,037 bacterial isolates</strong
 <p>This RWE reproduction successfully reconstructs the methodological framework and analytical insights from the 2020 Scientific Reports article using modern RWE standards and simulated datasets.</p>
 <p>It demonstrates:</p>
 <ul>
-<li>Expertise in large-scale AMR surveillance<br>
-</li>
-<li>Mastery of RWE methodologies<br>
-</li>
-<li>Reproducible analytic workflows<br>
-</li>
-<li>Ability to translate published research into data-driven insights</li>
+<li><p>Expertise in large-scale AMR surveillance</p></li>
+<li><p>Mastery of RWE methodologies</p></li>
+<li><p>Reproducible analytic workflows</p></li>
+<li><p>Ability to translate published research into data-driven insights</p></li>
 </ul>
 <hr>
 </section>
 <section id="skills-demonstrated" class="level1">
 <h1>Skills Demonstrated</h1>
 <ul>
-<li>Real-World Evidence (RWE) methodology<br>
-</li>
-<li>Surveillance epidemiology<br>
-</li>
-<li>Handling large microbiology datasets<br>
-</li>
-<li>Statistical analysis of resistance trends<br>
-</li>
-<li>Implementation of DTR definitions<br>
-</li>
-<li>Data visualization for AMR<br>
-</li>
-<li>Scientific communication</li>
+<li><p>Real-World Evidence (RWE) methodology</p></li>
+<li><p>Surveillance epidemiology</p></li>
+<li><p>Handling large microbiology datasets</p></li>
+<li><p>Statistical analysis of resistance trends</p></li>
+<li><p>Implementation of DTR definitions</p></li>
+<li><p>Data visualization for AMR</p></li>
+<li><p>Scientific communication</p></li>
 </ul>
 <hr>
 </section>
-<section id="source-publication-referenced" class="level1">
-<h1>Source Publication (Referenced)</h1>
-<p>Diallo OO, Baron SA, Dubourg G, et al.<br>
-<strong>Major discrepancy between factual antibiotic resistance and consumption in South of France</strong>.<br>
-<em>Scientific Reports</em> 2020;10:18262.</p>
+<section id="publication-referenced" class="level1">
+<h1>Publication (Referenced)</h1>
+<p>Diallo OO, Baron SA, Dubourg G, et al.&nbsp;<strong>Major discrepancy between factual antibiotic resistance and consumption in South of France</strong>. <em>Scientific Reports</em> 2020;10:18262.</p>
 <hr>
 
 

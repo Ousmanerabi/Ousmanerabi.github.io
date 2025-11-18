@@ -1,0 +1,252 @@
+---
+title: "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL"
+description: "Extraction, cleaning, time-series aggregation, and control-limit detection on routine microbiology surveillance data."
+author: "Ousmane Diallo, MPH-PhD"
+date: "11/16/2025"
+categories: ["SQL", "Extraction", "Cleaning", "AMR", "Trend Analysis", ]
+highlight-style: pygments
+page-layout: article
+format:
+  html:
+    css: ../assets/css/remove-keyword.css
+---
+
+## Introduction
+
+This project demonstrates how I used **SQL** to extract, clean, and transform routine microbiology laboratory surveillance data into an **analysis-ready dataset** suitable for epidemiological and real-world evidence (RWE) analytics.
+
+The dataset contained:
+
+-   Bacterial isolates\
+-   Susceptibility results across multiple antibiotics (S/I/R)\
+-   Patient identifiers\
+-   Collection dates\
+-   ECDC resistance classifications
+
+These scripts were originally developed during my PhD work on antimicrobial resistance (AMR) surveillance.
+
+The goal of the pipeline is to:
+
+-   Extract pathogen-specific susceptibility profiles\
+-   Build **time series** of resistance phenotypes\
+-   Apply **data quality checks**\
+-   Compute **statistical control limits (mean ± 2 SD)**\
+-   Identify pathogens with unusual activity (“early-warning signals”)
+
+------------------------------------------------------------------------
+
+## Data Model Overview
+
+For demonstration purposes, I use a simplified representation of the underlying microbiology database.\
+The main table is assumed to be **`tous`**, containing:
+
+-   `agent` – bacterial species\
+-   `datdem` – specimen collection date\
+-   `patuuid` – patient identifier\
+-   `bacteria` – indicator for bacterial isolates\
+-   `k_pheno` – phenotype classification\
+-   `ecdcClass` – ECDC resistance class\
+-   Columns for antibiotics coded as **S / I / R** (e.g., AMX, AMC, TZP, CF, CRO, FEP, IPM, GEN, CIP, etc.)
+
+------------------------------------------------------------------------
+
+## Extracting Susceptibility Profiles for *Escherichia coli*
+
+The first query extracts the full panel of antibiotic susceptibility results for *E. coli* isolates with non-missing phenotype classification.
+
+```sql
+SELECT agent, AMX, AMC, TZP, CF, CRO, FEP, ETP, IPM, CS, AN, GEN, CIP, FOS, FT, DOX, SXT FROM tous WHERE agent = 'Escherichia coli' AND k_pheno
+```
+
+## Monthly Time Series of Difficult-to-Treat Resistance (DTR)
+
+This query identifies E. coli isolates with reduced susceptibility to both ceftriaxone (CRO) and imipenem (IPM) — a proxy for difficult-to-treat (DTR) phenotypes — and aggregates them monthly.
+
+```sql
+SELECT
+    YEAR(datdem)              AS year,
+    MONTH(datdem)             AS month,
+    DATE_FORMAT(datdem,'%Y%m') AS ym,
+    COUNT(*)                  AS n_isolates
+FROM (
+    SELECT *
+    FROM tous
+    WHERE CRO IN ('R', 'I')
+      AND IPM IN ('R', 'I')
+      AND agent = 'Escherichia coli'
+) AS z
+GROUP BY ym
+ORDER BY ym ASC;
+
+```
+
+## Stratified Extraction by ECDC Class for *Staphylococcus aureus*
+
+This query extracts susceptibility data for *S. aureus*, stratified by ECDC resistance class (useful for MRSA surveillance).
+
+```sql
+SELECT
+    ecdcClass,
+    P,
+    OX,
+    FOX,
+    VA,
+    TEC,
+    E,
+    PT,
+    GEN,
+    CIP,
+    LNZ,
+    FOS,
+    DOX,
+    FA,
+    SXT,
+    RA
+FROM tous
+WHERE agent = 'Staphylococcus aureus'
+  AND ecdcClass IS NOT NULL;
+
+```
+
+## Advanced Surveillance: Weekly Counts and Control Limits (Mean ± 2 SD)
+
+This more complex SQL pipeline:
+
+-  Builds a complete agent × week time grid
+
+-  Computes weekly counts of isolates
+
+-  Calculates global statistics (cumulative count, mean, SD)
+
+-  Retrieves the count for the latest surveillance week
+
+-  Compares it to expected behavior using control limits (mean ± 2 SD)
+
+```sql
+
+WITH weekly_counts AS (
+    SELECT
+        agent,
+        DATE_FORMAT(datdem, '%x%v') AS w,
+        COUNT(DISTINCT patuuid)     AS n
+    FROM tous
+    WHERE bacteria = 1
+      AND patuuid IS NOT NULL
+    GROUP BY agent, DATE_FORMAT(datdem, '%x%v')
+),
+all_weeks AS (
+    SELECT DISTINCT DATE_FORMAT(datdem, '%x%v') AS w
+    FROM tous
+    WHERE agent = 'Escherichia coli'
+),
+all_agents AS (
+    SELECT DISTINCT agent
+    FROM tous
+    WHERE bacteria = 1
+),
+grid AS (
+    SELECT a.agent, b.w
+    FROM all_agents a
+    CROSS JOIN all_weeks b
+),
+full_ts AS (
+    SELECT
+        g.agent,
+        g.w,
+        COALESCE(wc.n, 0) AS n
+    FROM grid g
+    LEFT JOIN weekly_counts wc
+      ON g.agent = wc.agent
+     AND g.w     = wc.w
+),
+summary_stats AS (
+    SELECT
+        agent,
+        SUM(n)              AS cuml,
+        AVG(n)              AS m,
+        AVG(n) - 2*STD(n)   AS inf,
+        AVG(n) + 2*STD(n)   AS sup
+    FROM full_ts
+    GROUP BY agent
+),
+latest_week AS (
+    SELECT MAX(DATE_FORMAT(datdem, '%x%v')) AS w
+    FROM tous
+    WHERE agent = 'Escherichia coli'
+),
+latest_counts AS (
+    SELECT
+        f.agent,
+        f.w,
+        f.n
+    FROM full_ts f
+    JOIN latest_week lw
+      ON f.w = lw.w
+)
+SELECT
+    s.agent,
+    s.cuml,
+    s.m,
+    s.inf,
+    s.sup,
+    l.n AS latest_n
+FROM summary_stats s
+LEFT JOIN latest_counts l
+  ON s.agent = l.agent
+ORDER BY s.cuml DESC;
+```
+
+## Focus on Priority Pathogens
+
+This final query filters the dataset to common priority pathogens relevant to clinical and epidemiological monitoring.
+
+```sql
+SELECT *
+FROM tous
+WHERE agent IN (
+    'Escherichia coli',
+    'Staphylococcus aureus',
+    'Pseudomonas aeruginosa',
+    'Klebsiella pneumoniae',
+    'Staphylococcus epidermidis',
+    'Proteus mirabilis',
+    'Enterococcus faecalis',
+    'Streptococcus pneumoniae',
+    'Enterobacter cloacae',
+    'Streptococcus agalactiae',
+    'Enterococcus faecium',
+    'Morganella morganii',
+    'Enterobacter aerogenes',
+    'Streptococcus pyogenes',
+    'Neisseria meningitidis'
+);
+
+```
+------------------------------------
+
+## Outcomes & Impact
+
+-  Built an analysis-ready AMR dataset for multiple pathogens and antibiotics.
+
+-  Enabled routine weekly and monthly AMR surveillance.
+
+-  Implemented data quality checks, including missingness, impossible values, and duplicate detection.
+
+-  Constructed statistical early-warning indicators using control limits.
+
+-  Provided clean inputs for downstream epidemiological models and dashboards.
+
+----------------------------------------------------
+## Key Skills Demonstrated
+
+-  SQL data extraction & joins
+
+-  Time-series aggregation & surveillance logic
+
+-  Control-limit / anomaly detection
+
+-  Health data quality pipeline
+
+-  Antimicrobial resistance epidemiology
+
+-  Real-world evidence workflows
