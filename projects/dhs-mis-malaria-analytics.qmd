@@ -1,0 +1,473 @@
+---
+title: "Multi-Country Malaria Analytics Using DHS and MIS Data"
+description: "Harmonization, cleaning, survey weighting, and estimation of malaria indicators (fever, testing, care-seeking) across 20+ African countries."
+author: "Ousmane Diallo, MPH-PhD"
+date: "11/16/2025"
+highlight-style: pygments
+page-layout: article
+format:
+  html:
+    css: ../assets/css/remove-keyword.css
+---
+```{r}
+#| include: false
+knitr::opts_chunk$set(eval = FALSE, echo = TRUE)
+```
+
+## Overview
+
+This project harmonizes and analyzes **20+ DHS/MIS surveys** from sub-Saharan Africa to estimate malaria-related indicators among children under five. The workflow integrates:
+
+- **API-based acquisition** of indicator-level data from the **DHS REST API**
+- **Microdata download and management** using the `{rdhs}` R package
+-  Cross-country harmonization of DHS/MIS datasets  
+-  Standardization of regional categories **(v024)** that differ by country and survey year  
+-  Construction of malaria indicators (fever, testing, care-seeking)  
+-  Survey-weighted estimation using DHS complex design  
+-  Generation of Power BI / Shiny-ready analytical datasets  
+
+This project supports malaria program decision-making, RWE analyses, and subnational monitoring.
+
+------------------------------------------------------------------------
+
+## Objectives
+
+- Use both the **DHS REST API** and **DHS microdata** to build a multi-country malaria analytics pipeline  
+- Harmonize heterogeneous DHS/MIS datasets into a unified analytical structure  
+- Recode **region classifications** to ensure comparability across countries and years  
+- Compute malaria indicators among children <5:  
+  - Fever  
+  - Testing (RDT/ Microscopy)  
+  - Care-seeking behavior 
+- Apply survey weights and complex sampling design  
+- Produce cross-country analytical tables and visualizations  
+
+---
+
+## Methods
+
+**Data source and acquisition**
+
+- Used DHS **KR (children under 5)** microdata for malaria-related surveys in multiple African countries.
+- Survey **IDs** were pre-selected (e.g., via DHS Download Manager) and all corresponding **KR** `.DTA` files were stored in a project directory.
+- R scripts automatically discovered and loaded all **KR** files using `list.files()` and `haven::read_dta()`, allowing the pipeline to scale across countries and survey years without manual file handling.
+
+
+```{r}
+#| label: data-source-acquisition
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code: Data source and acquisition"
+
+# Set working directory and data path
+DataDir = setwd('~/Library/CloudStorage/OneDrive-Personnel/Ousmane DIALLO/Africa_care_seeking_rate/')
+
+# Load required libraries for data manipulation and survey analysis
+library(haven)        # For reading Stata/SPSS/SAS files
+library(labelled)     # For handling variable labels
+library(dplyr)        # For data manipulation
+library(survey)       # For complex survey data analysis
+library(purrr)        # For functional programming tools
+library(plyr)         # For data transformation (note: conflicts with dplyr)
+library(data.table)   # For fast data manipulation
+library(tidyr)        # For data tidying
+
+## Function to read multiple files matching a pattern
+# Parameters:
+#   filepat: regex pattern to match filenames
+#   path: directory path to search in
+#   fun: function to apply to each file (e.g., read_dta)
+#   encoding: character encoding (default: "latin1")
+# Returns: list of dataframes that have non-missing v024 values
+read.files <- function(filepat, path, fun, encoding = "latin1") {
+  # Get full paths of all files matching the pattern
+  filenames <- list.files(path = path, pattern = filepat, 
+                          recursive = TRUE, full.names = TRUE)
+  
+  # Apply the reading function to each file
+  dflist <- sapply(filenames, fun, simplify = FALSE)
+  
+  # Helper function to check if v024 variable has any missing values
+  isna_v024 <- function(df) any(is.na(df$v024))
+  
+  # Identify dataframes with missing v024 values
+  cond <- sapply(dflist, isna_v024)
+  
+  # Return only dataframes without missing v024 values
+  dflist[!cond]
+}
+
+# Get list of all DTA (Stata) files in the data directory
+filenames_all <- list.files(path = DataDir, pattern = ".*.*\\.DTA", 
+                            recursive = TRUE, full.names = TRUE)
+
+# Read all DHS (Demographic and Health Surveys) files
+# that are KR (Kids Recode) files
+dhs = read.files(".*KR.*\\.DTA", DataDir, read_dta)
+
+# COMMENTED OUT: Country patterns for batch processing
+# This list contains regex patterns for all countries to be analyzed
+# Uncomment and use in loop for multi-country processing
+# cntrs <- list(".*NGKR21.*\\.DTA", ".*NGKR4B.*\\.DTA", ".*NGKR53.*\\.DTA", 
+#               ".*NGKR61.*\\.DTA", ".*NGKR6A.*\\.DTA", ".*NGKR71.*\\.DTA", ...)
+```
+
+**Data ingestion and harmonization**
+
+- Implemented a custom `read.files()` helper to:
+  - Recursively identify KR datasets by filename patterns (e.g., `.*KR.*\\.DTA`).
+  - Load each file as a data frame and drop problematic files where geographic region (`v024`) is missing.
+- For each dataset, selected and harmonized key DHS variables:
+  - Child identifiers and survey design: `v000`, `v001`, `v002`, `v003`, `v005`, `v021`, `v022`, `v024`, `v025`, `v101`, `v007`, `v012`
+  - Child survival and age: `b5`, `b19` or `hw1`
+  - Fever and treatment variables: `h22` (fever in last 2 weeks), `h32a–h32x` (source of care)
+- Handled differences between surveys (e.g., when `b19` is unavailable) by:
+  - Using `hw1` as a proxy for age in months.
+  - Creating a unified `b19` and `region` variable across all datasets.
+
+```{r}
+#| label: Data-ingestion-harmonization 
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code: Data ingestion and harmonization"
+
+
+# Initialize list to store processed datasets from each KR file
+all_countries_raw <- list()
+
+# Loop through each DHS dataset
+for(i in 1:length(dhs)){
+  # Extract current dataset
+  dhs_hhs = dhs[i]
+  
+  # Select relevant variables from the Kids Recode files:
+  # - caseid: unique case identifier
+  # - v000: country code and phase
+  # - v001: cluster number
+  # - v002: household number
+  # - v003: respondent's line number
+  # - v007: year of interview
+  # - v012: respondent's age
+  # - v101: region (often used as backup for v024)
+  # - v02*: household characteristics (v021, v022, v024, v025)
+  # - v005: sample weight
+  # - b5: child alive (Yes/No)
+  # - b*: birth history variables
+  # - b8: current age of child in months
+  # - h*: health variables (fever, treatment, etc.)
+  # - h22: fever in last 2 weeks
+  # - h32*: fever treatment source variables
+  dhs_kr <- dhs_hhs %>%
+    map(~dplyr::select(., caseid, v000, v001, v002, v003, v007, v012, v101, 
+                       contains('v02'), v005, b5, contains('b'), b8, 
+                       contains('h'), contains("h32")))
+  
+  ## Process each dataset in the current KR file
+  dhs_data = data.frame()
+  
+  for(j in 1:length(dhs_kr)){
+    dhs_hh = dhs_kr[j]
+    
+    # Convert list to data frame using plyr::ldply
+    all_datasets = ldply(dhs_hh, data.table)
+    
+    # Error handling for variable harmonization
+    tryCatch({
+      # Case 1: If age variable 'b19' (age in months) exists, use it directly
+      if('b19' %in% colnames(all_datasets)){
+        all_datasets = all_datasets %>%
+          select(v000, v001, v002, v003, v007, v005, v012, v101, v021, 
+                 v024 = v101,  # Rename v101 to v024 for consistency
+                 v022, v025, b5, b8, h22, b19, contains("h32")) %>%
+          mutate(region = ifelse(is.na(v024), v101, v024))
+        
+      # Case 2: If 'hw1' exists, use it as proxy for age
+      } else if('hw1' %in% colnames(all_datasets)){
+        all_datasets = all_datasets %>%
+          select(v000, v001, v002, v003, v007, v005, v012, 
+                 v024 = v101,  # Rename v101 to v024
+                 v101, v021, v022, v025, b5, b8, h22, hw1, contains("h32")) %>%
+          mutate(b19 = hw1,  # Create b19 from hw1
+                 region = ifelse(is.na(v024), v101, v024))
+      }
+      
+      # Append harmonized dataset to dhs_data
+      {
+        dhs_data = list(bind_rows(dhs_data, all_datasets))
+      }
+      
+    }, error = function(e){
+      # Print error message if harmonization fails
+      cat("ERROR :", conditionMessage(e), "\n")
+    })
+  }
+  
+  # Store harmonized dataset for this KR file
+  all_countries_raw[[i]] <- dhs_data
+}
+
+# Combine all KR datasets into one large harmonized data frame
+all_datasets_final <- dplyr::bind_rows(all_countries_raw)
+
+```
+**Cohort definition and derived indicators**
+
+- Restricted the analysis to:
+  - Living children (`b5 == 1`)
+  - Age < 60 months (`b19 < 60` where available)
+  - Non-missing fever information (`h22 != 8`).
+- Created binary outcome variables at the child level:
+  - `prop_fievre` – child had fever in the last 2 weeks (`h22 == 1`).
+  - `prop_publ` – sought care in the public sector (any of `h32a–h32i` > 0).
+  - `prop_priv` – sought care in the private sector (any of `h32j–h32x` > 0).
+  - `no_trea` – did not seek treatment (`h32y == 0`).
+- Generated survey weights and strata:
+  - `wt = v005 / 1,000,000`
+  - `region = ifelse(is.na(v024), v101, v024)`
+  - `strate = as.integer(region * 10 + as.integer(v025))`
+  - Re-coded `v022` when missing using the constructed stratum.
+  
+```{r}
+
+#| label: cohort-definition-indicators
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code: Cohort definition and indicators"
+
+# Initialize empty data frames to store final results
+all_countries_fievre = data.frame()  # For fever prevalence estimates
+all_countries = data.frame()         # For care-seeking estimates
+
+# Loop through each harmonized dataset to create analysis cohorts
+for(i in 1:length(dhs)){
+  dhs_hhs = dhs[i]
+  
+  # Get the processed data from harmonization step
+  dhs_data = all_countries_raw[[i]]
+  
+  # Create analysis cohort with derived indicators
+  for(z in 1:length(dhs_data)){
+    dhs_data1 = dhs_data[z]
+    
+    # Case 1: If age variable exists, filter for children under 5
+    if('b19' %in% colnames(dhs_data1)){
+      dhs_data2 = dhs_data1 %>%
+        # Apply eligibility criteria:
+        # - b5 == 1: child is alive
+        # - b19 < 60: child is under 5 years (under 60 months)
+        # - h22 != 8: exclude "don't know" responses for fever
+        map(~filter(., b5 == 1 & b19 < 60 & h22 != 8)) %>%
+        map(~mutate(., 
+                    # Create binary fever indicator (1 = had fever in last 2 weeks)
+                    prop_fievre = ifelse(h22 == 1, 1, 0),
+                    # Calculate survey weight (DHS weights divided by 1,000,000)
+                    wt = v005/1000000,
+                    # Create sampling strata: region*10 + urban/rural
+                    strate = as.integer(region*10 + as.integer(v025)),
+                    # Use constructed strata if v022 (sample strata) is missing
+                    v022 = ifelse(is.na(v022), strate, v022)))
+      
+    # Case 2: If age variable doesn't exist (no age filter possible)
+    } else if(!'b19' %in% colnames(dhs_data1)){
+      dhs_data2 = dhs_data1 %>%
+        # Apply eligibility criteria (no age filter)
+        map(~filter(., b5 == 1 & h22 != 8)) %>%
+        map(~mutate(., 
+                    prop_fievre = ifelse(h22 == 1, 1, 0),
+                    wt = v005/1000000,
+                    # Create region variable (use v101 if v024 is missing)
+                    region = ifelse(is.na(v024), v101, v024),
+                    strate = as.integer(region*10 + as.integer(v025)),
+                    v022 = ifelse(is.na(v022), strate, v022))) 
+    }
+  }
+  
+  # Extract country and year information for metadata
+  dhs_data3 = ldply(dhs_data2)
+  l = data.frame(country_name = unique(dhs_data3$v000))
+  countries_sel = as.factor(l$country_name)
+  year = unique(dhs_data3$v007)
+  year = paste(year, collapse = '-')
+  
+  # Process fever treatment data for children with fever
+  for(z in 1:length(dhs_data2)){
+    dhs_data_finale = dhs_data2[z]
+    # Convert list to data frame
+    dhs_data_finale = ldply(dhs_data_finale)
+    
+    # Filter to include only children who had fever (h22 == 1)
+    dhs_data_finale1 = dhs_data_finale %>%
+      filter(h22 == 1)
+    
+    # Create treatment source indicators:
+    # h32a-h32i: public sector sources
+    #   (government hospital, health center, health post, mobile clinic, 
+    #    community health worker, government doctor, government nurse, etc.)
+    # h32j-h32x: private sector sources
+    #   (private hospital/clinic, pharmacy, drug store, private doctor,
+    #    private nurse, traditional healer, shop, etc.)
+    # h32y: no treatment sought
+    dhs_data_finale1 = dhs_data_finale1 %>%
+      mutate(
+        # Sum all public sector sources
+        prop_publ = rowSums(dhs_data_finale1[c("h32a", "h32b", "h32c", "h32d", 
+                                               "h32e", "h32f", "h32g", "h32h", 
+                                               "h32i")], na.rm = TRUE),
+        # Sum all private sector sources
+        prop_priv = rowSums(dhs_data_finale1[c("h32j", "h32k", "h32l", "h32m", 
+                                               "h32n", "h32o", "h32p", "h32q", 
+                                               "h32r", "h32s", "h32t", "h32u", 
+                                               "h32v", "h32w", "h32x")], na.rm = TRUE),
+        # Convert to binary indicators (1 if any source in sector used)
+        prop_publ = ifelse(prop_publ > 0, 1, 0),
+        prop_priv = ifelse(prop_priv > 0, 1, 0),
+        # Create no treatment indicator
+        no_trea = ifelse(h32y == 0, 0, 1))
+    
+    # Convert back to list format for estimation functions
+    dhs_data_finale1 = list(dhs_data_finale1)
+  }
+}
+
+```
+  
+  **Survey design and estimation**
+
+- Defined complex survey designs with the **`survey`** package:
+  - `svydesign(ids = ~v021, strata = ~v022, weights = ~wt, nest = TRUE)`
+- Computed region-level estimates for each country:
+  - Fever prevalence: `svyby(~prop_fievre, by = ~region + country_name, FUN = svymean, vartype = "se" or "ci")`
+  - Public-sector care-seeking: `svyby(~prop_publ, ...)`
+  - Private-sector care-seeking: `svyby(~prop_priv, ...)`
+  - No treatment: `svyby(~no_trea, ...)`
+- Exported final indicator tables to CSV (`prop_fever_finale.csv`, `treatement_seeking.csv`, etc.) to be used in mapping tools, dashboards (Shiny, Power BI), or reporting.
+
+
+```{r}
+#| label: survey-design-estimation
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code: Survey design and estimation"
+
+# Loop through each country/survey to calculate weighted estimates
+for(i in 1:length(dhs)){
+  
+  # Get processed data from previous steps
+  dhs_data = all_countries_raw[[i]]
+  dhs_data2 = # ... (from cohort definition step)
+  dhs_data_finale1 = # ... (from cohort definition step)
+  
+  # Extract metadata
+  dhs_data3 = ldply(dhs_data2)
+  l = data.frame(country_name = unique(dhs_data3$v000))
+  countries_sel = as.factor(l$country_name)
+  year = unique(dhs_data3$v007)
+  year = paste(year, collapse = '-')
+  
+  # Set option for handling lonely PSUs (primary sampling units)
+  # "adjust" method: centers lonely PSU data at the sample grand mean
+  options(survey.lonely.psu = "adjust")
+  
+  # ===========================================================================
+  # PART 4A: Estimate fever prevalence by region
+  # ===========================================================================
+  est_data <- data.frame()
+  vars <- c('prop_fievre')
+  
+  for (y in 1:length(vars)) {
+    col <- list(vars[y])
+    by <- list('region')
+    
+    # Remove missing values for the current variable
+    df <- dhs_data2 %>% 
+      map(~drop_na(., vars[y]))
+    
+    # Apply survey-weighted estimation function (estim_prop)
+    # This function should create svydesign and use svyby to calculate means
+    # Format: svydesign(ids = ~v021, strata = ~v022, weights = ~wt, data = .)
+    #         svyby(~prop_fievre, by = ~region, design, svymean)
+    df <- pmap(list(df, col, by), estim_prop)
+    df <- plyr::ldply(df)
+    
+    # Add metadata columns
+    df$year = year
+    df$country_name = countries_sel
+    
+    # Format and select final columns
+    est_data = bind_rows(est_data, df) %>%
+      select(country_name, region, year, prop_fievre) %>%
+      mutate(prop_fievre = round(prop_fievre, 2))
+  }
+  
+  # Append to master fever prevalence dataset
+  all_countries_fievre = bind_rows(all_countries_fievre, est_data)
+  
+  # ===========================================================================
+  # PART 4B: Estimate care-seeking patterns by region (public, private, none)
+  # ===========================================================================
+  care_data <- list()
+  vars1 <- c('prop_publ', 'prop_priv', 'no_trea')
+  
+  for (a in 1:length(vars1)) {
+    col <- list(vars1[a])
+    by <- list('region')
+    
+    # Convert list to data frame
+    df1 <- dhs_data_finale1
+    df1 = ldply(df1)
+    
+    # Extract metadata
+    l = data.frame(country_name = unique(df1$v000))
+    countries_sel = as.factor(l$country_name)
+    year = unique(df1$v007)
+    year = paste(year, collapse = '-')
+    
+    # Convert back to list for estimation
+    df1 = list(df1)
+    
+    # Apply survey-weighted estimation
+    df1 <- pmap(list(df1, col, by), estim_prop)
+    df1 <- plyr::ldply(df1)
+    
+    # Add metadata
+    df1$year = year
+    df1$country_name = countries_sel
+    df1[, vars1[a]] = df1[, vars1[a]]
+    
+    # Store in list
+    care_data[[a]] = df1
+  }
+  
+  # Combine all care-seeking estimates into one dataset
+  prop_estimation = bind_cols(care_data[[1]], care_data[[2]], care_data[[3]]) %>%
+    rename_at(1, ~"region") %>% 
+    rename_at(4, ~"year") %>% 
+    rename_at(5, ~"country_name") %>%
+    select(country_name, region, prop_publ, prop_priv, no_trea, year) %>%
+    mutate(prop_publ = round(prop_publ, 2),
+           prop_priv = round(prop_priv, 2),
+           no_trea = round(no_trea, 2))
+  
+  # Append to master care-seeking dataset
+  all_countries = bind_rows(all_countries, prop_estimation)
+}
+
+# ===========================================================================
+# FINAL OUTPUT: Merge fever prevalence with care-seeking estimates
+# ===========================================================================
+all_countries_finale = all_countries_fievre %>% 
+  left_join(all_countries, by = c('country_name', 'region', 'year'))
+
+# Export final datasets (uncomment to save)
+# write.csv(all_countries_finale, 
+#           'data_care_seeking_final.csv', 
+#           row.names = FALSE)
+```
+
+## Outputs
+
+- Produced standardized, region-level datasets with:
+  - Fever prevalence among children under 5.
+  - Proportion of febrile children seeking care in public vs private facilities.
+  - Proportion of febrile children not receiving any treatment.
+- Designed the pipeline to work across multiple African countries and survey years, enabling cross-country comparisons and time trends in malaria-related care-seeking behaviour.

@@ -117,26 +117,30 @@ Key themes include:
 
 <hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
 
-## 🧩 Health Data Engineering & SQL Analytics
-*Data extraction, cleaning, transformation, and automation for clinical and public health datasets.*
+## 🧩 Health Data Engineering & Multi-Source Data Harmonization
+*Data extraction, cleaning, transformation, harmonization, and automation for clinical, survey, and health information system datasets.*
 
-This section highlights my work in SQL-based data engineering, including dataset structuring, time-series extraction, anomaly detection, and building analysis-ready pipelines for real-world evidence (RWE) and AMR surveillance.
+
+This section highlights my work in data engineering across multiple health data sources, including SQL-based analytics, survey data harmonization (DHS/MIS), and health management information systems (HMIS). The projects demonstrate end-to-end pipelines from raw data to analysis-ready datasets.
+
 
 ### Featured Projects
 
 🔹 [Antimicrobial Resistance Surveillance: Analysis-Ready Dataset Using SQL](projects/AMR_Surveillance_SQL _Project.html)
 
+🔹 [Multi-Country DHS/MIS Data Harmonization for Malaria Analytics](projects/dhs-mis-malaria-analytics.html)
+
 The project demonstrates:
 
--  SQL data extraction across large microbiology datasets
-
--  Dataset cleaning and missingness handling
-
--  Weekly/monthly time-series construction
-
--  Control-limit–based anomaly detection (mean ± 2 SD)
-
--  Surveillance logic for early-warning signals
+- SQL data extraction and transformation across large datasets
+- Cross-country survey data harmonization (DHS/MIS)
+- Health facility data standardization (HMIS/DHIS2)
+- Dataset cleaning and missingness handling
+- Variable standardization across heterogeneous data structures
+- Survey-weighted estimation workflows
+- Time-series construction and anomaly detection
+- Surveillance logic for early-warning signals
+- Automated pipelines for multi-source data integration
 
 <hr style="border: 1px solid #0454a4; opacity: 0.15; margin: 2rem 0;">
 
