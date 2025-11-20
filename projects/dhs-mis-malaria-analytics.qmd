@@ -129,7 +129,7 @@ dhs = read.files(".*KR.*\\.DTA", DataDir, read_dta)
   - A comprehensive lookup table with 200+ region mappings was created to standardize region names across all countries
   - This lookup table is maintained as a separate data asset in the project repository for reusability and documentation.
 
-*Note: Supporting files (lookup tables, helper functions) are available in the project's [GitHub repository](https://github.com/votre-username/votre-repo).*
+*Note: Supporting files (lookup tables, helper functions) are available in the project's [GitHub repository](https://github.com/Ousmanerabi/Multi-Country-DHS_MIS_Data_Harmonization_for_Malaria_Analytics).*
 
 ```{r}
 #| label: data-ingestion-harmonization
