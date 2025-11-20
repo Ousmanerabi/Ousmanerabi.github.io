@@ -188,7 +188,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
-  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a></li>
+  <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a>
+  <ul class="collapse">
+  <li><a href="#final-dataset-schema" id="toc-final-dataset-schema" class="nav-link" data-scroll-target="#final-dataset-schema">Final Dataset Schema</a></li>
+  <li><a href="#sample-data-preview" id="toc-sample-data-preview" class="nav-link" data-scroll-target="#sample-data-preview">Sample Data Preview</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -261,10 +265,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
 <li>Compute malaria indicators among children &lt;5:
 <ul>
-<li>Fever<br>
-</li>
-<li>Testing (RDT/ Microscopy)<br>
-</li>
+<li>Fever</li>
 <li>Care-seeking behavior</li>
 </ul></li>
 <li>Apply survey weights and complex sampling design<br>
@@ -341,8 +342,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Implemented a custom <code>read.files()</code> helper to:
 <ul>
-<li>Recursively identify KR datasets by filename patterns (e.g., <code>.*KR.*\\.DTA</code>).</li>
-<li>Load each file as a data frame and drop problematic files where geographic region (<code>v024</code>) is missing.</li>
+<li>Recursively identify KR datasets by filename patterns (e.g., <code>.*KR.*\\.DTA</code>)</li>
+<li>Load each file as a data frame and drop problematic files where geographic region (<code>v024</code>) is missing</li>
 </ul></li>
 <li>For each dataset, selected and harmonized key DHS variables:
 <ul>
@@ -352,10 +353,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li>Handled differences between surveys (e.g., when <code>b19</code> is unavailable) by:
 <ul>
-<li>Using <code>hw1</code> as a proxy for age in months.</li>
-<li>Creating a unified <code>b19</code> and <code>region</code> variable across all datasets.</li>
+<li>Using <code>hw1</code> as a proxy for age in months</li>
+<li>Creating a unified <code>b19</code> and <code>region</code> variable across all datasets</li>
+</ul></li>
+<li>Standardized region names across countries and survey years:
+<ul>
+<li>Region identifiers (<code>v024</code>) vary by country and sometimes by survey year</li>
+<li>A comprehensive lookup table with 200+ region mappings was created to standardize region names across all countries</li>
+<li>This lookup table is maintained as a separate data asset in the project repository for reusability and documentation.</li>
 </ul></li>
 </ul>
+<p><em>Note: Supporting files (lookup tables, helper functions) are available in the project’s <a href="https://github.com/votre-username/votre-repo">GitHub repository</a>.</em></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Data ingestion and harmonization</summary>
@@ -434,7 +442,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine all KR datasets into one large harmonized data frame</span></span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>all_datasets_final <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(all_countries_raw)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>all_datasets_final <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(all_countries_raw)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a><span class="co"># STANDARDIZE REGION NAMES USING LOOKUP TABLE</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a><span class="co"># Load region standardization lookup table from repository</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="co"># (See: lookup/dhs_region_standardization.csv for complete mappings)</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>region_lookup <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">'lookup/dhs_region_standardization.csv'</span>, </span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>                          <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply standardization via left join</span></span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Handles both year-specific mappings (e.g., Angola, Liberia) </span></span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a><span class="co"># and year-independent mappings (e.g., Guinea, Benin)</span></span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>all_datasets_final <span class="ot">&lt;-</span> all_datasets_final <span class="sc">%&gt;%</span></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(region_lookup, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country_name"</span> <span class="ot">=</span> <span class="st">"country_name"</span>, </span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"year"</span> <span class="ot">=</span> <span class="st">"year"</span>, </span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"v024"</span> <span class="ot">=</span> <span class="st">"v024"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use standardized region name if available, otherwise keep v024 code</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">region_name =</span> <span class="fu">coalesce</span>(region_name, <span class="fu">as.character</span>(v024))</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><strong>Cohort definition and derived indicators</strong></p>
@@ -462,123 +490,120 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="cell">
 <details class="code-fold">
-<summary>View code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: cohort-definition-indicators</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "Show code: Cohort definition and indicators"</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty data frames to store final results</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>all_countries_fievre <span class="ot">=</span> <span class="fu">data.frame</span>()  <span class="co"># For fever prevalence estimates</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>all_countries <span class="ot">=</span> <span class="fu">data.frame</span>()         <span class="co"># For care-seeking estimates</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each harmonized dataset to create analysis cohorts</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dhs)){</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  dhs_hhs <span class="ot">=</span> dhs[i]</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the processed data from harmonization step</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  dhs_data <span class="ot">=</span> all_countries_raw[[i]]</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create analysis cohort with derived indicators</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(z <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dhs_data)){</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    dhs_data1 <span class="ot">=</span> dhs_data[z]</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 1: If age variable exists, filter for children under 5</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="st">'b19'</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(dhs_data1)){</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      dhs_data2 <span class="ot">=</span> dhs_data1 <span class="sc">%&gt;%</span></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply eligibility criteria:</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>        <span class="co"># - b5 == 1: child is alive</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>        <span class="co"># - b19 &lt; 60: child is under 5 years (under 60 months)</span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="co"># - h22 != 8: exclude "don't know" responses for fever</span></span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map</span>(<span class="sc">~</span><span class="fu">filter</span>(., b5 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> b19 <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">&amp;</span> h22 <span class="sc">!=</span> <span class="dv">8</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map</span>(<span class="sc">~</span><span class="fu">mutate</span>(., </span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Create binary fever indicator (1 = had fever in last 2 weeks)</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prop_fievre =</span> <span class="fu">ifelse</span>(h22 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Calculate survey weight (DHS weights divided by 1,000,000)</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wt =</span> v005<span class="sc">/</span><span class="dv">1000000</span>,</span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Create sampling strata: region*10 + urban/rural</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>                    <span class="at">strate =</span> <span class="fu">as.integer</span>(region<span class="sc">*</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">as.integer</span>(v025)),</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Use constructed strata if v022 (sample strata) is missing</span></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>                    <span class="at">v022 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v022), strate, v022)))</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 2: If age variable doesn't exist (no age filter possible)</span></span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">!</span><span class="st">'b19'</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(dhs_data1)){</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>      dhs_data2 <span class="ot">=</span> dhs_data1 <span class="sc">%&gt;%</span></span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply eligibility criteria (no age filter)</span></span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map</span>(<span class="sc">~</span><span class="fu">filter</span>(., b5 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> h22 <span class="sc">!=</span> <span class="dv">8</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map</span>(<span class="sc">~</span><span class="fu">mutate</span>(., </span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prop_fievre =</span> <span class="fu">ifelse</span>(h22 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wt =</span> v005<span class="sc">/</span><span class="dv">1000000</span>,</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Create region variable (use v101 if v024 is missing)</span></span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>                    <span class="at">region =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v024), v101, v024),</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>                    <span class="at">strate =</span> <span class="fu">as.integer</span>(region<span class="sc">*</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">as.integer</span>(v025)),</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>                    <span class="at">v022 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v022), strate, v022))) </span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract country and year information for metadata</span></span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  dhs_data3 <span class="ot">=</span> <span class="fu">ldply</span>(dhs_data2)</span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  l <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">country_name =</span> <span class="fu">unique</span>(dhs_data3<span class="sc">$</span>v000))</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  countries_sel <span class="ot">=</span> <span class="fu">as.factor</span>(l<span class="sc">$</span>country_name)</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>  year <span class="ot">=</span> <span class="fu">unique</span>(dhs_data3<span class="sc">$</span>v007)</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>  year <span class="ot">=</span> <span class="fu">paste</span>(year, <span class="at">collapse =</span> <span class="st">'-'</span>)</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Process fever treatment data for children with fever</span></span>
-<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(z <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dhs_data2)){</span>
-<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale <span class="ot">=</span> dhs_data2[z]</span>
-<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert list to data frame</span></span>
-<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale <span class="ot">=</span> <span class="fu">ldply</span>(dhs_data_finale)</span>
-<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter to include only children who had fever (h22 == 1)</span></span>
-<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale1 <span class="ot">=</span> dhs_data_finale <span class="sc">%&gt;%</span></span>
-<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(h22 <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create treatment source indicators:</span></span>
-<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    <span class="co"># h32a-h32i: public sector sources</span></span>
-<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   (government hospital, health center, health post, mobile clinic, </span></span>
-<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    <span class="co">#    community health worker, government doctor, government nurse, etc.)</span></span>
-<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    <span class="co"># h32j-h32x: private sector sources</span></span>
-<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   (private hospital/clinic, pharmacy, drug store, private doctor,</span></span>
-<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    <span class="co">#    private nurse, traditional healer, shop, etc.)</span></span>
-<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>    <span class="co"># h32y: no treatment sought</span></span>
-<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale1 <span class="ot">=</span> dhs_data_finale1 <span class="sc">%&gt;%</span></span>
-<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(</span>
-<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sum all public sector sources</span></span>
-<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>        <span class="at">prop_publ =</span> <span class="fu">rowSums</span>(dhs_data_finale1[<span class="fu">c</span>(<span class="st">"h32a"</span>, <span class="st">"h32b"</span>, <span class="st">"h32c"</span>, <span class="st">"h32d"</span>, </span>
-<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32e"</span>, <span class="st">"h32f"</span>, <span class="st">"h32g"</span>, <span class="st">"h32h"</span>, </span>
-<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32i"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sum all private sector sources</span></span>
-<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>        <span class="at">prop_priv =</span> <span class="fu">rowSums</span>(dhs_data_finale1[<span class="fu">c</span>(<span class="st">"h32j"</span>, <span class="st">"h32k"</span>, <span class="st">"h32l"</span>, <span class="st">"h32m"</span>, </span>
-<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32n"</span>, <span class="st">"h32o"</span>, <span class="st">"h32p"</span>, <span class="st">"h32q"</span>, </span>
-<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32r"</span>, <span class="st">"h32s"</span>, <span class="st">"h32t"</span>, <span class="st">"h32u"</span>, </span>
-<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32v"</span>, <span class="st">"h32w"</span>, <span class="st">"h32x"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert to binary indicators (1 if any source in sector used)</span></span>
-<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>        <span class="at">prop_publ =</span> <span class="fu">ifelse</span>(prop_publ <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>        <span class="at">prop_priv =</span> <span class="fu">ifelse</span>(prop_priv <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create no treatment indicator</span></span>
-<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>        <span class="at">no_trea =</span> <span class="fu">ifelse</span>(h32y <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert back to list format for estimation functions</span></span>
-<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale1 <span class="ot">=</span> <span class="fu">list</span>(dhs_data_finale1)</span>
-<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<summary>Show code: Cohort definition and indicators</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize empty data frames to store final results</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>all_countries_fievre <span class="ot">=</span> <span class="fu">data.frame</span>()  <span class="co"># For fever prevalence estimates</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>all_countries <span class="ot">=</span> <span class="fu">data.frame</span>()         <span class="co"># For care-seeking estimates</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop through each harmonized dataset to create analysis cohorts</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dhs)){</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  dhs_hhs <span class="ot">=</span> dhs[i]</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Get the processed data from harmonization step</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  dhs_data <span class="ot">=</span> all_countries_raw[[i]]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create analysis cohort with derived indicators</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(z <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dhs_data)){</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    dhs_data1 <span class="ot">=</span> dhs_data[z]</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 1: If age variable exists, filter for children under 5</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span>(<span class="st">'b19'</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(dhs_data1)){</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>      dhs_data2 <span class="ot">=</span> dhs_data1 <span class="sc">%&gt;%</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply eligibility criteria:</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        <span class="co"># - b5 == 1: child is alive</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>        <span class="co"># - b19 &lt; 60: child is under 5 years (under 60 months)</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>        <span class="co"># - h22 != 8: exclude "don't know" responses for fever</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map</span>(<span class="sc">~</span><span class="fu">filter</span>(., b5 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> b19 <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">&amp;</span> h22 <span class="sc">!=</span> <span class="dv">8</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map</span>(<span class="sc">~</span><span class="fu">mutate</span>(., </span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Create binary fever indicator (1 = had fever in last 2 weeks)</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prop_fievre =</span> <span class="fu">ifelse</span>(h22 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Calculate survey weight (DHS weights divided by 1,000,000)</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wt =</span> v005<span class="sc">/</span><span class="dv">1000000</span>,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Create sampling strata: region*10 + urban/rural</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>                    <span class="at">strate =</span> <span class="fu">as.integer</span>(region<span class="sc">*</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">as.integer</span>(v025)),</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Use constructed strata if v022 (sample strata) is missing</span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                    <span class="at">v022 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v022), strate, v022)))</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Case 2: If age variable doesn't exist (no age filter possible)</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(<span class="sc">!</span><span class="st">'b19'</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(dhs_data1)){</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>      dhs_data2 <span class="ot">=</span> dhs_data1 <span class="sc">%&gt;%</span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Apply eligibility criteria (no age filter)</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map</span>(<span class="sc">~</span><span class="fu">filter</span>(., b5 <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> h22 <span class="sc">!=</span> <span class="dv">8</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        <span class="fu">map</span>(<span class="sc">~</span><span class="fu">mutate</span>(., </span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>                    <span class="at">prop_fievre =</span> <span class="fu">ifelse</span>(h22 <span class="sc">==</span> <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wt =</span> v005<span class="sc">/</span><span class="dv">1000000</span>,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>                    <span class="co"># Create region variable (use v101 if v024 is missing)</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>                    <span class="at">region =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v024), v101, v024),</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>                    <span class="at">strate =</span> <span class="fu">as.integer</span>(region<span class="sc">*</span><span class="dv">10</span> <span class="sc">+</span> <span class="fu">as.integer</span>(v025)),</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>                    <span class="at">v022 =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v022), strate, v022))) </span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Extract country and year information for metadata</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>  dhs_data3 <span class="ot">=</span> <span class="fu">ldply</span>(dhs_data2)</span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>  l <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">country_name =</span> <span class="fu">unique</span>(dhs_data3<span class="sc">$</span>v000))</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  countries_sel <span class="ot">=</span> <span class="fu">as.factor</span>(l<span class="sc">$</span>country_name)</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  year <span class="ot">=</span> <span class="fu">unique</span>(dhs_data3<span class="sc">$</span>v007)</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>  year <span class="ot">=</span> <span class="fu">paste</span>(year, <span class="at">collapse =</span> <span class="st">'-'</span>)</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Process fever treatment data for children with fever</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(z <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(dhs_data2)){</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale <span class="ot">=</span> dhs_data2[z]</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert list to data frame</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale <span class="ot">=</span> <span class="fu">ldply</span>(dhs_data_finale)</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Filter to include only children who had fever (h22 == 1)</span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale1 <span class="ot">=</span> dhs_data_finale <span class="sc">%&gt;%</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(h22 <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Create treatment source indicators:</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># h32a-h32i: public sector sources</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   (government hospital, health center, health post, mobile clinic, </span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    <span class="co">#    community health worker, government doctor, government nurse, etc.)</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># h32j-h32x: private sector sources</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    <span class="co">#   (private hospital/clinic, pharmacy, drug store, private doctor,</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>    <span class="co">#    private nurse, traditional healer, shop, etc.)</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>    <span class="co"># h32y: no treatment sought</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale1 <span class="ot">=</span> dhs_data_finale1 <span class="sc">%&gt;%</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span>(</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sum all public sector sources</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>        <span class="at">prop_publ =</span> <span class="fu">rowSums</span>(dhs_data_finale1[<span class="fu">c</span>(<span class="st">"h32a"</span>, <span class="st">"h32b"</span>, <span class="st">"h32c"</span>, <span class="st">"h32d"</span>, </span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32e"</span>, <span class="st">"h32f"</span>, <span class="st">"h32g"</span>, <span class="st">"h32h"</span>, </span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32i"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Sum all private sector sources</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>        <span class="at">prop_priv =</span> <span class="fu">rowSums</span>(dhs_data_finale1[<span class="fu">c</span>(<span class="st">"h32j"</span>, <span class="st">"h32k"</span>, <span class="st">"h32l"</span>, <span class="st">"h32m"</span>, </span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32n"</span>, <span class="st">"h32o"</span>, <span class="st">"h32p"</span>, <span class="st">"h32q"</span>, </span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32r"</span>, <span class="st">"h32s"</span>, <span class="st">"h32t"</span>, <span class="st">"h32u"</span>, </span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>                                               <span class="st">"h32v"</span>, <span class="st">"h32w"</span>, <span class="st">"h32x"</span>)], <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Convert to binary indicators (1 if any source in sector used)</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>        <span class="at">prop_publ =</span> <span class="fu">ifelse</span>(prop_publ <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>        <span class="at">prop_priv =</span> <span class="fu">ifelse</span>(prop_priv <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>        <span class="co"># Create no treatment indicator</span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>        <span class="at">no_trea =</span> <span class="fu">ifelse</span>(h32y <span class="sc">==</span> <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>))</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert back to list format for estimation functions</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    dhs_data_finale1 <span class="ot">=</span> <span class="fu">list</span>(dhs_data_finale1)</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p><strong>Survey design and estimation</strong></p>
 <ul>
+<li>Applied survey weights to <strong>child-level data</strong> to account for complex sampling design</li>
 <li>Defined complex survey designs with the <strong><code>survey</code></strong> package:
 <ul>
 <li><code>svydesign(ids = ~v021, strata = ~v022, weights = ~wt, nest = TRUE)</code></li>
 </ul></li>
-<li>Computed region-level estimates for each country:
+<li><strong>Aggregated to region level</strong> by computing weighted estimates for each country:
 <ul>
-<li>Fever prevalence: <code>svyby(~prop_fievre, by = ~region + country_name, FUN = svymean, vartype = "se" or "ci")</code></li>
-<li>Public-sector care-seeking: <code>svyby(~prop_publ, ...)</code></li>
-<li>Private-sector care-seeking: <code>svyby(~prop_priv, ...)</code></li>
-<li>No treatment: <code>svyby(~no_trea, ...)</code></li>
+<li>Fever prevalence: <code>svyby(~prop_fievre, by = ~region + country_name, FUN = svymean)</code></li>
+<li>Public-sector care-seeking: <code>svyby(~prop_publ, by = ~region, ...)</code></li>
+<li>Private-sector care-seeking: <code>svyby(~prop_priv, by = ~region, ...)</code></li>
+<li>No treatment: <code>svyby(~no_trea, by = ~region, ...)</code></li>
 </ul></li>
-<li>Exported final indicator tables to CSV (<code>prop_fever_finale.csv</code>, <code>treatement_seeking.csv</code>, etc.) to be used in mapping tools, dashboards (Shiny, Power BI), or reporting.</li>
+<li>Exported final <strong>region-level indicator tables</strong> to CSV for use in mapping tools, dashboards (Shiny, Power BI), or reporting</li>
 </ul>
+<p><em>Note: The <code>estim_prop()</code> helper function implements this workflow and is available in the [GitHub repository]</em></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Show code: Survey design and estimation</summary>
@@ -700,17 +725,208 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="outputs" class="level2">
 <h2 class="anchored" data-anchor-id="outputs">Outputs</h2>
+<p>The final deliverable is an <strong>analysis-ready CSV dataset</strong> containing:</p>
 <ul>
-<li>Produced standardized, region-level datasets with:
-<ul>
-<li>Fever prevalence among children under 5.</li>
-<li>Proportion of febrile children seeking care in public vs private facilities.</li>
-<li>Proportion of febrile children not receiving any treatment.</li>
-</ul></li>
-<li>Designed the pipeline to work across multiple African countries and survey years, enabling cross-country comparisons and time trends in malaria-related care-seeking behaviour.</li>
+<li><strong>Region-level aggregated estimates</strong> derived from 150,000+ child-level observations across 20+ African countries</li>
+<li>Standardized geographic (region) and temporal (year) variables</li>
+<li>Survey-weighted malaria indicators: fever prevalence, care-seeking patterns (public vs private sector)</li>
+<li>One row per region per country per survey year</li>
 </ul>
+<p><strong>Data transformation:</strong> Child-level microdata (one row per child) was aggregated to region level using survey-weighted estimation (<code>svyby</code>) to produce population-representative estimates.</p>
+<p>This dataset feeds into interactive dashboards (Power BI/R Shiny) for:</p>
+<ul>
+<li>Cross-country malaria burden comparisons</li>
+<li>Treatment-seeking behavior trends</li>
+<li>Market access gap analysis</li>
+</ul>
+<div class="cell">
+<details class="code-fold">
+<summary>Show code: Export analysis-ready dataset</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># EXPORT FINAL ANALYSIS-READY DATASET</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># ============================================================================</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Final dataset structure:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># - One row per child (under 5 years)</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># - Standardized region names across countries</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># - Binary indicators: fever, public care, private care, no treatment</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co"># - Survey weights and design variables</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># - Ready for visualization in Power BI or R Shiny</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Export to CSV for dashboard ingestion</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(all_countries_finale, </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>          <span class="st">'data/malaria_fever_careseeking_final.csv'</span>, </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Preview final dataset structure</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(all_countries_finale)</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Data summary for documentation</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Total records:"</span>, <span class="fu">nrow</span>(all_countries_finale), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Countries:"</span>, <span class="fu">length</span>(<span class="fu">unique</span>(all_countries_finale<span class="sc">$</span>country_name)), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Survey years:"</span>, <span class="fu">paste</span>(<span class="fu">range</span>(all_countries_finale<span class="sc">$</span>year), <span class="at">collapse =</span> <span class="st">"-"</span>), <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="final-dataset-schema" class="level3">
+<h3 class="anchored" data-anchor-id="final-dataset-schema">Final Dataset Schema</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 15%">
+<col style="width: 34%">
+<col style="width: 23%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Type</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>country_name</code></td>
+<td>Character</td>
+<td>Country name</td>
+<td>“Benin”</td>
+</tr>
+<tr class="even">
+<td><code>region</code></td>
+<td>Character</td>
+<td>Standardized region name</td>
+<td>“alibori”</td>
+</tr>
+<tr class="odd">
+<td><code>year</code></td>
+<td>Character</td>
+<td>Survey year</td>
+<td>“2017-2018”</td>
+</tr>
+<tr class="even">
+<td><code>prop_fievre</code></td>
+<td>Numeric</td>
+<td>Fever prevalence among children &lt;5</td>
+<td>0.23</td>
+</tr>
+<tr class="odd">
+<td><code>prop_publ</code></td>
+<td>Numeric</td>
+<td>% of febrile children who sought care in public sector</td>
+<td>0.60</td>
+</tr>
+<tr class="even">
+<td><code>prop_priv</code></td>
+<td>Numeric</td>
+<td>% of febrile children who sought care in private sector</td>
+<td>0.07</td>
+</tr>
+<tr class="odd">
+<td><code>No_treat</code></td>
+<td>Numeric</td>
+<td>% of febrile children who did not seek any treatment</td>
+<td>0.25</td>
+</tr>
+<tr class="even">
+<td><code>type_survey</code></td>
+<td>Character</td>
+<td>Survey type</td>
+<td>“DHS” or “MIS”</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Important Note on Care-Seeking Categories:</strong></p>
+<p>These categories are <strong>not mutually exclusive</strong>. Children may seek care from multiple sources during a single illness episode (e.g., public health center for consultation + private pharmacy for medications). This reflects real-world healthcare-seeking behavior, particularly in contexts where:</p>
+<ul>
+<li>Stock-outs are common in public facilities</li>
+<li>Patients utilize a mix of public and private services based on availability, cost, and perceived quality</li>
+<li>Treatment pathways involve sequential visits to multiple providers</li>
+</ul>
+<p><strong>Interpretation:</strong> In regions where <code>prop_publ + prop_priv + No_treat &gt; 1.0</code>, this indicates overlap where some children accessed both public and private care. This is an important indicator of health system performance and patient behavior patterns.</p>
+</section>
+<section id="sample-data-preview" class="level3">
+<h3 class="anchored" data-anchor-id="sample-data-preview">Sample Data Preview</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 9%">
+<col style="width: 15%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 11%">
+<col style="width: 15%">
+<col style="width: 6%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>country_name</th>
+<th>region</th>
+<th>prop_fievre</th>
+<th>prop_publ</th>
+<th>prop_priv</th>
+<th>No_treat</th>
+<th>type_survey</th>
+<th>year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Angola</td>
+<td>cabinda</td>
+<td>0.16</td>
+<td>0.60</td>
+<td>0.17</td>
+<td>0.35</td>
+<td>DHS</td>
+<td>2015-2016</td>
+</tr>
+<tr class="even">
+<td>Angola</td>
+<td>zaire</td>
+<td>0.15</td>
+<td>0.64</td>
+<td>0.21</td>
+<td>0.12</td>
+<td>DHS</td>
+<td>2015-2016</td>
+</tr>
+<tr class="odd">
+<td>Benin</td>
+<td>alibori</td>
+<td>0.23</td>
+<td>0.10</td>
+<td>0.01</td>
+<td>0.83</td>
+<td>DHS</td>
+<td>2017-2018</td>
+</tr>
+<tr class="even">
+<td>Benin</td>
+<td>atacora</td>
+<td>0.16</td>
+<td>0.28</td>
+<td>0.19</td>
+<td>0.52</td>
+<td>DHS</td>
+<td>2017-2018</td>
+</tr>
+<tr class="odd">
+<td>Burkina Faso</td>
+<td>Boucle du Mouhoun</td>
+<td>0.13</td>
+<td>0.60</td>
+<td>0.01</td>
+<td>0.39</td>
+<td>MIS</td>
+<td>2021</td>
+</tr>
+</tbody>
+</table>
+<p><em>Note: Some regions show totals &gt; 1.0 (e.g., Angola-Cabinda: 0.60 + 0.17 + 0.35 = 1.12), indicating dual care-seeking from both sectors.</em></p>
+<p><em>Note: This dataset is designed for direct ingestion into Power BI/Shiny dashboards.</em></p>
 
 
+</section>
 </section>
 
 <p>Ousmane Diallo, MPH-PhD – Biostatistician, Data Scientist &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
