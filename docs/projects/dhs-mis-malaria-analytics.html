@@ -185,7 +185,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a>
+  <ul class="collapse">
+  <li><a href="#key-skills-demonstrated" id="toc-key-skills-demonstrated" class="nav-link" data-scroll-target="#key-skills-demonstrated">Key skills demonstrated</a></li>
+  </ul></li>
   <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
   <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
   <li><a href="#outputs" id="toc-outputs" class="nav-link" data-scroll-target="#outputs">Outputs</a>
@@ -239,7 +242,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
 <p>This project harmonizes and analyzes <strong>20+ DHS/MIS surveys</strong> from sub-Saharan Africa to estimate malaria-related indicators among children under five. The workflow integrates:</p>
 <ul>
-<li><strong>API-based acquisition</strong> of indicator-level data from the <strong>DHS REST API</strong></li>
 <li><strong>Microdata download and management</strong> using the <code>{rdhs}</code> R package</li>
 <li>Cross-country harmonization of DHS/MIS datasets<br>
 </li>
@@ -253,6 +255,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>This project supports malaria program decision-making, RWE analyses, and subnational monitoring.</p>
 <hr>
+<section id="key-skills-demonstrated" class="level3">
+<h3 class="anchored" data-anchor-id="key-skills-demonstrated">Key skills demonstrated</h3>
+<ul>
+<li>Advanced R programming for large-scale survey microdata</li>
+<li>Complex survey design and weighting with the <code>{survey}</code> package</li>
+<li>Cross-country data harmonization and regional standardization</li>
+<li>Derivation of malaria-related RWE indicators (fever, treatment, sector of care)</li>
+<li>Preparation of analysis-ready datasets for dashboards (Power BI, Shiny)</li>
+</ul>
+<hr>
+</section>
 </section>
 <section id="objectives" class="level2">
 <h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
@@ -393,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># - h22: fever in last 2 weeks</span></span>
 <span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="co"># - h32*: fever treatment source variables</span></span>
 <span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  dhs_kr <span class="ot">&lt;-</span> dhs_hhs <span class="sc">%&gt;%</span></span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="fu">map</span>(<span class="sc">~</span>dplyr<span class="sc">::</span><span class="fu">select</span>(., caseid, v000, v001, v002, v003, v007, v012, v101, </span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    purrr<span class="sc">::</span><span class="fu">map</span>(<span class="sc">~</span>dplyr<span class="sc">::</span><span class="fu">select</span>(., caseid, v000, v001, v002, v003, v007, v012, v101, </span>
 <span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">contains</span>(<span class="st">'v02'</span>), v005, b5, <span class="fu">contains</span>(<span class="st">'b'</span>), b8, </span>
 <span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>                       <span class="fu">contains</span>(<span class="st">'h'</span>), <span class="fu">contains</span>(<span class="st">"h32"</span>)))</span>
 <span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  </span>
@@ -411,18 +424,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Case 1: If age variable 'b19' (age in months) exists, use it directly</span></span>
 <span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span>(<span class="st">'b19'</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(all_datasets)){</span>
 <span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>        all_datasets <span class="ot">=</span> all_datasets <span class="sc">%&gt;%</span></span>
-<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select</span>(v000, v001, v002, v003, v007, v005, v012, v101, v021, </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">select</span>(v000, v001, v002, v003, v007, v005, v012, v101, v021, </span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                 <span class="at">v024 =</span> v101,  <span class="co"># Rename v101 to v024 for consistency</span></span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                 v022, v025, b5, b8, h22, b19, <span class="fu">contains</span>(<span class="st">"h32"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v024), v101, v024))</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">region =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v024), v101, v024))</span>
 <span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        </span>
 <span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>      <span class="co"># Case 2: If 'hw1' exists, use it as proxy for age</span></span>
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>      } <span class="cf">else</span> <span class="cf">if</span>(<span class="st">'hw1'</span> <span class="sc">%in%</span> <span class="fu">colnames</span>(all_datasets)){</span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        all_datasets <span class="ot">=</span> all_datasets <span class="sc">%&gt;%</span></span>
-<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>          <span class="fu">select</span>(v000, v001, v002, v003, v007, v005, v012, </span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">select</span>(v000, v001, v002, v003, v007, v005, v012, </span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>                 <span class="at">v024 =</span> v101,  <span class="co"># Rename v101 to v024</span></span>
 <span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                 v101, v021, v022, v025, b5, b8, h22, hw1, <span class="fu">contains</span>(<span class="st">"h32"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>          <span class="fu">mutate</span>(<span class="at">b19 =</span> hw1,  <span class="co"># Create b19 from hw1</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>          dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">b19 =</span> hw1,  <span class="co"># Create b19 from hw1</span></span>
 <span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                 <span class="at">region =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(v024), v101, v024))</span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>      }</span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>      </span>
@@ -459,7 +472,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(region_lookup, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"country_name"</span> <span class="ot">=</span> <span class="st">"country_name"</span>, </span>
 <span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"year"</span> <span class="ot">=</span> <span class="st">"year"</span>, </span>
 <span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>                                   <span class="st">"v024"</span> <span class="ot">=</span> <span class="st">"v024"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
 <span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Use standardized region name if available, otherwise keep v024 code</span></span>
 <span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    <span class="at">region_name =</span> <span class="fu">coalesce</span>(region_name, <span class="fu">as.character</span>(v024))</span>
 <span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -822,7 +835,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td>0.07</td>
 </tr>
 <tr class="odd">
-<td><code>No_treat</code></td>
+<td><code>no_treat</code></td>
 <td>Numeric</td>
 <td>% of febrile children who did not seek any treatment</td>
 <td>0.25</td>
@@ -864,7 +877,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <th>prop_fievre</th>
 <th>prop_publ</th>
 <th>prop_priv</th>
-<th>No_treat</th>
+<th>no_treat</th>
 <th>type_survey</th>
 <th>year</th>
 </tr>

@@ -18,7 +18,6 @@ knitr::opts_chunk$set(eval = FALSE, echo = TRUE)
 
 This project harmonizes and analyzes **20+ DHS/MIS surveys** from sub-Saharan Africa to estimate malaria-related indicators among children under five. The workflow integrates:
 
-- **API-based acquisition** of indicator-level data from the **DHS REST API**
 - **Microdata download and management** using the `{rdhs}` R package
 -  Cross-country harmonization of DHS/MIS datasets  
 -  Standardization of regional categories **(v024)** that differ by country and survey year  
@@ -29,6 +28,16 @@ This project harmonizes and analyzes **20+ DHS/MIS surveys** from sub-Saharan Af
 This project supports malaria program decision-making, RWE analyses, and subnational monitoring.
 
 ------------------------------------------------------------------------
+
+### Key skills demonstrated
+
+- Advanced R programming for large-scale survey microdata
+- Complex survey design and weighting with the `{survey}` package
+- Cross-country data harmonization and regional standardization
+- Derivation of malaria-related RWE indicators (fever, treatment, sector of care)
+- Preparation of analysis-ready datasets for dashboards (Power BI, Shiny)
+
+--------------------
 
 ## Objectives
 
@@ -164,7 +173,7 @@ for(i in 1:length(dhs)){
   # - h22: fever in last 2 weeks
   # - h32*: fever treatment source variables
   dhs_kr <- dhs_hhs %>%
-    map(~dplyr::select(., caseid, v000, v001, v002, v003, v007, v012, v101, 
+    purrr::map(~dplyr::select(., caseid, v000, v001, v002, v003, v007, v012, v101, 
                        contains('v02'), v005, b5, contains('b'), b8, 
                        contains('h'), contains("h32")))
   
@@ -182,18 +191,18 @@ for(i in 1:length(dhs)){
       # Case 1: If age variable 'b19' (age in months) exists, use it directly
       if('b19' %in% colnames(all_datasets)){
         all_datasets = all_datasets %>%
-          select(v000, v001, v002, v003, v007, v005, v012, v101, v021, 
+          dplyr::select(v000, v001, v002, v003, v007, v005, v012, v101, v021, 
                  v024 = v101,  # Rename v101 to v024 for consistency
                  v022, v025, b5, b8, h22, b19, contains("h32")) %>%
-          mutate(region = ifelse(is.na(v024), v101, v024))
+          dplyr::mutate(region = ifelse(is.na(v024), v101, v024))
         
       # Case 2: If 'hw1' exists, use it as proxy for age
       } else if('hw1' %in% colnames(all_datasets)){
         all_datasets = all_datasets %>%
-          select(v000, v001, v002, v003, v007, v005, v012, 
+          dplyr::select(v000, v001, v002, v003, v007, v005, v012, 
                  v024 = v101,  # Rename v101 to v024
                  v101, v021, v022, v025, b5, b8, h22, hw1, contains("h32")) %>%
-          mutate(b19 = hw1,  # Create b19 from hw1
+          dplyr::mutate(b19 = hw1,  # Create b19 from hw1
                  region = ifelse(is.na(v024), v101, v024))
       }
       
@@ -230,7 +239,7 @@ all_datasets_final <- all_datasets_final %>%
   left_join(region_lookup, by = c("country_name" = "country_name", 
                                    "year" = "year", 
                                    "v024" = "v024")) %>%
-  mutate(
+  dplyr::mutate(
     # Use standardized region name if available, otherwise keep v024 code
     region_name = coalesce(region_name, as.character(v024))
   )
@@ -553,7 +562,7 @@ cat("Survey years:", paste(range(all_countries_finale$year), collapse = "-"), "\
 | `prop_fievre` | Numeric | Fever prevalence among children <5 | 0.23 |
 | `prop_publ` | Numeric | % of febrile children who sought care in public sector | 0.60 |
 | `prop_priv` | Numeric | % of febrile children who sought care in private sector | 0.07 |
-| `No_treat` | Numeric | % of febrile children who did not seek any treatment | 0.25 |
+| `no_treat` | Numeric | % of febrile children who did not seek any treatment | 0.25 |
 | `type_survey` | Character | Survey type | "DHS" or "MIS" |
 
 **Important Note on Care-Seeking Categories:**
@@ -569,7 +578,7 @@ These categories are **not mutually exclusive**. Children may seek care from mul
 
 ### Sample Data Preview
 
-| country_name | region | prop_fievre | prop_publ | prop_priv | No_treat | type_survey | year |
+| country_name | region | prop_fievre | prop_publ | prop_priv | no_treat | type_survey | year |
 |--------------|--------|-------------|-----------|-----------|----------|-------------|------|
 | Angola | cabinda | 0.16 | 0.60 | 0.17 | 0.35 | DHS | 2015-2016 |
 | Angola | zaire | 0.15 | 0.64 | 0.21 | 0.12 | DHS | 2015-2016 |
