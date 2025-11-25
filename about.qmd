@@ -1,6 +1,6 @@
 ---
 title: "About Ousmane Diallo, MPH, PhD"
-description: "Ousmane Diallo, MPH, PhD is a data scientist, Epidemiologist, Biostatistician, "
+description: "Ousmane Diallo, MPH, PhD is a data scientist, Epidemiologist, Biostatistician"
 image: images/bio-photo-2.jpg
 about:
   template: solana

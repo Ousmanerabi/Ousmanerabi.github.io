@@ -1,0 +1,261 @@
+---
+title: "Data Quality Pipeline for Routine Surveillance Data from HMIS"
+description: "End-to-end R pipeline for cleaning, harmonizing, and assessing data quality of routine malaria indicators from DHIS2 at health-facility level."
+author: "Ousmane Diallo, MPH-PhD"
+date: "11/16/2025"
+categories: [HMIS, malaria, data quality, DHIS2, R, health data science]
+highlight-style: pygments
+page-layout: article
+format:
+  html:
+    css: ../assets/css/remove-keyword.css
+---
+
+```{r}
+#| include: false
+knitr::opts_chunk$set(eval = FALSE, echo = TRUE)
+```
+
+## Overview
+
+This project builds a full **R pipeline** to evaluate the quality of routine malaria data reported through a **national DHIS2-based HMIS**.
+
+Using several years of health-facility–level data (2016–2022), the workflow quantifies:
+
+-   **Missing data patterns** by indicator, month, and district\
+-   **Outliers and implausible values** (SD-based and Hampel filters)\
+-   **Internal consistency** between key malaria indicators\
+-   **Health-facility activity and reporting completeness** over time
+
+The outputs are designed to support **national malaria program** teams in monitoring data quality and prioritizing supervision and corrective actions.
+
+This project highlights my expertise in Real World Evidence (RWE) analytics, focusing on routine health data from DHIS2. It demonstrates skills in data wrangling, quality assessment, and visualization—key for roles in pharmacoepidemiology, health analytics, or public health research
+
+------------------------------------------------------------------------
+
+## Data sources and unit of analysis
+
+-   **Source**: DHIS2 routine HMIS exports (malaria indicators and related service statistics)\
+-   **Unit of analysis**: health facility × month × year\
+-   **Geographic level**: national, aggregated into regions and districts (no facility identifiers displayed in the report)
+
+Key malaria indicators used in this project include:
+
+| Indicator     | Description                               | Age Groups            | Example Use Case            |
+|---------------|--------------------------------------------|------------------------|------------------------------|
+| allout        | Outpatient visits (all causes)             | All, <5y, >5y          | Denominator for incidence rates |
+| susp          | Suspected malaria cases                    | All, <5y, >5y          | Suspicion surveillance       |
+| test          | Tested cases (RDT + microscopy)            | All, <5y, >5y          | Diagnostic coverage          |
+| conf          | Confirmed malaria cases                    | All, <5y, >5y          | Confirmed incidence          |
+| maltreat      | Treated uncomplicated cases                | All, <5y, >5y          | Treatment access             |
+| confsev       | Confirmed severe cases                     | All, <5y, >5y          | Severity monitoring          |
+| maldth        | Malaria-related deaths                     | All, <5y, >5y          | Mortality tracking           |
+| IPTp/Stocks   | Preventive interventions & commodities      | Pregnant women         | Activity flags               |
+
+: {.striped .hover}
+
+**Challenges Addressed:** Recurrent missing data, French month names, facility name inconsistencies across years.
+
+------------------------------------------------------------------------
+
+## Data management & indicator construction in R
+
+The R pipeline performs the following steps:
+
+1.  **Cleaning and recoding**
+
+    -   Selects and renames geographic and time variables (region, district, health facility, month, year).
+    -   Recodes **French month names to numeric months** and splits the period variable into `month` and `year` (`case_when` and `separate`).
+    -   Standardizes age groups:
+        -   \<5 years, 5–14 years, ≥15 years, and combined groups (under-5 vs over-5).
+
+2.  **Construction of aggregate indicators** Using `dplyr::rowwise()` and `mutate()`, the script creates:
+
+    -   **Total outpatient visits**: allout, allout_u5, allout_ov5\
+    -   **Admissions**: alladm, alladm_u5, alladm_ov5\
+    -   **Suspected, tested, confirmed cases**:
+        -   `susp`, `test` (RDT + microscopy), `conf` (RDT + microscopy)\
+    -   **Treatment and severity**:
+        -   `maltreat` (treated uncomplicated cases),\
+        -   `pressev`, `confsev` (presumed and confirmed severe cases)\
+    -   **Malaria deaths**: `maldth` (overall and age-specific)
+
+3.  **Zero to NA recoding for analytical indicators**
+
+    -   For malaria indicators, zeros are recoded to `NA` to distinguish true zeros from non-reporting.
+    
+    
+```{r}
+#| label: data-management-indicator
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code: Data management"
+
+
+tdata = st
+```
+
+
+------------------------------------------------------------------------
+
+## Data-quality indicators
+
+### 1. Missing data by indicator, month, and district
+
+Using `group_by()` and `across()`:
+
+-   Counts the **number of missing values per indicator** at district × month × year level.\
+-   Joins the number of reporting facilities to compute the **percentage of missing values**.
+
+$$
+\text{Missingness }(\%) =
+\frac{N_{\text{facilities with NA}}}{N_{\text{facilities reporting in district}}} \times 100
+$$
+
+
+The resulting dataset (`*_missing_data`) includes:
+
+-   Region, district, month, year\
+-   Indicator type (visits, suspected, tested, confirmed, treated, admissions, deaths)\
+-   Age category (under-5, over-5, all ages)\
+-   Numerator (facilities with missing data) and denominator (total facilities)\
+-   **Proportion of missing data (%)**
+
+```{r}
+#| label: Missing-data
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code:Missing Data"
+
+data = t
+```
+
+------------------------------------------------------------------------
+
+### 2. Outlier detection and imputation
+
+The pipeline applies two complementary methods:
+
+1.  **Mean ± 3 standard deviations**
+    -   For each indicator, computes mean and SD across all facility-months.\
+    -   Flags values outside **\[mean − 3×SD, mean + 3×SD\]** as potential outliers.
+2.  **Hampel filter (median ± 3 MAD)**
+    -   Computes the **median** and **median absolute deviation (MAD)**.\
+    -   Flags values outside **\[median − 3×MAD, median + 3×MAD\]** as robust outliers.
+
+Outliers are:
+
+-   **Flagged** in a long-format dataset (facility × month × indicator).\
+-   Optionally **imputed** using local averages from neighboring months for the same facility when justified, while retaining flags for transparency.
+
+
+```{r}
+#| label: Outliers-detection-imputation
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code:outliers-detection"
+
+data = t
+```
+
+------------------------------------------------------------------------
+
+### 3. Internal consistency checks
+
+Programmatic rules derived from malaria surveillance practice are encoded in R; for example:
+
+-   Tested cases ≥ confirmed cases\
+-   Suspected cases ≥ tested cases\
+-   Confirmed cases ≥ treated cases\
+-   Malaria deaths ≤ total deaths\
+-   Malaria admissions ≤ total admissions
+
+For each facility-month, the script:
+
+-   Creates logical flags (“Normal” / “Not normal”) for each rule.\
+-   Aggregates results by district and month to compute the **proportion of facility-months with incoherent data**.
+
+```{r}
+#| label: Internal-Consistency-Check
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code: Internal Check"
+
+data = t
+```
+
+------------------------------------------------------------------------
+
+### 4. Facility activity and reporting completeness
+
+To distinguish **inactive facilities** from **true zero values**:
+
+1.  For each facility-month, counts the number of **non-missing malaria indicators**.\
+2.  Defines **activity status**:
+    -   `active` if at least one key malaria indicator is reported,\
+    -   `inactive` otherwise.
+3.  Builds a **time series per facility** using a unique facility identifier and calendar date.
+4.  Computes for each district and month:
+    -   total number of facilities,
+    -   number of active facilities,
+    -   **reporting completeness (%)** = active facilities / total facilities × 100.
+
+This produces district-level completeness trajectories over several years.
+
+
+```{r}
+#| label: Facility-activity-reporting
+#| eval: false
+#| code-fold: true
+#| code-summary: "Show code: Facility and Reporting"
+
+data = t
+```
+
+------------------------------------------------------------------------
+
+## Visualizations
+
+Key outputs include:
+
+-   **Heatmaps of missingness**
+    -   Percentage of missing values per indicator × month, faceted by district.
+-   **Scatter plots for coherence checks**
+    -   Tested vs confirmed cases, colored by coherence status, with regression lines.
+-   **Time series of reporting completeness**
+    -   Monthly completeness by district and at national level.
+
+Detailed interactive visualizations of this project are implemented in a dedicated Visualizations Chapter using Shiny (for dynamic R-based dashboards). These tools enable drill-downs by district, time-series filtering, and exportable insights for stakeholders. Access the Shiny app via [GitHub link] upon request.
+
+------------------------------------------------------------------------
+
+## Results and Insights
+
+-  Missingness: 15-25% for confirmed cases (higher in dry season); rural districts > urban.
+
+-  Outliers: 5-10% flagged (Hampel more conservative).
+
+-  Consistency: 92% "normal" records; issues tied to under-reported tests.
+
+-  Completeness: Improved from 65% (2016) to 85% (2024); district trajectories guide interventions.
+
+**RWE Insights**: Adjustments for reporting bias refine incidence estimates (e.g., +20% under-reported cases), enhancing evidence for intervention efficacy.
+
+## Relevance for RWE, and healthcare analytics roles
+
+This project demonstrates:
+
+-   Ability to work with **large routine health datasets** (HMIS) at facility level.\
+-   Proficiency in **R for data cleaning, reshaping, and quality assessment** (dplyr, tidyr, lubridate, ggplot2).\
+-   Experience translating **programmatic rules** from malaria surveillance into **automated data-quality checks**.\
+-   Skills in building **reusable analytic datasets and indicators** to support national programs and donor reporting.
+
+| Category           | Skills                                               | R Tools / Examples                           |
+|--------------------|-------------------------------------------------------|-----------------------------------------------|
+| Data Wrangling     | Cleaning, reshaping, indicator building              | `dplyr`, `tidyr`, `lubridate`                 |
+| Quality Assessment | Missingness, outliers (Hampel/SD), consistency rules | Custom functions, `mad()`, logical flags      |
+| Visualization      | Heatmaps, time series, scatterplots                  | `ggplot2`, `viridis`                          |
+| RWE-Specific       | Bias adjustment in routine data, longitudinal trends | DHIS2 handling, facility-level aggregation    |
+
+: {.striped .hover}
+

@@ -290,8 +290,8 @@ for(i in 1:length(dhs)){
         # - b5 == 1: child is alive
         # - b19 < 60: child is under 5 years (under 60 months)
         # - h22 != 8: exclude "don't know" responses for fever
-        map(~filter(., b5 == 1 & b19 < 60 & h22 != 8)) %>%
-        map(~mutate(., 
+        purrr::map(~dplyr::filter(., b5 == 1 & b19 < 60 & h22 != 8)) %>%
+        purrr::map(~dplyr::mutate(., 
                     # Create binary fever indicator (1 = had fever in last 2 weeks)
                     prop_fievre = ifelse(h22 == 1, 1, 0),
                     # Calculate survey weight (DHS weights divided by 1,000,000)
@@ -305,8 +305,8 @@ for(i in 1:length(dhs)){
     } else if(!'b19' %in% colnames(dhs_data1)){
       dhs_data2 = dhs_data1 %>%
         # Apply eligibility criteria (no age filter)
-        map(~filter(., b5 == 1 & h22 != 8)) %>%
-        map(~mutate(., 
+        purrr::map(~dplyr::filter(., b5 == 1 & h22 != 8)) %>%
+        purrr::map(~dplyr::mutate(., 
                     prop_fievre = ifelse(h22 == 1, 1, 0),
                     wt = v005/1000000,
                     # Create region variable (use v101 if v024 is missing)
@@ -342,7 +342,7 @@ for(i in 1:length(dhs)){
     #    private nurse, traditional healer, shop, etc.)
     # h32y: no treatment sought
     dhs_data_finale1 = dhs_data_finale1 %>%
-      mutate(
+      dplyr::mutate(
         # Sum all public sector sources
         prop_publ = rowSums(dhs_data_finale1[c("h32a", "h32b", "h32c", "h32d", 
                                                "h32e", "h32f", "h32g", "h32h", 

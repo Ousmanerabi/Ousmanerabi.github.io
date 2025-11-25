@@ -130,6 +130,8 @@ This section highlights my work in data engineering across multiple health data 
 
 🔹 [Multi-Country DHS/MIS Data Harmonization for Malaria Analytics](projects/dhs-mis-malaria-analytics.html)
 
+🔹 [Data Quality Pipeline for Routine Surveillance Data from HMIS](projects/HMIS_malaria-analytics.html)
+
 The project demonstrates:
 
 - SQL data extraction and transformation across large datasets
