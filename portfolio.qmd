@@ -88,6 +88,7 @@ The projects integrate data from surveys, hospitals, and surveillance systems.
 🔹 [Patient-level Risk Factors for Clinical Malaria in Children (2–60 months)](projects/patient-level-risk-factors-analysis.html)  
 🔹 [Hospital Mortality and Positive Blood Culture with Difficult-to-Treat Resistance – Marseille, France](projects/hospital-mortality-and-positive-blood-culture.html)  
 🔹 [Major Discrepancy Between Factual Antibiotic Resistance and Consumption in Southern France](projects/major_consumption.html)  
+🔹 [Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II)](projects/protocol.html)  
 
 These projects highlight:
 

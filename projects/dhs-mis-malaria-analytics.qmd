@@ -2,7 +2,7 @@
 title: "Multi-Country Malaria Analytics Using DHS and MIS Data"
 description: "Harmonization, cleaning, survey weighting, and estimation of malaria indicators (fever, testing, care-seeking) across 20+ African countries."
 author: "Ousmane Diallo, MPH-PhD"
-date: "11/16/2025"
+date: "2025-11-16"
 highlight-style: pygments
 page-layout: article
 format:

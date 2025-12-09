@@ -2,7 +2,7 @@
 title: "Antimicrobial Resistance Surveillance: Building an Analysis-Ready Dataset Using SQL"
 description: "Extraction, cleaning, time-series aggregation, and control-limit detection on routine microbiology surveillance data."
 author: "Ousmane Diallo, MPH-PhD"
-date: "11/16/2025"
+date: "2025-11-16"
 categories: ["SQL", "Extraction", "Cleaning", "AMR", "Trend Analysis", ]
 highlight-style: pygments
 page-layout: article

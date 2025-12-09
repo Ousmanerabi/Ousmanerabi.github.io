@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ousmane Diallo, MPH-PhD">
+<meta name="dcterms.date" content="2025-11-16">
+<meta name="description" content="Retrospective cohort assessing IAC placement impact on mortality and resource use in ventilated patients">
+
+<title>Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II) – Ousmane Diallo, MPH-PhD</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../images/favicon.jpg" rel="icon" type="image/jpeg">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../assets/css/remove-keyword.css">
+<meta property="og:title" content="Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II) – Ousmane Diallo, MPH-PhD">
+<meta property="og:description" content="Retrospective cohort assessing IAC placement impact on mortality and resource use in ventilated patients">
+<meta property="og:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
+<meta property="og:site_name" content="Ousmane Diallo, MPH-PhD">
+<meta name="twitter:title" content="Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II) – Ousmane Diallo, MPH-PhD">
+<meta name="twitter:description" content="Retrospective cohort assessing IAC placement impact on mortality and resource use in ventilated patients">
+<meta name="twitter:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Ousmane Diallo, MPH-PhD</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> <i class="bi bi-house-door-fill" role="img" aria-label="Home">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> <i class="bi bi-file-earmark-text-fill" role="img">
+</i> 
+<span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> <i class="bi bi-person-lines-fill" role="img" aria-label="About">
+</i> 
+<span class="menu-text">About</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../portfolio.html"> <i class="bi bi-file-earmark-code-fill" role="img" aria-label="Portfolio">
+</i> 
+<span class="menu-text">Portfolio</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../contact.html"> <i class="bi bi-chat-square-text-fill" role="img" aria-label="Contact">
+</i> 
+<span class="menu-text">Contact</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ousmanerabi" target="_blank"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/ousmane-rabi" target="_blank"> <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#title-page" id="toc-title-page" class="nav-link active" data-scroll-target="#title-page">1.Title page</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">2.Abstract</a>
+  <ul class="collapse">
+  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#research-question-and-objectives" id="toc-research-question-and-objectives" class="nav-link" data-scroll-target="#research-question-and-objectives">Research question and objectives</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a></li>
+  </ul></li>
+  <li><a href="#amendments-and-updates" id="toc-amendments-and-updates" class="nav-link" data-scroll-target="#amendments-and-updates">3. Amendments and updates</a></li>
+  <li><a href="#milestones" id="toc-milestones" class="nav-link" data-scroll-target="#milestones">4. Milestones</a></li>
+  <li><a href="#rationale-and-background" id="toc-rationale-and-background" class="nav-link" data-scroll-target="#rationale-and-background">5. Rationale and background</a></li>
+  <li><a href="#research-question-and-objectives-1" id="toc-research-question-and-objectives-1" class="nav-link" data-scroll-target="#research-question-and-objectives-1">6. Research question and objectives</a>
+  <ul class="collapse">
+  <li><a href="#a.-primary-research-question-and-objective" id="toc-a.-primary-research-question-and-objective" class="nav-link" data-scroll-target="#a.-primary-research-question-and-objective">A. Primary research question and objective</a></li>
+  <li><a href="#b.-secondary-research-question-and-objective" id="toc-b.-secondary-research-question-and-objective" class="nav-link" data-scroll-target="#b.-secondary-research-question-and-objective">B. Secondary research question and objective</a></li>
+  </ul></li>
+  <li><a href="#research-methods" id="toc-research-methods" class="nav-link" data-scroll-target="#research-methods">7. Research methods</a>
+  <ul class="collapse">
+  <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study design</a></li>
+  <li><a href="#study-design-diagram" id="toc-study-design-diagram" class="nav-link" data-scroll-target="#study-design-diagram">Study design diagram</a></li>
+  <li><a href="#settings-and-variables" id="toc-settings-and-variables" class="nav-link" data-scroll-target="#settings-and-variables">Settings and variables</a></li>
+  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis">Data analysis</a></li>
+  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data sources</a></li>
+  <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management">Data management</a></li>
+  <li><a href="#quality-control" id="toc-quality-control" class="nav-link" data-scroll-target="#quality-control">Quality control</a></li>
+  <li><a href="#study-size-and-feasibility" id="toc-study-size-and-feasibility" class="nav-link" data-scroll-target="#study-size-and-feasibility">Study size and feasibility</a></li>
+  </ul></li>
+  <li><a href="#limitation-of-the-methods" id="toc-limitation-of-the-methods" class="nav-link" data-scroll-target="#limitation-of-the-methods">8. Limitation of the methods</a></li>
+  <li><a href="#protection-of-human-subjects" id="toc-protection-of-human-subjects" class="nav-link" data-scroll-target="#protection-of-human-subjects">9. Protection of human subjects</a></li>
+  <li><a href="#reporting-of-adverse-events" id="toc-reporting-of-adverse-events" class="nav-link" data-scroll-target="#reporting-of-adverse-events">10. Reporting of adverse events</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">11. References</a></li>
+  <li><a href="#appendices" id="toc-appendices" class="nav-link" data-scroll-target="#appendices">12. Appendices</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II)</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">RWE</div>
+    <div class="quarto-category">EHR</div>
+    <div class="quarto-category">MIMIC-II</div>
+    <div class="quarto-category">observational-study</div>
+    <div class="quarto-category">ICU</div>
+    <div class="quarto-category">logistic regression</div>
+    <div class="quarto-category">propensity-score</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    Retrospective cohort assessing IAC placement impact on mortality and resource use in ventilated patients
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ousmane Diallo, MPH-PhD </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 16, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="title-page" class="level2">
+<h2 class="anchored" data-anchor-id="title-page">1.Title page</h2>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 67%">
+<col style="width: 32%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Element</strong></th>
+<th><strong>Details</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Title</strong></td>
+<td><em>Evaluation of the Association Between Indwelling Arterial Catheter Placement and Clinical Outcomes in Mechanically Ventilated Patients: A Retrospective Cohort Study Using MIMIC-II EHR Data.</em></td>
+</tr>
+<tr class="even">
+<td><strong>Primary Objective</strong></td>
+<td>Estimate the adjusted association (aOR) between <strong>IAC use</strong> and <strong>28-day mortality</strong> using multivariable regression models accounting for severity-of-illness confounding.</td>
+</tr>
+<tr class="odd">
+<td><strong>Secondary Objectives</strong></td>
+<td>- Assess whether <strong>IAC use</strong> is associated with higher <strong>daily arterial blood gas utilization</strong>.<br> - Evaluate impact on <strong>ICU length of stay (LOS)</strong>.</td>
+</tr>
+<tr class="even">
+<td><strong>Exposure Definition</strong></td>
+<td>Exposure defined using <code>aline_flg</code> (1 = IAC used, 0 = no IAC). Timestamp-based new-user design not possible due to lack of procedure timing in MIMIC-II.</td>
+</tr>
+<tr class="odd">
+<td><strong>Protocol Version</strong></td>
+<td>v1.0 (27-Nov-2025)</td>
+</tr>
+<tr class="even">
+<td><strong>Contributors</strong></td>
+<td><strong>PI:</strong> Ousmane Diallo, MPH-PhD (Design, Analysis, Reporting)<br>Contact: <em>ousmanerabi12@gmail.com</em></td>
+</tr>
+<tr class="odd">
+<td><strong>Study Registration</strong></td>
+<td>OSF.io preregistration (DOI: TBD); ClinicalTrials.gov planned (NCT ID: TBD).</td>
+</tr>
+<tr class="even">
+<td><strong>Sponsor</strong></td>
+<td>Self-sponsored project for RWE training and portfolio development.</td>
+</tr>
+<tr class="odd">
+<td><strong>Conflict of Interest</strong></td>
+<td>None declared.</td>
+</tr>
+<tr class="even">
+<td><strong>Funding</strong></td>
+<td>Self-funded; no industry or external support.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">2.Abstract</h2>
+<section id="background" class="level3">
+<h3 class="anchored" data-anchor-id="background">Background</h3>
+<p>Indwelling arterial catheters (IACs) are frequently used in intensive care units (ICUs) for continuous blood pressure monitoring and repeated arterial blood gas sampling among mechanically ventilated patients. Although clinically useful, they are invasive and may carry risks such as local complications and bloodstream infections.</p>
+<p>Despite their routine use, real-world evidence (RWE) describing how IAC use relates to mortality and resource utilization in mechanically ventilated but hemodynamically stable ICU patients remains limited. This study uses the MIMIC-II database to evaluate whether the presence of an arterial line is associated with differences in 28-day mortality and care intensity.</p>
+</section>
+<section id="research-question-and-objectives" class="level3">
+<h3 class="anchored" data-anchor-id="research-question-and-objectives">Research question and objectives</h3>
+<p><em>How to write a research question: In the population of interest <strong>(study cohort)</strong>, is the <strong>exposure to the variable of interest</strong> associated with a different <strong>outcome than in the control group?</strong>.</em></p>
+<p><em>This question employs a new-user design to minimize immortal time bias.</em></p>
+<p>Among mechanically ventilated adult ICU patients who are not receiving vasopressor therapy, is the use of an indwelling arterial catheter (IAC) defined as any documented arterial line during the ICU stay (<code>aline_flg = 1</code>) compared with no IAC use, associated with:</p>
+<ul>
+<li><strong>differences in 28-day mortality</strong> (primary, patient-centered outcome)?<br>
+</li>
+<li><strong>a higher number of blood gas measurements per day</strong> (secondary, mechanistic/intermediate outcome)?</li>
+</ul>
+<p><strong>Primary Objective:</strong><br>
+Estimate the adjusted association (aOR) between <strong>IAC use</strong> and <strong>28-day mortality</strong> using multivariable regression models accounting for confounding by severity of illness.</p>
+<p><strong>Secondary Objective:</strong><br>
+Evaluate whether <strong>IAC use</strong> is associated with greater <strong>daily arterial blood gas utilization</strong> and <strong>ICU length of stay</strong>.</p>
+</section>
+<section id="methods" class="level3">
+<h3 class="anchored" data-anchor-id="methods">Methods</h3>
+<p>We will conduct a retrospective cohort study using the MIMIC-II database, including adult ICU patients receiving invasive mechanical ventilation. Exposure will be defined as documented IAC use at any point during the ICU stay (<code>aline_flg = 1</code>).</p>
+<p>To address confounding by indication, we will use two complementary analytical strategies. First, a multivariable logistic regression model will estimate the association between IAC use and 28-day mortality, adjusting for baseline severity of illness (e.g., SAPS I, SOFA), demographics, comorbidities, and day-1 physiologic and laboratory variables. Second, we will estimate propensity scores for IAC use via logistic regression and apply matching to balance covariates between groups before refitting the outcome model.</p>
+<p>Effect estimates will be reported as odds ratios with 95% confidence intervals.</p>
+</section>
+</section>
+<section id="amendments-and-updates" class="level2">
+<h2 class="anchored" data-anchor-id="amendments-and-updates">3. Amendments and updates</h2>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 17%">
+<col style="width: 19%">
+<col style="width: 22%">
+<col style="width: 24%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Version date</strong></th>
+<th><strong>Version number</strong></th>
+<th><strong>Section amended</strong></th>
+<th><strong>Amendment / update</strong></th>
+<th><strong>Reason for amendment</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>27-Nov-2025</td>
+<td>v1.0</td>
+<td>Full protocol</td>
+<td>Initial version</td>
+<td>First complete draft of study protocol</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> This protocol is version <strong>1.0 (27-Nov-2025)</strong>. Future updates will be documented in the table above. Amendments may include:</p>
+<ul>
+<li>changes in exposure definition (e.g., refinement of <code>aline_flg</code> logic),</li>
+<li>updates to covariate selection or variable construction,</li>
+<li>modifications to statistical methodology (e.g., switching from IPTW to PS matching),</li>
+<li>adjustments to inclusion/exclusion criteria,</li>
+<li>addition of new sensitivity analyses,</li>
+<li>corrections following peer review or analytic QA.</li>
+</ul>
+<p>Each amendment will be <strong>timestamped</strong>, <strong>versioned</strong>, and <strong>archived</strong> to ensure full traceability, transparency, and reproducibility.</p>
+</section>
+<section id="milestones" class="level2">
+<h2 class="anchored" data-anchor-id="milestones">4. Milestones</h2>
+<p>The study timeline includes the following milestones:</p>
+<table class="table-striped table-hover caption-top table">
+<thead>
+<tr class="header">
+<th><strong>Milestone</strong></th>
+<th><strong>Date</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Protocol finalization</td>
+<td>December 2025</td>
+</tr>
+<tr class="even">
+<td>Data extraction &amp; preprocessing</td>
+<td>December 2025 – January 2026</td>
+</tr>
+<tr class="odd">
+<td>Exploratory data analysis</td>
+<td>January 2026</td>
+</tr>
+<tr class="even">
+<td>Propensity score modeling</td>
+<td>January – February 2026</td>
+</tr>
+<tr class="odd">
+<td>Primary analysis (mortality models)</td>
+<td>February 2026</td>
+</tr>
+<tr class="even">
+<td>Secondary analysis (ABG/day, LOS)</td>
+<td>February 2026</td>
+</tr>
+<tr class="odd">
+<td>Sensitivity analyses</td>
+<td>March 2026</td>
+</tr>
+<tr class="even">
+<td>Portfolio documentation &amp; reporting</td>
+<td>March 2026</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="rationale-and-background" class="level2">
+<h2 class="anchored" data-anchor-id="rationale-and-background">5. Rationale and background</h2>
+<p>Critically ill patients receiving invasive mechanical ventilation require close monitoring of oxygenation, ventilation parameters, and hemodynamic status. Clinicians frequently rely on arterial blood gas (ABG) measurements and continuous arterial pressure monitoring to guide ventilator settings and detect physiologic deterioration. Mechanical ventilation is associated with significant morbidity and mortality, and monitoring intensity varies widely across patients and institutions.</p>
+<p>Indwelling arterial catheters (IACs) are commonly used in ICUs to provide continuous invasive blood pressure measurements and facilitate frequent ABG sampling. Their use is widespread among ventilated patients, particularly those with greater severity of illness. Although IACs offer clinical advantages, they are invasive and associated with risks such as catheter-related infections, vascular complications, and bloodstream infections. Previous studies suggest possible associations between IAC use and increased mortality, though results are inconsistent and confounded by the fact that sicker patients are more likely to receive an IAC (“confounding by indication”).</p>
+<p>Despite their ubiquitous use, the net clinical impact of IAC placement on patient-centered outcomes—especially mortality, resource utilization, and monitoring intensity—remains unclear. Randomized trials are scarce and often underpowered, and observational evidence is limited by confounding, heterogeneity in practice, and missing procedural timing in many EHR datasets. Furthermore, real-world data sources like MIMIC-II rarely provide granular timestamps for line insertion, complicating causal interpretation and mirroring common constraints faced in operational RWE analyses.</p>
+<p>Using the MIMIC-II EHR dataset, this study will estimate the association between IAC use and 28-day mortality among mechanically ventilated adults in the absence of vasopressor therapy. By applying both multivariable regression and propensity score methods (matching or IPTW), the study aims to reduce confounding and generate more balanced comparisons between IAC users and non-users. Beyond answering the clinical question, this work demonstrates a transparent, reproducible framework for conducting ICU-focused RWE analyses using EHR data under realistic data limitations. The study therefore contributes methodological insight (handling confounding, handling limited timestamps) and practical evidence on IAC-related outcomes.</p>
+</section>
+<section id="research-question-and-objectives-1" class="level2">
+<h2 class="anchored" data-anchor-id="research-question-and-objectives-1">6. Research question and objectives</h2>
+<section id="a.-primary-research-question-and-objective" class="level3">
+<h3 class="anchored" data-anchor-id="a.-primary-research-question-and-objective">A. Primary research question and objective</h3>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Study element</strong></th>
+<th><strong>Specification</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Objective</strong></td>
+<td>To estimate the association between indwelling arterial catheter (IAC) use and 28-day mortality among mechanically ventilated adult ICU patients not receiving vasopressors.</td>
+</tr>
+<tr class="even">
+<td><strong>Hypothesis</strong></td>
+<td>IAC use is not associated with lower 28-day mortality after adjusting for baseline severity of illness (null hypothesis).</td>
+</tr>
+<tr class="odd">
+<td><strong>Population (mention key inclusion-exclusion criteria)</strong></td>
+<td>Adult ICU patients in MIMIC-II who: (1) received invasive mechanical ventilation; (2) were not receiving vasopressor therapy on day 1; (3) had sufficient data available for key covariates and outcomes.</td>
+</tr>
+<tr class="even">
+<td><strong>Exposure</strong></td>
+<td>Documented use of an indwelling arterial catheter during the ICU stay (<code>aline_flg = 1</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>Comparator</strong></td>
+<td>No documented IAC use during the ICU stay (<code>aline_flg = 0</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>Outcome</strong></td>
+<td>28-day all-cause mortality, assessed using in-hospital death flags and follow-up information.</td>
+</tr>
+<tr class="odd">
+<td><strong>Time (when follow up begins and ends)</strong></td>
+<td><strong>Time zero:</strong> initiation of invasive mechanical ventilation. <strong>Follow-up:</strong> up to 28 days after MV initiation or until hospital discharge or death, whichever occurs first.</td>
+</tr>
+<tr class="even">
+<td><strong>Setting</strong></td>
+<td>Adult ICUs from the MIMIC-II clinical database (Beth Israel Deaconess Medical Center).</td>
+</tr>
+<tr class="odd">
+<td><strong>Main measure of effect</strong></td>
+<td>Adjusted odds ratio (aOR) for 28-day mortality from multivariable logistic regression and propensity-score–weighted models.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="b.-secondary-research-question-and-objective" class="level3">
+<h3 class="anchored" data-anchor-id="b.-secondary-research-question-and-objective">B. Secondary research question and objective</h3>
+<table class="table-striped table-hover caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Study element</strong></th>
+<th><strong>Specification</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Objective</strong></td>
+<td>To assess whether IAC use is associated with increased monitoring intensity (arterial blood gas measurements per day) and greater ICU resource utilization (ICU length of stay).</td>
+</tr>
+<tr class="even">
+<td><strong>Hypothesis</strong></td>
+<td>IAC use is associated with more frequent ABG sampling and increased ICU length of stay compared with no IAC use.</td>
+</tr>
+<tr class="odd">
+<td><strong>Population (mention key inclusion-exclusion criteria)</strong></td>
+<td>Same as primary analysis: mechanically ventilated adult ICU patients in MIMIC-II who are not receiving vasopressor therapy on day 1 and have sufficient data for covariates and outcomes.</td>
+</tr>
+<tr class="even">
+<td><strong>Exposure</strong></td>
+<td>Documented IAC use during the ICU stay (<code>aline_flg = 1</code>).</td>
+</tr>
+<tr class="odd">
+<td><strong>Comparator</strong></td>
+<td>No documented IAC use during the ICU stay (<code>aline_flg = 0</code>).</td>
+</tr>
+<tr class="even">
+<td><strong>Outcome</strong></td>
+<td>(1) Number of arterial blood gas measurements per ICU day; (2) ICU length of stay (LOS) in days.</td>
+</tr>
+<tr class="odd">
+<td><strong>Time (when follow up begins and ends)</strong></td>
+<td><strong>Time zero:</strong> initiation of invasive mechanical ventilation. <strong>Follow-up:</strong> for ABG/day and LOS, the entire ICU stay until ICU discharge or in-ICU death.</td>
+</tr>
+<tr class="even">
+<td><strong>Setting</strong></td>
+<td>Adult ICUs from the MIMIC-II clinical database.</td>
+</tr>
+<tr class="odd">
+<td><strong>Main measure of effect</strong></td>
+<td>(1) Rate ratio or adjusted mean difference in ABG/day (e.g., via negative binomial or linear regression). (2) Adjusted mean difference or hazard ratio for ICU LOS.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="research-methods" class="level2">
+<h2 class="anchored" data-anchor-id="research-methods">7. Research methods</h2>
+<section id="study-design" class="level3">
+<h3 class="anchored" data-anchor-id="study-design">Study design</h3>
+<p>Retrospective observational cohort study using routinely collected intensive care unit (ICU) electronic health record data from the MIMIC-II database.</p>
+<p>A cohort design is appropriate because the research question compares outcomes (28-day mortality, monitoring intensity, ICU length of stay) between patients <strong>with</strong> and <strong>without</strong> exposure to an indwelling arterial catheter (IAC). The cohort framework preserves the temporal sequence between baseline covariates, IAC use, and subsequent outcomes, and allows estimation of absolute risks and adjusted measures of association (e.g.&nbsp;odds ratios).</p>
+<p>Using an existing ICU EHR cohort (MIMIC-II) is efficient, reflects real-world practice, and provides rich information on severity of illness, physiology, and resource use needed to adjust for confounding by indication. Alternative designs such as case-control or cross-sectional studies would provide less transparent temporality and weaker support for causal interpretation in this context.</p>
+</section>
+<section id="study-design-diagram" class="level3">
+<h3 class="anchored" data-anchor-id="study-design-diagram">Study design diagram</h3>
+<p>The study follows a retrospective cohort structure:</p>
+<ol type="1">
+<li><strong>Cohort entry (“Time zero”)</strong>
+<ul>
+<li>Defined as the initiation of invasive mechanical ventilation (MV).<br>
+</li>
+<li>All baseline covariates (demographics, severity scores, comorbidities, day-1 labs and vitals) are assessed at or before MV initiation.</li>
+</ul></li>
+<li><strong>Exposure assessment</strong>
+<ul>
+<li>Patients are classified as <strong>IAC users</strong> if <code>aline_flg = 1</code> at any time during the ICU stay.<br>
+</li>
+<li>Patients with <code>aline_flg = 0</code> serve as the <strong>unexposed group</strong>.</li>
+</ul></li>
+<li><strong>Follow-up period</strong>
+<ul>
+<li>For mortality outcomes: from MV initiation until 28 days, hospital discharge, or death.<br>
+</li>
+<li>For secondary outcomes (ABG/day, LOS): from MV initiation until ICU discharge or in-ICU death.</li>
+</ul></li>
+<li><strong>Analysis</strong>
+<ul>
+<li>Comparison of outcomes between exposed and unexposed groups using multivariable models and propensity-score–based methods.</li>
+</ul></li>
+</ol>
+<p>A DAG illustrating confounding by severity of illness (e.g., SAPS I, SOFA) and its relationship to both IAC use and mortality will be provided in the Appendix.</p>
+</section>
+<section id="settings-and-variables" class="level3">
+<h3 class="anchored" data-anchor-id="settings-and-variables">Settings and variables</h3>
+<p><strong>Setting</strong><br>
+This study is conducted using the MIMIC-II clinical database, derived from ICU encounters at Beth Israel Deaconess Medical Center (Boston, USA). The dataset includes high-resolution clinical measurements, laboratory results, medications, interventions, and outcomes.</p>
+<p><strong>Key variables</strong></p>
+<ol type="1">
+<li><strong>Exposure</strong>
+<ul>
+<li><em>Indwelling arterial catheter use:</em> <code>aline_flg</code> (1 = used, 0 = not used)</li>
+</ul></li>
+<li><strong>Primary outcome</strong>
+<ul>
+<li><em>28-day all-cause mortality:</em> constructed from in-hospital death flag and time to event fields.</li>
+</ul></li>
+<li><strong>Secondary outcomes</strong>
+<ul>
+<li><em>Arterial blood gas measurements per ICU day:</em> count of ABG records / ICU length of stay.<br>
+</li>
+<li><em>ICU length of stay:</em> number of days from ICU admission to ICU discharge.</li>
+</ul></li>
+<li><strong>Covariates (baseline)</strong>
+<ul>
+<li><strong>Demographics:</strong> age, sex, ethnicity<br>
+</li>
+<li><strong>Severity of illness:</strong> SAPS I, SOFA score<br>
+</li>
+<li><strong>Comorbidities:</strong> Charlson comorbidity index<br>
+</li>
+<li><strong>Day-1 laboratory values:</strong> pH, PaO2, PaCO2, lactate, sodium, potassium, hematocrit, WBC<br>
+</li>
+<li><strong>Day-1 vital signs:</strong> heart rate, mean arterial pressure, temperature, oxygen saturation<br>
+</li>
+<li><strong>Clinical status:</strong> vasopressor use, fluid balance<br>
+</li>
+<li><strong>ICU type:</strong> medical, surgical, trauma</li>
+</ul></li>
+</ol>
+<p>Covariate selection is based on clinical relevance and prior literature on factors associated with both IAC use and mortality.</p>
+</section>
+<section id="data-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="data-analysis">Data analysis</h3>
+<section id="descriptive-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="descriptive-analysis">1. Descriptive analysis</h4>
+<ul>
+<li>Summaries of baseline characteristics by exposure group (IAC vs.&nbsp;no IAC).<br>
+</li>
+<li>Continuous variables: mean ± SD or median (IQR).<br>
+</li>
+<li>Categorical variables: counts and percentages.<br>
+</li>
+<li>Standardized mean differences (SMD &lt; 0.1 indicates good balance).</li>
+</ul>
+</section>
+<section id="primary-analysis-28-day-mortality" class="level4">
+<h4 class="anchored" data-anchor-id="primary-analysis-28-day-mortality">2. Primary analysis (28-day mortality)</h4>
+<ul>
+<li><strong>Multivariable logistic regression model:</strong><br>
+<code>logit(P(death_28d = 1)) = β0 + β1*IAC + β2*SAPS_I + β3*age + ...</code></li>
+<li>Report adjusted odds ratios (aOR) with 95% CIs.</li>
+</ul>
+</section>
+<section id="propensity-score-model" class="level4">
+<h4 class="anchored" data-anchor-id="propensity-score-model">3. Propensity score model</h4>
+<ul>
+<li>Logistic regression to estimate probability of receiving an IAC:<br>
+<code>PS = P(aline_flg = 1 | covariates)</code></li>
+<li>Two approaches:
+<ul>
+<li><strong>Nearest neighbor matching (1:1 or 1:3)</strong></li>
+<li><strong>Inverse probability of treatment weighting (IPTW)</strong> using stabilized weights<br>
+</li>
+</ul></li>
+<li>Assess balance using standardized mean differences before and after adjustment.</li>
+</ul>
+</section>
+<section id="secondary-analyses" class="level4">
+<h4 class="anchored" data-anchor-id="secondary-analyses">4. Secondary analyses</h4>
+<ul>
+<li><strong>ABG/day:</strong>
+<ul>
+<li>Count model (Poisson or negative binomial depending on dispersion).<br>
+</li>
+<li>Outcome: number of ABG per ICU day.<br>
+</li>
+</ul></li>
+<li><strong>ICU length of stay (LOS):</strong>
+<ul>
+<li>Linear regression or Cox proportional hazards model depending on distribution.</li>
+</ul></li>
+</ul>
+</section>
+<section id="sensitivity-analyses" class="level4">
+<h4 class="anchored" data-anchor-id="sensitivity-analyses">5. Sensitivity analyses</h4>
+<ul>
+<li>Alternative severity covariate sets.<br>
+</li>
+<li>PS trimming (e.g., 1st–99th percentile).<br>
+</li>
+<li>Complete-case vs.&nbsp;multiple imputation for missing covariates.<br>
+</li>
+<li>Excluding patients with extremely short ICU stays (&lt; 24 h).</li>
+</ul>
+<p>All analyses will be conducted in R or Python using reproducible scripts.</p>
+</section>
+</section>
+<section id="data-sources" class="level3">
+<h3 class="anchored" data-anchor-id="data-sources">Data sources</h3>
+<p>The study uses the MIMIC-II database, a publicly available ICU EHR dataset hosted by PhysioNet. MIMIC-II includes de-identified patient-level clinical data such as:</p>
+<ul>
+<li>demographics</li>
+<li>vital signs at high temporal resolution</li>
+<li>laboratory measurements</li>
+<li>comorbidities and diagnoses</li>
+<li>procedures and interventions</li>
+<li>ICU outcomes (length of stay, mortality)</li>
+</ul>
+<p>Only patients who meet PhysioNet data-use requirements and CITI training certification are granted access.</p>
+</section>
+<section id="data-management" class="level3">
+<h3 class="anchored" data-anchor-id="data-management">Data management</h3>
+<ul>
+<li>Data will be downloaded from PhysioNet servers following IRB-free data-use approval.<br>
+</li>
+<li>The database will be stored locally in a PostgreSQL environment for efficient querying.<br>
+</li>
+<li>Data preprocessing will include:
+<ul>
+<li>creation of analytic cohort (mechanically ventilated, no vasopressors)</li>
+<li>construction of exposure, outcome, and covariate variables</li>
+<li>unit harmonization and outlier handling</li>
+<li>missing data assessment and documentation<br>
+</li>
+</ul></li>
+<li>All data transformations will be recorded in version-controlled scripts (GitHub).<br>
+</li>
+<li>No identifiable information exists in MIMIC-II; all analyses will be conducted on de-identified data.</li>
+</ul>
+</section>
+<section id="quality-control" class="level3">
+<h3 class="anchored" data-anchor-id="quality-control">Quality control</h3>
+<ul>
+<li>Use of reproducible R scripts with clear documentation.<br>
+</li>
+<li>Independent verification of inclusion/exclusion logic.<br>
+</li>
+<li>Internal data consistency checks (range checks, type validation).<br>
+</li>
+<li>PS balance checks with SMD thresholds (&lt;0.1).<br>
+</li>
+<li>Replication of key results using both regression and PS-weighted models to assess robustness.</li>
+</ul>
+</section>
+<section id="study-size-and-feasibility" class="level3">
+<h3 class="anchored" data-anchor-id="study-size-and-feasibility">Study size and feasibility</h3>
+<p>MIMIC-II includes thousands of ICU patients, with a substantial proportion receiving invasive mechanical ventilation and/or arterial catheterization. This ensures adequate statistical power for:</p>
+<ul>
+<li>multivariable regression with multiple covariates<br>
+</li>
+<li>propensity score matching or weighting<br>
+</li>
+<li>subgroup and sensitivity analyses</li>
+</ul>
+<p>Given the large sample size and rich covariate set, the study is feasible and well-powered to detect clinically meaningful associations.</p>
+</section>
+</section>
+<section id="limitation-of-the-methods" class="level2">
+<h2 class="anchored" data-anchor-id="limitation-of-the-methods">8. Limitation of the methods</h2>
+<ul>
+<li><strong>No timestamp for IAC insertion</strong> in the derived dataset: exposure misclassification is possible.<br>
+</li>
+<li><strong>Residual confounding</strong> despite regression and PS methods (unmeasured illness severity, clinician judgment).<br>
+</li>
+<li><strong>Confounding by indication:</strong> sicker patients are more likely to receive an IAC.<br>
+</li>
+<li><strong>Single-center study:</strong> may limit generalizability.<br>
+</li>
+<li><strong>Missing data:</strong> depends on ICU documentation patterns; imputation may be necessary.<br>
+</li>
+<li><strong>Cannot infer causality:</strong> observational design remains subject to unmeasured confounding.</li>
+</ul>
+</section>
+<section id="protection-of-human-subjects" class="level2">
+<h2 class="anchored" data-anchor-id="protection-of-human-subjects">9. Protection of human subjects</h2>
+<p>This study uses the de-identified MIMIC-II database, which meets HIPAA requirements for removal of personal identifiers. No direct patient interaction occurs, and no re-identification is possible.</p>
+<p>The study qualifies as <strong>non-human subjects research</strong>, and no IRB approval is required. Data access is granted only after completing CITI training and signing PhysioNet’s data-use agreement, which prohibits attempts at patient re-identification.</p>
+</section>
+<section id="reporting-of-adverse-events" class="level2">
+<h2 class="anchored" data-anchor-id="reporting-of-adverse-events">10. Reporting of adverse events</h2>
+<p>As this study uses retrospective, de-identified EHR data, no clinical interventions are performed and no adverse events may occur as part of the research process. Therefore, adverse event reporting does not apply.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">11. References</h2>
+<ol type="1">
+<li>Hsu et al.&nbsp;(Crit Care Med 2017) PMID:28426500.</li>
+<li>Goldberger et al.&nbsp;(MIMIC-II Sci Data 2017).</li>
+<li>O’Grady et al.&nbsp;(IAC risks, Lancet 2001).</li>
+<li>Hernán et al.&nbsp;(Target Trial Emulation, NEJM 2016).</li>
+</ol>
+</section>
+<section id="appendices" class="level2">
+<h2 class="anchored" data-anchor-id="appendices">12. Appendices</h2>
+<ul>
+<li>Appendix A: DAG representing confounding structure<br>
+</li>
+<li>Appendix B: Variable definitions and coding<br>
+</li>
+<li>Appendix C: SQL queries and preprocessing workflow<br>
+</li>
+<li>Appendix D: Propensity score diagnostics (SMD plots, Love plot)<br>
+</li>
+<li>Appendix E: Regression model specifications</li>
+</ul>
+
+
+</section>
+
+<p>Ousmane Diallo, MPH-PhD – Biostatistician, Data Scientist &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/ousmanediallo\.com");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ Website by Ousmane Diallo | © 2025 |
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ousmanerabi" target="_blank">
+      <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/ousmane-diallo8" target="_blank">
+      <i class="bi bi-linkedin" role="img" aria-label="LinkedIn">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
