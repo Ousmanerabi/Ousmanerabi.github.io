@@ -1,0 +1,44 @@
+---
+title: "Early Arterial Catheter Use in Mechanically Ventilated ICU Patients"
+description: "Target trial–inspired RWE study using MIMIC data"
+format: html
+toc: true
+---
+
+## Project Overview
+
+**Objective**
+Estimate the association between indwelling arterial catheter (IAC) use and 28-day mortality among mechanically ventilated adult ICU patients.
+
+**Data source**
+MIMIC-III (PostgreSQL, AWS RDS)
+
+**Study design**
+Retrospective observational cohort, target-trial–inspired.
+
+------------------------------------------------------------------------
+
+## Project Structure
+
+-   📄 **Protocol v2.0 (Active – MIMIC-III)**
+    → [View protocol](protocol_v2.html)
+
+-   📄 **Protocol v1.0 (Archived – MIMIC-II)**
+    → [View archived protocol](protocol.html)
+
+-   🧬 **Cohort construction & SQL logic**
+    → [Cohort definition](cohort_construction.html)
+
+-   ⚖️ **Bias, time-zero & exposure windows**\
+    → [Design considerations](bias_and_design.html)
+
+-   📊 **Results & models** *(in progress)*
+
+------------------------------------------------------------------------
+
+## Why this project matters (RWE relevance)
+
+-   Emulates a **target trial** under real EHR constraints
+-   Explicit handling of **immortal time bias**
+-   Clear separation of **time zero vs exposure window**
+-   Reproducible SQL-first cohort construction
