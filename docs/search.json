@@ -2041,6 +2041,6 @@
     "href": "projects/Protocol.html#appendices",
     "title": "Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II)",
     "section": "12. Appendices",
-    "text": "12. Appendices\n\nAppendix A: DAG representing confounding structure\n\nAppendix B: Variable definitions and coding\n\nAppendix C: SQL queries and preprocessing workflow\n\nAppendix D: Propensity score diagnostics (SMD plots, Love plot)\n\nAppendix E: Regression model specifications"
+    "text": "12. Appendices\n\nAppendix A: DAG representing confounding structure\n\nAppendix B: Variable definitions and coding\n\nAppendix C: SQL queries and pre-processing workflow\n\nAppendix D: Propensity score diagnostics (SMD plots, Love plot)\n\nAppendix E: Regression model specifications"
   }
 ]
