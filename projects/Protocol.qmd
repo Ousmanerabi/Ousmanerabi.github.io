@@ -326,7 +326,7 @@ As this study uses retrospective, de-identified EHR data, no clinical interventi
 
 - Appendix A: DAG representing confounding structure  
 - Appendix B: Variable definitions and coding  
-- Appendix C: SQL queries and preprocessing workflow  
+- Appendix C: SQL queries and pre-processing workflow  
 - Appendix D: Propensity score diagnostics (SMD plots, Love plot)  
 - Appendix E: Regression model specifications  
 
