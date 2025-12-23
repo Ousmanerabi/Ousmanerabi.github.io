@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ousmane Diallo, MPH-PhD">
-<meta name="dcterms.date" content="2025-11-16">
-<meta name="description" content="Retrospective cohort assessing IAC placement impact on mortality and resource use in ventilated patients">
+<meta name="dcterms.date" content="2025-12-18">
+<meta name="description" content="Retrospective ICU EHR cohort using explicit time zero (MV start) and early exposure window for IAC; pragmatic covariate strategy under data-access constraints">
 
-<title>Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II) – Ousmane Diallo, MPH-PhD</title>
+<title>Real-World Evidence Study Protocol (v2.0): Early Arterial Catheter Use and 28-Day Mortality in Mechanically Ventilated ICU Patients (MIMIC-III) – Ousmane Diallo, MPH-PhD</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,22 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<link href="../images/favicon.jpg" rel="icon" type="image/jpeg">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../images/favicon.jpg" rel="icon" type="image/jpeg">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,14 +71,14 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../assets/css/styles.css">
+<link rel="stylesheet" href="../../assets/css/styles.css">
 <link rel="stylesheet" href="../assets/css/remove-keyword.css">
-<meta property="og:title" content="Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II) – Ousmane Diallo, MPH-PhD">
-<meta property="og:description" content="Retrospective cohort assessing IAC placement impact on mortality and resource use in ventilated patients">
+<meta property="og:title" content="Real-World Evidence Study Protocol (v2.0): Early Arterial Catheter Use and 28-Day Mortality in Mechanically Ventilated ICU Patients (MIMIC-III) – Ousmane Diallo, MPH-PhD">
+<meta property="og:description" content="Retrospective ICU EHR cohort using explicit time zero (MV start) and early exposure window for IAC; pragmatic covariate strategy under data-access constraints">
 <meta property="og:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
 <meta property="og:site_name" content="Ousmane Diallo, MPH-PhD">
-<meta name="twitter:title" content="Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II) – Ousmane Diallo, MPH-PhD">
-<meta name="twitter:description" content="Retrospective cohort assessing IAC placement impact on mortality and resource use in ventilated patients">
+<meta name="twitter:title" content="Real-World Evidence Study Protocol (v2.0): Early Arterial Catheter Use and 28-Day Mortality in Mechanically Ventilated ICU Patients (MIMIC-III) – Ousmane Diallo, MPH-PhD">
+<meta name="twitter:description" content="Retrospective ICU EHR cohort using explicit time zero (MV start) and early exposure window for IAC; pragmatic covariate strategy under data-access constraints">
 <meta name="twitter:image" content="https://ousmanediallo.com/images/bio-photo-2.jpg">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -90,7 +90,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Ousmane Diallo, MPH-PhD</span>
     </a>
   </div>
@@ -101,27 +101,27 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> <i class="bi bi-house-door-fill" role="img" aria-label="Home">
+    <a class="nav-link" href="../../index.html"> <i class="bi bi-house-door-fill" role="img" aria-label="Home">
 </i> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications.html"> <i class="bi bi-file-earmark-text-fill" role="img">
+    <a class="nav-link" href="../../publications.html"> <i class="bi bi-file-earmark-text-fill" role="img">
 </i> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html"> <i class="bi bi-person-lines-fill" role="img" aria-label="About">
+    <a class="nav-link" href="../../about.html"> <i class="bi bi-person-lines-fill" role="img" aria-label="About">
 </i> 
 <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../portfolio.html"> <i class="bi bi-file-earmark-code-fill" role="img" aria-label="Portfolio">
+    <a class="nav-link" href="../../portfolio.html"> <i class="bi bi-file-earmark-code-fill" role="img" aria-label="Portfolio">
 </i> 
 <span class="menu-text">Portfolio</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../contact.html"> <i class="bi bi-chat-square-text-fill" role="img" aria-label="Contact">
+    <a class="nav-link" href="../../contact.html"> <i class="bi bi-chat-square-text-fill" role="img" aria-label="Contact">
 </i> 
 <span class="menu-text">Contact</span></a>
   </li>  
@@ -151,8 +151,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#title-page" id="toc-title-page" class="nav-link active" data-scroll-target="#title-page">1.Title page</a></li>
-  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">2.Abstract</a>
+  <li><a href="#title-page" id="toc-title-page" class="nav-link active" data-scroll-target="#title-page">1. Title page</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">2. Abstract</a>
   <ul class="collapse">
   <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
   <li><a href="#research-question-and-objectives" id="toc-research-question-and-objectives" class="nav-link" data-scroll-target="#research-question-and-objectives">Research question and objectives</a></li>
@@ -164,20 +164,19 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#research-question-and-objectives-1" id="toc-research-question-and-objectives-1" class="nav-link" data-scroll-target="#research-question-and-objectives-1">6. Research question and objectives</a>
   <ul class="collapse">
   <li><a href="#a.-primary-research-question-and-objective" id="toc-a.-primary-research-question-and-objective" class="nav-link" data-scroll-target="#a.-primary-research-question-and-objective">A. Primary research question and objective</a></li>
-  <li><a href="#b.-secondary-research-question-and-objective" id="toc-b.-secondary-research-question-and-objective" class="nav-link" data-scroll-target="#b.-secondary-research-question-and-objective">B. Secondary research question and objective</a></li>
+  <li><a href="#b.-secondary-research-questions-and-objectives-feasibility-dependent" id="toc-b.-secondary-research-questions-and-objectives-feasibility-dependent" class="nav-link" data-scroll-target="#b.-secondary-research-questions-and-objectives-feasibility-dependent">B. Secondary research questions and objectives (feasibility-dependent)</a></li>
   </ul></li>
   <li><a href="#research-methods" id="toc-research-methods" class="nav-link" data-scroll-target="#research-methods">7. Research methods</a>
   <ul class="collapse">
   <li><a href="#study-design" id="toc-study-design" class="nav-link" data-scroll-target="#study-design">Study design</a></li>
-  <li><a href="#study-design-diagram" id="toc-study-design-diagram" class="nav-link" data-scroll-target="#study-design-diagram">Study design diagram</a></li>
+  <li><a href="#key-design-definitions" id="toc-key-design-definitions" class="nav-link" data-scroll-target="#key-design-definitions">Key design definitions</a></li>
   <li><a href="#settings-and-variables" id="toc-settings-and-variables" class="nav-link" data-scroll-target="#settings-and-variables">Settings and variables</a></li>
-  <li><a href="#data-analysis" id="toc-data-analysis" class="nav-link" data-scroll-target="#data-analysis">Data analysis</a></li>
-  <li><a href="#data-sources" id="toc-data-sources" class="nav-link" data-scroll-target="#data-sources">Data sources</a></li>
-  <li><a href="#data-management" id="toc-data-management" class="nav-link" data-scroll-target="#data-management">Data management</a></li>
+  <li><a href="#inclusionexclusion-criteria-operational" id="toc-inclusionexclusion-criteria-operational" class="nav-link" data-scroll-target="#inclusionexclusion-criteria-operational">Inclusion/exclusion criteria (operational)</a></li>
+  <li><a href="#statistical-analysis-plan" id="toc-statistical-analysis-plan" class="nav-link" data-scroll-target="#statistical-analysis-plan">Statistical analysis plan</a></li>
+  <li><a href="#data-management-reproducibility" id="toc-data-management-reproducibility" class="nav-link" data-scroll-target="#data-management-reproducibility">Data management &amp; reproducibility</a></li>
   <li><a href="#quality-control" id="toc-quality-control" class="nav-link" data-scroll-target="#quality-control">Quality control</a></li>
-  <li><a href="#study-size-and-feasibility" id="toc-study-size-and-feasibility" class="nav-link" data-scroll-target="#study-size-and-feasibility">Study size and feasibility</a></li>
   </ul></li>
-  <li><a href="#limitation-of-the-methods" id="toc-limitation-of-the-methods" class="nav-link" data-scroll-target="#limitation-of-the-methods">8. Limitation of the methods</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">8. Limitations</a></li>
   <li><a href="#protection-of-human-subjects" id="toc-protection-of-human-subjects" class="nav-link" data-scroll-target="#protection-of-human-subjects">9. Protection of human subjects</a></li>
   <li><a href="#reporting-of-adverse-events" id="toc-reporting-of-adverse-events" class="nav-link" data-scroll-target="#reporting-of-adverse-events">10. Reporting of adverse events</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">11. References</a></li>
@@ -190,13 +189,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Real-World Evidence Study Protocol: Impact of Arterial Catheter Use on Mortality and Resource Utilization in Mechanically Ventilated ICU Patients (MIMIC-II)</h1>
+<h1 class="title">Real-World Evidence Study Protocol (v2.0): Early Arterial Catheter Use and 28-Day Mortality in Mechanically Ventilated ICU Patients (MIMIC-III)</h1>
   <div class="quarto-categories">
     <div class="quarto-category">RWE</div>
     <div class="quarto-category">EHR</div>
-    <div class="quarto-category">MIMIC-II</div>
+    <div class="quarto-category">MIMIC-III</div>
     <div class="quarto-category">observational-study</div>
     <div class="quarto-category">ICU</div>
+    <div class="quarto-category">target-trial</div>
     <div class="quarto-category">logistic regression</div>
     <div class="quarto-category">propensity-score</div>
   </div>
@@ -204,7 +204,7 @@ ul.task-list li input[type="checkbox"] {
 
 <div>
   <div class="description">
-    Retrospective cohort assessing IAC placement impact on mortality and resource use in ventilated patients
+    Retrospective ICU EHR cohort using explicit time zero (MV start) and early exposure window for IAC; pragmatic covariate strategy under data-access constraints
   </div>
 </div>
 
@@ -221,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 16, 2025</p>
+      <p class="date">December 18, 2025</p>
     </div>
   </div>
   
@@ -234,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 <section id="title-page" class="level2">
-<h2 class="anchored" data-anchor-id="title-page">1.Title page</h2>
+<h2 class="anchored" data-anchor-id="title-page">1. Title page</h2>
 <table class="table-striped table-hover caption-top table">
 <colgroup>
 <col style="width: 67%">
@@ -249,23 +249,23 @@ ul.task-list li input[type="checkbox"] {
 <tbody>
 <tr class="odd">
 <td><strong>Title</strong></td>
-<td><em>Evaluation of the Association Between Indwelling Arterial Catheter Placement and Clinical Outcomes in Mechanically Ventilated Patients: A Retrospective Cohort Study Using MIMIC-II EHR Data.</em></td>
+<td><em>Early Indwelling Arterial Catheter Use and 28-Day Mortality in Mechanically Ventilated ICU Patients: A Retrospective Cohort Study Using MIMIC-III EHR Data (Protocol v2.0).</em></td>
 </tr>
 <tr class="even">
 <td><strong>Primary Objective</strong></td>
-<td>Estimate the adjusted association (aOR) between <strong>IAC use</strong> and <strong>28-day mortality</strong> using multivariable regression models accounting for severity-of-illness confounding.</td>
+<td>Estimate the adjusted association between <strong>early IAC exposure</strong> and <strong>28-day mortality</strong> among mechanically ventilated adult ICU patients <strong>not receiving vasopressors in the first 24h after MV start</strong>.</td>
 </tr>
 <tr class="odd">
 <td><strong>Secondary Objectives</strong></td>
-<td>- Assess whether <strong>IAC use</strong> is associated with higher <strong>daily arterial blood gas utilization</strong>.<br> - Evaluate impact on <strong>ICU length of stay (LOS)</strong>.</td>
+<td><em>(Planned, contingent on data feasibility)</em> Assess whether early IAC exposure is associated with (i) <strong>ICU length of stay (LOS)</strong> and (ii) <strong>monitoring intensity</strong> (e.g., ABG/day) if event tables are available.</td>
 </tr>
 <tr class="even">
 <td><strong>Exposure Definition</strong></td>
-<td>Exposure defined using <code>aline_flg</code> (1 = IAC used, 0 = no IAC). Timestamp-based new-user design not possible due to lack of procedure timing in MIMIC-II.</td>
+<td><strong>Early IAC use</strong>: evidence of arterial line placement/documentation occurring <strong>within 0–24 hours after MV start</strong> (time zero). Exposure is derived from procedure/event documentation in MIMIC-III (not <code>aline_flg</code>).</td>
 </tr>
 <tr class="odd">
 <td><strong>Protocol Version</strong></td>
-<td>v1.0 (27-Nov-2025)</td>
+<td><strong>v2.0 (18-Dec-2025)</strong> <em>(Active)</em></td>
 </tr>
 <tr class="even">
 <td><strong>Contributors</strong></td>
@@ -273,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="odd">
 <td><strong>Study Registration</strong></td>
-<td>OSF.io preregistration (DOI: TBD); ClinicalTrials.gov planned (NCT ID: TBD).</td>
+<td>Not registered (portfolio RWE training project). Registration may be added later (OSF/ClinicalTrials.gov: TBD).</td>
 </tr>
 <tr class="even">
 <td><strong>Sponsor</strong></td>
@@ -289,34 +289,28 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+<blockquote class="blockquote">
+<p><strong>Protocol status:</strong> This is the <strong>active protocol</strong> used for cohort construction and analysis. Protocol v1.0 (MIMIC-II) is archived for transparency and traceability.</p>
+</blockquote>
 </section>
 <section id="abstract" class="level2">
-<h2 class="anchored" data-anchor-id="abstract">2.Abstract</h2>
+<h2 class="anchored" data-anchor-id="abstract">2. Abstract</h2>
 <section id="background" class="level3">
 <h3 class="anchored" data-anchor-id="background">Background</h3>
-<p>Indwelling arterial catheters (IACs) are frequently used in intensive care units (ICUs) for continuous blood pressure monitoring and repeated arterial blood gas sampling among mechanically ventilated patients. Although clinically useful, they are invasive and may carry risks such as local complications and bloodstream infections.</p>
-<p>Despite their routine use, real-world evidence (RWE) describing how IAC use relates to mortality and resource utilization in mechanically ventilated but hemodynamically stable ICU patients remains limited. This study uses the MIMIC-II database to evaluate whether the presence of an arterial line is associated with differences in 28-day mortality and care intensity.</p>
+<p>Indwelling arterial catheters (IACs) are widely used in intensive care units (ICUs) for continuous blood pressure monitoring and frequent arterial blood gas (ABG) sampling, especially among mechanically ventilated (MV) patients. While IACs may improve monitoring, they are invasive and can be associated with complications (e.g., vascular injury, infection). Observational associations between IAC use and mortality are difficult to interpret because sicker patients are more likely to receive an IAC (<strong>confounding by indication</strong>) and because exposure timing can introduce <strong>immortal time bias</strong> if not handled carefully.</p>
 </section>
 <section id="research-question-and-objectives" class="level3">
 <h3 class="anchored" data-anchor-id="research-question-and-objectives">Research question and objectives</h3>
-<p><em>How to write a research question: In the population of interest <strong>(study cohort)</strong>, is the <strong>exposure to the variable of interest</strong> associated with a different <strong>outcome than in the control group?</strong>.</em></p>
-<p><em>This question employs a new-user design to minimize immortal time bias.</em></p>
-<p>Among mechanically ventilated adult ICU patients who are not receiving vasopressor therapy, is the use of an indwelling arterial catheter (IAC) defined as any documented arterial line during the ICU stay (<code>aline_flg = 1</code>) compared with no IAC use, associated with:</p>
+<p>Among <strong>mechanically ventilated adult ICU patients</strong> who are <strong>not receiving vasopressors</strong> in the first 24 hours after MV initiation, is <strong>early IAC exposure (0–24h after MV start)</strong>, compared with no early IAC exposure, associated with:</p>
 <ul>
-<li><strong>differences in 28-day mortality</strong> (primary, patient-centered outcome)?<br>
-</li>
-<li><strong>a higher number of blood gas measurements per day</strong> (secondary, mechanistic/intermediate outcome)?</li>
+<li><strong>28-day all-cause mortality</strong> (primary outcome)?</li>
 </ul>
-<p><strong>Primary Objective:</strong><br>
-Estimate the adjusted association (aOR) between <strong>IAC use</strong> and <strong>28-day mortality</strong> using multivariable regression models accounting for confounding by severity of illness.</p>
-<p><strong>Secondary Objective:</strong><br>
-Evaluate whether <strong>IAC use</strong> is associated with greater <strong>daily arterial blood gas utilization</strong> and <strong>ICU length of stay</strong>.</p>
+<p>Secondary outcomes (feasibility-dependent): - ICU length of stay - monitoring intensity (e.g., ABG/day)</p>
 </section>
 <section id="methods" class="level3">
 <h3 class="anchored" data-anchor-id="methods">Methods</h3>
-<p>We will conduct a retrospective cohort study using the MIMIC-II database, including adult ICU patients receiving invasive mechanical ventilation. Exposure will be defined as documented IAC use at any point during the ICU stay (<code>aline_flg = 1</code>).</p>
-<p>To address confounding by indication, we will use two complementary analytical strategies. First, a multivariable logistic regression model will estimate the association between IAC use and 28-day mortality, adjusting for baseline severity of illness (e.g., SAPS I, SOFA), demographics, comorbidities, and day-1 physiologic and laboratory variables. Second, we will estimate propensity scores for IAC use via logistic regression and apply matching to balance covariates between groups before refitting the outcome model.</p>
-<p>Effect estimates will be reported as odds ratios with 95% confidence intervals.</p>
+<p>We will conduct a retrospective cohort study using the <strong>MIMIC-III</strong> ICU EHR database. We define <strong>time zero</strong> as the earliest timestamp indicating invasive mechanical ventilation during an ICU stay (<strong>MV start</strong>). We classify patients as exposed if an arterial line is documented/placed <strong>within 0–24 hours after MV start</strong>. Patients without documented arterial line placement during the exposure window are classified as unexposed.</p>
+<p>To reduce confounding, we will estimate adjusted associations using (1) multivariable regression and (2) propensity score methods (matching or weighting). Due to computational/storage constraints, high-frequency event tables (e.g., <code>chartevents</code>, <code>labevents</code>) may be unavailable; therefore, baseline covariate adjustment will rely on variables feasible to extract (e.g., demographics, admission characteristics, comorbidities/diagnoses, ICU/service type, and vasoactive medication exposure from input tables). Results will be reported as odds ratios with 95% confidence intervals, with transparent reporting of limitations due to unavailable physiologic/laboratory covariates.</p>
 </section>
 </section>
 <section id="amendments-and-updates" class="level2">
@@ -343,32 +337,22 @@ Evaluate whether <strong>IAC use</strong> is associated with greater <strong>dai
 <td>27-Nov-2025</td>
 <td>v1.0</td>
 <td>Full protocol</td>
-<td>Initial version</td>
-<td>First complete draft of study protocol</td>
+<td>Initial draft (MIMIC-II framing, <code>aline_flg</code> exposure).</td>
+<td>Initial specification under presumed data constraints.</td>
 </tr>
 <tr class="even">
 <td>18-Dec-2025</td>
 <td>v2.0</td>
-<td>Data source, exposure, covariates, secondary outcomes</td>
-<td>Updated protocol to use MIMIC-III with reconstructed MV time zero and early IAC exposure window; excluded high-frequency event tables (labs/vitals) due to computational/storage constraints; focused on primary mortality outcome</td>
-<td>Improved temporal validity and feasibility; minimizes immortal time bias while preserving reproducibility</td>
+<td>Data source, exposure, time zero, covariates, feasibility</td>
+<td>Updated to <strong>MIMIC-III</strong>; reconstructed <strong>MV start</strong> as explicit <strong>time zero</strong>; defined <strong>early IAC exposure window (0–24h)</strong>; implemented vaso-free day-1 criterion; adopted pragmatic covariate strategy excluding high-frequency event tables when unavailable.</td>
+<td>Improve temporal validity and reduce immortal time bias; ensure feasibility and reproducibility given storage/compute limitations.</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Note:</strong> This protocol is version <strong>1.0 (27-Nov-2025)</strong>. Future updates will be documented in the table above. Amendments may include:</p>
-<ul>
-<li>changes in exposure definition (e.g., refinement of <code>aline_flg</code> logic),</li>
-<li>updates to covariate selection or variable construction,</li>
-<li>modifications to statistical methodology (e.g., switching from IPTW to PS matching),</li>
-<li>adjustments to inclusion/exclusion criteria,</li>
-<li>addition of new sensitivity analyses,</li>
-<li>corrections following peer review or analytic QA.</li>
-</ul>
-<p>Each amendment will be <strong>timestamped</strong>, <strong>versioned</strong>, and <strong>archived</strong> to ensure full traceability, transparency, and reproducibility.</p>
+<p><strong>Note:</strong> All analyses in this project are based on <strong>Protocol v2.0</strong>.</p>
 </section>
 <section id="milestones" class="level2">
 <h2 class="anchored" data-anchor-id="milestones">4. Milestones</h2>
-<p>The study timeline includes the following milestones:</p>
 <table class="table-striped table-hover caption-top table">
 <thead>
 <tr class="header">
@@ -378,27 +362,27 @@ Evaluate whether <strong>IAC use</strong> is associated with greater <strong>dai
 </thead>
 <tbody>
 <tr class="odd">
-<td>Protocol finalization</td>
+<td>Protocol v2 finalization</td>
 <td>December 2025</td>
 </tr>
 <tr class="even">
-<td>Data extraction &amp; preprocessing</td>
+<td>Cohort extraction (SQL)</td>
 <td>December 2025 – January 2026</td>
 </tr>
 <tr class="odd">
-<td>Exploratory data analysis</td>
+<td>Descriptive analysis &amp; QA</td>
 <td>January 2026</td>
 </tr>
 <tr class="even">
-<td>Propensity score modeling</td>
+<td>PS model &amp; balance diagnostics</td>
 <td>January – February 2026</td>
 </tr>
 <tr class="odd">
-<td>Primary analysis (mortality models)</td>
+<td>Primary analysis (mortality)</td>
 <td>February 2026</td>
 </tr>
 <tr class="even">
-<td>Secondary analysis (ABG/day, LOS)</td>
+<td>Secondary analyses (if feasible)</td>
 <td>February 2026</td>
 </tr>
 <tr class="odd">
@@ -406,7 +390,7 @@ Evaluate whether <strong>IAC use</strong> is associated with greater <strong>dai
 <td>March 2026</td>
 </tr>
 <tr class="even">
-<td>Portfolio documentation &amp; reporting</td>
+<td>Portfolio write-up</td>
 <td>March 2026</td>
 </tr>
 </tbody>
@@ -414,10 +398,12 @@ Evaluate whether <strong>IAC use</strong> is associated with greater <strong>dai
 </section>
 <section id="rationale-and-background" class="level2">
 <h2 class="anchored" data-anchor-id="rationale-and-background">5. Rationale and background</h2>
-<p>Critically ill patients receiving invasive mechanical ventilation require close monitoring of oxygenation, ventilation parameters, and hemodynamic status. Clinicians frequently rely on arterial blood gas (ABG) measurements and continuous arterial pressure monitoring to guide ventilator settings and detect physiologic deterioration. Mechanical ventilation is associated with significant morbidity and mortality, and monitoring intensity varies widely across patients and institutions.</p>
-<p>Indwelling arterial catheters (IACs) are commonly used in ICUs to provide continuous invasive blood pressure measurements and facilitate frequent ABG sampling. Their use is widespread among ventilated patients, particularly those with greater severity of illness. Although IACs offer clinical advantages, they are invasive and associated with risks such as catheter-related infections, vascular complications, and bloodstream infections. Previous studies suggest possible associations between IAC use and increased mortality, though results are inconsistent and confounded by the fact that sicker patients are more likely to receive an IAC (“confounding by indication”).</p>
-<p>Despite their ubiquitous use, the net clinical impact of IAC placement on patient-centered outcomes—especially mortality, resource utilization, and monitoring intensity—remains unclear. Randomized trials are scarce and often underpowered, and observational evidence is limited by confounding, heterogeneity in practice, and missing procedural timing in many EHR datasets. Furthermore, real-world data sources like MIMIC-II rarely provide granular timestamps for line insertion, complicating causal interpretation and mirroring common constraints faced in operational RWE analyses.</p>
-<p>Using the MIMIC-II EHR dataset, this study will estimate the association between IAC use and 28-day mortality among mechanically ventilated adults in the absence of vasopressor therapy. By applying both multivariable regression and propensity score methods (matching or IPTW), the study aims to reduce confounding and generate more balanced comparisons between IAC users and non-users. Beyond answering the clinical question, this work demonstrates a transparent, reproducible framework for conducting ICU-focused RWE analyses using EHR data under realistic data limitations. The study therefore contributes methodological insight (handling confounding, handling limited timestamps) and practical evidence on IAC-related outcomes.</p>
+<p>Mechanically ventilated ICU patients require close monitoring of ventilation, oxygenation, and hemodynamics. IACs can facilitate continuous invasive blood pressure monitoring and repeated ABG sampling, but their risks and benefits are debated. Observational ICU studies of IAC use are vulnerable to:</p>
+<ul>
+<li><strong>Confounding by indication</strong>: clinicians preferentially place IACs in more severely ill patients.</li>
+<li><strong>Immortal time bias</strong>: if exposure is defined as “ever got IAC” during a follow-up period beginning at MV start, exposed patients must survive long enough to receive an IAC. This can bias comparisons if not handled with an explicit exposure window aligned to time zero.</li>
+</ul>
+<p>This protocol uses an explicit <strong>time zero</strong> (MV initiation) and a prespecified <strong>early exposure window (0–24 hours)</strong> to align patient eligibility, exposure classification, and follow-up, supporting clearer causal interpretation under real-world constraints.</p>
 </section>
 <section id="research-question-and-objectives-1" class="level2">
 <h2 class="anchored" data-anchor-id="research-question-and-objectives-1">6. Research question and objectives</h2>
@@ -437,45 +423,45 @@ Evaluate whether <strong>IAC use</strong> is associated with greater <strong>dai
 <tbody>
 <tr class="odd">
 <td><strong>Objective</strong></td>
-<td>To estimate the association between indwelling arterial catheter (IAC) use and 28-day mortality among mechanically ventilated adult ICU patients not receiving vasopressors.</td>
+<td>Estimate the association between <strong>early IAC exposure (0–24h after MV start)</strong> and <strong>28-day mortality</strong> among mechanically ventilated adult ICU patients <strong>not receiving vasopressors in the first 24h after MV start</strong>.</td>
 </tr>
 <tr class="even">
 <td><strong>Hypothesis</strong></td>
-<td>IAC use is not associated with lower 28-day mortality after adjusting for baseline severity of illness (null hypothesis).</td>
+<td>Early IAC exposure is <strong>not</strong> associated with lower 28-day mortality after adjustment (null hypothesis).</td>
 </tr>
 <tr class="odd">
-<td><strong>Population (mention key inclusion-exclusion criteria)</strong></td>
-<td>Adult ICU patients in MIMIC-II who: (1) received invasive mechanical ventilation; (2) were not receiving vasopressor therapy on day 1; (3) had sufficient data available for key covariates and outcomes.</td>
+<td><strong>Population</strong></td>
+<td>Adult ICU patients in <strong>MIMIC-III</strong> who (1) received invasive MV, (2) meet eligibility/exclusion criteria, and (3) can be classified for exposure and outcome.</td>
 </tr>
 <tr class="even">
 <td><strong>Exposure</strong></td>
-<td>Documented use of an indwelling arterial catheter during the ICU stay (<code>aline_flg = 1</code>).</td>
+<td><strong>Early IAC</strong>: arterial line documented/placed <strong>within 0–24h</strong> after MV start.</td>
 </tr>
 <tr class="odd">
 <td><strong>Comparator</strong></td>
-<td>No documented IAC use during the ICU stay (<code>aline_flg = 0</code>).</td>
+<td>No arterial line documentation/placement during the 0–24h exposure window (primary definition).</td>
 </tr>
 <tr class="even">
 <td><strong>Outcome</strong></td>
-<td>28-day all-cause mortality, assessed using in-hospital death flags and follow-up information.</td>
+<td>28-day all-cause mortality (in-hospital death within 28 days of MV start, as available in MIMIC-III).</td>
 </tr>
 <tr class="odd">
-<td><strong>Time (when follow up begins and ends)</strong></td>
-<td><strong>Time zero:</strong> initiation of invasive mechanical ventilation. <strong>Follow-up:</strong> up to 28 days after MV initiation or until hospital discharge or death, whichever occurs first.</td>
+<td><strong>Time</strong></td>
+<td><strong>Time zero:</strong> MV start. <strong>Follow-up:</strong> up to 28 days after MV start, or until hospital discharge/death (whichever occurs first, depending on available timestamps).</td>
 </tr>
 <tr class="even">
 <td><strong>Setting</strong></td>
-<td>Adult ICUs from the MIMIC-II clinical database (Beth Israel Deaconess Medical Center).</td>
+<td>Adult ICUs captured in <strong>MIMIC-III</strong> (Beth Israel Deaconess Medical Center).</td>
 </tr>
 <tr class="odd">
 <td><strong>Main measure of effect</strong></td>
-<td>Adjusted odds ratio (aOR) for 28-day mortality from multivariable logistic regression and propensity-score–weighted models.</td>
+<td>Adjusted odds ratio (aOR) for 28-day mortality from multivariable logistic regression and propensity-score–based models.</td>
 </tr>
 </tbody>
 </table>
 </section>
-<section id="b.-secondary-research-question-and-objective" class="level3">
-<h3 class="anchored" data-anchor-id="b.-secondary-research-question-and-objective">B. Secondary research question and objective</h3>
+<section id="b.-secondary-research-questions-and-objectives-feasibility-dependent" class="level3">
+<h3 class="anchored" data-anchor-id="b.-secondary-research-questions-and-objectives-feasibility-dependent">B. Secondary research questions and objectives (feasibility-dependent)</h3>
 <table class="table-striped table-hover caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -490,39 +476,27 @@ Evaluate whether <strong>IAC use</strong> is associated with greater <strong>dai
 <tbody>
 <tr class="odd">
 <td><strong>Objective</strong></td>
-<td>To assess whether IAC use is associated with increased monitoring intensity (arterial blood gas measurements per day) and greater ICU resource utilization (ICU length of stay).</td>
+<td>Assess whether early IAC exposure is associated with (1) ICU LOS, and (2) monitoring intensity (e.g., ABG/day) when required tables are available.</td>
 </tr>
 <tr class="even">
-<td><strong>Hypothesis</strong></td>
-<td>IAC use is associated with more frequent ABG sampling and increased ICU length of stay compared with no IAC use.</td>
+<td><strong>Population</strong></td>
+<td>Same as primary analysis.</td>
 </tr>
 <tr class="odd">
-<td><strong>Population (mention key inclusion-exclusion criteria)</strong></td>
-<td>Same as primary analysis: mechanically ventilated adult ICU patients in MIMIC-II who are not receiving vasopressor therapy on day 1 and have sufficient data for covariates and outcomes.</td>
+<td><strong>Exposure/Comparator</strong></td>
+<td>Same as primary analysis.</td>
 </tr>
 <tr class="even">
-<td><strong>Exposure</strong></td>
-<td>Documented IAC use during the ICU stay (<code>aline_flg = 1</code>).</td>
+<td><strong>Outcomes</strong></td>
+<td>(1) ICU LOS in days; (2) ABG/day (requires ABG identification from event tables).</td>
 </tr>
 <tr class="odd">
-<td><strong>Comparator</strong></td>
-<td>No documented IAC use during the ICU stay (<code>aline_flg = 0</code>).</td>
+<td><strong>Time</strong></td>
+<td>For ICU LOS: entire ICU stay. For ABG/day: ICU stay (or MV period), depending on data availability.</td>
 </tr>
 <tr class="even">
-<td><strong>Outcome</strong></td>
-<td>(1) Number of arterial blood gas measurements per ICU day; (2) ICU length of stay (LOS) in days.</td>
-</tr>
-<tr class="odd">
-<td><strong>Time (when follow up begins and ends)</strong></td>
-<td><strong>Time zero:</strong> initiation of invasive mechanical ventilation. <strong>Follow-up:</strong> for ABG/day and LOS, the entire ICU stay until ICU discharge or in-ICU death.</td>
-</tr>
-<tr class="even">
-<td><strong>Setting</strong></td>
-<td>Adult ICUs from the MIMIC-II clinical database.</td>
-</tr>
-<tr class="odd">
 <td><strong>Main measure of effect</strong></td>
-<td>(1) Rate ratio or adjusted mean difference in ABG/day (e.g., via negative binomial or linear regression). (2) Adjusted mean difference or hazard ratio for ICU LOS.</td>
+<td>LOS: adjusted mean difference or time-to-discharge model; ABG/day: Poisson/negative binomial rate ratio.</td>
 </tr>
 </tbody>
 </table>
@@ -532,249 +506,166 @@ Evaluate whether <strong>IAC use</strong> is associated with greater <strong>dai
 <h2 class="anchored" data-anchor-id="research-methods">7. Research methods</h2>
 <section id="study-design" class="level3">
 <h3 class="anchored" data-anchor-id="study-design">Study design</h3>
-<p>Retrospective observational cohort study using routinely collected intensive care unit (ICU) electronic health record data from the MIMIC-II database.</p>
-<p>A cohort design is appropriate because the research question compares outcomes (28-day mortality, monitoring intensity, ICU length of stay) between patients <strong>with</strong> and <strong>without</strong> exposure to an indwelling arterial catheter (IAC). The cohort framework preserves the temporal sequence between baseline covariates, IAC use, and subsequent outcomes, and allows estimation of absolute risks and adjusted measures of association (e.g.&nbsp;odds ratios).</p>
-<p>Using an existing ICU EHR cohort (MIMIC-II) is efficient, reflects real-world practice, and provides rich information on severity of illness, physiology, and resource use needed to adjust for confounding by indication. Alternative designs such as case-control or cross-sectional studies would provide less transparent temporality and weaker support for causal interpretation in this context.</p>
+<p>Retrospective observational cohort study using routinely collected ICU EHR data from <strong>MIMIC-III</strong>.</p>
+<p>This protocol is <strong>target-trial–inspired</strong>:</p>
+<ul>
+<li><strong>Eligibility</strong> is assessed at/near time zero (MV start).</li>
+<li><strong>Exposure</strong> is assigned within a prespecified window (0–24h after MV start).</li>
+<li><strong>Follow-up</strong> begins at time zero for the outcome of interest.</li>
+</ul>
+<p>This design helps reduce immortal time bias relative to an “ever exposed” definition.</p>
 </section>
-<section id="study-design-diagram" class="level3">
-<h3 class="anchored" data-anchor-id="study-design-diagram">Study design diagram</h3>
-<p>The study follows a retrospective cohort structure:</p>
-<ol type="1">
-<li><strong>Cohort entry (“Time zero”)</strong>
-<ul>
-<li>Defined as the initiation of invasive mechanical ventilation (MV).<br>
-</li>
-<li>All baseline covariates (demographics, severity scores, comorbidities, day-1 labs and vitals) are assessed at or before MV initiation.</li>
-</ul></li>
-<li><strong>Exposure assessment</strong>
-<ul>
-<li>Patients are classified as <strong>IAC users</strong> if <code>aline_flg = 1</code> at any time during the ICU stay.<br>
-</li>
-<li>Patients with <code>aline_flg = 0</code> serve as the <strong>unexposed group</strong>.</li>
-</ul></li>
-<li><strong>Follow-up period</strong>
-<ul>
-<li>For mortality outcomes: from MV initiation until 28 days, hospital discharge, or death.<br>
-</li>
-<li>For secondary outcomes (ABG/day, LOS): from MV initiation until ICU discharge or in-ICU death.</li>
-</ul></li>
-<li><strong>Analysis</strong>
-<ul>
-<li>Comparison of outcomes between exposed and unexposed groups using multivariable models and propensity-score–based methods.</li>
-</ul></li>
-</ol>
-<p>A DAG illustrating confounding by severity of illness (e.g., SAPS I, SOFA) and its relationship to both IAC use and mortality will be provided in the Appendix.</p>
+<section id="key-design-definitions" class="level3">
+<h3 class="anchored" data-anchor-id="key-design-definitions">Key design definitions</h3>
+<section id="time-zero" class="level4">
+<h4 class="anchored" data-anchor-id="time-zero">Time zero</h4>
+<p><strong>MV initiation (MV start)</strong> within an ICU stay.</p>
+</section>
+<section id="exposure-window-024h" class="level4">
+<h4 class="anchored" data-anchor-id="exposure-window-024h">Exposure window (0–24h)</h4>
+<p>A patient is classified as <strong>early IAC exposed</strong> if the earliest documented arterial line placement/event occurs in <strong>[MV start, MV start + 24h)</strong>.</p>
+<p>Patients without arterial line evidence in this window are classified as unexposed (primary definition).</p>
+<blockquote class="blockquote">
+<p><strong>Important distinction</strong><br>
+<em>Time zero</em> defines when follow-up begins (MV start).<br>
+The <em>exposure window</em> defines when exposure status is determined (0–24h after time zero).<br>
+These are not the same concept.</p>
+</blockquote>
+</section>
 </section>
 <section id="settings-and-variables" class="level3">
 <h3 class="anchored" data-anchor-id="settings-and-variables">Settings and variables</h3>
 <p><strong>Setting</strong><br>
-This study is conducted using the MIMIC-II clinical database, derived from ICU encounters at Beth Israel Deaconess Medical Center (Boston, USA). The dataset includes high-resolution clinical measurements, laboratory results, medications, interventions, and outcomes.</p>
-<p><strong>Key variables</strong></p>
-<ol type="1">
-<li><strong>Exposure</strong>
+ICU encounters from MIMIC-III (BIDMC). Data are queried from a PostgreSQL database (AWS RDS).</p>
+<p><strong>Primary exposure</strong><br>
+- Early IAC placement/documentation within 0–24h of MV start (derived from procedure/event documentation).</p>
+<p><strong>Primary outcome</strong><br>
+- 28-day all-cause mortality (in-hospital death within 28 days after MV start, based on available death time fields).</p>
+<p><strong>Key covariates (pragmatic, feasibility-driven)</strong></p>
+<p>Because high-frequency event tables (e.g., <code>chartevents</code>, <code>labevents</code>) may be unavailable due to storage constraints, baseline adjustment will prioritize variables extractable from smaller/feasible tables:</p>
 <ul>
-<li><em>Indwelling arterial catheter use:</em> <code>aline_flg</code> (1 = used, 0 = not used)</li>
-</ul></li>
-<li><strong>Primary outcome</strong>
-<ul>
-<li><em>28-day all-cause mortality:</em> constructed from in-hospital death flag and time to event fields.</li>
-</ul></li>
-<li><strong>Secondary outcomes</strong>
-<ul>
-<li><em>Arterial blood gas measurements per ICU day:</em> count of ABG records / ICU length of stay.<br>
-</li>
-<li><em>ICU length of stay:</em> number of days from ICU admission to ICU discharge.</li>
-</ul></li>
-<li><strong>Covariates (baseline)</strong>
-<ul>
-<li><strong>Demographics:</strong> age, sex, ethnicity<br>
-</li>
-<li><strong>Severity of illness:</strong> SAPS I, SOFA score<br>
-</li>
-<li><strong>Comorbidities:</strong> Charlson comorbidity index<br>
-</li>
-<li><strong>Day-1 laboratory values:</strong> pH, PaO2, PaCO2, lactate, sodium, potassium, hematocrit, WBC<br>
-</li>
-<li><strong>Day-1 vital signs:</strong> heart rate, mean arterial pressure, temperature, oxygen saturation<br>
-</li>
-<li><strong>Clinical status:</strong> vasopressor use, fluid balance<br>
-</li>
-<li><strong>ICU type:</strong> medical, surgical, trauma</li>
-</ul></li>
-</ol>
-<p>Covariate selection is based on clinical relevance and prior literature on factors associated with both IAC use and mortality.</p>
+<li>Demographics: age (at ICU admission), sex, ethnicity (from admissions/demographics tables as available)</li>
+<li>Admission characteristics: admission type, service category (medical vs surgical), ICU stay order</li>
+<li>Comorbidity proxies: ICD-9 diagnosis-based comorbidity measures (e.g., Charlson) where feasible</li>
+<li>Vasopressor exposure: vasopressor administration in first 24h after MV start (used as an exclusion and/or covariate)</li>
+</ul>
+<p><strong>Explicitly not included in v2.0 (due to data constraints)</strong> - Day-1 labs and high-resolution vitals from <code>labevents</code>/<code>chartevents</code>, if these tables are unavailable in the working environment.</p>
 </section>
-<section id="data-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="data-analysis">Data analysis</h3>
+<section id="inclusionexclusion-criteria-operational" class="level3">
+<h3 class="anchored" data-anchor-id="inclusionexclusion-criteria-operational">Inclusion/exclusion criteria (operational)</h3>
+<ol type="1">
+<li>Adult patients: age ≥ 16 years</li>
+<li>Mechanically ventilated during ICU stay; MV start defined</li>
+<li>MV start occurs early relative to ICU admission: within first 24h of ICU admission</li>
+<li>ICU LOS above minimum threshold</li>
+<li>First ICU stay per patient (to avoid correlated observations and simplify interpretation)</li>
+<li>Exclude surgical service admissions</li>
+<li>Exclude vasopressor use in the first 24h after MV start (primary population definition)</li>
+</ol>
+</section>
+<section id="statistical-analysis-plan" class="level3">
+<h3 class="anchored" data-anchor-id="statistical-analysis-plan">Statistical analysis plan</h3>
 <section id="descriptive-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="descriptive-analysis">1. Descriptive analysis</h4>
+<h4 class="anchored" data-anchor-id="descriptive-analysis">Descriptive analysis</h4>
 <ul>
-<li>Summaries of baseline characteristics by exposure group (IAC vs.&nbsp;no IAC).<br>
-</li>
-<li>Continuous variables: mean ± SD or median (IQR).<br>
-</li>
-<li>Categorical variables: counts and percentages.<br>
-</li>
-<li>Standardized mean differences (SMD &lt; 0.1 indicates good balance).</li>
+<li>Summarize baseline characteristics by early IAC exposure status.</li>
+<li>Report standardized mean differences (SMD) for covariate balance.</li>
 </ul>
 </section>
 <section id="primary-analysis-28-day-mortality" class="level4">
-<h4 class="anchored" data-anchor-id="primary-analysis-28-day-mortality">2. Primary analysis (28-day mortality)</h4>
+<h4 class="anchored" data-anchor-id="primary-analysis-28-day-mortality">Primary analysis (28-day mortality)</h4>
 <ul>
-<li><strong>Multivariable logistic regression model:</strong><br>
-<code>logit(P(death_28d = 1)) = β0 + β1*IAC + β2*SAPS_I + β3*age + ...</code></li>
-<li>Report adjusted odds ratios (aOR) with 95% CIs.</li>
-</ul>
-</section>
-<section id="propensity-score-model" class="level4">
-<h4 class="anchored" data-anchor-id="propensity-score-model">3. Propensity score model</h4>
+<li>Multivariable logistic regression:
 <ul>
-<li>Logistic regression to estimate probability of receiving an IAC:<br>
-<code>PS = P(aline_flg = 1 | covariates)</code></li>
-<li>Two approaches:
-<ul>
-<li><strong>Nearest neighbor matching (1:1 or 1:3)</strong></li>
-<li><strong>Inverse probability of treatment weighting (IPTW)</strong> using stabilized weights<br>
-</li>
-</ul></li>
-<li>Assess balance using standardized mean differences before and after adjustment.</li>
-</ul>
-</section>
-<section id="secondary-analyses" class="level4">
-<h4 class="anchored" data-anchor-id="secondary-analyses">4. Secondary analyses</h4>
-<ul>
-<li><strong>ABG/day:</strong>
-<ul>
-<li>Count model (Poisson or negative binomial depending on dispersion).<br>
-</li>
-<li>Outcome: number of ABG per ICU day.<br>
-</li>
-</ul></li>
-<li><strong>ICU length of stay (LOS):</strong>
-<ul>
-<li>Linear regression or Cox proportional hazards model depending on distribution.</li>
+<li>Outcome: death_28d</li>
+<li>Predictor: early IAC exposure</li>
+<li>Adjust for feasible confounders (demographics, admission/service features, comorbidity proxies)</li>
 </ul></li>
 </ul>
 </section>
-<section id="sensitivity-analyses" class="level4">
-<h4 class="anchored" data-anchor-id="sensitivity-analyses">5. Sensitivity analyses</h4>
+<section id="propensity-score-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="propensity-score-analysis">Propensity score analysis</h4>
 <ul>
-<li>Alternative severity covariate sets.<br>
-</li>
-<li>PS trimming (e.g., 1st–99th percentile).<br>
-</li>
-<li>Complete-case vs.&nbsp;multiple imputation for missing covariates.<br>
-</li>
-<li>Excluding patients with extremely short ICU stays (&lt; 24 h).</li>
-</ul>
-<p>All analyses will be conducted in R or Python using reproducible scripts.</p>
-</section>
-</section>
-<section id="data-sources" class="level3">
-<h3 class="anchored" data-anchor-id="data-sources">Data sources</h3>
-<p>The study uses the MIMIC-II database, a publicly available ICU EHR dataset hosted by PhysioNet. MIMIC-II includes de-identified patient-level clinical data such as:</p>
+<li>Fit a propensity score model for early IAC exposure using the same feasible covariates.</li>
+<li>Apply:
 <ul>
-<li>demographics</li>
-<li>vital signs at high temporal resolution</li>
-<li>laboratory measurements</li>
-<li>comorbidities and diagnoses</li>
-<li>procedures and interventions</li>
-<li>ICU outcomes (length of stay, mortality)</li>
-</ul>
-<p>Only patients who meet PhysioNet data-use requirements and CITI training certification are granted access.</p>
-</section>
-<section id="data-management" class="level3">
-<h3 class="anchored" data-anchor-id="data-management">Data management</h3>
-<ul>
-<li>Data will be downloaded from PhysioNet servers following IRB-free data-use approval.<br>
-</li>
-<li>The database will be stored locally in a PostgreSQL environment for efficient querying.<br>
-</li>
-<li>Data preprocessing will include:
-<ul>
-<li>creation of analytic cohort (mechanically ventilated, no vasopressors)</li>
-<li>construction of exposure, outcome, and covariate variables</li>
-<li>unit harmonization and outlier handling</li>
-<li>missing data assessment and documentation<br>
-</li>
+<li>1:1 nearest neighbor matching <strong>or</strong></li>
+<li>IPTW with stabilized weights</li>
 </ul></li>
-<li>All data transformations will be recorded in version-controlled scripts (GitHub).<br>
-</li>
-<li>No identifiable information exists in MIMIC-II; all analyses will be conducted on de-identified data.</li>
+<li>Re-estimate association with weighted/matched outcome model.</li>
+<li>Assess balance using SMD before/after.</li>
+</ul>
+</section>
+<section id="sensitivity-analyses-planned" class="level4">
+<h4 class="anchored" data-anchor-id="sensitivity-analyses-planned">Sensitivity analyses (planned)</h4>
+<ul>
+<li>Alternative exposure definitions:
+<ul>
+<li>“Any IAC during ICU stay” (risk of immortal time bias; reported as sensitivity only)</li>
+<li>Alternative exposure windows (e.g., 0–12h, 0–48h)</li>
+</ul></li>
+<li>Alternative eligibility rules:
+<ul>
+<li>Different LOS thresholds</li>
+<li>Include vs exclude surgical service (covariate vs exclusion)</li>
+</ul></li>
+<li>Outcome definition sensitivity:
+<ul>
+<li>Use additional death fields (e.g., patient-level date of death) when available/appropriate and consistent with MIMIC-III.</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="data-management-reproducibility" class="level3">
+<h3 class="anchored" data-anchor-id="data-management-reproducibility">Data management &amp; reproducibility</h3>
+<ul>
+<li>SQL-first cohort extraction; R used for analysis.</li>
+<li>Version control via GitHub; all derivations documented.</li>
+<li>Deliverables include cohort flowchart, SQL scripts, and analysis scripts.</li>
 </ul>
 </section>
 <section id="quality-control" class="level3">
 <h3 class="anchored" data-anchor-id="quality-control">Quality control</h3>
 <ul>
-<li>Use of reproducible R scripts with clear documentation.<br>
-</li>
-<li>Independent verification of inclusion/exclusion logic.<br>
-</li>
-<li>Internal data consistency checks (range checks, type validation).<br>
-</li>
-<li>PS balance checks with SMD thresholds (&lt;0.1).<br>
-</li>
-<li>Replication of key results using both regression and PS-weighted models to assess robustness.</li>
+<li>Unit checks and sanity checks for timestamps (MV start within ICU stay bounds).</li>
+<li>Internal checks for duplicates (icustay_id uniqueness).</li>
+<li>Validation of exposure/outcome construction on random samples.</li>
 </ul>
 </section>
-<section id="study-size-and-feasibility" class="level3">
-<h3 class="anchored" data-anchor-id="study-size-and-feasibility">Study size and feasibility</h3>
-<p>MIMIC-II includes thousands of ICU patients, with a substantial proportion receiving invasive mechanical ventilation and/or arterial catheterization. This ensures adequate statistical power for:</p>
-<ul>
-<li>multivariable regression with multiple covariates<br>
-</li>
-<li>propensity score matching or weighting<br>
-</li>
-<li>subgroup and sensitivity analyses</li>
-</ul>
-<p>Given the large sample size and rich covariate set, the study is feasible and well-powered to detect clinically meaningful associations.</p>
 </section>
-</section>
-<section id="limitation-of-the-methods" class="level2">
-<h2 class="anchored" data-anchor-id="limitation-of-the-methods">8. Limitation of the methods</h2>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">8. Limitations</h2>
 <ul>
-<li><strong>No timestamp for IAC insertion</strong> in the derived dataset: exposure misclassification is possible.<br>
-</li>
-<li><strong>Residual confounding</strong> despite regression and PS methods (unmeasured illness severity, clinician judgment).<br>
-</li>
-<li><strong>Confounding by indication:</strong> sicker patients are more likely to receive an IAC.<br>
-</li>
-<li><strong>Single-center study:</strong> may limit generalizability.<br>
-</li>
-<li><strong>Missing data:</strong> depends on ICU documentation patterns; imputation may be necessary.<br>
-</li>
-<li><strong>Cannot infer causality:</strong> observational design remains subject to unmeasured confounding.</li>
+<li><strong>Residual confounding</strong> remains possible, particularly if severity-of-illness measures and high-resolution vitals/labs are unavailable.</li>
+<li><strong>Exposure misclassification</strong> is possible because IAC documentation may be incomplete or recorded after placement.</li>
+<li><strong>Single-center</strong> ICU data may limit generalizability.</li>
+<li><strong>Operational definitions</strong> (e.g., MV start derived from available tables) may differ from bedside reality; all logic is explicitly documented.</li>
 </ul>
 </section>
 <section id="protection-of-human-subjects" class="level2">
 <h2 class="anchored" data-anchor-id="protection-of-human-subjects">9. Protection of human subjects</h2>
-<p>This study uses the de-identified MIMIC-II database, which meets HIPAA requirements for removal of personal identifiers. No direct patient interaction occurs, and no re-identification is possible.</p>
-<p>The study qualifies as <strong>non-human subjects research</strong>, and no IRB approval is required. Data access is granted only after completing CITI training and signing PhysioNet’s data-use agreement, which prohibits attempts at patient re-identification.</p>
+<p>This project uses de-identified MIMIC-III data under the PhysioNet data use agreement. No re-identification is attempted. The project qualifies as non-human subjects research as conducted on de-identified data (institutional determinations may vary).</p>
 </section>
 <section id="reporting-of-adverse-events" class="level2">
 <h2 class="anchored" data-anchor-id="reporting-of-adverse-events">10. Reporting of adverse events</h2>
-<p>As this study uses retrospective, de-identified EHR data, no clinical interventions are performed and no adverse events may occur as part of the research process. Therefore, adverse event reporting does not apply.</p>
+<p>Not applicable (retrospective analysis of de-identified data).</p>
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">11. References</h2>
 <ol type="1">
-<li>Hsu et al.&nbsp;(Crit Care Med 2017) PMID:28426500.</li>
-<li>Goldberger et al.&nbsp;(MIMIC-II Sci Data 2017).</li>
-<li>O’Grady et al.&nbsp;(IAC risks, Lancet 2001).</li>
-<li>Hernán et al.&nbsp;(Target Trial Emulation, NEJM 2016).</li>
+<li>Hernán MA, Robins JM. “Using Big Data to Emulate a Target Trial When a Randomized Trial Is Not Available.” <em>NEJM</em> (2016).</li>
+<li>Goldberger AL et al.&nbsp;“PhysioNet: Components of a New Research Resource for Complex Physiologic Signals.” <em>Circulation</em> (2000).</li>
+<li>Johnson AEW et al.&nbsp;“MIMIC-III, a freely accessible critical care database.” <em>Sci Data</em> (2016).</li>
+<li>Hsu DJ et al.&nbsp;(as previously cited; ICU arterial catheter observational context).</li>
 </ol>
 </section>
 <section id="appendices" class="level2">
 <h2 class="anchored" data-anchor-id="appendices">12. Appendices</h2>
 <ul>
-<li>Appendix A: DAG representing confounding structure<br>
-</li>
-<li>Appendix B: Variable definitions and coding<br>
-</li>
-<li>Appendix C: SQL queries and pre-processing workflow<br>
-</li>
-<li>Appendix D: Propensity score diagnostics (SMD plots, Love plot)<br>
-</li>
+<li>Appendix A: Cohort flowchart &amp; eligibility logic (SQL-aligned)</li>
+<li>Appendix B: Variable definitions (time zero, exposure window, outcome)</li>
+<li>Appendix C: SQL queries and preprocessing workflow (PostgreSQL)</li>
+<li>Appendix D: Propensity score diagnostics (SMD/Love plot)</li>
 <li>Appendix E: Regression model specifications</li>
 </ul>
 
