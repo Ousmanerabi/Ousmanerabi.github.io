@@ -303,14 +303,23 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="research-question-and-objectives">Research question and objectives</h3>
 <p>Among <strong>mechanically ventilated adult ICU patients</strong> who are <strong>not receiving vasopressors</strong> in the first 24 hours after MV initiation, is <strong>early IAC exposure (0–24h after MV start)</strong>, compared with no early IAC exposure, associated with:</p>
 <ul>
-<li><strong>28-day all-cause mortality</strong> (primary outcome)?</li>
+<li><p>primary outocome : <strong>28-day all-cause mortality</strong></p></li>
+<li><p>Secondary outcomes : <strong>ICU length of stay</strong> and <strong>monitoring intensity (e.g., ABG/day)</strong> (feasibility-dependent)</p></li>
 </ul>
-<p>Secondary outcomes (feasibility-dependent): - ICU length of stay - monitoring intensity (e.g., ABG/day)</p>
 </section>
 <section id="methods" class="level3">
 <h3 class="anchored" data-anchor-id="methods">Methods</h3>
-<p>We will conduct a retrospective cohort study using the <strong>MIMIC-III</strong> ICU EHR database. We define <strong>time zero</strong> as the earliest timestamp indicating invasive mechanical ventilation during an ICU stay (<strong>MV start</strong>). We classify patients as exposed if an arterial line is documented/placed <strong>within 0–24 hours after MV start</strong>. Patients without documented arterial line placement during the exposure window are classified as unexposed.</p>
-<p>To reduce confounding, we will estimate adjusted associations using (1) multivariable regression and (2) propensity score methods (matching or weighting). Due to computational/storage constraints, high-frequency event tables (e.g., <code>chartevents</code>, <code>labevents</code>) may be unavailable; therefore, baseline covariate adjustment will rely on variables feasible to extract (e.g., demographics, admission characteristics, comorbidities/diagnoses, ICU/service type, and vasoactive medication exposure from input tables). Results will be reported as odds ratios with 95% confidence intervals, with transparent reporting of limitations due to unavailable physiologic/laboratory covariates.</p>
+<p>We will conduct a retrospective, observational analysis using the <strong>MIMIC-III</strong> ICU EHR database. We define <strong>time zero</strong> as the earliest timestamp indicating invasive mechanical ventilation during an ICU stay (<strong>MV start</strong>). We classify patients as exposed if an arterial line is documented/placed <strong>within 0–24 hours after MV start</strong>. Patients without documented arterial line placement during the exposure window are classified as unexposed.</p>
+<p>To reduce confounding, we will estimate adjusted associations using</p>
+<ul>
+<li><ol type="1">
+<li>multivariable logistic regression and</li>
+</ol></li>
+<li><ol start="2" type="1">
+<li>propensity score methods (matching or weighting).</li>
+</ol></li>
+</ul>
+<p>Due to computational/storage constraints, high-frequency event tables (e.g., <code>chartevents</code>, <code>labevents</code>) may be unavailable; therefore, baseline covariate adjustment will rely on variables feasible to extract (e.g., demographics, admission characteristics, comorbidities/diagnoses, ICU/service type, and vasoactive medication exposure from input tables). Results will be reported as odds ratios with 95% confidence intervals, with transparent reporting of limitations due to unavailable physiologic/laboratory covariates.</p>
 </section>
 </section>
 <section id="amendments-and-updates" class="level2">
@@ -347,6 +356,13 @@ ul.task-list li input[type="checkbox"] {
 <td>Updated to <strong>MIMIC-III</strong>; reconstructed <strong>MV start</strong> as explicit <strong>time zero</strong>; defined <strong>early IAC exposure window (0–24h)</strong>; implemented vaso-free day-1 criterion; adopted pragmatic covariate strategy excluding high-frequency event tables when unavailable.</td>
 <td>Improve temporal validity and reduce immortal time bias; ensure feasibility and reproducibility given storage/compute limitations.</td>
 </tr>
+<tr class="odd">
+<td>18-Dec-2025</td>
+<td>v2.0</td>
+<td>Population – Exclusion criteria</td>
+<td>Excluded patients admitted to the Cardiac Surgery Recovery Unit (CSRU) (n = 60) due to systematic pre-ICU arterial line placement</td>
+<td>Prevents structural exposure misclassification and improves comparability between exposed and unexposed groups</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Note:</strong> All analyses in this project are based on <strong>Protocol v2.0</strong>.</p>
@@ -367,11 +383,11 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 <tr class="even">
 <td>Cohort extraction (SQL)</td>
-<td>December 2025 – January 2026</td>
+<td>December 2025</td>
 </tr>
 <tr class="odd">
 <td>Descriptive analysis &amp; QA</td>
-<td>January 2026</td>
+<td>December 2025</td>
 </tr>
 <tr class="even">
 <td>PS model &amp; balance diagnostics</td>
@@ -561,6 +577,7 @@ ICU encounters from MIMIC-III (BIDMC). Data are queried from a PostgreSQL databa
 <li>First ICU stay per patient (to avoid correlated observations and simplify interpretation)</li>
 <li>Exclude surgical service admissions</li>
 <li>Exclude vasopressor use in the first 24h after MV start (primary population definition)</li>
+<li>Patients admitted to the <strong>Cardiac Surgery Recovery Unit (CSRU)</strong> were excluded (n = 60). In this unit, indwelling arterial catheters are frequently placed prior to ICU admission and prior to initiation of mechanical ventilation, leading to structural exposure misclassification and lack of comparability with non-exposed patients.</li>
 </ol>
 </section>
 <section id="statistical-analysis-plan" class="level3">

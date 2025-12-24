@@ -42,17 +42,21 @@ Indwelling arterial catheters (IACs) are widely used in intensive care units (IC
 
 Among **mechanically ventilated adult ICU patients** who are **not receiving vasopressors** in the first 24 hours after MV initiation, is **early IAC exposure (0–24h after MV start)**, compared with no early IAC exposure, associated with:
 
-- **28-day all-cause mortality** (primary outcome)?
+- primary outocome : **28-day all-cause mortality**
 
-Secondary outcomes (feasibility-dependent):
-- ICU length of stay
-- monitoring intensity (e.g., ABG/day)
+- Secondary outcomes : **ICU length of stay** and **monitoring intensity (e.g., ABG/day)** (feasibility-dependent)
 
 ### Methods
 
-We will conduct a retrospective cohort study using the **MIMIC-III** ICU EHR database. We define **time zero** as the earliest timestamp indicating invasive mechanical ventilation during an ICU stay (**MV start**). We classify patients as exposed if an arterial line is documented/placed **within 0–24 hours after MV start**. Patients without documented arterial line placement during the exposure window are classified as unexposed.
+We will conduct a retrospective, observational analysis using the **MIMIC-III** ICU EHR database. We define **time zero** as the earliest timestamp indicating invasive mechanical ventilation during an ICU stay (**MV start**). We classify patients as exposed if an arterial line is documented/placed **within 0–24 hours after MV start**. Patients without documented arterial line placement during the exposure window are classified as unexposed.
 
-To reduce confounding, we will estimate adjusted associations using (1) multivariable regression and (2) propensity score methods (matching or weighting). Due to computational/storage constraints, high-frequency event tables (e.g., `chartevents`, `labevents`) may be unavailable; therefore, baseline covariate adjustment will rely on variables feasible to extract (e.g., demographics, admission characteristics, comorbidities/diagnoses, ICU/service type, and vasoactive medication exposure from input tables). Results will be reported as odds ratios with 95% confidence intervals, with transparent reporting of limitations due to unavailable physiologic/laboratory covariates.
+To reduce confounding, we will estimate adjusted associations using 
+
+- (1) multivariable logistic regression and 
+
+- (2) propensity score methods (matching or weighting). 
+
+Due to computational/storage constraints, high-frequency event tables (e.g., `chartevents`, `labevents`) may be unavailable; therefore, baseline covariate adjustment will rely on variables feasible to extract (e.g., demographics, admission characteristics, comorbidities/diagnoses, ICU/service type, and vasoactive medication exposure from input tables). Results will be reported as odds ratios with 95% confidence intervals, with transparent reporting of limitations due to unavailable physiologic/laboratory covariates.
 
 
 ## 3. Amendments and updates
@@ -61,6 +65,7 @@ To reduce confounding, we will estimate adjusted associations using (1) multivar
 |------------------|--------------------|----------------------|-------------------------|---------------------------|
 | 27-Nov-2025 | v1.0 | Full protocol | Initial draft (MIMIC-II framing, `aline_flg` exposure). | Initial specification under presumed data constraints. |
 | 18-Dec-2025 | v2.0 | Data source, exposure, time zero, covariates, feasibility | Updated to **MIMIC-III**; reconstructed **MV start** as explicit **time zero**; defined **early IAC exposure window (0–24h)**; implemented vaso-free day-1 criterion; adopted pragmatic covariate strategy excluding high-frequency event tables when unavailable. | Improve temporal validity and reduce immortal time bias; ensure feasibility and reproducibility given storage/compute limitations. |
+| 18-Dec-2025 | v2.0 | Population – Exclusion criteria | Excluded patients admitted to the Cardiac Surgery Recovery Unit (CSRU) (n = 60) due to systematic pre-ICU arterial line placement | Prevents structural exposure misclassification and improves comparability between exposed and unexposed groups |
 
 : {.striped .hover}
 
@@ -72,8 +77,8 @@ To reduce confounding, we will estimate adjusted associations using (1) multivar
 | **Milestone** | **Date** |
 |---------------|----------|
 | Protocol v2 finalization | December 2025 |
-| Cohort extraction (SQL) | December 2025 – January 2026 |
-| Descriptive analysis & QA | January 2026 |
+| Cohort extraction (SQL) | December 2025  |
+| Descriptive analysis & QA | December 2025 |
 | PS model & balance diagnostics | January – February 2026 |
 | Primary analysis (mortality) | February 2026 |
 | Secondary analyses (if feasible) | February 2026 |
@@ -186,6 +191,7 @@ Because high-frequency event tables (e.g., `chartevents`, `labevents`) may be un
 5. First ICU stay per patient (to avoid correlated observations and simplify interpretation)
 6. Exclude surgical service admissions
 7. Exclude vasopressor use in the first 24h after MV start (primary population definition)
+8. Patients admitted to the **Cardiac Surgery Recovery Unit (CSRU)** were excluded (n = 60). In this unit, indwelling arterial catheters are frequently placed prior to ICU admission and prior to initiation of mechanical ventilation, leading to structural exposure misclassification and lack of comparability with non-exposed patients.
 
 ### Statistical analysis plan
 
