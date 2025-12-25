@@ -117,7 +117,15 @@ tab1_smd <- final_cohort_v3 %>% dplyr::select(age, gender,charlson_score,
 
 ### Logistic regression
 
-fit <- glm(death_28d~iac_exposed_re+age+gender+charlson_score+icu_type+insurance_grp+adm_type_grp+ethnicity_grp, family = binomial, data = final_cohort_v3)
+final_cohort_v3$ethnicity_grp <- relevel(
+  final_cohort_v3$ethnicity_grp,
+  ref = "WHITE"
+)
+
+final_cohort_v3 = final_cohort_v3 %>%
+  dplyr::mutate(age10=age/10)
+
+fit <- glm(death_28d~iac_exposed_re+age10+gender+charlson_score+icu_type+insurance_grp+adm_type_grp+ethnicity_grp, family = binomial, data = final_cohort_v3)
 
 ### Display the model fit
 summary(fit)
@@ -127,4 +135,114 @@ questionr::odds.ratio(fit)
 
 ## Forest plot
 
+ggstats::ggcoef_model(fit, exponentiate = TRUE,
+                      variable_labels = c(age10 = "Age (per 10 years)",
+                                          iac_exposed_re="Exposure",
+                                          gender="Sex",
+                                          charlson_idex="Charlson comorbidity index",
+                                          icu_type="ICU type",
+                                          #vaso_24h="Vasopressor use (first 24h)",
+                                          insurance_grp = "Insurance",
+                                          adm_type_grp = "Admission type",
+                                          ethnicity_grp = "Ethnic group"),
+                      no_reference_row = broom.helpers::all_categorical(),
+                      categorical_terms_pattern = "{level}/{reference_level}")
 
+
+### Propensity score matching
+
+final_cohort_v3$iac_exposed_re <- relevel(as.factor(final_cohort_v3$iac_exposed_re), ref = "No-IAC")
+
+
+library(MatchIt)
+
+
+match_obj_1 <- matchit(
+  iac_exposed_re ~ age + gender + charlson_score + icu_type +
+    insurance_grp + adm_type_grp + ethnicity_grp,
+  data = final_cohort_v3,
+  method   = "nearest",
+  distance = "glm",
+  ratio    = 1,
+  replace  = FALSE,
+  caliper  = 0.2
+)
+
+summary(match_obj_1)
+
+matched_data <- match.data(match_obj_1)
+
+matched_data <- matched_data %>%
+  dplyr::mutate(age10 = age / 10)
+
+
+fit_ps_adj <- glm(
+  death_28d ~ iac_exposed_re + age10,
+  family = binomial,
+  data = matched_data
+)
+summary(fit_ps_adj)
+
+
+### Love plot
+
+install.packages("cobalt")
+library(cobalt)
+
+bt <- bal.tab(match_obj_1, un = TRUE, disp.v.ratio = FALSE, binary = "std")
+
+bal <- bt$Balance %>%
+  tibble::rownames_to_column("term") %>%
+  # optionnel: si jamais "distance" apparaît, on l'enlève
+  filter(!is.na(term), term != "", term != "distance", term != "(Intercept)") %>%
+  transmute(
+    term,
+    smd_pre  = Diff.Un,
+    smd_post = Diff.Adj,
+    # ---- variable "mère" ----
+    base_key = case_when(
+      term %in% c("age", "charlson_score") ~ term,              # continues
+      grepl("_", term) ~ sub("_(?!.*_).*", "", term, perl=TRUE), # avant le dernier "_"
+      TRUE ~ term
+    ),
+    base_var = recode(base_key,
+                      age           = "Age (years)",
+                      gender        = "Sex",
+                      charlson_score= "Charlson score",
+                      icu_type      = "ICU type",
+                      insurance_grp = "Insurance",
+                      adm_type_grp  = "Admission type",
+                      ethnicity_grp = "Ethnic group",
+                      .default      = base_key
+    )
+  ) %>%
+  group_by(base_var) %>%
+  summarise(
+    smd_pre  = max(abs(smd_pre),  na.rm = TRUE),
+    smd_post = max(abs(smd_post), na.rm = TRUE),
+    .groups = "drop"
+  ) %>%
+  pivot_longer(c(smd_pre, smd_post), names_to="sample", values_to="smd") %>%
+  mutate(sample = recode(sample,
+                         smd_pre  = "Before matching",
+                         smd_post = "After matching"))
+
+# Ordre: du pire au meilleur AVANT matching
+order_levels <- bal %>%
+  dplyr::filter(sample == "Before matching") %>%
+  dplyr::arrange(smd) %>%
+  pull(base_var)
+
+bal <- bal %>%
+  dplyr::mutate(base_var = factor(base_var, levels = rev(order_levels)))
+
+ggplot2::ggplot(bal, aes(x = smd, y = base_var, shape = sample, color=sample)) +
+  geom_point(size = 3) +
+  geom_vline(xintercept = 0.1, linetype = "dashed") +
+  labs(
+    x = "Absolute Standardized Mean Difference (|SMD|)",
+    y = "",
+    title = "Covariate balance before and after propensity score matching",
+    subtitle = "Acceptable balance threshold: |SMD| < 0.10"
+  ) +
+  theme_minimal(base_size = 14)
