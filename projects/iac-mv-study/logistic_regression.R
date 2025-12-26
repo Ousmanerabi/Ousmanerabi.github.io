@@ -326,13 +326,93 @@ love.plot(
   aggregate = "max"
 )
 
+###
+
+b_w <- bal.tab(w_out, un = TRUE)
+
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(cobalt)
+
+#--- 1) Balance tables
+b_m <- bal.tab(match_obj_1, un = TRUE)   # matching
+b_w <- bal.tab(w_out, un = TRUE)         # IPTW (WeightIt)
+
+#--- 2) Helper: transforme Balance -> 1 ligne par variable (max |SMD|)
+balance_to_long <- function(bt, method_label) {
+  bt$Balance %>%
+    tibble::rownames_to_column("term") %>%
+    transmute(term,
+              smd_un  = Diff.Un,
+              smd_adj = Diff.Adj) %>%
+    mutate(
+      base_var = case_when(
+        grepl("^icu_type", term) ~ "ICU type",
+        grepl("^insurance_grp", term) ~ "Insurance",
+        grepl("^adm_type_grp", term) ~ "Admission type",
+        grepl("^ethnicity_grp", term) ~ "Ethnic group",
+        grepl("^gender", term) ~ "Sex",
+        term == "age" ~ "Age (years)",
+        term == "charlson_score" ~ "Charlson score",
+        TRUE ~ term
+      )
+    ) %>%
+    group_by(base_var) %>%
+    summarise(
+      Unadjusted = max(abs(smd_un),  na.rm = TRUE),
+      Adjusted   = max(abs(smd_adj), na.rm = TRUE),
+      .groups = "drop"
+    ) %>%
+    pivot_longer(cols = c(Unadjusted, Adjusted),
+                 names_to = "sample",
+                 values_to = "smd") %>%
+    mutate(method = method_label)
+}
+
+bal_match <- balance_to_long(b_m, "PS matching")
+bal_iptw  <- balance_to_long(b_w, "IPTW")
+
+#--- 3) Construire le dataset final avec 3 "samples"
+# Unadjusted: identique pour matching et IPTW (on garde 1 seule version)
+bal_unadj <- bal_match %>%
+  dplyr::filter(sample == "Unadjusted") %>%
+  dplyr::mutate(method = "Unadjusted")  # on en fait sa propre "méthode"
+
+bal_plot <- dplyr::bind_rows(
+  bal_unadj,
+  bal_match %>% dplyr::filter(sample == "Adjusted"),
+  bal_iptw  %>% dplyr::filter(sample == "Adjusted")
+) %>%
+  dplyr::mutate(sample = method) %>%   # rename pour l’axe/légende
+  dplyr::select(base_var, smd, sample)
+
+# Ordre des variables selon le pire déséquilibre unadjusted
+var_order <- bal_unadj %>%
+  dplyr::arrange(smd) %>%
+  dplyr::pull(base_var)
+
+bal_plot <- bal_plot %>%
+  dplyr::mutate(base_var = factor(base_var, levels = var_order))
+
+#--- 4) Plot
+ggplot(bal_plot1, aes(x = smd, y = base_var, color = sample, shape = sample)) +
+  geom_point(size = 3) +
+  geom_vline(xintercept = 0.1, linetype = "dashed") +
+  labs(
+    x = "Absolute Standardized Mean Difference (|SMD|)",
+    y = "",
+    title = "Covariate balance: Unadjusted vs PS matching vs IPTW",
+    subtitle = "Threshold: |SMD| < 0.10"
+  ) +
+  theme_minimal(base_size = 14)
 # -----------------------------
 # 4) Weighted outcome model (logistic) with robust SE
 # -----------------------------
 # Survey design object (robust SE via sandwich)
 des <- svydesign(
   ids     = ~1,
-  weights = ~w_iptw_trunc,  # utilise w_iptw si tu ne veux pas truncation
+  weights = ~w_iptw,  # utilise w_iptw si tu ne veux pas truncation
   data    = final_cohort_v3
 )
 
