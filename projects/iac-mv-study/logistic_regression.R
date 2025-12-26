@@ -246,3 +246,120 @@ ggplot2::ggplot(bal, aes(x = smd, y = base_var, shape = sample, color=sample)) +
     subtitle = "Acceptable balance threshold: |SMD| < 0.10"
   ) +
   theme_minimal(base_size = 14)
+
+
+##
+# ============================================================
+# IPTW (Inverse Probability of Treatment Weighting) - ATE
+# ============================================================
+
+library(dplyr)
+library(WeightIt)
+library(cobalt)
+library(survey)
+library(broom)
+
+# -----------------------------
+# 0) Check exposure coding
+# -----------------------------
+final_cohort_v3 <- final_cohort_v3 %>%
+  mutate(
+    iac_exposed_re = factor(iac_exposed_re)
+  )
+
+# Met "No-IAC" comme référence (important pour l'interprétation)
+final_cohort_v3$iac_exposed_re <- relevel(final_cohort_v3$iac_exposed_re, ref = "No-IAC")
+
+table(final_cohort_v3$iac_exposed_re, useNA = "ifany")
+
+# -----------------------------
+# 1) Fit propensity score weights (ATE)
+# -----------------------------
+w_out <- weightit(
+  iac_exposed_re ~ age + gender + charlson_score + icu_type +
+    insurance_grp + adm_type_grp + ethnicity_grp,
+  data     = final_cohort_v3,
+  method   = "ps",     # PS via logistic regression
+  estimand = "ATE"     # ATE weights
+)
+
+summary(w_out)
+
+# Extract weights
+final_cohort_v3$w_iptw <- w_out$weights
+
+# -----------------------------
+# 2) Diagnostics: weights
+# -----------------------------
+summary(final_cohort_v3$w_iptw)
+quantile(final_cohort_v3$w_iptw, probs = c(.01, .05, .1, .5, .9, .95, .99), na.rm = TRUE)
+
+# Quick plot
+hist(final_cohort_v3$w_iptw, breaks = 50, main = "IPTW weights distribution", xlab = "Weight")
+
+# Optionnel: truncation (souvent utile si poids extrêmes)
+# Ici exemple 1st-99th percentile
+w_lo <- quantile(final_cohort_v3$w_iptw, 0.01, na.rm = TRUE)
+w_hi <- quantile(final_cohort_v3$w_iptw, 0.99, na.rm = TRUE)
+
+final_cohort_v3 <- final_cohort_v3 %>%
+  mutate(
+    w_iptw_trunc = pmin(pmax(w_iptw, w_lo), w_hi)
+  )
+
+# -----------------------------
+# 3) Balance diagnostics post-weighting (SMD)
+# -----------------------------
+# Table de balance
+bt_w <- bal.tab(w_out, un = TRUE, disp.v.ratio = FALSE, binary = "std")
+bt_w
+
+# Love plot agrégé (1 ligne par variable) - cobalt >= 4
+love.plot(
+  w_out,
+  stats = "mean.diffs",
+  abs = TRUE,
+  threshold = 0.10,
+  var.order = "unadjusted",
+  drop.distance = TRUE,
+  sample.names = c("Before weighting", "After weighting"),
+  aggregate = "max"
+)
+
+# -----------------------------
+# 4) Weighted outcome model (logistic) with robust SE
+# -----------------------------
+# Survey design object (robust SE via sandwich)
+des <- svydesign(
+  ids     = ~1,
+  weights = ~w_iptw_trunc,  # utilise w_iptw si tu ne veux pas truncation
+  data    = final_cohort_v3
+)
+
+fit_iptw <- svyglm(
+  death_28d ~ iac_exposed_re + age + gender + charlson_score + icu_type +
+    insurance_grp + adm_type_grp + ethnicity_grp,
+  design = des,
+  family = quasibinomial()
+)
+
+summary(fit_iptw)
+
+# OR + CI
+or_tab <- broom::tidy(fit_iptw, conf.int = TRUE, exponentiate = TRUE)
+or_tab
+
+# Extraire seulement l'effet IAC (IAC vs No-IAC)
+or_tab %>% filter(grepl("^iac_exposed_re", term))
+
+# -----------------------------
+# 5) Option: weighted marginal effect (unadjusted outcome model)
+#     (souvent présenté comme estimand après équilibrage)
+# -----------------------------
+fit_iptw_marginal <- svyglm(
+  death_28d ~ iac_exposed_re,
+  design = des,
+  family = quasibinomial()
+)
+
+broom::tidy(fit_iptw_marginal, conf.int = TRUE, exponentiate = TRUE)
