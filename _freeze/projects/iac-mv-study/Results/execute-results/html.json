@@ -1,0 +1,15 @@
+{
+  "hash": "e5f89e59ef443a6a3d400324f54bab2d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Real-World Evidence Study: Early Arterial Catheter Use and 28-Day Mortality in Mechanically Ventilated ICU Patients (MIMIC-III)\"\ndescription: \"Retrospective ICU EHR cohort using explicit time zero (MV start) and early exposure window for IAC; pragmatic covariate strategy under data-access constraints\"\nauthor: \"Ousmane Diallo, MPH-PhD\"\ndate: \"2025-12-18\"\ncategories: [RWE, EHR, MIMIC-III, observational-study, ICU, target-trial, logistic regression, propensity-score]\nhighlight-style: pygments\npage-layout: article\nformat:\n  html:\n    css: ../assets/css/remove-keyword.css\n---\n\n\n\n## Results\n\nWe analyzed XX ICU admissions meeting the inclusion criteria. \nAmong these, XX patients (XX%) received invasive arterial catheterization (IAC) \nwithin 24 hours of mechanical ventilation initiation.\n\n\n### Baseline characteristics\n\nBefore adjustment, patients receiving IAC differed from those without IAC in several\nbaseline characteristics, including age, ICU type, insurance status, admission type,\nand comorbidity burden.\n\n### Covariate balance\n\nPropensity score matching and inverse probability of treatment weighting (IPTW)\nsubstantially improved covariate balance across all measured variables.\n\nAfter adjustment, all standardized mean differences were below 0.10, indicating\nadequate balance between exposure groups.\n\n#### love plot\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n#knitr::include_graphics(\"figures/balance_unadj_ps_iptw.png\")\n```\n:::\n\n\n\n### Association between arterial line placement and 28-day mortality\n#### Propensity score–matched analysis\n\nIn the propensity score–matched cohort, arterial line placement was associated\nwith a lower odds of 28-day mortality (OR XX, 95% CI XX–XX, p = XX).\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n#knitr::include_graphics(\"figures/forest_ps_matched.png\")\n```\n:::\n\n\n\n\n#### Inverse probability of treatment weighting (IPTW)\n\nIn IPTW analyses estimating the average treatment effect in the overall population,\narterial line placement was not significantly associated with 28-day mortality\n(OR XX, 95% CI XX–XX, p = XX).\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n#knitr::include_graphics(\"figures/forest_iptw.png\")\n```\n:::\n\n\n\n\n### Comparison of causal estimands\n\nResults differed by analytical approach. While propensity score matching suggested\na modest protective association of arterial line placement among comparable patients,\nthis effect was attenuated in IPTW analyses estimating the population-average effect.\n\nThese findings suggest potential heterogeneity of treatment effect and limited\nevidence for a strong population-wide causal benefit.\n\n\n\n \n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

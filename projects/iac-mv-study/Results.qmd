@@ -1,0 +1,89 @@
+---
+title: "Real-World Evidence Study: Early Arterial Catheter Use and 28-Day Mortality in Mechanically Ventilated ICU Patients (MIMIC-III)"
+description: "Retrospective ICU EHR cohort using explicit time zero (MV start) and early exposure window for IAC; pragmatic covariate strategy under data-access constraints"
+author: "Ousmane Diallo, MPH-PhD"
+date: "2025-12-18"
+categories: [RWE, EHR, MIMIC-III, observational-study, ICU, target-trial, logistic regression, propensity-score]
+highlight-style: pygments
+page-layout: article
+format:
+  html:
+    css: ../assets/css/remove-keyword.css
+---
+
+## Results
+
+We analyzed XX ICU admissions meeting the inclusion criteria. 
+Among these, XX patients (XX%) received invasive arterial catheterization (IAC) 
+within 24 hours of mechanical ventilation initiation.
+
+
+### Baseline characteristics
+
+Before adjustment, patients receiving IAC differed from those without IAC in several
+baseline characteristics, including age, ICU type, insurance status, admission type,
+and comorbidity burden.
+
+### Covariate balance
+
+Propensity score matching and inverse probability of treatment weighting (IPTW)
+substantially improved covariate balance across all measured variables.
+
+After adjustment, all standardized mean differences were below 0.10, indicating
+adequate balance between exposure groups.
+
+#### love plot
+
+
+```{r}
+#| label: Plots1
+#| fig-cap: ""
+#| warning: false
+#| eval: false
+#knitr::include_graphics("figures/balance_unadj_ps_iptw.png")
+```
+
+### Association between arterial line placement and 28-day mortality
+#### Propensity score–matched analysis
+
+In the propensity score–matched cohort, arterial line placement was associated
+with a lower odds of 28-day mortality (OR XX, 95% CI XX–XX, p = XX).
+
+
+```{r}
+#| label: Plots3
+#| fig-cap: ""
+#| warning: false
+#| eval: false
+#knitr::include_graphics("figures/forest_ps_matched.png")
+```
+
+
+#### Inverse probability of treatment weighting (IPTW)
+
+In IPTW analyses estimating the average treatment effect in the overall population,
+arterial line placement was not significantly associated with 28-day mortality
+(OR XX, 95% CI XX–XX, p = XX).
+
+
+```{r}
+#| label: Plots2
+#| fig-cap: ""
+#| warning: false
+#| eval: false
+#knitr::include_graphics("figures/forest_iptw.png")
+```
+
+
+### Comparison of causal estimands
+
+Results differed by analytical approach. While propensity score matching suggested
+a modest protective association of arterial line placement among comparable patients,
+this effect was attenuated in IPTW analyses estimating the population-average effect.
+
+These findings suggest potential heterogeneity of treatment effect and limited
+evidence for a strong population-wide causal benefit.
+
+
+
+ 
