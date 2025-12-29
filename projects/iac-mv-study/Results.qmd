@@ -13,16 +13,13 @@ format:
 
 ## Results
 
-We analyzed XX ICU admissions meeting the inclusion criteria. 
-Among these, XX patients (XX%) received invasive arterial catheterization (IAC) 
-within 24 hours of mechanical ventilation initiation.
+We analyzed 2899 ICU admissions meeting the inclusion criteria. 
+Among these, XX patients (XX%) received invasive arterial catheterization (IAC) within 24 hours of mechanical ventilation initiation.
 
 
 ### Baseline characteristics
 
-Before adjustment, patients receiving IAC differed from those without IAC in several
-baseline characteristics, including age, ICU type, insurance status, admission type,
-and comorbidity burden.
+Before adjustment, patients receiving IAC differed from those without IAC in several baseline characteristics, including age, ICU type, insurance status, admission type, and comorbidity burden.
 
 ### Covariate balance
 
