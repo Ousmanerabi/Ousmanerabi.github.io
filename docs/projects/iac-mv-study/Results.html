@@ -23,40 +23,6 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
@@ -185,13 +151,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#results" id="toc-results" class="nav-link active" data-scroll-target="#results">Results</a>
-  <ul class="collapse">
-  <li><a href="#baseline-characteristics" id="toc-baseline-characteristics" class="nav-link" data-scroll-target="#baseline-characteristics">Baseline characteristics</a></li>
-  <li><a href="#covariate-balance" id="toc-covariate-balance" class="nav-link" data-scroll-target="#covariate-balance">Covariate balance</a></li>
+  <li><a href="#patient-population" id="toc-patient-population" class="nav-link active" data-scroll-target="#patient-population">Patient Population</a></li>
   <li><a href="#association-between-arterial-line-placement-and-28-day-mortality" id="toc-association-between-arterial-line-placement-and-28-day-mortality" class="nav-link" data-scroll-target="#association-between-arterial-line-placement-and-28-day-mortality">Association between arterial line placement and 28-day mortality</a></li>
   <li><a href="#comparison-of-causal-estimands" id="toc-comparison-of-causal-estimands" class="nav-link" data-scroll-target="#comparison-of-causal-estimands">Comparison of causal estimands</a></li>
-  </ul></li>
   </ul>
 </nav>
     </div>
@@ -244,57 +206,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="results" class="level2">
-<h2 class="anchored" data-anchor-id="results">Results</h2>
-<p>We analyzed XX ICU admissions meeting the inclusion criteria. Among these, XX patients (XX%) received invasive arterial catheterization (IAC) within 24 hours of mechanical ventilation initiation.</p>
-<section id="baseline-characteristics" class="level3">
-<h3 class="anchored" data-anchor-id="baseline-characteristics">Baseline characteristics</h3>
-<p>Before adjustment, patients receiving IAC differed from those without IAC in several baseline characteristics, including age, ICU type, insurance status, admission type, and comorbidity burden.</p>
-</section>
-<section id="covariate-balance" class="level3">
-<h3 class="anchored" data-anchor-id="covariate-balance">Covariate balance</h3>
-<p>Propensity score matching and inverse probability of treatment weighting (IPTW) substantially improved covariate balance across all measured variables.</p>
-<p>After adjustment, all standardized mean differences were below 0.10, indicating adequate balance between exposure groups.</p>
-<section id="love-plot" class="level4">
-<h4 class="anchored" data-anchor-id="love-plot">love plot</h4>
-<div class="cell">
-<details class="code-fold">
-<summary>View code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#knitr::include_graphics("figures/balance_unadj_ps_iptw.png")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
+<section id="patient-population" class="level3">
+<h3 class="anchored" data-anchor-id="patient-population">Patient Population</h3>
+<p>A total of 61,532 patients were admitted to the ICU. After applying the predefined exclusion criteria, the final analytical cohort included 1,740 mechanically ventilated patients, of whom 612 (35.2%) were exposed to invasive arterial catheterization (IAC) and 1,128 (64.8%) were not exposed (see Figure 1). Baseline demographic and clinical characteristics of the study population are presented in Table 1.</p>
+<p>Before any adjustment, baseline characteristics differed between the IAC-exposed and unexposed groups (Table 1), with standardized mean differences (SMDs) ≥ 0.10 observed for several variables, including ICU type, insurance status, and admission type (Figure 2). Specifically, the distribution of ICU types, insurance categories, and admission types differed between exposure groups.</p>
+<p>After propensity score matching (PSM) and inverse probability of treatment weighting (IPTW), all baseline covariates achieved adequate balance, with absolute SMDs below 0.10 across all variables (Figure 2).</p>
+<p>In the 1:1 propensity score–matched cohort, a total of 1,202 patients were included. The mean age was 57 years in the IAC-exposed group and 59 years (SD 11.4) in the unexposed group. The majority of patients in both groups were male (59% in the exposed group and 60% in the unexposed group).</p>
+<p>Baseline clinical characteristics, including the Charlson Comorbidity Index, were well balanced after matching, with mean (SD) Charlson scores of 1.0 in both exposure groups.</p>
 </section>
 <section id="association-between-arterial-line-placement-and-28-day-mortality" class="level3">
 <h3 class="anchored" data-anchor-id="association-between-arterial-line-placement-and-28-day-mortality">Association between arterial line placement and 28-day mortality</h3>
-<section id="propensity-scorematched-analysis" class="level4">
-<h4 class="anchored" data-anchor-id="propensity-scorematched-analysis">Propensity score–matched analysis</h4>
-<p>In the propensity score–matched cohort, arterial line placement was associated with a lower odds of 28-day mortality (OR XX, 95% CI XX–XX, p = XX).</p>
-<div class="cell">
-<details class="code-fold">
-<summary>View code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#knitr::include_graphics("figures/forest_ps_matched.png")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
-<section id="inverse-probability-of-treatment-weighting-iptw" class="level4">
-<h4 class="anchored" data-anchor-id="inverse-probability-of-treatment-weighting-iptw">Inverse probability of treatment weighting (IPTW)</h4>
-<p>In IPTW analyses estimating the average treatment effect in the overall population, arterial line placement was not significantly associated with 28-day mortality (OR XX, 95% CI XX–XX, p = XX).</p>
-<div class="cell">
-<details class="code-fold">
-<summary>View code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#knitr::include_graphics("figures/forest_iptw.png")</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-</section>
+<p>In the propensity score–matched cohort, arterial line placement was associated with a lower odds of 28-day mortality, although this association did not reach conventional statistical significance (adjusted OR = 0.77, 95% CI 0.91–1.00, p = 0.056) (Figure 3), indicating a borderline protective effect.</p>
+<p>In the inverse probability of treatment weighted (IPTW) analysis, which estimates the average treatment effect in the overall population, arterial line placement was associated with a significantly lower odds of 28-day mortality (OR = 0.33, 95% CI 0.15–2.07, p = 0.03). However, the wide confidence interval suggests substantial uncertainty around the magnitude of the effect, likely reflecting residual variability and limited effective sample size.</p>
 </section>
 <section id="comparison-of-causal-estimands" class="level3">
 <h3 class="anchored" data-anchor-id="comparison-of-causal-estimands">Comparison of causal estimands</h3>
-<p>Results differed by analytical approach. While propensity score matching suggested a modest protective association of arterial line placement among comparable patients, this effect was attenuated in IPTW analyses estimating the population-average effect.</p>
-<p>These findings suggest potential heterogeneity of treatment effect and limited evidence for a strong population-wide causal benefit.</p>
+<p>Results differed according to the causal estimand and analytical approach. Propensity score matching, which targets a conditional treatment effect among clinically comparable patients, suggested a modest protective association between arterial line placement and 28-day mortality.</p>
+<p>In contrast, inverse probability of treatment weighting (IPTW), estimating the average treatment effect in the overall population, yielded a stronger but less precise effect estimate, reflecting increased variability and sensitivity to model specification.</p>
+<p>Taken together, these findings suggest possible heterogeneity of treatment effect, with arterial line placement potentially benefiting selected patient subgroups rather than conferring a strong, uniform population-wide mortality benefit.</p>
 
 
-</section>
 </section>
 
 <p>Ousmane Diallo, MPH-PhD – Biostatistician, Data Scientist &amp; Epidemiologist based in Chicago, Illinois, USA. Specializing in SAS programming, CDISC standards, and real-world evidence for clinical research.</p><a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->
