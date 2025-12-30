@@ -23,13 +23,40 @@ In the 1:1 propensity score–matched cohort, a total of 1,202 patients were inc
 
 Baseline clinical characteristics, including the Charlson Comorbidity Index, were well balanced after matching, with mean (SD) Charlson scores of 1.0 in both exposure groups.
 
+Table 1. Baseline characteristics of the study population by early IAC exposure.
+
+| **Characteristic** | **IAC**<br>N = 612 | **No IAC**<br>N = 1,128 | **SMD** | **95% CI** |
+|-------------------|-------------|--------------|-------------|-------------|
+| **Age (years)** | 59 (44, 73) | 58 (44, 75) | -0.11 | -0.21, -0.02 |
+| **Sex** |  |  | 0.03 | -0.07, 0.13 |
+| Female | 249 (41%) | 477 (42%) |  |  |
+| Male | 363 (59%) | 651 (58%) |  |  |
+| **Charlson comorbidity index** | 1 (0, 2) | 1 (0, 2) | 0.07 | -0.02, 0.17 |
+| **ICU type** |  |  | 0.28 | 0.18, 0.38 |
+| Cardiac | 68 (11%) | 69 (6.1%) |  |  |
+| MICU | 251 (41%) | 608 (54%) |  |  |
+| Surgical | 293 (48%) | 451 (40%) |  |  |
+| **Insurance** |  |  | 0.15 | 0.05, 0.25 |
+| Private | 239 (39%) | 359 (32%) |  |  |
+| Public | 357 (58%) | 734 (65%) |  |  |
+| Uninsured | 16 (2.6%) | 35 (3.1%) |  |  |
+| **Admission type** |  |  | 0.16 | 0.06, 0.25 |
+| Elective | 33 (5.4%) | 27 (2.4%) |  |  |
+| Non-elective | 579 (95%) | 1,101 (98%) |  |  |
+| **28-day mortality** |  |  | 0.06 | -0.03, 0.16 |
+| No | 492 (80%) | 935 (83%) |  |  |
+| Yes | 120 (20%) | 193 (17%) |  |  |
+| **Ethnic group** |  |  | 0.08 | -0.02, 0.17 |
+| Asian | 7 (1.1%) | 14 (1.2%) |  |  |
+| Black | 47 (7.7%) | 78 (6.9%) |  |  |
+| Other | 151 (25%) | 314 (28%) |  |  |
+| White | 407 (67%) | 722 (64%) |  |  |
 
 ### Association between arterial line placement and 28-day mortality
 
 In the propensity score–matched cohort, arterial line placement was associated with a lower odds of 28-day mortality, although this association did not reach conventional statistical significance (**adjusted OR = 0.77, 95% CI 0.91–1.00, p = 0.056**) (Figure 3), indicating a borderline protective effect.
 
 In the inverse probability of treatment weighted (IPTW) analysis, which estimates the average treatment effect in the overall population, arterial line placement was associated with a significantly lower odds of 28-day mortality (**aOR = 0.33, 95% CI 0.15–2.07, p = 0.03**). However, the wide confidence interval suggests substantial uncertainty around the magnitude of the effect, likely reflecting residual variability and limited effective sample size.
-
 
 ### Comparison of causal estimands
 
