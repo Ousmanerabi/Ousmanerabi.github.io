@@ -15,52 +15,26 @@ format:
 
 A total of 61,532 patients were admitted to the ICU. After applying the predefined exclusion criteria, the final analytical cohort included 1,740 mechanically ventilated patients, of whom 612 (35.2%) were exposed to invasive arterial catheterization (IAC) and 1,128 (64.8%) were not exposed (see Figure 1). Baseline demographic and clinical characteristics of the study population are presented in Table 1.
 
+Before any adjustment, baseline characteristics differed between the IAC-exposed and unexposed groups (Table 1), with standardized mean differences (SMDs) ≥ 0.10 observed for several variables, including ICU type, insurance status, and admission type (Figure 2). Specifically, the distribution of ICU types, insurance categories, and admission types differed between exposure groups.
 
+After propensity score matching (PSM) and inverse probability of treatment weighting (IPTW), all baseline covariates achieved adequate balance, with absolute SMDs below 0.10 across all variables (Figure 2).
 
-### Covariate balance
+In the 1:1 propensity score–matched cohort, a total of 1,202 patients were included. The mean age was 57 years in the IAC-exposed group and 59 years (SD 11.4) in the unexposed group. The majority of patients in both groups were male (59% in the exposed group and 60% in the unexposed group).
 
-Propensity score matching and inverse probability of treatment weighting (IPTW) substantially improved covariate balance across all measured variables.
+Baseline clinical characteristics, including the Charlson Comorbidity Index, were well balanced after matching, with mean (SD) Charlson scores of 1.0 in both exposure groups.
 
-After adjustment, all standardized mean differences were below 0.10, indicating adequate balance between exposure groups.
-
-#### love plot
-
-```{r}
-#| label: Plots1
-#| fig-cap: ""
-#| warning: false
-#| eval: false
-#knitr::include_graphics("figures/balance_unadj_ps_iptw.png")
-```
 
 ### Association between arterial line placement and 28-day mortality
 
-#### Propensity score–matched analysis
+In the propensity score–matched cohort, arterial line placement was associated with a lower odds of 28-day mortality, although this association did not reach conventional statistical significance (adjusted OR = 0.77, 95% CI 0.91–1.00, p = 0.056) (Figure 3), indicating a borderline protective effect.
 
-In the propensity score–matched cohort, arterial line placement was associated with a lower odds of 28-day mortality (OR XX, 95% CI XX–XX, p = XX).
+In the inverse probability of treatment weighted (IPTW) analysis, which estimates the average treatment effect in the overall population, arterial line placement was associated with a significantly lower odds of 28-day mortality (OR = 0.33, 95% CI 0.15–2.07, p = 0.03). However, the wide confidence interval suggests substantial uncertainty around the magnitude of the effect, likely reflecting residual variability and limited effective sample size.
 
-```{r}
-#| label: Plots3
-#| fig-cap: ""
-#| warning: false
-#| eval: false
-#knitr::include_graphics("figures/forest_ps_matched.png")
-```
-
-#### Inverse probability of treatment weighting (IPTW)
-
-In IPTW analyses estimating the average treatment effect in the overall population, arterial line placement was not significantly associated with 28-day mortality (OR XX, 95% CI XX–XX, p = XX).
-
-```{r}
-#| label: Plots2
-#| fig-cap: ""
-#| warning: false
-#| eval: false
-#knitr::include_graphics("figures/forest_iptw.png")
-```
 
 ### Comparison of causal estimands
 
-Results differed by analytical approach. While propensity score matching suggested a modest protective association of arterial line placement among comparable patients, this effect was attenuated in IPTW analyses estimating the population-average effect.
+Results differed according to the causal estimand and analytical approach. Propensity score matching, which targets a conditional treatment effect among clinically comparable patients, suggested a modest protective association between arterial line placement and 28-day mortality.
 
-These findings suggest potential heterogeneity of treatment effect and limited evidence for a strong population-wide causal benefit.
+In contrast, inverse probability of treatment weighting (IPTW), estimating the average treatment effect in the overall population, yielded a stronger but less precise effect estimate, reflecting increased variability and sensitivity to model specification.
+
+Taken together, these findings suggest possible heterogeneity of treatment effect, with arterial line placement potentially benefiting selected patient subgroups rather than conferring a strong, uniform population-wide mortality benefit.
