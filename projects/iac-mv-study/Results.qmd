@@ -26,9 +26,9 @@ Baseline clinical characteristics, including the Charlson Comorbidity Index, wer
 
 ### Association between arterial line placement and 28-day mortality
 
-In the propensity score–matched cohort, arterial line placement was associated with a lower odds of 28-day mortality, although this association did not reach conventional statistical significance (adjusted OR = 0.77, 95% CI 0.91–1.00, p = 0.056) (Figure 3), indicating a borderline protective effect.
+In the propensity score–matched cohort, arterial line placement was associated with a lower odds of 28-day mortality, although this association did not reach conventional statistical significance (**adjusted OR = 0.77, 95% CI 0.91–1.00, p = 0.056**) (Figure 3), indicating a borderline protective effect.
 
-In the inverse probability of treatment weighted (IPTW) analysis, which estimates the average treatment effect in the overall population, arterial line placement was associated with a significantly lower odds of 28-day mortality (OR = 0.33, 95% CI 0.15–2.07, p = 0.03). However, the wide confidence interval suggests substantial uncertainty around the magnitude of the effect, likely reflecting residual variability and limited effective sample size.
+In the inverse probability of treatment weighted (IPTW) analysis, which estimates the average treatment effect in the overall population, arterial line placement was associated with a significantly lower odds of 28-day mortality (**aOR = 0.33, 95% CI 0.15–2.07, p = 0.03**). However, the wide confidence interval suggests substantial uncertainty around the magnitude of the effect, likely reflecting residual variability and limited effective sample size.
 
 
 ### Comparison of causal estimands
