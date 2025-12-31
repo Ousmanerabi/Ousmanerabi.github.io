@@ -26,7 +26,7 @@ Baseline clinical characteristics, including the Charlson Comorbidity Index, wer
 **Table 1. Baseline characteristics of the study population by early IAC exposure.**
 
 | **Characteristic** | **IAC**<br>N = 612 | **No IAC**<br>N = 1,128 | **SMD** | **95% CI** |
-|-------------------|-------------|--------------|-------------|-------------|
+|---------------|---------------|---------------|---------------|---------------|
 | **Age (years)** | 59 (44, 73) | 58 (44, 75) | -0.11 | -0.21, -0.02 |
 | **Sex** |  |  | 0.03 | -0.07, 0.13 |
 | Female | 249 (41%) | 477 (42%) |  |  |
@@ -54,14 +54,26 @@ Baseline clinical characteristics, including the Charlson Comorbidity Index, wer
 
 : {.striped .hover}
 
-*Values are median (Q1, Q3) for continuous variables and n (%) for categorical variables.
-SMD = standardized mean difference; CI = confidence interval.*
+*Values are median (Q1, Q3) for continuous variables and n (%) for categorical variables. SMD = standardized mean difference; CI = confidence interval.*
+
+::: {layout-ncol="1"}
+
+![Fig. The SMDs of baseline characteristics in the unadjusted population, the PS-matched population, and the IPW population).](images/SMD.png){width="100%"}
+
+:::
+
 
 ### Association between arterial line placement and 28-day mortality
 
 In the propensity score–matched cohort, arterial line placement was associated with a lower odds of 28-day mortality, although this association did not reach conventional statistical significance (**adjusted OR = 0.77, 95% CI 0.91–1.00, p = 0.056**) (Figure 3), indicating a borderline protective effect.
 
 In the inverse probability of treatment weighted (IPTW) analysis, which estimates the average treatment effect in the overall population, arterial line placement was associated with a significantly lower odds of 28-day mortality (**aOR = 0.33, 95% CI 0.15–2.07, p = 0.03**). However, the wide confidence interval suggests substantial uncertainty around the magnitude of the effect, likely reflecting residual variability and limited effective sample size.
+
+::: {layout-ncol="2"}
+![Figure 3A.Adjusted odds ratios for 28-day mortality (IPTW-weighted model).](images/coef_forest_ps.png){width="100%"}
+
+![Figure 3B.Adjusted odds ratios for 28-day mortality (multivariable model)).](images/coef_forest_iptw.png){width="100%"}
+:::
 
 ### Comparison of causal estimands
 
