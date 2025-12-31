@@ -24,15 +24,11 @@ Retrospective observational cohort, target-trial–inspired.
     → [View protocol](protocol_v2.html)
 
 -   📄 **Protocol v1.0 (Archived – MIMIC-II)**
-    → [View archived protocol](protocol.html)
+    → [View archived protocol](Protocol.html)
 
--   🧬 **Cohort construction & SQL logic**
-    → [Cohort definition](cohort_construction.html)
 
--   ⚖️ **Bias, time-zero & exposure windows**\
-    → [Design considerations](bias_and_design.html)
-
--   📊 **Results & models** *(in progress)*
+-   📊 **Results & models**
+      → [View Results](Results.html)
 
 ------------------------------------------------------------------------
 
