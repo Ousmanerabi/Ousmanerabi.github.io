@@ -21,7 +21,7 @@ Retrospective observational cohort, target-trial–inspired.
 ## Project Structure
 
 -   📄 **Protocol v2.0 (Active – MIMIC-III)**
-    → [View protocol](protocol_v2.html)
+    → [View protocol](Protocol_v2.html)
 
 -   📄 **Protocol v1.0 (Archived – MIMIC-II)**
     → [View archived protocol](Protocol.html)
