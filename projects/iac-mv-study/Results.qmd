@@ -81,4 +81,8 @@ Results differed according to the causal estimand and analytical approach. Prope
 
 In contrast, inverse probability of treatment weighting (IPTW), estimating the average treatment effect in the overall population, yielded a stronger but less precise effect estimate, reflecting increased variability and sensitivity to model specification.
 
+
+### Conclusion
+
 Taken together, these findings suggest possible heterogeneity of treatment effect, with arterial line placement potentially benefiting selected patient subgroups rather than conferring a strong, uniform population-wide mortality benefit.
+
